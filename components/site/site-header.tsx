@@ -172,14 +172,38 @@ export function SiteHeader({ goalNav }: { goalNav?: React.ReactNode }) {
           className="-my-2 flex min-w-0 items-center gap-3 py-2"
           aria-label={`${PLAN.title} home`}
         >
-          <Image
-            src="/plan/brand/addu-city-council.jpg"
-            alt=""
-            width={40}
-            height={40}
-            className="h-9 w-9 shrink-0 rounded-full sm:h-10 sm:w-10"
-            priority
-          />
+          {/* The bird alone, not the full lockup: at header size the
+              "CITY OF ADDU" wordmark under it would be five pixels tall, and
+              the plan's own title is already sitting next to it.
+
+              Both versions render and cross-fade rather than swapping `src`.
+              Over the hero the mark sits on photography, where the dark purple
+              of the wing disappears, so that state needs the reversed artwork —
+              but switching the source there would blank the logo while the
+              second file downloaded, mid-scroll. Decorative: the link is
+              labelled. */}
+          <span className="relative block h-6 w-[53px] shrink-0 sm:h-8 sm:w-[71px]">
+            <Image
+              src="/plan/brand/city-of-addu-bird.png"
+              alt=""
+              width={390}
+              height={176}
+              className={`absolute inset-0 h-full w-full transition-opacity duration-300 ${
+                light ? 'opacity-0' : 'opacity-100'
+              }`}
+              priority
+            />
+            <Image
+              src="/plan/brand/city-of-addu-bird-white.png"
+              alt=""
+              width={390}
+              height={176}
+              className={`absolute inset-0 h-full w-full transition-opacity duration-300 ${
+                light ? 'opacity-100' : 'opacity-0'
+              }`}
+              priority
+            />
+          </span>
           <span className="min-w-0 leading-tight">
             <span
               className={`block truncate font-heading text-[0.95rem] sm:text-[1.05rem] ${

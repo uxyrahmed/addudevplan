@@ -8,20 +8,23 @@ export function SiteFooter() {
       <div className="shell-wide py-14 sm:py-20">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_1.4fr]">
           <div>
-            <div className="flex items-center gap-3">
-              <Image
-                src="/plan/brand/addu-city-council.jpg"
-                alt=""
-                width={44}
-                height={44}
-                className="h-11 w-11 rounded-full"
-              />
-              <div className="leading-tight">
- <p className="font-heading text-title text-navy">{PLAN.title}</p>
-                <p className="text-micro font-bold tracking-[0.12em] text-mist uppercase">
-                  {PLAN.period}
-                </p>
-              </div>
+            {/* The one place with room for the full lockup — bird, wordmark
+                and tagline — so the official mark appears somewhere intact
+                rather than only as the cropped bird in the header. Stacked
+                above the plan title, because the council and the document it
+                published are two different things. */}
+            <Image
+              src="/plan/brand/city-of-addu.png"
+              alt="City of Addu"
+              width={418}
+              height={356}
+              className="h-auto w-[124px]"
+            />
+            <div className="mt-6 leading-tight">
+              <p className="font-heading text-title text-navy">{PLAN.title}</p>
+              <p className="text-micro font-bold tracking-[0.12em] text-mist uppercase">
+                {PLAN.period}
+              </p>
             </div>
             <p className="mt-5 max-w-sm text-small text-stone">
               Published by {PLAN.author} on {PLAN.date}, open for comments and feedback. Every
