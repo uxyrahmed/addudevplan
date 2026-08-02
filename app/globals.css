@@ -93,6 +93,17 @@
     --shell-gutter: clamp(1.25rem, 5vw, 6rem);
     --scrollbar-w: 10px;
     color-scheme: light;
+
+    /* Cartography, for the atoll map. The deck draws Addu as warm land on a
+       cool reef; this is that pairing rebuilt out of the site's own palette.
+       Three depths — lagoon, reef flat, land — because an atoll read as a flat
+       silhouette is just a shape. Kept pale on purpose: the map sits on the
+       section tint and should read as a drawing, not as a block of colour
+       competing with the goal grid below it. */
+    --lagoon: color-mix(in oklab, var(--color-sky) 8%, white);
+    --reef: color-mix(in oklab, var(--color-sky) 22%, white);
+    --land: #ece0c4;
+    --coast: #c9b58e;
   }
 
   html {

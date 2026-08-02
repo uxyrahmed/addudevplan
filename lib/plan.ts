@@ -111,11 +111,15 @@ export const HEADLINE_FACTS: Stat[] = [
  * That draft replaced the earlier per-island reclamation table with this
  * summary and a map. The two disagree — the 21 July table's reclamation column
  * sums to 271 ha against the 253 ha stated here — so the table is not carried
- * over rather than publish a figure the council has since revised.
+ * over rather than publish a figure the council has since revised. The atoll
+ * map on the home page shows geography for the same reason: the shape of the
+ * city is settled, the per-island hectares are not.
+ *
+ * Stored as numbers so the reclaimed share is derived rather than hand-typed.
  */
 export const LAND = {
-  total: '1,268',
-  reclaimed: '253',
+  totalHa: 1268,
+  reclaimedHa: 253,
   unit: 'hectares',
   islands: [
     'Hithadhoo',
@@ -128,7 +132,12 @@ export const LAND = {
     'Hulhudhoo',
     'Meedhoo',
   ],
+  /** Joined by the Link Road — the four the plan counts as one city. */
+  linked: ['Hithadhoo', 'Maradhoo', 'Feydhoo', 'Gan'],
 } as const
+
+/** Share of the city that is made land, to one decimal. */
+export const RECLAIMED_PCT = (LAND.reclaimedHa / LAND.totalHa) * 100
 
 /**
  * Settlement history, from the timeline on slide 3 of the 29 July draft.

@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import ArrowRight02Icon from '@hugeicons/core-free-icons/ArrowRight02Icon'
 import Comment01Icon from '@hugeicons/core-free-icons/Comment01Icon'
 import { Icon } from '@/components/ui/icon'
@@ -7,6 +6,7 @@ import { Hero } from '@/components/home/hero'
 import { ReefDivider } from '@/components/home/reef-divider'
 import { TimelineRail } from '@/components/home/timeline-rail'
 import { StatCounter } from '@/components/home/stat-counter'
+import { AtollMap } from '@/components/home/atoll-map'
 import { MigrationChart } from '@/components/home/migration-chart'
 import { PopulationLedger, PopulationGap } from '@/components/home/population-gap'
 import { Vision } from '@/components/home/vision'
@@ -19,11 +19,13 @@ import {
   INITIATIVES,
   INITIATIVES_INTRO,
   LAND,
+  RECLAIMED_PCT,
   TIMELINE,
   PILLARS,
   PILLARS_INTRO,
   TOTAL_ACTIONS,
   TURNING_POINT,
+  fmt,
 } from '@/lib/plan'
 
 export default function HomePage() {
@@ -77,26 +79,44 @@ export default function HomePage() {
               <p className="mt-6 max-w-[62ch] text-lead text-slate">
                 Hithadhoo, Maradhoo, Feydhoo and Gan are joined by the Link Road, so one
                 investment reaches every community — and reclamation has added{' '}
-                <strong className="text-navy">{LAND.reclaimed} hectares</strong> to a city that
-                now covers <strong className="text-navy">{LAND.total} hectares</strong>.
+                <strong className="text-navy">{fmt(LAND.reclaimedHa)} hectares</strong> to a city
+                that now covers <strong className="text-navy">{fmt(LAND.totalHa)} hectares</strong>.
               </p>
 
-              <dl className="mt-8 flex flex-wrap gap-x-12 gap-y-6 border-y border-hairline py-6">
+              <dl className="mt-8 flex flex-wrap gap-x-12 gap-y-6 border-t border-hairline pt-6">
                 <div>
                   <dt className="text-small text-stone">Total land area</dt>
                   <dd className="font-heading text-display-3 text-navy tabular-nums">
-                    {LAND.total}
+                    {fmt(LAND.totalHa)}
                     <span className="ml-1.5 text-title text-stone">ha</span>
                   </dd>
                 </div>
                 <div>
                   <dt className="text-small text-stone">Of which reclaimed</dt>
                   <dd className="font-heading text-display-3 text-navy tabular-nums">
-                    {LAND.reclaimed}
+                    {fmt(LAND.reclaimedHa)}
                     <span className="ml-1.5 text-title text-stone">ha</span>
                   </dd>
                 </div>
               </dl>
+
+              {/* The two figures above state the amount; this states the share,
+                  which is the part worth noticing. Split from the derived
+                  percentage so a revised figure moves the bar. */}
+              <div className="mt-7 border-b border-hairline pb-7">
+                <div
+                  data-reveal="measure"
+                  className="flex h-2.5 overflow-hidden rounded-full"
+                  aria-hidden
+                >
+                  <div className="bg-navy" style={{ width: `${100 - RECLAIMED_PCT}%` }} />
+                  <div className="bg-sky" style={{ width: `${RECLAIMED_PCT}%` }} />
+                </div>
+                <p className="mt-3.5 flex items-center gap-2.5 text-small text-stone">
+                  <span aria-hidden className="h-2.5 w-2.5 shrink-0 rounded-full bg-sky" />
+                  Reclaimed — one hectare of the city in every five.
+                </p>
+              </div>
 
               <p className="mt-6 text-small text-stone">
                 <span className="text-ink">Islands of the city — </span>
@@ -104,23 +124,8 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div data-reveal="scale" className="lg:sticky lg:top-28">
-              <Image
-                src="/plan/maps/four-communities.png"
-                alt="Map of Addu Atoll showing Gan, Feydhoo, Maradhoo, Maradhoo Feydhoo and Hithadhoo joined by the Link Road."
-                width={2218}
-                height={978}
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="h-auto w-full rounded-3xl border border-hairline bg-white"
-              />
-              <Image
-                src="/plan/maps/addu-atoll.png"
-                alt="Map of the 50 islands that make up Addu Atoll."
-                width={1814}
-                height={950}
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="mt-5 h-auto w-full rounded-3xl border border-hairline bg-white"
-              />
+            <div data-reveal="fade">
+              <AtollMap />
             </div>
           </div>
 
