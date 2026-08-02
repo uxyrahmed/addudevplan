@@ -55,12 +55,11 @@ export function SiteFooter() {
           </nav>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-hairline pt-6 text-small text-mist sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 border-t border-hairline pt-6 text-small text-mist">
           <p>
             © {PLAN.author}. Open for consultation — figures and targets can change with your
             feedback.
           </p>
-          <p>Feedback is stored on your device until a submission service is connected.</p>
         </div>
       </div>
     </footer>
