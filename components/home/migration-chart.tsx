@@ -6,7 +6,9 @@ import { canAnimateRichly } from '@/lib/motion-prefs'
 import { MIGRATION_SERIES as DATA } from '@/lib/plan'
 
 const W = 720
-const H = 400
+// Shorter than it is wide by design: five gridlines and two lines need the
+// horizontal run, not the vertical, and the extra height was only air.
+const H = 340
 const PAD = { top: 20, right: 34, bottom: 42, left: 46 }
 const MAX = 45
 
@@ -82,7 +84,7 @@ export function MigrationChart() {
           576px floor forced a scrollbar and clipped the final year label. The
           chart scales instead, and the viewBox carries enough right padding for
           the last label to sit inside it. */}
-      <div className="mt-8">
+      <div className="mt-6">
         <svg
           ref={ref}
           viewBox={`0 0 ${W} ${H}`}
@@ -153,7 +155,7 @@ export function MigrationChart() {
         </svg>
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-small text-stone">
+      <div className="mt-3.5 flex flex-wrap items-center gap-x-6 gap-y-2 text-small text-stone">
         {DATA.series.map((s) => (
           <span key={s.name} className="inline-flex items-center gap-2">
             <span className="h-0.5 w-6 rounded-full" style={{ background: s.color }} />
@@ -162,7 +164,7 @@ export function MigrationChart() {
         ))}
       </div>
 
-      <p className="mt-4 text-small text-stone">
+      <p className="mt-3.5 text-small text-stone">
         Addu&rsquo;s share of the Maldivian population fell from 9% to 5.1%, while Male&rsquo;s
         rose from 11% to 40% — the same story as the bars, seen nationally.
       </p>

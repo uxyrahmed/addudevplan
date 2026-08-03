@@ -84,7 +84,7 @@ export default function HomePage() {
                 that now covers <strong className="text-navy">{fmt(LAND.totalHa)} hectares</strong>.
               </p>
 
-              <dl className="mt-8 flex flex-wrap gap-x-12 gap-y-6 border-t border-hairline pt-6">
+              <dl className="mt-7 flex flex-wrap gap-x-12 gap-y-5 border-t border-hairline pt-5">
                 <div>
                   <dt className="text-small text-stone">Total land area</dt>
                   <dd className="font-heading text-display-3 text-navy tabular-nums">
@@ -104,7 +104,7 @@ export default function HomePage() {
               {/* The two figures above state the amount; this states the share,
                   which is the part worth noticing. Split from the derived
                   percentage so a revised figure moves the bar. */}
-              <div className="mt-7 border-b border-hairline pb-7">
+              <div className="mt-6 border-b border-hairline pb-6">
                 <div
                   data-reveal="measure"
                   className="flex h-2.5 overflow-hidden rounded-full"
@@ -119,13 +119,16 @@ export default function HomePage() {
                 </p>
               </div>
 
-              <div className="mt-7">
+              {/* Three columns, so nine islands are three rows rather than five.
+                  A list was asked for over the old single run-on line; it does
+                  not have to be a tall one. */}
+              <div className="mt-6">
                 <p className="text-small text-ink">Islands of the city</p>
-                <ul className="mt-3 grid grid-cols-2 gap-x-10">
+                <ul className="mt-2.5 grid grid-cols-2 gap-x-8 sm:grid-cols-3">
                   {LAND.islands.map((island) => (
                     <li
                       key={island}
-                      className="border-t border-hairline py-2 text-small text-stone"
+                      className="border-t border-hairline py-1.5 text-small text-stone"
                     >
                       {island}
                     </li>
@@ -169,7 +172,7 @@ export default function HomePage() {
               starting to close, and the chart puts it in national context. */}
           <div
             id="out-migration"
-            className="mt-20 scroll-mt-24 border-t border-hairline pt-16"
+            className="mt-16 scroll-mt-24 border-t border-hairline pt-12"
           >
             {/* Quiet on purpose — the sum below is the statement, not this. */}
             <h2 className="font-heading text-title font-normal text-slate">
@@ -179,7 +182,7 @@ export default function HomePage() {
             {/* Lede across the full width: the statement and the sentence that
                 qualifies it belong together. Keeping the standfirst out of the
                 chart column is what removed the dead space under it. */}
-            <div className="mt-10 grid gap-x-20 gap-y-10 lg:grid-cols-2 lg:items-start">
+            <div className="mt-8 grid gap-x-20 gap-y-8 lg:grid-cols-2 lg:items-start">
               <PopulationGap />
               <p className="max-w-[46ch] text-lead text-slate">
                 In 1977 that gap was 705 people. Closing it — 35,000 residents by 2030 — is what
@@ -191,7 +194,7 @@ export default function HomePage() {
                 header rule so their tops align, and neither is sticky — a
                 sticky chart beside a scrolling ledger is what made the two
                 look unrelated. */}
-            <div className="mt-16 grid gap-14 border-t border-hairline pt-14 lg:grid-cols-2 lg:items-start lg:gap-20">
+            <div className="mt-12 grid gap-12 border-t border-hairline pt-10 lg:grid-cols-2 lg:items-start lg:gap-20">
               <PopulationLedger />
               <div data-reveal="fade">
                 <MigrationChart />

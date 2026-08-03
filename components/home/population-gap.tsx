@@ -64,7 +64,7 @@ export function PopulationLedger() {
         {POPULATION.map((row) => {
           const gap = gapOf(row)
           return (
-            <li key={row.year} className="border-t border-hairline py-5" data-reveal="up">
+            <li key={row.year} className="border-t border-hairline py-2.5" data-reveal="up">
               {/* Three real columns rather than `justify-between`, which left a
                   hole in the middle of every row and crowded the numbers
                   against the right edge. */}
@@ -83,7 +83,7 @@ export function PopulationLedger() {
                   gap, left empty on purpose. */}
               <div
                 aria-hidden
-                className="relative mt-4 h-2"
+                className="relative mt-2.5 h-2"
                 style={{ ['--w' as string]: pct(row.registered) }}
               >
                 <span
@@ -104,7 +104,7 @@ export function PopulationLedger() {
       {/* A legend against the marks themselves rather than a sentence
           describing them: the swatches are the same outline and fill the rows
           use, so the mapping is read off the graphic instead of remembered. */}
-      <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-small text-stone">
+      <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-small text-stone">
         <span className="inline-flex items-center gap-2.5">
           <span aria-hidden className="h-2.5 w-7 rounded-[2px] bg-navy" />
           Living here
