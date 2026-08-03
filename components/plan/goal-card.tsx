@@ -40,7 +40,6 @@ export function GoalCard({ goal, index = 0 }: { goal: Goal; index?: number }) {
           Goal {goal.number}
         </p>
         <h3 className="goal-card__title mt-2 font-heading text-title text-ink">{goal.title}</h3>
-        <p className="mt-2.5 text-small text-stone">{goal.tagline}</p>
       </div>
 
       <div className="relative mt-auto flex items-center justify-between gap-3 border-t border-hairline pt-4 text-small">
