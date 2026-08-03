@@ -63,6 +63,17 @@ const LINKED = [
   { name: 'Gan', x: 459, y: 657, lx: 408, ly: 668 },
 ]
 
+/**
+ * On the road but not one of the four the plan counts as communities. Labelled
+ * in ink like the four, because it is on the chain — but no stop, because the
+ * dot means "connected community" and Maradhoo-Feydhoo is not one of the four.
+ *
+ * It labels east into the lagoon rather than west with the rest of the arm:
+ * Maradhoo and Feydhoo are only 65 units apart there, and a third label between
+ * them ran into Maradhoo's stop.
+ */
+const ON_CHAIN = [{ name: 'Maradhoo-Feydhoo', lx: 360, ly: 560 }]
+
 /** Reached by boat. No dot, quieter label — the absence is the point. */
 const UNLINKED = [
   { name: 'Meedhoo', lx: 884, ly: 112 },
@@ -179,6 +190,11 @@ export function AtollMap() {
               {s.name}
             </text>
           ))}
+          {ON_CHAIN.map((s) => (
+            <text key={s.name} x={s.lx} y={s.ly} fill="var(--color-ink)" fontSize="20">
+              {s.name}
+            </text>
+          ))}
           {UNLINKED.map((s) => (
             <text key={s.name} x={s.lx} y={s.ly} fill="var(--color-mist)" fontSize="20">
               {s.name}
@@ -202,9 +218,9 @@ export function AtollMap() {
           </span>
         </span>
         <p className="mt-3">
-          The road joins four of the city&rsquo;s nine islands end to end, crossing open reef
-          where the chain breaks. Villingili, Hulhudhoo and Meedhoo sit on the far rim and are
-          reached by boat.
+          The Link Road joins the western chain end to end, from Hithadhoo down to Gan, crossing
+          open reef where the chain breaks. Villingili, Hulhudhoo and Meedhoo sit on the far rim
+          of the atoll and are reached by boat.
         </p>
       </figcaption>
     </figure>

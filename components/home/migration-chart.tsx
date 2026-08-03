@@ -163,8 +163,8 @@ export function MigrationChart() {
       </div>
 
       <p className="mt-4 text-small text-stone">
-        Addu&rsquo;s share of the country fell from 9% to 5.1% while Male&rsquo;s rose from 11% to
-        40% — the same story as the bars, seen nationally.
+        Addu&rsquo;s share of the Maldivian population fell from 9% to 5.1%, while Male&rsquo;s
+        rose from 11% to 40% — the same story as the bars, seen nationally.
       </p>
     </figure>
   )

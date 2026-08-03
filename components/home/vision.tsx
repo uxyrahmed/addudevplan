@@ -1,5 +1,5 @@
 import { SplitHeading } from '@/components/motion/split-heading'
-import { LATEST_POPULATION, TARGET_RESIDENTS, VISION, fmt } from '@/lib/plan'
+import { TARGET_RESIDENTS, VISION, fmt } from '@/lib/plan'
 
 /**
  * The hinge of the page: the moment the plan turns from diagnosis to intent.
@@ -51,11 +51,6 @@ export function Vision() {
                 {fmt(TARGET_RESIDENTS)}
               </span>
               <span className="mt-1 block text-display-3 text-white/75">residents by 2030</span>
-            </p>
-
-            <p className="mt-7 max-w-[38ch] text-small text-white/70">
-              {fmt(LATEST_POPULATION.registered)} people are already registered in Addu — the
-              target is the city filling back up to its own register, not invented growth.
             </p>
           </div>
         </div>

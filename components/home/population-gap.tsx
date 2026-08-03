@@ -101,10 +101,20 @@ export function PopulationLedger() {
         })}
       </ol>
 
-      <p className="mt-6 text-small text-stone">
-        Each bar is drawn on the same scale, from zero. The outline is everyone on the register;
-        the solid part is everyone actually living here.
-      </p>
+      {/* A legend against the marks themselves rather than a sentence
+          describing them: the swatches are the same outline and fill the rows
+          use, so the mapping is read off the graphic instead of remembered. */}
+      <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-small text-stone">
+        <span className="inline-flex items-center gap-2.5">
+          <span aria-hidden className="h-2.5 w-7 rounded-[2px] bg-navy" />
+          Living here
+        </span>
+        <span className="inline-flex items-center gap-2.5">
+          <span aria-hidden className="h-2.5 w-7 rounded-[2px] border border-navy/35" />
+          On the register
+        </span>
+        <span className="text-mist">Same scale, from zero</span>
+      </div>
     </div>
   )
 }

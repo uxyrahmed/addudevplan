@@ -77,8 +77,9 @@ export default function HomePage() {
                 One atoll, four connected communities
               </SplitHeading>
               <p className="mt-6 max-w-[62ch] text-lead text-slate">
-                Hithadhoo, Maradhoo, Feydhoo and Gan are joined by the Link Road, so one
-                investment reaches every community — and reclamation has added{' '}
+                The Link Road runs the length of the western chain, from Hithadhoo through
+                Maradhoo, Maradhoo-Feydhoo and Feydhoo to Gan, so one investment reaches every
+                community — and reclamation has added{' '}
                 <strong className="text-navy">{fmt(LAND.reclaimedHa)} hectares</strong> to a city
                 that now covers <strong className="text-navy">{fmt(LAND.totalHa)} hectares</strong>.
               </p>
@@ -114,14 +115,23 @@ export default function HomePage() {
                 </div>
                 <p className="mt-3.5 flex items-center gap-2.5 text-small text-stone">
                   <span aria-hidden className="h-2.5 w-2.5 shrink-0 rounded-full bg-sky" />
-                  Reclaimed — one hectare of the city in every five.
+                  One in every five hectares of the city is reclaimed land.
                 </p>
               </div>
 
-              <p className="mt-6 text-small text-stone">
-                <span className="text-ink">Islands of the city — </span>
-                {LAND.islands.join(' · ')}
-              </p>
+              <div className="mt-7">
+                <p className="text-small text-ink">Islands of the city</p>
+                <ul className="mt-3 grid grid-cols-2 gap-x-10">
+                  {LAND.islands.map((island) => (
+                    <li
+                      key={island}
+                      className="border-t border-hairline py-2 text-small text-stone"
+                    >
+                      {island}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             <div data-reveal="fade">
@@ -136,8 +146,6 @@ export default function HomePage() {
             </SplitHeading>
             <p className="mt-5 max-w-[62ch] text-lead text-slate">
               Addu&rsquo;s people have been relocated island to island for most of a century.
-              That history is why the out-migration below runs so deep — and why bringing people
-              home is the plan&rsquo;s first measure of success.
             </p>
 
             {/* Nine entries never fit legibly across a page, so they keep a
@@ -203,11 +211,11 @@ export default function HomePage() {
           </SplitHeading>
           <p className="mt-8 max-w-[68ch] text-lead text-slate">{PILLARS_INTRO.body}</p>
 
-          <ul className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-hairline sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-hairline sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {PILLARS.map((pillar) => (
               <li
                 key={pillar.id}
-                className="flex min-h-56 flex-col justify-between p-6 text-white"
+                className="flex min-h-40 flex-col justify-end p-6 text-white"
                 // The accessible variant, not the plate colour. White on three
                 // of the four printed colours measures 2.7–3.3:1, which fails
                 // for a tile that carries its own label. Same hue, legible.
@@ -216,7 +224,6 @@ export default function HomePage() {
                 <h3 className="max-w-[14ch] font-heading text-title !text-white">
                   {pillar.name}
                 </h3>
-                <p className="mt-6 text-small text-white">{pillar.blurb}</p>
               </li>
             ))}
           </ul>
@@ -231,7 +238,7 @@ export default function HomePage() {
         <div className="shell">
           <SplitHeading className="font-display text-display-2">Fifteen goals</SplitHeading>
           <p className="mt-5 max-w-[62ch] text-lead text-slate">
-            Fifteen goals aligned with four sustainability pillars will be pursued to achieve the
+            Fifteen goals aligned with five sustainability pillars will be pursued to achieve the
             vision of Sustainable Addu City. Open any goal to read its targets and comment on each
             action.
           </p>
