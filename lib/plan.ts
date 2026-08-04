@@ -19,11 +19,11 @@ export type Pillar = {
   color: string
   /**
    * Same hue, darkened until it clears 4.5:1 on white. The printed colours are
-   * chosen for large filled shapes; three of the four fail as body text, so
-   * anything type-sized uses this instead and the plate keeps the original.
+   * chosen for large filled shapes; three of the four printed ones fail as body
+   * text, so anything type-sized uses this instead and the plate keeps the
+   * original.
    */
   textColor: string
-  blurb: string
 }
 
 export type Stat = {
@@ -111,24 +111,38 @@ export const HEADLINE_FACTS: Stat[] = [
  * That draft replaced the earlier per-island reclamation table with this
  * summary and a map. The two disagree — the 21 July table's reclamation column
  * sums to 271 ha against the 253 ha stated here — so the table is not carried
- * over rather than publish a figure the council has since revised.
+ * over rather than publish a figure the council has since revised. The atoll
+ * map on the home page shows geography for the same reason: the shape of the
+ * city is settled, the per-island hectares are not.
+ *
+ * Stored as numbers so the reclaimed share is derived rather than hand-typed.
  */
 export const LAND = {
-  total: '1,268',
-  reclaimed: '253',
+  totalHa: 1268,
+  reclaimedHa: 253,
   unit: 'hectares',
+  /**
+   * North to south down the western chain, then the eastern rim. Maamendhoo is
+   * not carried over and Maradhoo-Feydhoo is: the 2 August deck still lists the
+   * older set, and the council corrected it in review.
+   */
   islands: [
     'Hithadhoo',
-    'Maamendhoo',
     'Hankede',
     'Maradhoo',
+    'Maradhoo-Feydhoo',
     'Feydhoo',
     'Gan',
     'Villingili',
     'Hulhudhoo',
     'Meedhoo',
   ],
+  /** Joined by the Link Road — the four the plan counts as one city. */
+  linked: ['Hithadhoo', 'Maradhoo', 'Feydhoo', 'Gan'],
 } as const
+
+/** Share of the city that is made land, to one decimal. */
+export const RECLAIMED_PCT = (LAND.reclaimedHa / LAND.totalHa) * 100
 
 /**
  * Settlement history, from the timeline on slide 3 of the 29 July draft.
@@ -149,7 +163,7 @@ export const TIMELINE: { year: string; text: string }[] = [
   { year: '1948', text: 'Residents of Gan and Feydhoo return back home.' },
   {
     year: '1957',
-    text: 'British begin construction of military base in Gan. Relocation of residents of Gan to Feydhoo, and of Feydhoo to Maradhoo.',
+    text: 'British begin construction of military base in Gan. Relocation of residents of Gan to Feydhoo, and of Feydhoo to Maradhoo-Feydhoo.',
   },
   { year: '1960', text: 'British granted 30 year lease for Gan and Maamendhoo.' },
   { year: '1976', text: 'British troops leave Gan.' },
@@ -199,14 +213,26 @@ export const MIGRATION_SERIES = {
   ],
 } as const
 
+/**
+ * The 2 August deck is mid-revision here: its heading reads "Five
+ * interconnected pillars" while the paragraph under it still lists the original
+ * four. The council confirmed the fifth is governance, so the count and the
+ * list are reconciled below — but the words "and good governance" are ours, not
+ * the deck's, and should be replaced with the council's own phrasing once the
+ * prose catches up.
+ */
 export const PILLARS_INTRO = {
-  title: 'Four interconnected pillars',
-  body: `What distinguishes the Addu Development Plan is its integrated, systems-based approach. Rather than a collection of standalone projects, it presents a coherent model for transformation built on four interconnected pillars: modern smart infrastructure, empowered people, a diversified economy, and a rich natural environment. Together, these elements define a clear vision for Addu as a sustainable, resilient, and inclusive city.`,
+  title: 'Five interconnected pillars',
+  body: `What distinguishes the Addu Development Plan is its integrated, systems-based approach. Rather than a collection of standalone projects, it presents a coherent model for transformation built on five interconnected pillars: modern smart infrastructure, empowered people, a diversified economy, a rich natural environment, and good governance. Together, these elements define a clear vision for Addu as a sustainable, resilient, and inclusive city.`,
 } as const
 
 /**
- * The four pillars, named in the plan's own prose. Colours are the four badge
- * fills used across the goal grid.
+ * The pillars. Colours for the first four are the badge fills used across the
+ * goal grid, read out of the deck's own colour operators.
+ *
+ * Governance is the exception. The pillar itself is confirmed; the deck has not
+ * caught up, so it neither names nor colours it. The label, blurb and colour
+ * below are this site's and should be replaced when the deck does.
  *
  * NOTE: the draft deck does not state which goals sit under which pillar, so
  * this site deliberately does not assert a mapping. Add a `goals: number[]`
@@ -218,28 +244,31 @@ export const PILLARS: Pillar[] = [
     name: 'Modern smart infrastructure',
     color: '#652C67',
     textColor: '#652C67',
-    blurb: 'Energy, water, mobility and connectivity built to carry a city of 35,000.',
   },
   {
     id: 'people',
     name: 'Empowered people',
     color: '#48A0A4',
     textColor: '#357578',
-    blurb: 'Health, learning and community life that let people build a future here.',
   },
   {
     id: 'economy',
     name: 'A diversified economy',
     color: '#569A92',
     textColor: '#40736D',
-    blurb: 'Enterprise, digital trade and tourism that reach beyond a single sector.',
   },
   {
     id: 'environment',
     name: 'A rich natural environment',
     color: '#90A84F',
     textColor: '#617135',
-    blurb: 'Reefs, wetlands, wildlife and culture protected as living assets.',
+  },
+  {
+    id: 'governance',
+    name: 'Good governance',
+    // The deck's blue, darkened to clear 4.5:1 under white like the others.
+    color: '#0076B9',
+    textColor: '#00699F',
   },
 ]
 
@@ -272,8 +301,8 @@ export const GOALS: Goal[] = [
         number: '01',
         title: 'Every home is a prosumer',
         actions: [
-          { id: 'g1-s1-a1', text: 'Provide 5 kW solar PV to 6,000 homes' },
-          { id: 'g1-s1-a2', text: 'Enable 14 kWh battery storage to homes' },
+          { id: 'g1-s1-a1', text: 'Provide 10 kWp solar PV to 6,000 homes' },
+          { id: 'g1-s1-a2', text: 'Enable 15 kWh battery storage to homes' },
           { id: 'g1-s1-a3', text: 'Provide smart meters to 6,000 homes' },
         ],
       },
@@ -1185,7 +1214,7 @@ export const INITIATIVES: Initiative[] = [
   {
     number: '01',
     title: 'Home solar and battery storage',
-    text: 'We are taking a major step toward a cleaner, more affordable energy future for our community. We are launching a new initiative to install a 4 kWp solar PV system on every household in Addu along with 10 kWh battery storage.',
+    text: 'We are taking a major step toward a cleaner, more affordable energy future for our community. We are launching a new initiative to install a 10 kW solar PV system on every household in Addu along with 15 kWh battery storage.',
   },
   {
     number: '02',

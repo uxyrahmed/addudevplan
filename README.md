@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Addu Development Plan 2026–2031 — consultation site
 
-## Getting Started
+A public consultation site for the Addu Development Plan 2026–2031, published by the
+Addu City Council. It presents the plan's vision, four pillars and fifteen goals, and
+lets residents respond to every strategy and action in it.
 
-First, run the development server:
+## Getting started
+
+```bash
+npm install
+```
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Other scripts:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+```bash
+npm run lint
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Next.js 16** (App Router) with **React 19**
+- **Tailwind CSS 4**
+- **GSAP**, **Motion** and **Lenis** for the scroll and reveal layer
+- **Hugeicons** for iconography
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This repo tracks a Next.js version with breaking changes from older releases — read the
+relevant guide in `node_modules/next/dist/docs/` before writing new code. See
+[AGENTS.md](AGENTS.md).
 
-## Deploy on Vercel
+## Layout
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Path | What lives there |
+| --- | --- |
+| `app/` | Routes — the home page, `app/goals/[slug]` for each goal, root layout and global CSS |
+| `lib/plan.ts` | The whole content model: plan metadata, vision, pillars, goals, strategies, actions |
+| `components/home/` | Home-page sections — hero, vision, population gap, migration chart, timeline |
+| `components/plan/` | Goal grid, goal cards, badges and strategy lists |
+| `components/feedback/` | The response controls, the running basket and the review panel |
+| `components/motion/` | Scroll progress, smooth scroll, reveals and view transitions |
+| `components/site/` | Header, footer and goal navigation |
+| `public/plan/` | Brand assets, including the official City of Addu logo |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Content
+
+All plan copy lives in [`lib/plan.ts`](lib/plan.ts), transcribed from the council's draft
+slide deck. Goals, targets and strategies come from the 21 July draft; front-of-deck
+figures, the settlement timeline and the cover date follow the 29 July revision. Goal
+colours are read from the deck's own colour values, so they match the presentation.
+
+Two conventions matter when editing it:
+
+- **Action `id`s are stable keys.** Feedback is keyed on them, so never renumber an id
+  in place.
+- **Nothing unfinished is published.** Where the source deck has placeholder counts or
+  incomplete targets, the item is left out and the goal carries an `openNote` instead.
+
+## Feedback
+
+Every action carries three reactions — Support, Not sure, Concern — plus an optional
+comment. Responses accumulate into a basket that opens a review panel, grouped by goal,
+where a visitor can edit or remove any response, download a copy, or send the set to the
+council.
+
+The response shape is `{ [actionId]: { reaction, comment } }`, produced in
+[`components/feedback/feedback-store.tsx`](components/feedback/feedback-store.tsx);
+`markSubmitted` is the submission entry point.

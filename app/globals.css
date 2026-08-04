@@ -28,11 +28,13 @@
   --color-shell: #f6f7f9; /* section tint */
   --color-sand: #f2efe9; /* warm tint */
 
-  /* -- the four pillar / goal colours ------------------------------------ */
+  /* -- the pillar / goal colours ----------------------------------------- */
   --color-pillar-purple: #652c67;
   --color-pillar-teal: #48a0a4;
   --color-pillar-sea: #569a92;
   --color-pillar-olive: #90a84f;
+  /* Governance. Not a deck colour — see the note against PILLARS in plan.ts. */
+  --color-pillar-blue: #0076b9;
 
   /* -- type -------------------------------------------------------------- */
   /* Three voices, by size rather than by section:
@@ -93,6 +95,17 @@
     --shell-gutter: clamp(1.25rem, 5vw, 6rem);
     --scrollbar-w: 10px;
     color-scheme: light;
+
+    /* Cartography, for the atoll map. The deck draws Addu as warm land on a
+       cool reef; this is that pairing rebuilt out of the site's own palette.
+       Three depths — lagoon, reef flat, land — because an atoll read as a flat
+       silhouette is just a shape. Kept pale on purpose: the map sits on the
+       section tint and should read as a drawing, not as a block of colour
+       competing with the goal grid below it. */
+    --lagoon: color-mix(in oklab, var(--color-sky) 8%, white);
+    --reef: color-mix(in oklab, var(--color-sky) 22%, white);
+    --land: #ece0c4;
+    --coast: #c9b58e;
   }
 
   html {

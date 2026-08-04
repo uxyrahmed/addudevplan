@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import ArrowRight02Icon from '@hugeicons/core-free-icons/ArrowRight02Icon'
 import Comment01Icon from '@hugeicons/core-free-icons/Comment01Icon'
 import { Icon } from '@/components/ui/icon'
@@ -7,6 +6,7 @@ import { Hero } from '@/components/home/hero'
 import { ReefDivider } from '@/components/home/reef-divider'
 import { TimelineRail } from '@/components/home/timeline-rail'
 import { StatCounter } from '@/components/home/stat-counter'
+import { AtollMap } from '@/components/home/atoll-map'
 import { MigrationChart } from '@/components/home/migration-chart'
 import { PopulationLedger, PopulationGap } from '@/components/home/population-gap'
 import { Vision } from '@/components/home/vision'
@@ -19,11 +19,13 @@ import {
   INITIATIVES,
   INITIATIVES_INTRO,
   LAND,
+  RECLAIMED_PCT,
   TIMELINE,
   PILLARS,
   PILLARS_INTRO,
   TOTAL_ACTIONS,
   TURNING_POINT,
+  fmt,
 } from '@/lib/plan'
 
 export default function HomePage() {
@@ -75,52 +77,65 @@ export default function HomePage() {
                 One atoll, four connected communities
               </SplitHeading>
               <p className="mt-6 max-w-[62ch] text-lead text-slate">
-                Hithadhoo, Maradhoo, Feydhoo and Gan are joined by the Link Road, so one
-                investment reaches every community — and reclamation has added{' '}
-                <strong className="text-navy">{LAND.reclaimed} hectares</strong> to a city that
-                now covers <strong className="text-navy">{LAND.total} hectares</strong>.
+                The Link Road runs the length of the western chain, from Hithadhoo through
+                Maradhoo, Maradhoo-Feydhoo and Feydhoo to Gan, so one investment reaches every
+                community — and reclamation has added{' '}
+                <strong className="text-navy">{fmt(LAND.reclaimedHa)} hectares</strong> to a city
+                that now covers <strong className="text-navy">{fmt(LAND.totalHa)} hectares</strong>.
               </p>
 
-              <dl className="mt-8 flex flex-wrap gap-x-12 gap-y-6 border-y border-hairline py-6">
+              <dl className="mt-8 flex flex-wrap gap-x-12 gap-y-6 border-t border-hairline pt-6">
                 <div>
                   <dt className="text-small text-stone">Total land area</dt>
                   <dd className="font-heading text-display-3 text-navy tabular-nums">
-                    {LAND.total}
+                    {fmt(LAND.totalHa)}
                     <span className="ml-1.5 text-title text-stone">ha</span>
                   </dd>
                 </div>
                 <div>
                   <dt className="text-small text-stone">Of which reclaimed</dt>
                   <dd className="font-heading text-display-3 text-navy tabular-nums">
-                    {LAND.reclaimed}
+                    {fmt(LAND.reclaimedHa)}
                     <span className="ml-1.5 text-title text-stone">ha</span>
                   </dd>
                 </div>
               </dl>
 
-              <p className="mt-6 text-small text-stone">
-                <span className="text-ink">Islands of the city — </span>
-                {LAND.islands.join(' · ')}
-              </p>
+              {/* The two figures above state the amount; this states the share,
+                  which is the part worth noticing. Split from the derived
+                  percentage so a revised figure moves the bar. */}
+              <div className="mt-7 border-b border-hairline pb-7">
+                <div
+                  data-reveal="measure"
+                  className="flex h-2.5 overflow-hidden rounded-full"
+                  aria-hidden
+                >
+                  <div className="bg-navy" style={{ width: `${100 - RECLAIMED_PCT}%` }} />
+                  <div className="bg-sky" style={{ width: `${RECLAIMED_PCT}%` }} />
+                </div>
+                <p className="mt-3.5 flex items-center gap-2.5 text-small text-stone">
+                  <span aria-hidden className="h-2.5 w-2.5 shrink-0 rounded-full bg-sky" />
+                  One in every five hectares of the city is reclaimed land.
+                </p>
+              </div>
+
+              <div className="mt-7">
+                <p className="text-small text-ink">Islands of the city</p>
+                <ul className="mt-3 grid grid-cols-2 gap-x-10">
+                  {LAND.islands.map((island) => (
+                    <li
+                      key={island}
+                      className="border-t border-hairline py-2 text-small text-stone"
+                    >
+                      {island}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
-            <div data-reveal="scale" className="lg:sticky lg:top-28">
-              <Image
-                src="/plan/maps/four-communities.png"
-                alt="Map of Addu Atoll showing Gan, Feydhoo, Maradhoo, Maradhoo Feydhoo and Hithadhoo joined by the Link Road."
-                width={2218}
-                height={978}
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="h-auto w-full rounded-3xl border border-hairline bg-white"
-              />
-              <Image
-                src="/plan/maps/addu-atoll.png"
-                alt="Map of the 50 islands that make up Addu Atoll."
-                width={1814}
-                height={950}
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="mt-5 h-auto w-full rounded-3xl border border-hairline bg-white"
-              />
+            <div data-reveal="fade">
+              <AtollMap />
             </div>
           </div>
 
@@ -131,8 +146,6 @@ export default function HomePage() {
             </SplitHeading>
             <p className="mt-5 max-w-[62ch] text-lead text-slate">
               Addu&rsquo;s people have been relocated island to island for most of a century.
-              That history is why the out-migration below runs so deep — and why bringing people
-              home is the plan&rsquo;s first measure of success.
             </p>
 
             {/* Nine entries never fit legibly across a page, so they keep a
@@ -198,11 +211,11 @@ export default function HomePage() {
           </SplitHeading>
           <p className="mt-8 max-w-[68ch] text-lead text-slate">{PILLARS_INTRO.body}</p>
 
-          <ul className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-hairline sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-hairline sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {PILLARS.map((pillar) => (
               <li
                 key={pillar.id}
-                className="flex min-h-56 flex-col justify-between p-6 text-white"
+                className="flex min-h-40 flex-col justify-end p-6 text-white"
                 // The accessible variant, not the plate colour. White on three
                 // of the four printed colours measures 2.7–3.3:1, which fails
                 // for a tile that carries its own label. Same hue, legible.
@@ -211,7 +224,6 @@ export default function HomePage() {
                 <h3 className="max-w-[14ch] font-heading text-title !text-white">
                   {pillar.name}
                 </h3>
-                <p className="mt-6 text-small text-white">{pillar.blurb}</p>
               </li>
             ))}
           </ul>
@@ -226,7 +238,7 @@ export default function HomePage() {
         <div className="shell">
           <SplitHeading className="font-display text-display-2">Fifteen goals</SplitHeading>
           <p className="mt-5 max-w-[62ch] text-lead text-slate">
-            Fifteen goals aligned with four sustainability pillars will be pursued to achieve the
+            Fifteen goals aligned with five sustainability pillars will be pursued to achieve the
             vision of Sustainable Addu City. Open any goal to read its targets and comment on each
             action.
           </p>

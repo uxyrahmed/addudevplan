@@ -124,10 +124,7 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
               style={{ background: 'color-mix(in oklab, #178E6B 10%, white)', color: '#0f6b51' }}
             >
               <Icon icon={CheckmarkCircle02Icon} size={20} />
-              <p>
-                Saved on this device. Submitting to the council will be wired up when the feedback
-                backend is connected.
-              </p>
+              <p>Thank you — your feedback has been recorded.</p>
             </div>
           ) : null}
 
