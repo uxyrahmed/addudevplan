@@ -86,9 +86,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       data-anim=""
     >
       <body>
-        {/* Scripting off means nothing will ever reveal these, so show them. */}
+        {/* Scripting off means nothing will ever reveal these, so show them.
+            `visibility` is listed because the reveal now hides with it too —
+            without this line the whole plan would be blank, not just static. */}
         <noscript>
-          <style>{`html[data-anim] [data-reveal],html[data-anim] [data-enter]{opacity:1!important;transform:none!important}`}</style>
+          <style>{`html[data-anim] [data-reveal],html[data-anim] [data-enter]{opacity:1!important;visibility:visible!important;transform:none!important}`}</style>
         </noscript>
         {/* The document shell only. The consultation's own chrome — header,
             footer, feedback basket, scroll layer — lives in app/(site), so the

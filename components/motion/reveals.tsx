@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { prefersReducedMotion } from '@/lib/motion-prefs'
+import { REVEAL_OBSERVER_INIT } from '@/lib/reveal-trigger'
 
 /** Module scope on purpose: a route change unmounts the page, so component
  *  state cannot remember where the visitor came from. */
@@ -95,8 +96,7 @@ export function Reveals() {
           )
         }
       },
-      // Fire a little before the element's top edge reaches the fold.
-      { rootMargin: '0px 0px -12% 0px', threshold: 0 },
+      REVEAL_OBSERVER_INIT,
     )
 
     document.querySelectorAll<HTMLElement>('[data-reveal-stagger]').forEach((g) => observer.observe(g))

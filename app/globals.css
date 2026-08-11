@@ -258,8 +258,24 @@
    briefly visible, or briefly blank, on an unrelated re-render. With the
    motion in a stylesheet there is exactly one writer and the states are
    declarative — hidden until revealed, and never the other way round. */
+/* `visibility`, not just `opacity`: transparent content is still content. At
+   opacity 0 alone a screen reader still announces it, Tab still stops on its
+   links, and find-in-page still matches it — so the page reads as full while it
+   looks empty. `visibility: hidden` takes it out of the accessibility tree and
+   the focus order until it actually arrives.
+
+   Not `display: none` and not the `hidden` attribute: both remove the layout
+   box, and IntersectionObserver has nothing to observe without one, so nothing
+   would ever reveal itself. `visibility: hidden` keeps the box — it still
+   occupies space and still intersects — which is also what keeps the page from
+   reflowing as each section appears.
+
+   It is left out of the transition list deliberately. Visibility flips at once
+   on reveal and the opacity does the fading; transitioning it would hold the
+   element non-interactive for the length of the fade. */
 html[data-anim] [data-reveal] {
   opacity: 0;
+  visibility: hidden;
   transition:
     opacity 0.85s var(--ease-out-expo) var(--reveal-delay, 0s),
     transform 0.85s var(--ease-out-expo) var(--reveal-delay, 0s);
@@ -283,8 +299,11 @@ html[data-anim] [data-reveal="measure"] {
 html[data-anim] [data-reveal="measure"] {
   transition-duration: 1.1s;
 }
+/* `visibility` is inherited, so a revealed child inside a still-hidden parent
+   has to say so itself — which this does, being on the element that reveals. */
 html[data-anim] [data-reveal][data-revealed] {
   opacity: 1;
+  visibility: visible;
   transform: none;
 }
 
@@ -309,9 +328,11 @@ html[data-anim] [data-reveal][data-reveal-instant] {
    the tween, and the element is never visible in an un-animated state. */
 html[data-anim] [data-enter] {
   opacity: 0;
+  visibility: hidden;
 }
 html[data-anim] [data-enter][data-entered] {
   opacity: 1;
+  visibility: visible;
 }
 
 /* Split-text lines.
@@ -694,6 +715,7 @@ html[data-anim] [data-enter][data-entered] {
   html[data-anim] [data-reveal],
   html[data-anim] [data-enter] {
     opacity: 1 !important;
+    visibility: visible !important;
     transform: none !important;
   }
 
