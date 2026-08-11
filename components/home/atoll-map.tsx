@@ -133,129 +133,138 @@ export function AtollMap() {
   }, [])
 
   return (
-    <figure>
-      <svg
-        ref={ref}
-        viewBox="58 24 1000 790"
-        className="block h-auto w-full"
-        role="img"
-        aria-label={`Map of Addu Atoll. The four islands of the city — ${LAND.islands.join(', ')} — lie along the western side of the atoll from north to south, joined end to end by the Link Road, which crosses open water on causeways. The road runs on past Feydhoo to the south-east, beyond the city. The rest of the atoll is reef and lagoon.`}
-      >
-        <g fill="var(--reef)">
-          {REEF.map((d) => (
-            <path key={d.slice(0, 24)} d={d} />
-          ))}
-        </g>
-
-        <g fill="var(--lagoon)">
-          {LAGOON.map((d) => (
-            <path key={d.slice(0, 24)} d={d} />
-          ))}
-        </g>
-
-        {/* The line where the flat drops away to open ocean. Hairline, because
-            it is orientation rather than information. */}
-        <g fill="none" stroke="var(--coast)" strokeWidth="1.5" strokeOpacity="0.5">
-          {OCEAN_EDGE.map((d) => (
-            <path key={d.slice(0, 24)} d={d} />
-          ))}
-        </g>
-
-        <g fill="var(--land)" stroke="var(--coast)" strokeWidth="1.2" strokeLinejoin="round">
-          {ISLAND.map((d) => (
-            <path key={d.slice(0, 24)} d={d} />
-          ))}
-        </g>
-
-        {/* A phone renders this ~335px wide, where a 5-unit stroke lands under
-            two device pixels. The road is the whole point, so it thickens
-            rather than thins out of legibility. */}
-        <path
-          data-road
-          d={LINK_ROAD}
-          fill="none"
-          stroke="var(--color-navy)"
-          strokeWidth="5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="max-sm:[stroke-width:9]"
-        />
-
-        {/* Hollow, where the island markers are solid: this is where the road
-            stops, not a place. */}
-        {ROAD_ENDS.map((end) => (
-          <g key={end.id} data-end={end.id}>
-            <circle
-              cx={end.x}
-              cy={end.y}
-              r="8"
-              fill="white"
-              stroke="var(--color-navy)"
-              strokeWidth="4"
-              className="max-sm:[r:12] max-sm:[stroke-width:6]"
-            />
-            <text
-              x={end.x + end.dx}
-              y={end.y + end.dy}
-              textAnchor={end.anchor}
-              fill="var(--color-stone)"
-              fontSize="20"
-              className="font-heading max-sm:[font-size:30px]"
-            >
-              {end.label}
-            </text>
+    // Fills the height its column is given, so the legend lands on the same
+    // baseline as the copy beside it instead of floating above it.
+    //
+    // The map is as wide as the column and its aspect ratio is fixed, so it
+    // cannot grow to take up the slack — the space has to go somewhere. It is
+    // split above and below the drawing rather than left as one hole under it,
+    // which would read as a gap rather than as margin.
+    <figure className="flex h-full flex-col gap-5">
+      <div className="flex flex-1 items-center">
+        <svg
+          ref={ref}
+          viewBox="58 24 1000 790"
+          className="block h-auto w-full"
+          role="img"
+          aria-label={`Map of Addu Atoll. The four islands of the city — ${LAND.islands.join(', ')} — lie along the western side of the atoll from north to south, joined end to end by the Link Road, which crosses open water on causeways. The road runs on past Feydhoo to the south-east, beyond the city. The rest of the atoll is reef and lagoon.`}
+        >
+          <g fill="var(--reef)">
+            {REEF.map((d) => (
+              <path key={d.slice(0, 24)} d={d} />
+            ))}
           </g>
-        ))}
 
-        {MARKERS.map(([x, y], i) => (
-          <g key={LAND.islands[i]} data-stop>
-            <circle
-              cx={x}
-              cy={y}
-              r="15"
-              fill="var(--color-navy)"
-              stroke="white"
-              strokeWidth="3"
-              className="max-sm:[r:22] max-sm:[stroke-width:5]"
-            />
-            <text
-              x={x}
-              y={y}
-              textAnchor="middle"
-              dominantBaseline="central"
-              fill="white"
-              fontSize="19"
-              fontWeight="700"
-              className="font-heading max-sm:[font-size:28px]"
-            >
-              {i + 1}
-            </text>
+          <g fill="var(--lagoon)">
+            {LAGOON.map((d) => (
+              <path key={d.slice(0, 24)} d={d} />
+            ))}
           </g>
-        ))}
 
-        {/* Names sized for the ~530px this renders at in the grid. Below `sm`
-            the map is too small to carry them and they are dropped, which is
-            why the numbered list beside it stays in the copy. */}
-        <g className="hidden font-heading sm:block">
+          {/* The line where the flat drops away to open ocean. Hairline, because
+              it is orientation rather than information. */}
+          <g fill="none" stroke="var(--coast)" strokeWidth="1.5" strokeOpacity="0.5">
+            {OCEAN_EDGE.map((d) => (
+              <path key={d.slice(0, 24)} d={d} />
+            ))}
+          </g>
+
+          <g fill="var(--land)" stroke="var(--coast)" strokeWidth="1.2" strokeLinejoin="round">
+            {ISLAND.map((d) => (
+              <path key={d.slice(0, 24)} d={d} />
+            ))}
+          </g>
+
+          {/* A phone renders this ~335px wide, where a 5-unit stroke lands under
+              two device pixels. The road is the whole point, so it thickens
+              rather than thins out of legibility. */}
+          <path
+            data-road
+            d={LINK_ROAD}
+            fill="none"
+            stroke="var(--color-navy)"
+            strokeWidth="5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="max-sm:[stroke-width:9]"
+          />
+
+          {/* Hollow, where the island markers are solid: this is where the road
+              stops, not a place. */}
+          {ROAD_ENDS.map((end) => (
+            <g key={end.id} data-end={end.id}>
+              <circle
+                cx={end.x}
+                cy={end.y}
+                r="8"
+                fill="white"
+                stroke="var(--color-navy)"
+                strokeWidth="4"
+                className="max-sm:[r:12] max-sm:[stroke-width:6]"
+              />
+              <text
+                x={end.x + end.dx}
+                y={end.y + end.dy}
+                textAnchor={end.anchor}
+                fill="var(--color-stone)"
+                fontSize="20"
+                className="font-heading max-sm:[font-size:30px]"
+              >
+                {end.label}
+              </text>
+            </g>
+          ))}
+
           {MARKERS.map(([x, y], i) => (
-            <text
-              key={LAND.islands[i]}
-              x={x + LABELS[i].dx}
-              y={y + LABELS[i].dy}
-              textAnchor={LABELS[i].anchor}
-              fill="var(--color-ink)"
-              fontSize="25"
-            >
-              {LAND.islands[i]}
-            </text>
+            <g key={LAND.islands[i]} data-stop>
+              <circle
+                cx={x}
+                cy={y}
+                r="15"
+                fill="var(--color-navy)"
+                stroke="white"
+                strokeWidth="3"
+                className="max-sm:[r:22] max-sm:[stroke-width:5]"
+              />
+              <text
+                x={x}
+                y={y}
+                textAnchor="middle"
+                dominantBaseline="central"
+                fill="white"
+                fontSize="19"
+                fontWeight="700"
+                className="font-heading max-sm:[font-size:28px]"
+              >
+                {i + 1}
+              </text>
+            </g>
           ))}
-        </g>
-      </svg>
+
+          {/* Names sized for the ~530px this renders at in the grid. Below `sm`
+              the map is too small to carry them and they are dropped, which is
+              why the numbered list beside it stays in the copy. */}
+          <g className="hidden font-heading sm:block">
+            {MARKERS.map(([x, y], i) => (
+              <text
+                key={LAND.islands[i]}
+                x={x + LABELS[i].dx}
+                y={y + LABELS[i].dy}
+                textAnchor={LABELS[i].anchor}
+                fill="var(--color-ink)"
+                fontSize="25"
+              >
+                {LAND.islands[i]}
+              </text>
+            ))}
+          </g>
+        </svg>
+      </div>
 
       {/* Sand for land and blue for sea need no legend. The two marks that
           carry the argument do — and the sentence below carries it again in
           words, for the widths where the map drops its names. */}
-      <figcaption className="mt-5 border-t border-hairline pt-4 text-small text-stone">
+      <figcaption className="border-t border-hairline pt-4 text-small text-stone">
         <span className="flex flex-wrap items-center gap-x-6 gap-y-2">
           <span className="inline-flex items-center gap-2">
             <span aria-hidden className="h-[3px] w-7 rounded-full bg-navy" />

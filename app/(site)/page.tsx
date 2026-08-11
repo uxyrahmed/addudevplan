@@ -71,7 +71,11 @@ export default function HomePage() {
       {/* ------------------------------------------------ Geography & growth */}
       <section className="bg-shell py-20 sm:py-28">
         <div className="shell">
-          <div className="grid items-start gap-14 lg:grid-cols-2 lg:gap-20">
+          {/* Stretch, not `items-start`: the map column is shorter than the
+              copy beside it, and letting it fill the row lets its legend sit on
+              the same baseline as the island list rather than floating above
+              it. */}
+          <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
             <div>
               <SplitHeading className="font-display text-display-3 font-bold">
                 One atoll, four connected communities
