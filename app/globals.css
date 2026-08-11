@@ -101,9 +101,14 @@
        Three depths — lagoon, reef flat, land — because an atoll read as a flat
        silhouette is just a shape. Kept pale on purpose: the map sits on the
        section tint and should read as a drawing, not as a block of colour
-       competing with the goal grid below it. */
-    --lagoon: color-mix(in oklab, var(--color-sky) 8%, white);
-    --reef: color-mix(in oklab, var(--color-sky) 22%, white);
+       competing with the goal grid below it.
+
+       Depth decides which is bluer: the lagoon is enclosed water and the flat
+       around it is ankle-deep, so the flat is the paler of the two. The
+       council's own artwork draws it that way, and the reverse makes the atoll
+       read as an outline drawn around nothing. */
+    --lagoon: color-mix(in oklab, var(--color-sky) 26%, white);
+    --reef: color-mix(in oklab, var(--color-sky) 14%, white);
     --land: #ece0c4;
     --coast: #c9b58e;
   }

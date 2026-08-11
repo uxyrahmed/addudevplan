@@ -122,23 +122,18 @@ export const LAND = {
   reclaimedHa: 253,
   unit: 'hectares',
   /**
-   * North to south down the western chain, then the eastern rim. Maamendhoo is
-   * not carried over and Maradhoo-Feydhoo is: the 2 August deck still lists the
-   * older set, and the council corrected it in review.
+   * The islands of the city, north to south down the western chain.
+   *
+   * Four, and only these four — Gan is not part of Addu City, and neither are
+   * the other islands on the atoll rim, which the map still draws as reef and
+   * uninhabited land. The council corrected this in review; earlier decks
+   * listed a wider set.
+   *
+   * The order is the geography, and it is load-bearing: the map numbers its
+   * markers 1–4 from the north and reads the names out of this array by index,
+   * so reordering it renames the map.
    */
-  islands: [
-    'Hithadhoo',
-    'Hankede',
-    'Maradhoo',
-    'Maradhoo-Feydhoo',
-    'Feydhoo',
-    'Gan',
-    'Villingili',
-    'Hulhudhoo',
-    'Meedhoo',
-  ],
-  /** Joined by the Link Road — the four the plan counts as one city. */
-  linked: ['Hithadhoo', 'Maradhoo', 'Feydhoo', 'Gan'],
+  islands: ['Hithadhoo', 'Maradhoo', 'Maradhoo-Feydhoo', 'Feydhoo'],
 } as const
 
 /** Share of the city that is made land, to one decimal. */

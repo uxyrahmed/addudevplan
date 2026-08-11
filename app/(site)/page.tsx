@@ -78,7 +78,7 @@ export default function HomePage() {
               </SplitHeading>
               <p className="mt-6 max-w-[62ch] text-lead text-slate">
                 The Link Road runs the length of the western chain, from Hithadhoo through
-                Maradhoo, Maradhoo-Feydhoo and Feydhoo to Gan, so one investment reaches every
+                Maradhoo and Maradhoo-Feydhoo to Feydhoo, so one investment reaches every
                 community — and reclamation has added{' '}
                 <strong className="text-navy">{fmt(LAND.reclaimedHa)} hectares</strong> to a city
                 that now covers <strong className="text-navy">{fmt(LAND.totalHa)} hectares</strong>.
@@ -119,17 +119,23 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* Three columns, so nine islands are three rows rather than five.
-                  A list was asked for over the old single run-on line; it does
-                  not have to be a tall one. */}
+              {/* Two columns, so four islands are two rows. Numbered to match
+                  the map beside it, which is what carries the key at the widths
+                  where the map drops its own names. */}
               <div className="mt-6">
                 <p className="text-small text-ink">Islands of the city</p>
-                <ul className="mt-2.5 grid grid-cols-2 gap-x-8 sm:grid-cols-3">
-                  {LAND.islands.map((island) => (
+                <ul className="mt-2.5 grid grid-cols-2 gap-x-8">
+                  {LAND.islands.map((island, i) => (
                     <li
                       key={island}
-                      className="border-t border-hairline py-1.5 text-small text-stone"
+                      className="flex items-center gap-2.5 border-t border-hairline py-1.5 text-small text-stone"
                     >
+                      <span
+                        aria-hidden
+                        className="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-navy text-[9px] font-bold text-white"
+                      >
+                        {i + 1}
+                      </span>
                       {island}
                     </li>
                   ))}
