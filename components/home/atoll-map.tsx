@@ -34,7 +34,10 @@ const LABELS: { dx: number; dy: number; anchor: 'start' | 'end' }[] = [
   { dx: -22, dy: 6, anchor: 'end' },
   { dx: 24, dy: -6, anchor: 'start' },
   { dx: 24, dy: 5, anchor: 'start' },
-  { dx: 24, dy: 16, anchor: 'start' },
+  // Feydhoo rides higher than the other two offsets would suggest: the island
+  // south of it reaches up to about y 644 at this x, and a baseline any lower
+  // put the word on the sand while the two above it sat in clear water.
+  { dx: 24, dy: 8, anchor: 'start' },
 ]
 
 /**
