@@ -37,6 +37,22 @@ const LABELS: { dx: number; dy: number; anchor: 'start' | 'end' }[] = [
   { dx: 24, dy: 16, anchor: 'start' },
 ]
 
+/**
+ * The two ends of the Link Road, taken from the road's own first and last
+ * point so they cannot drift from the line they cap.
+ *
+ * A stroke that simply stops mid-lagoon reads as an unfinished drawing. A ring
+ * at each end says the road ends *there* — and naming them north and south is
+ * what tells a reader which way the chain runs, which the road cannot say on
+ * its own once it has finished drawing.
+ */
+const ROAD_ENDS = [
+  // Set outboard of the ring, away from the land it sits on: the northern end
+  // has open reef above it, the southern end has the flat to its east.
+  { id: 'north', label: 'North', x: 160, y: 146, dx: 0, dy: -26, anchor: 'middle' },
+  { id: 'south', label: 'South', x: 579, y: 689, dx: 26, dy: 8, anchor: 'start' },
+] as const
+
 export function AtollMap() {
   const ref = useRef<SVGSVGElement>(null)
 
@@ -55,14 +71,21 @@ export function AtollMap() {
         const ctx = gsap.context(() => {
           const road = el.querySelector<SVGPathElement>('[data-road]')
           const stops = el.querySelectorAll('[data-stop]')
+          const ends = el.querySelectorAll('[data-end]')
           if (!road) return
 
           // Set the dash only once we know we are animating. Doing it in the
           // markup would leave the road invisible for anyone this effect bails
           // out on — reduced motion, a low-core device, a hidden tab.
           const len = road.getTotalLength()
-          gsap.set(road, { strokeDasharray: len, strokeDashoffset: len })
+          // Negative, not positive. The source path is drawn south to north, so
+          // a positive offset would reveal it from the southern end — against
+          // the way the map is read and against the order the markers surface
+          // in. Offsetting the other way draws it from the north instead,
+          // without reversing 104 points of path data.
+          gsap.set(road, { strokeDasharray: len, strokeDashoffset: -len })
           gsap.set(stops, { opacity: 0, scale: 0, transformOrigin: 'center' })
+          gsap.set(ends, { opacity: 0 })
 
           const play = () => {
             gsap.to(road, { strokeDashoffset: 0, duration: 2.1, ease: 'power2.inOut' })
@@ -74,6 +97,14 @@ export function AtollMap() {
               ease: 'back.out(2)',
               stagger: 0.42,
               delay: 0.45,
+            })
+            // Each end appears as the road gets there: the north one as it sets
+            // off, the south one as it arrives.
+            gsap.to(el.querySelectorAll('[data-end="north"]'), { opacity: 1, duration: 0.4 })
+            gsap.to(el.querySelectorAll('[data-end="south"]'), {
+              opacity: 1,
+              duration: 0.4,
+              delay: 1.85,
             })
           }
 
@@ -105,7 +136,7 @@ export function AtollMap() {
         viewBox="58 24 1000 790"
         className="block h-auto w-full"
         role="img"
-        aria-label={`Map of Addu Atoll. The four islands of the city — ${LAND.islands.join(', ')} — lie along the western side of the atoll, joined end to end by the Link Road, which crosses open water on causeways. The rest of the atoll rim is reef and uninhabited islands.`}
+        aria-label={`Map of Addu Atoll. The four islands of the city — ${LAND.islands.join(', ')} — lie along the western side of the atoll from north to south, joined end to end by the Link Road, which crosses open water on causeways. The road runs on past Feydhoo to the south-east, beyond the city. The rest of the atoll is reef and lagoon.`}
       >
         <g fill="var(--reef)">
           {REEF.map((d) => (
@@ -146,6 +177,32 @@ export function AtollMap() {
           strokeLinejoin="round"
           className="max-sm:[stroke-width:9]"
         />
+
+        {/* Hollow, where the island markers are solid: this is where the road
+            stops, not a place. */}
+        {ROAD_ENDS.map((end) => (
+          <g key={end.id} data-end={end.id}>
+            <circle
+              cx={end.x}
+              cy={end.y}
+              r="8"
+              fill="white"
+              stroke="var(--color-navy)"
+              strokeWidth="4"
+              className="max-sm:[r:12] max-sm:[stroke-width:6]"
+            />
+            <text
+              x={end.x + end.dx}
+              y={end.y + end.dy}
+              textAnchor={end.anchor}
+              fill="var(--color-stone)"
+              fontSize="20"
+              className="font-heading max-sm:[font-size:30px]"
+            >
+              {end.label}
+            </text>
+          </g>
+        ))}
 
         {MARKERS.map(([x, y], i) => (
           <g key={LAND.islands[i]} data-stop>
@@ -212,9 +269,9 @@ export function AtollMap() {
           </span>
         </span>
         <p className="mt-3">
-          The Link Road joins the four islands of the city end to end, from Hithadhoo in the north
-          down to Feydhoo, crossing open reef where the chain breaks. The rest of the atoll rim is
-          reef and uninhabited islands.
+          The Link Road runs north to south down the western chain, joining the four islands of the
+          city end to end and crossing open reef where the chain breaks. It carries on past Feydhoo
+          to the south-east, beyond the city.
         </p>
       </figcaption>
     </figure>
