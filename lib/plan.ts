@@ -218,52 +218,58 @@ export const MIGRATION_SERIES = {
  */
 export const PILLARS_INTRO = {
   title: 'Five interconnected pillars',
-  body: `What distinguishes the Addu Development Plan is its integrated, systems-based approach. Rather than a collection of standalone projects, it presents a coherent model for transformation built on five interconnected pillars: modern smart infrastructure, empowered people, a diversified economy, a rich natural environment, and good governance. Together, these elements define a clear vision for Addu as a sustainable, resilient, and inclusive city.`,
+  body: `What distinguishes the Addu Development Plan is its integrated, systems-based approach. Rather than presenting a collection of standalone projects, it sets out a coherent model for transformation built on five interconnected pillars: modern smart infrastructure, empowered people, a diversified thriving economy, a rich natural environment, and good governance grounded in trust, respect, and strong leadership. Together, these pillars provide a clear and credible foundation for Addu's future as a resilient, inclusive and sustainable city.`,
 } as const
 
 /**
- * The pillars. Colours for the first four are the badge fills used across the
- * goal grid, read out of the deck's own colour operators.
+ * The five pillars, named and coloured as the 5 August deck draws them.
  *
- * Governance is the exception. The pillar itself is confirmed; the deck has not
- * caught up, so it neither names nor colours it. The label, blurb and colour
- * below are this site's and should be replaced when the deck does.
+ * The deck has caught up: it now sets all five as a honeycomb of filled
+ * hexagons, Governance included, so the placeholder label and colour this site
+ * used to carry for it are gone. Colours are sampled from those hexagons —
+ * they are gradient plates, so each is the dominant tone rather than a stated
+ * value.
  *
- * NOTE: the draft deck does not state which goals sit under which pillar, so
- * this site deliberately does not assert a mapping. Add a `goals: number[]`
+ * `textColor` is the same hue darkened until it clears 4.5:1 on white. Four of
+ * the five are already dark enough to double as type; only Infrastructure's
+ * orange needed taking down.
+ *
+ * NOTE: the draft still does not state which goals sit under which pillar, so
+ * this site deliberately does not assert a mapping. The deck accents each goal
+ * in one of four of these hues — which is a strong hint, not a statement — and
+ * that accent is what a goal's own colour follows. Add a `goals: number[]`
  * field here once the council confirms it.
  */
 export const PILLARS: Pillar[] = [
   {
     id: 'infrastructure',
-    name: 'Modern smart infrastructure',
-    color: '#652C67',
-    textColor: '#652C67',
+    name: 'Infrastructure',
+    color: '#DC5818',
+    textColor: '#C04E14',
   },
   {
     id: 'people',
-    name: 'Empowered people',
-    color: '#48A0A4',
-    textColor: '#357578',
-  },
-  {
-    id: 'economy',
-    name: 'A diversified economy',
-    color: '#569A92',
-    textColor: '#40736D',
-  },
-  {
-    id: 'environment',
-    name: 'A rich natural environment',
-    color: '#90A84F',
-    textColor: '#617135',
+    name: 'People',
+    color: '#350F4D',
+    textColor: '#350F4D',
   },
   {
     id: 'governance',
-    name: 'Good governance',
-    // The deck's blue, darkened to clear 4.5:1 under white like the others.
-    color: '#0076B9',
-    textColor: '#00699F',
+    name: 'Governance',
+    color: '#3C6C0F',
+    textColor: '#3C6C0F',
+  },
+  {
+    id: 'environment',
+    name: 'Environment',
+    color: '#0A5857',
+    textColor: '#0A5857',
+  },
+  {
+    id: 'economy',
+    name: 'Economy',
+    color: '#082767',
+    textColor: '#082767',
   },
 ]
 
@@ -274,8 +280,8 @@ export const GOALS: Goal[] = [
     number: 1,
     slug: 'energy-security',
     title: 'Ensure energy security',
-    color: '#652C67',
-    textColor: '#652C67',
+    color: '#EE8A12',
+    textColor: '#AE650D',
     tagline: 'Every home a renewable energy producer',
     summary: `Addu generates 68,431,692 kWh of electricity annually to serve 7,389 connections, comprising 5,693 domestic, 1,455 business, and 241 institutional customers. The city's heavy reliance on imported diesel to meet this demand leaves households, businesses, and public services vulnerable to rising fuel costs, global market volatility, and supply disruptions. Frequent power outages caused by generation and network capacity constraints further underline the urgent need for a more reliable, resilient, and diversified energy system. With its abundant solar resources, Addu has exceptional potential to become a renewable-energy prosumer city, where households, businesses, and institutions generate, store, consume, and share clean electricity. The widespread adoption of solar PV and battery storage offers a practical and scalable pathway towards achieving this transition.`,
     stats: [
@@ -328,8 +334,8 @@ export const GOALS: Goal[] = [
     number: 2,
     slug: 'water-security',
     title: 'Ensure water security',
-    color: '#48A0A4',
-    textColor: '#357578',
+    color: '#EE8A12',
+    textColor: '#AE650D',
     tagline: 'Renewables-powered desalination and rainwater for all',
     summary: `Addu will secure its long-term water supply through five diversified sources — desalination, household and community-scale rainwater harvesting, responsibly managed groundwater, reclaimed wastewater, and mineralised bottled water. Solar PV and battery storage will support reliable desalination. Expanded rainwater systems will capture and store rainfall for domestic and public use, while carefully managed groundwater will provide a dedicated supply for gardening and landscaping. Expanded sewerage networks and advanced wastewater treatment will enable reclaimed water to be used safely for agriculture, irrigation, landscaping, and other non-potable purposes. Addu will also support the local production of mineralised drinking water in reusable glass bottles and large-volume containers for homes, restaurants, hotels, offices, and other businesses.`,
     stats: [
@@ -388,8 +394,8 @@ export const GOALS: Goal[] = [
     number: 3,
     slug: 'food-security',
     title: 'Ensure food security',
-    color: '#48A0A4',
-    textColor: '#357578',
+    color: '#AA6DDC',
+    textColor: '#945FBF',
     tagline: 'Grow more at home, land more from the sea',
     summary: `The Maldives imported approximately USD 790.5 million worth of food in 2025, underscoring the country's heavy dependence on external markets while revealing a significant economic opportunity to expand domestic production. Against a backdrop of rising global food prices, supply-chain disruptions, and climate-related shocks, strengthening food security has become a strategic priority for Addu City. With the largest land area among the Maldives' atolls, substantial agricultural potential, productive fisheries, and a growing population, Addu is uniquely positioned for sustainable food production and to contribute meaningfully to national food security.`,
     stats: [
@@ -481,8 +487,8 @@ export const GOALS: Goal[] = [
     number: 4,
     slug: 'future-ready-transport',
     title: 'Future ready transport',
-    color: '#569A92',
-    textColor: '#40736D',
+    color: '#EE8A12',
+    textColor: '#AE650D',
     tagline: 'Free electric buses every 10 minutes',
     summary: `As incomes continue to rise, vehicle ownership is expected to increase, leading to greater traffic congestion, parking shortages, road safety concerns, and dependence on imported fossil fuels. To avoid becoming a car-dependent city, Addu will adopt a free electric bus service operating every 10 minutes during peak hours, supported by walking and cycling infrastructure and a planned transition to electric vehicles. Complemented by an expanding EV charging network, this strategy will lower transport emissions, reduce fuel imports, improve air quality, and establish Addu as a city for clean, affordable, inclusive and sustainable mobility.`,
     stats: [
@@ -548,8 +554,8 @@ export const GOALS: Goal[] = [
     number: 5,
     slug: 'connect-the-south',
     title: 'Connect the South',
-    color: '#90A84F',
-    textColor: '#617135',
+    color: '#EE8A12',
+    textColor: '#AE650D',
     tagline: 'One southern region, connected daily',
     summary: `Reliable connectivity between Addu, Fuvahmulah, and Huvadhoo is fundamental to creating an integrated southern economic region. Daily passenger services will improve access to healthcare, education, and employment for residents, while enabling visitors to travel between the Southern Atolls as a single tourism destination. Daily freight services will ensure the timely movement of medical supplies, laboratory samples, fresh food, fisheries products, e-commerce parcels, and essential goods, while supporting emergency response during disruptions. This target will be delivered through complementary investments to enhance Gan International Airport with new international routes and sustained regional air services, establish drone cargo corridors for time-critical deliveries, and develop a strategic gateway port.`,
     stats: [
@@ -604,8 +610,8 @@ export const GOALS: Goal[] = [
     number: 6,
     slug: 'diverse-quality-housing',
     title: 'Diverse quality housing',
-    color: '#652C67',
-    textColor: '#652C67',
+    color: '#EE8A12',
+    textColor: '#AE650D',
     tagline: '350 new homes and 1,000 rental units',
     summary: `Addu City is planning to attract professionals, skilled workers, and returning families. Accelerating housing delivery is essential to attract residents, and we will deliver new sustainable homes for families. To support Addu's transformation into a destination for wellness, education, aviation, and business, we will deliver spacious apartments across low-rise (3-4 storey) apartment buildings, providing high-quality accommodation for professionals and their families. These apartments will feature generous living spaces, lift access, secure parking, and energy-efficient design, offering an attractive lifestyle for professionals, entrepreneurs, and skilled workers. Together with complementary initiatives for affordable rental accommodation and mixed-use neighbourhoods, this goal will create attractive liveable communities.`,
     stats: [
@@ -661,8 +667,8 @@ export const GOALS: Goal[] = [
     number: 7,
     slug: 'connect-community-and-culture',
     title: 'Connect community and culture',
-    color: '#569A92',
-    textColor: '#40736D',
+    color: '#178E6B',
+    textColor: '#168665',
     tagline: 'A community centre within a 10-minute walk',
     summary: `Addu City will foster vibrant, inclusive, and connected communities by creating high-quality public spaces that encourage recreation, social interaction, culture, and healthy living. Through integrated community centres, active waterfronts, attractive parks, and shaded walkable streets, every resident will have easy access to places where people can gather, exercise, learn, celebrate, and build stronger community connections. We will safeguard historical sites, traditions, language, and cultural practices, and ensure that heritage is respected and sustained as a living part of everyday life. We will showcase local traditions and stories to create memorable experiences and enable longer stays, repeat visits, and positive word-of-mouth, contributing to sustainable tourism and local economic growth.`,
     stats: [
@@ -753,8 +759,8 @@ export const GOALS: Goal[] = [
     number: 8,
     slug: 'health-and-well-being',
     title: 'Health and well-being',
-    color: '#569A92',
-    textColor: '#40736D',
+    color: '#AA6DDC',
+    textColor: '#945FBF',
     tagline: 'Comprehensive care within 10 minutes of home',
     summary: `Addu City faces growing health challenges, including rising non-communicable diseases, mental health needs, and the high cost of care and medicines. Strengthening prevention — through cancer screening, nutrition, and active lifestyles — alongside improved mental health support is essential for long-term well-being. Upgrading island health centres into effective primary healthcare providers and positioning Addu Equatorial Hospital as the southern medical hub will improve access and quality of care. Investing in a skilled health workforce and affordable services will ensure a resilient, inclusive, and people-centred health system. There are 561 people in the health workforce in Addu.`,
     stats: [
@@ -843,8 +849,8 @@ export const GOALS: Goal[] = [
     number: 9,
     slug: 'education-excellence',
     title: 'Education excellence',
-    color: '#90A84F',
-    textColor: '#617135',
+    color: '#AA6DDC',
+    textColor: '#945FBF',
     tagline: '2,000 tertiary students a year by 2030',
     summary: `Education is central to Addu City's future competitiveness, workforce development, and social progress. Strengthening foundational learning through quality early childhood education, upgrading school infrastructure and science labs, and expanding vocational training pathways will align skills with emerging economic opportunities. Building digital capabilities and promoting lifelong learning will ensure adaptability in a rapidly changing world. Together, these investments will create a skilled, innovative, and resilient community.`,
     stats: [
@@ -934,8 +940,8 @@ export const GOALS: Goal[] = [
     number: 10,
     slug: 'inclusive-prosperity',
     title: 'Inclusive prosperity',
-    color: '#652C67',
-    textColor: '#652C67',
+    color: '#1D68A6',
+    textColor: '#1D68A6',
     tagline: 'Near-zero poverty and 500 businesses backed',
     summary: `Addu City is committed to achieving zero poverty by building a dynamic, innovative, and digitally enabled economy that creates opportunities for everyone. Through investment in entrepreneurship, future-ready skills, digital infrastructure, SMEs, and improved access to finance and markets, the city will generate quality jobs, empower local businesses, and strengthen economic resilience. Targeted support for women, youth, people with disabilities, and other vulnerable groups will ensure that every resident has the opportunity to participate in and benefit from sustainable economic growth, leading to greater inclusion, shared prosperity, and an improved quality of life.`,
     stats: [
@@ -1026,8 +1032,8 @@ export const GOALS: Goal[] = [
     number: 11,
     slug: 'wildlife-and-wellness-tourism',
     title: 'Wildlife and wellness tourism',
-    color: '#569A92',
-    textColor: '#40736D',
+    color: '#1D68A6',
+    textColor: '#1D68A6',
     tagline: 'Beyond the Beach — where nature meets wellbeing',
     summary: `Addu will become the destination "Beyond the Beach" — where nature meets wellbeing. By combining world-class wildlife experiences with health, wellness, and active lifestyles, Addu will create a distinctive year-round visitor economy. Visitors will encounter manta rays, whale sharks, dolphins, turtles, White Terns, and spectacular coral reefs through world-class diving and immersive nature experiences, while wellness retreats, healthy local cuisine, outdoor recreation, and specialist healthcare at Addu Equatorial Hospital make Addu a destination for restoration, recovery, and rejuvenation. Supported by boutique eco-lodges and sustainable accommodation, Addu will offer an authentic Maldivian experience.`,
     stats: [
@@ -1115,8 +1121,8 @@ export const GOALS: Goal[] = [
     number: 12,
     slug: 'environment-protection',
     title: 'Environment protection',
-    color: '#90A84F',
-    textColor: '#617135',
+    color: '#178E6B',
+    textColor: '#168665',
     tagline: 'Protected reefs and wetlands, and a circular economy',
     summary: `Addu City will protect and restore its unique natural environment while building a climate-resilient circular economy that supports sustainable growth and community wellbeing. The city will conserve coral reefs, wetlands, mangroves, beaches, and other ecologically significant ecosystems by designating and effectively managing protected areas and nature parks, restoring degraded habitats, and promoting responsible public access and eco-tourism. Through resource efficiency, waste reduction, recycling, nature-based solutions, and climate-resilient infrastructure, Addu will enhance biodiversity, strengthen resilience to climate change, and create a cleaner, healthier, and more sustainable city for present and future generations.`,
     stats: [
