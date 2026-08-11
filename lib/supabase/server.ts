@@ -12,8 +12,12 @@ import { supabaseConfig } from './config'
  * council member's session to the next request.
  */
 export async function createClient() {
-  const { url, key } = supabaseConfig()
+  // Read cookies before validating configuration, not after. Awaiting `cookies()`
+  // is what opts the route into dynamic rendering; throwing first means Next
+  // never finds that out, tries to prerender the page at build time, and fails
+  // the build on a machine that simply has no runtime secrets yet.
   const cookieStore = await cookies()
+  const { url, key } = supabaseConfig()
 
   return createServerClient(url, key, {
     cookies: {

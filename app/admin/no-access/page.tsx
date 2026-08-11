@@ -4,6 +4,9 @@ import { redirect } from 'next/navigation'
 
 export const metadata = { title: 'No access' }
 
+/** Depends entirely on who is asking, so it is never prerendered or cached. */
+export const dynamic = 'force-dynamic'
+
 /**
  * Signed in, but not on the council allowlist.
  *
