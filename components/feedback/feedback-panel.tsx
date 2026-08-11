@@ -7,6 +7,8 @@ import SentIcon from '@hugeicons/core-free-icons/SentIcon'
 import Delete02Icon from '@hugeicons/core-free-icons/Delete02Icon'
 import Download01Icon from '@hugeicons/core-free-icons/Download01Icon'
 import CheckmarkCircle02Icon from '@hugeicons/core-free-icons/CheckmarkCircle02Icon'
+import AlertCircleIcon from '@hugeicons/core-free-icons/AlertCircleIcon'
+import Loading03Icon from '@hugeicons/core-free-icons/Loading03Icon'
 import { Icon } from '@/components/ui/icon'
 import { GOALS, TOTAL_ACTIONS } from '@/lib/plan'
 import { REACTIONS, useFeedback } from './feedback-store'
@@ -23,7 +25,8 @@ const INDEX = new Map(
 const REACTION_BY_ID = new Map(REACTIONS.map((r) => [r.id, r]))
 
 export function FeedbackPanel({ onClose }: { onClose: () => void }) {
-  const { feedback, count, clearAll, remove, submitted, markSubmitted } = useFeedback()
+  const { feedback, count, clearAll, remove, submitted, status, error, revised, submit } =
+    useFeedback()
   const closeRef = useRef<HTMLButtonElement>(null)
 
   // Opened by choice, so move focus into it and let Escape close it.
@@ -124,7 +127,23 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
               style={{ background: 'color-mix(in oklab, #178E6B 10%, white)', color: '#0f6b51' }}
             >
               <Icon icon={CheckmarkCircle02Icon} size={20} />
-              <p>Thank you — your feedback has been recorded.</p>
+              <p>
+                {revised
+                  ? 'Thank you — your feedback has been updated. It replaces what you sent before.'
+                  : 'Thank you — your feedback has reached Addu City Council.'}{' '}
+                Change anything above and you can send it again.
+              </p>
+            </div>
+          ) : null}
+
+          {status === 'error' && error ? (
+            <div
+              role="alert"
+              className="mb-5 flex items-start gap-3 rounded-2xl p-4 text-small"
+              style={{ background: 'color-mix(in oklab, #970E53 9%, white)', color: '#7c0b45' }}
+            >
+              <Icon icon={AlertCircleIcon} size={20} />
+              <p>{error}</p>
             </div>
           ) : null}
 
@@ -182,12 +201,21 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
         <footer className="border-t border-hairline px-6 pt-4 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
           <button
             type="button"
-            onClick={markSubmitted}
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-navy px-5 py-3.5 text-small font-bold text-white transition-colors hover:bg-navy-deep"
+            onClick={submit}
+            disabled={status === 'sending' || submitted}
+            aria-busy={status === 'sending'}
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-navy px-5 py-3.5 text-small font-bold text-white transition-colors hover:bg-navy-deep disabled:cursor-default disabled:bg-stone"
           >
-            <Icon icon={SentIcon} size={17} />
-            Send to Addu City Council
+            <Icon icon={status === 'sending' ? Loading03Icon : SentIcon} size={17} />
+            {status === 'sending' ? 'Sending…' : submitted ? 'Sent' : 'Send to Addu City Council'}
           </button>
+          {/* Said once, next to the button that does it, rather than in a
+              privacy page nobody opens. */}
+          {submitted ? null : (
+            <p className="mt-2.5 text-center text-micro tracking-normal text-mist">
+              Sent anonymously. Your name is not asked for or recorded.
+            </p>
+          )}
           <div className="mt-3 flex items-center justify-between gap-3 text-small">
             <button
               type="button"

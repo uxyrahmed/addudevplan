@@ -10,7 +10,9 @@ import {
   type ReactNode,
 } from 'react'
 
-export type Reaction = 'support' | 'unsure' | 'concern'
+import { REACTION_META, REACTION_VALUES, type WireReaction } from '@/lib/reactions'
+
+export type Reaction = WireReaction
 
 export type Entry = {
   reaction?: Reaction
@@ -21,6 +23,8 @@ export type Entry = {
 export type Feedback = Record<string, Entry>
 
 const STORAGE_KEY = 'addu-plan-feedback:v1'
+
+export type SubmitStatus = 'idle' | 'sending' | 'sent' | 'error'
 
 type Ctx = {
   ready: boolean
@@ -33,7 +37,13 @@ type Ctx = {
   count: number
   countFor: (ids: string[]) => number
   submitted: boolean
-  markSubmitted: () => void
+  status: SubmitStatus
+  /** Why the last send failed, in words a resident can act on. */
+  error: string | null
+  /** True when the send replaced a basket this browser had already filed. */
+  revised: boolean
+  /** Sends the basket to the council. Resolves once it has succeeded or failed. */
+  submit: () => Promise<void>
 }
 
 const FeedbackContext = createContext<Ctx | null>(null)
@@ -45,13 +55,17 @@ function isEmpty(entry: Entry | undefined) {
 /**
  * Holds the visitor's response to every strategy and action.
  *
- * MVP scope: this is the browser's copy only — nothing leaves the device. When
- * the backend lands, `markSubmitted` is where the POST goes; the payload is
- * already the shape a server would want (`{ [actionId]: { reaction, comment } }`).
+ * The browser's copy is the working draft: it survives a reload, a closed tab
+ * and a return visit, and nothing is sent until the visitor asks for it in the
+ * review panel. `submit` is the only thing that leaves the device, and it posts
+ * to /api/feedback rather than talking to the database directly — the server
+ * holds the write secret and does the de-duplication.
  */
 export function FeedbackProvider({ children }: { children: ReactNode }) {
   const [feedback, setFeedback] = useState<Feedback>({})
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState<SubmitStatus>('idle')
+  const [error, setError] = useState<string | null>(null)
+  const [revised, setRevised] = useState(false)
   const [ready, setReady] = useState(false)
 
   // Hydrate after mount so server and client markup agree.
@@ -68,7 +82,7 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
       if (raw) {
         const parsed = JSON.parse(raw) as { entries?: Feedback; submitted?: boolean }
         setFeedback(parsed.entries ?? {})
-        setSubmitted(Boolean(parsed.submitted))
+        if (parsed.submitted) setStatus('sent')
       }
     } catch {
       // Corrupt or blocked storage: start clean rather than break the page.
@@ -80,14 +94,24 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!ready) return
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ entries: feedback, submitted }))
+      window.localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({ entries: feedback, submitted: status === 'sent' }),
+      )
     } catch {
       // Private browsing / quota — feedback simply won't persist.
     }
-  }, [feedback, submitted, ready])
+  }, [feedback, status, ready])
+
+  // Any edit after a send means the sent copy is no longer what the visitor
+  // thinks it is, so the panel drops back to offering to send again.
+  const reopen = useCallback(() => {
+    setStatus((prev) => (prev === 'idle' ? prev : 'idle'))
+    setError(null)
+  }, [])
 
   const setReaction = useCallback((id: string, reaction: Reaction) => {
-    setSubmitted(false)
+    reopen()
     setFeedback((prev) => {
       const next = { ...prev }
       const current = next[id]
@@ -101,31 +125,78 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
       else next[id] = entry
       return next
     })
-  }, [])
+  }, [reopen])
 
-  const setComment = useCallback((id: string, comment: string) => {
-    setSubmitted(false)
-    setFeedback((prev) => {
-      const next = { ...prev }
-      const entry: Entry = { ...next[id], comment, updatedAt: Date.now() }
-      if (isEmpty(entry)) delete next[id]
-      else next[id] = entry
-      return next
-    })
-  }, [])
+  const setComment = useCallback(
+    (id: string, comment: string) => {
+      reopen()
+      setFeedback((prev) => {
+        const next = { ...prev }
+        const entry: Entry = { ...next[id], comment, updatedAt: Date.now() }
+        if (isEmpty(entry)) delete next[id]
+        else next[id] = entry
+        return next
+      })
+    },
+    [reopen],
+  )
 
-  const remove = useCallback((id: string) => {
-    setFeedback((prev) => {
-      const next = { ...prev }
-      delete next[id]
-      return next
-    })
-  }, [])
+  const remove = useCallback(
+    (id: string) => {
+      reopen()
+      setFeedback((prev) => {
+        const next = { ...prev }
+        delete next[id]
+        return next
+      })
+    },
+    [reopen],
+  )
 
   const clearAll = useCallback(() => {
     setFeedback({})
-    setSubmitted(false)
+    setStatus('idle')
+    setError(null)
+    setRevised(false)
   }, [])
+
+  const submit = useCallback(async () => {
+    const responses = Object.entries(feedback)
+      .filter(([, entry]) => !isEmpty(entry))
+      .map(([actionId, entry]) => ({
+        actionId,
+        reaction: entry.reaction ?? null,
+        comment: entry.comment?.trim() || null,
+      }))
+
+    if (!responses.length) return
+
+    setStatus('sending')
+    setError(null)
+
+    try {
+      const res = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ responses }),
+      })
+      const data = (await res.json().catch(() => ({}))) as { error?: string; revised?: boolean }
+
+      if (!res.ok) {
+        setStatus('error')
+        setError(data.error ?? 'Could not send your feedback. Please try again.')
+        return
+      }
+
+      setRevised(Boolean(data.revised))
+      setStatus('sent')
+    } catch {
+      // Offline, or the request never reached the server. The basket is still
+      // in localStorage, so nothing the visitor typed is lost.
+      setStatus('error')
+      setError('No connection. Your feedback is saved on this device — try sending again.')
+    }
+  }, [feedback])
 
   const value = useMemo<Ctx>(() => {
     const ids = Object.keys(feedback)
@@ -138,10 +209,13 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
       clearAll,
       count: ids.length,
       countFor: (subset) => subset.filter((id) => !isEmpty(feedback[id])).length,
-      submitted,
-      markSubmitted: () => setSubmitted(true),
+      submitted: status === 'sent',
+      status,
+      error,
+      revised,
+      submit,
     }
-  }, [feedback, ready, setReaction, setComment, remove, clearAll, submitted])
+  }, [feedback, ready, setReaction, setComment, remove, clearAll, status, error, revised, submit])
 
   return <FeedbackContext.Provider value={value}>{children}</FeedbackContext.Provider>
 }
@@ -152,8 +226,10 @@ export function useFeedback() {
   return ctx
 }
 
-export const REACTIONS: { id: Reaction; label: string; short: string; color: string }[] = [
-  { id: 'support', label: 'I support this', short: 'Support', color: '#178E6B' },
-  { id: 'unsure', label: "I'm not sure", short: 'Not sure', color: '#EE8A12' },
-  { id: 'concern', label: 'I have a concern', short: 'Concern', color: '#970E53' },
-]
+/**
+ * The three reactions in the order they are offered, with their wording and
+ * colour. Built from the shared metadata so the admin panel's tallies and these
+ * buttons can never disagree about what green means.
+ */
+export const REACTIONS: { id: Reaction; label: string; short: string; color: string }[] =
+  REACTION_VALUES.map((id) => ({ id, ...REACTION_META[id] }))

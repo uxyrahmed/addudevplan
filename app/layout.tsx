@@ -2,14 +2,6 @@ import type { Metadata, Viewport } from 'next'
 import { Google_Sans, Merriweather, Questrial } from 'next/font/google'
 import './globals.css'
 import { PLAN } from '@/lib/plan'
-import { SmoothScroll } from '@/components/motion/smooth-scroll'
-import { ScrollProgress } from '@/components/motion/scroll-progress'
-import { Reveals } from '@/components/motion/reveals'
-import { SiteHeader } from '@/components/site/site-header'
-import { HeaderGoalLinks } from '@/components/site/header-goal-links'
-import { SiteFooter } from '@/components/site/site-footer'
-import { FeedbackProvider } from '@/components/feedback/feedback-store'
-import { FeedbackBasket } from '@/components/feedback/feedback-basket'
 
 /**
  * Display: a variable soft serif. Google Sans is already a geometric-humanist
@@ -98,21 +90,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <noscript>
           <style>{`html[data-anim] [data-reveal],html[data-anim] [data-enter]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
-        <FeedbackProvider>
-          <SmoothScroll />
-          <Reveals />
-          <ScrollProgress />
-          <a
-            href="#main"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:rounded-full focus:bg-navy focus:px-5 focus:py-3 focus:text-small focus:font-bold focus:text-white"
-          >
-            Skip to content
-          </a>
-          <SiteHeader goalNav={<HeaderGoalLinks />} />
-          <main id="main">{children}</main>
-          <SiteFooter />
-          <FeedbackBasket />
-        </FeedbackProvider>
+        {/* The document shell only. The consultation's own chrome — header,
+            footer, feedback basket, scroll layer — lives in app/(site), so the
+            admin panel can render a different shell inside the same fonts. */}
+        {children}
       </body>
     </html>
   )
