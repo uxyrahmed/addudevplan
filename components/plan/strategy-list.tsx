@@ -8,7 +8,7 @@ import type { Goal } from '@/lib/plan'
 /**
  * Strategies and actions for one goal, each action carrying its own feedback
  * control. A quiet progress line at the top tells the visitor how far through
- * this goal they are, which is what makes 15 goals feel finishable.
+ * this goal they are, which is what makes twelve goals feel finishable.
  */
 export function StrategyList({ goal }: { goal: Goal }) {
   const { countFor, ready } = useFeedback()

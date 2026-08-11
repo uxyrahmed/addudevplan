@@ -57,13 +57,13 @@ export const metadata: Metadata = {
     template: `%s — ${PLAN.title}`,
   },
   description:
-    'Fifteen goals to make Addu a sustainable, resilient and inclusive city of 35,000 people by 2030. Read the plan and tell the council what you think of every strategy.',
+    'Twelve goals to make Addu a sustainable, resilient and inclusive city of 35,000 people by 2030. Read the plan and tell the council what you think of every strategy.',
   applicationName: PLAN.title,
   authors: [{ name: PLAN.author }],
   openGraph: {
     title: `${PLAN.title} ${PLAN.period}`,
     description:
-      'Fifteen goals for a sustainable Addu. Read the plan and share your feedback on every strategy.',
+      'Twelve goals for a sustainable Addu. Read the plan and share your feedback on every strategy.',
     type: 'website',
   },
 }

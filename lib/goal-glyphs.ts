@@ -1,12 +1,16 @@
 /**
- * Goal badge glyphs, extracted from the "Fifteen Goals" slide of the plan PDF.
+ * Goal badge glyphs, extracted from the goals slide of the plan PDF.
  *
  * These are the deck's own vector paths on a 100x100 grid, stroked in
  * `currentColor` so a badge can recolour them and GSAP can draw them on.
- * Goals 12, 13 and 15 are raster in the source deck; they fall back to the
+ * Goals 11 and 12 are raster in the source deck; they fall back to the
  * alpha-masked PNGs in `public/plan/goals/goal-NN-glyph.png`.
  *
  * Generated from the PDF — do not hand-edit; re-extract if the deck changes.
+ * These paths came from the fifteen-goal deck and were renumbered when the plan
+ * became twelve goals; goals 1-10 kept their subject, so they kept their glyph.
+ * The 11 August deck draws its own icon set, which is worth re-extracting when
+ * the design catches up with the content.
  */
 import type { IconData } from "@/components/ui/icon"
 
@@ -84,15 +88,11 @@ export const GOAL_GLYPHS: Record<number, IconData | null> = {
     ["path", { d: "M46.27,45.30 C46.27,45.30 50.28,50.31 50.28,60.34", fill: "none", stroke: "currentColor", strokeWidth: 3.01, strokeLinecap: "round", strokeLinejoin: "round" }],
     ["path", { d: "M68.34,68.37 C63.93,63.45 57.48,60.35 50.28,60.35 C43.09,60.35 36.64,63.45 32.23,68.37", fill: "none", stroke: "currentColor", strokeWidth: 3.01, strokeLinecap: "round", strokeLinejoin: "round" }],
   ],
-  11: [
-    ["path", { d: "M35.63,50.04 C35.63,42.47 35.63,38.69 37.98,36.34 C40.33,33.99 44.11,33.99 51.68,33.99 C59.25,33.99 63.03,33.99 65.38,36.34 C67.73,38.69 67.73,42.47 67.73,50.04 C67.73,57.61 67.73,61.39 65.38,63.74 C63.03,66.09 59.25,66.09 51.68,66.09 C44.11,66.09 40.33,66.09 37.98,63.74 C35.63,61.39 35.63,57.61 35.63,50.04 Z", fill: "none", stroke: "currentColor", strokeWidth: 3.01, strokeLinecap: "round", strokeLinejoin: "round" }],
-    ["path", { d: "M43.12,58.60 C44.59,60.07 46.95,60.07 51.68,60.07 C53.26,60.07 54.58,60.07 55.69,60.02 L61.66,54.05 C61.71,52.95 61.71,51.63 61.71,50.04 C61.71,45.31 61.71,42.95 60.24,41.48 C58.77,40.01 56.41,40.01 51.68,40.01 C46.95,40.01 44.59,40.01 43.12,41.48 C41.65,42.95 41.65,45.31 41.65,50.04 C41.65,54.77 41.65,57.13 43.12,58.60 Z", fill: "none", stroke: "currentColor", strokeWidth: 3.01, strokeLinecap: "round", strokeLinejoin: "round" }],
-    ["path", { d: "M43.65,29.98 L43.65,33.99 M59.71,29.98 L59.71,33.99 M51.68,29.98 L51.68,33.99 M43.65,66.09 L43.65,70.10 M51.68,66.09 L51.68,70.10 M59.71,66.09 L59.71,70.10 M71.74,58.07 L67.73,58.07 M35.63,42.02 L31.62,42.02 M35.63,58.07 L31.62,58.07 M35.63,50.04 L31.62,50.04 M71.74,42.02 L67.73,42.02 M71.74,50.04 L67.73,50.04", fill: "none", stroke: "currentColor", strokeWidth: 3.01, strokeLinecap: "round", strokeLinejoin: "round" }],
-  ],
+  // Goals 11 and 12 are raster in the source deck, so they fall back to the
+  // alpha-masked PNGs in public/plan/goals. Their artwork was renumbered when
+  // the plan went from fifteen goals to twelve: wildlife tourism moved from 12
+  // to 11, and the biodiversity glyph now stands for the merged Environment
+  // protection goal.
+  11: null,
   12: null,
-  13: null,
-  14: [
-    ["path", { d: "M44.66,33.29 C36.62,35.12 30.62,42.31 30.62,50.90 C30.62,51.93 30.70,52.93 30.87,53.91 M44.66,33.29 L38.64,30.84 M44.66,33.29 L42.65,38.86 M64.85,58.93 C66.06,56.51 66.73,53.79 66.73,50.90 C66.73,41.96 60.22,34.53 51.68,33.10 M64.85,58.93 L70.74,54.92 M64.85,58.93 L61.72,52.91 M33.66,60.93 C36.90,65.77 42.41,68.96 48.67,68.96 C53.30,68.96 57.52,67.22 60.71,64.36 M33.66,60.93 L40.65,60.93 M33.66,60.93 L33.66,67.96", fill: "none", stroke: "currentColor", strokeWidth: 3.01, strokeLinecap: "round", strokeLinejoin: "round" }],
-  ],
-  15: null,
 }

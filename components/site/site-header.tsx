@@ -13,7 +13,7 @@ import { PLAN } from '@/lib/plan'
 /** Section links. The id is both the anchor and the scrollspy target. */
 const NAV = [
   { id: 'turning-point', label: 'The plan' },
-  { id: 'goals', label: 'Fifteen goals' },
+  { id: 'goals', label: 'Twelve goals' },
   { id: 'initiatives', label: 'Initiatives' },
 ] as const
 

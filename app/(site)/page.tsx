@@ -245,9 +245,9 @@ export default function HomePage() {
             the page, so the goal grid ran 320px past the headings above and
             below it and the column of the page visibly stepped out here. */}
         <div className="shell">
-          <SplitHeading className="font-display text-display-2">Fifteen goals</SplitHeading>
+          <SplitHeading className="font-display text-display-2">Twelve goals</SplitHeading>
           <p className="mt-5 max-w-[62ch] text-lead text-slate">
-            Fifteen goals aligned with five sustainability pillars will be pursued to achieve the
+            Twelve goals aligned with five sustainability pillars will be pursued to achieve the
             vision of Sustainable Addu City. Open any goal to read its targets and comment on each
             action.
           </p>

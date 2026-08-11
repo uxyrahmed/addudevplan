@@ -109,7 +109,7 @@ export function Hero() {
             href="/#goals"
             className="group inline-flex items-center gap-2.5 rounded-full bg-white px-6 py-3.5 font-heading text-small text-navy transition-colors hover:bg-sky hover:text-white"
           >
-            Explore the fifteen goals
+            Explore the twelve goals
             <span className="transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1">
               <Icon icon={ArrowRight02Icon} size={18} />
             </span>

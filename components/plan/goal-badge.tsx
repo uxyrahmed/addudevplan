@@ -14,7 +14,7 @@ type Props = {
    * Deliberately a fixed size per breakpoint, not a stretch-to-fit. Stretching
    * a square inside a flex row is circular — `aspect-ratio` derives width from
    * height while flex derives height from the row — and the box runs away. A
-   * fixed size also keeps all fifteen heroes identical, instead of the badge
+   * fixed size also keeps all twelve heroes identical, instead of the badge
    * growing on the goals with longer titles.
    */
   hero?: boolean
@@ -27,8 +27,8 @@ type Props = {
 /**
  * A goal's rounded-square badge: the deck's own glyph on the deck's own colour.
  *
- * The glyph is vector for twelve of the fifteen goals — those paths came
- * straight out of the "Fifteen Goals" slide. The remaining three are raster in
+ * The glyph is vector for ten of the twelve goals — those paths came
+ * straight out of the deck goals slide. The remaining two are raster in
  * the source deck, so they render as an alpha-masked PNG tinted white. Both
  * paths land on an identical CSS plate, so the set reads as one system.
  *

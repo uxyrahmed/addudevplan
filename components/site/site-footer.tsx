@@ -33,7 +33,7 @@ export function SiteFooter() {
           </div>
 
           <nav aria-label="All goals">
-            <p className="eyebrow mb-4">Fifteen goals</p>
+            <p className="eyebrow mb-4">Twelve goals</p>
             <ul className="grid gap-x-8 sm:grid-cols-2">
               {GOALS.map((goal) => (
                 <li key={goal.slug}>
