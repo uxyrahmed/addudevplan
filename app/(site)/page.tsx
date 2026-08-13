@@ -45,13 +45,31 @@ export default function HomePage() {
               here, where the lede runs 544px tall. Every section opener on the
               page splits the same way, so the rhythm holds down the page.
 
-              Below `xl` it stays stacked: putting a 1,445-character lede in a
-              400px column costs more than the space it reclaims. */}
-          <div className="xl:grid xl:grid-cols-[0.8fr_1.2fr] xl:items-baseline xl:gap-x-16">
+              Two numbers set the breakpoint and the ratio, and neither is a
+              round one. At the old `xl` + `0.8fr_1.2fr` the lede ran 58ch at
+              1280 and 61ch at 1600: the column, not the `max-w-[68ch]`, was
+              setting the measure, and setting it under the 65ch a paragraph
+              this long wants.
+
+              The heading column cannot simply be squeezed to pay for it.
+              "interconnected" measures 429px at the 62px this face resolves
+              to, and a column narrower than that overflows — which is what
+              rules `xl` out entirely: 1280px leaves 1088px between the
+              gutters, and no split of it gives the lede 65ch and the heading
+              its 429px at once.
+
+              So the split waits for `2xl`, where 1318px of usable width
+              divides into 862px of lede (65ch) and 457px of heading, and the
+              ratio is 0.53/1 rather than 0.8/1.2 to put the slack where the
+              reading happens. Below `2xl` the pair stacks and the lede takes
+              its full 68ch. The white space that leaves down the right at
+              1440 is ordinary editorial margin, and cheaper than a short
+              measure on the longest paragraphs on the page. */}
+          <div className="2xl:grid 2xl:grid-cols-[0.53fr_1fr] 2xl:items-baseline 2xl:gap-x-16">
             <SplitHeading className="max-w-[16ch] font-display text-display-2 font-bold">
               {TURNING_POINT.title}
             </SplitHeading>
-            <p className="mt-8 max-w-[68ch] text-lead text-slate xl:mt-0">
+            <p className="mt-8 max-w-[68ch] text-lead text-slate 2xl:mt-0">
               {TURNING_POINT.body}
             </p>
           </div>
@@ -194,11 +212,11 @@ export default function HomePage() {
       {/* ------------------------------------------------------------ Pillars */}
       <section id="pillars" className="scroll-mt-24 py-20 sm:py-32">
         <div className="shell">
-          <div className="xl:grid xl:grid-cols-[0.8fr_1.2fr] xl:items-baseline xl:gap-x-16">
+          <div className="2xl:grid 2xl:grid-cols-[0.53fr_1fr] 2xl:items-baseline 2xl:gap-x-16">
             <SplitHeading className="max-w-[18ch] font-display text-display-2 font-bold">
               {PILLARS_INTRO.title}
             </SplitHeading>
-            <p className="mt-8 max-w-[68ch] text-lead text-slate xl:mt-0">{PILLARS_INTRO.body}</p>
+            <p className="mt-8 max-w-[68ch] text-lead text-slate 2xl:mt-0">{PILLARS_INTRO.body}</p>
           </div>
 
           {/* Numbered, and carrying the deck's own phrase rather than a single
@@ -217,8 +235,17 @@ export default function HomePage() {
                 style={{ background: pillar.textColor }}
               >
                 {/* Ornamental: it numbers the five for the eye, and the
-                    heading below is what actually gets read out. */}
-                <span aria-hidden className="font-heading text-micro text-white/60 tabular-nums">
+                    heading below is what actually gets read out.
+
+                    Full white, not a translucent one. At `white/60` the five
+                    numerals measured 2.7:1 on Infrastructure's orange against
+                    6.4:1 on People's purple — the plates are nowhere near a
+                    common luminance, so one alpha cannot hold one contrast,
+                    and the row read as four numerals and a smudge. No alpha
+                    fixes it either: the orange still misses 4.5:1 at 90%.
+                    Recession comes from size and tracking instead, which is
+                    how `eyebrow` already does it. */}
+                <span aria-hidden className="font-heading text-micro text-white tabular-nums">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <h3 className="max-w-[15ch] font-heading text-title !text-white">
@@ -233,13 +260,13 @@ export default function HomePage() {
       {/* -------------------------------------------------------------- Goals */}
       <section id="goals" className="scroll-mt-24 bg-shell py-20 sm:py-32">
         <div className="shell">
-          <div className="xl:grid xl:grid-cols-[0.8fr_1.2fr] xl:items-baseline xl:gap-x-16">
+          <div className="2xl:grid 2xl:grid-cols-[0.53fr_1fr] 2xl:items-baseline 2xl:gap-x-16">
             <SplitHeading className="font-display text-display-2">Twelve goals</SplitHeading>
             {/* The draft's own sentence names a count of pillars — "four" — that
                 its pillars slide, two sections up, contradicts with five. The
                 clause is dropped rather than arbitrated: the site should not pick
                 a side on a number the council is still settling. */}
-            <p className="mt-5 max-w-[62ch] text-lead text-slate xl:mt-0">
+            <p className="mt-5 max-w-[68ch] text-lead text-slate 2xl:mt-0">
               Twelve goals will be pursued to achieve the vision of Sustainable Addu City. Open any
               goal to read its targets and comment on each action.
             </p>
@@ -252,11 +279,11 @@ export default function HomePage() {
       {/* -------------------------------------------------------- Initiatives */}
       <section id="initiatives" className="scroll-mt-24 py-20 sm:py-32">
         <div className="shell">
-          <div className="xl:grid xl:grid-cols-[0.8fr_1.2fr] xl:items-baseline xl:gap-x-16">
+          <div className="2xl:grid 2xl:grid-cols-[0.53fr_1fr] 2xl:items-baseline 2xl:gap-x-16">
             <SplitHeading className="max-w-[16ch] font-display text-display-2 font-bold">
               {INITIATIVES_INTRO.title}
             </SplitHeading>
-            <p className="mt-6 max-w-[62ch] text-lead text-slate xl:mt-0">
+            <p className="mt-6 max-w-[68ch] text-lead text-slate 2xl:mt-0">
               {INITIATIVES_INTRO.body}
             </p>
           </div>
@@ -271,10 +298,10 @@ export default function HomePage() {
             {INITIATIVES.map((item) => (
               <li key={item.number} data-reveal="up" className="border-t border-hairline pt-6">
                 <div className="flex items-baseline gap-4">
- <span className="font-heading text-title text-navy tabular-nums">
+                  <span className="font-heading text-title text-navy tabular-nums">
                     {item.number}
                   </span>
- <h3 className="font-heading text-title text-ink">{item.title}</h3>
+                  <h3 className="font-heading text-title text-ink">{item.title}</h3>
                 </div>
                 <p className="mt-3 text-small text-stone">{item.text}</p>
               </li>
@@ -286,7 +313,12 @@ export default function HomePage() {
       {/* ----------------------------------------------------------- Feedback */}
       <section id="feedback" className="scroll-mt-24 bg-sand py-20 sm:py-32">
         <div className="shell">
-          <div className="grid items-start gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+          {/* 1.25/0.75, not 1.1/0.9: at the old ratio this lede sat at 55ch
+              while the section openers above it ran 66ch, so the one paragraph
+              actually asking for a response was the narrowest column on the
+              page. The three steps beside it are short lines against a numeral
+              and give the width up without complaint. */}
+          <div className="grid items-start gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20">
             <div>
               <SplitHeading className="max-w-[18ch] font-display text-display-2 font-bold">
                 Tell us what to change.
@@ -300,7 +332,7 @@ export default function HomePage() {
               <Link
                 href={`/goals/${GOALS[0].slug}`}
                 transitionTypes={['page-forward']}
- className="group mt-9 inline-flex items-center gap-2.5 rounded-full bg-navy px-6 py-3.5 font-heading text-small text-white transition-colors hover:bg-navy-deep"
+                className="group mt-9 inline-flex items-center gap-2.5 rounded-full bg-navy px-6 py-3.5 font-heading text-small text-white transition-colors hover:bg-navy-deep"
               >
                 <Icon icon={Comment01Icon} size={17} />
                 Start with goal 1
@@ -329,11 +361,11 @@ export default function HomePage() {
                 },
               ].map((step) => (
                 <li key={step.n} data-reveal="up" className="flex gap-5 py-6">
- <span className="font-heading text-title text-mist tabular-nums">
+                  <span className="font-heading text-title text-mist tabular-nums">
                     {step.n}
                   </span>
                   <div>
- <h3 className="font-heading text-title text-ink">{step.t}</h3>
+                    <h3 className="font-heading text-title text-ink">{step.t}</h3>
                     <p className="mt-2 max-w-[58ch] text-small text-stone">{step.d}</p>
                   </div>
                 </li>

@@ -91,13 +91,13 @@ export default async function GoalPage(props: PageProps<'/goals/[slug]'>) {
       <section className="shell py-14 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20">
           <div>
- <h2 className="font-heading text-title text-ink">Why this matters</h2>
+            <h2 className="font-heading text-title text-ink">Why this matters</h2>
             <p className="mt-5 max-w-[68ch] text-lead text-slate">{goal.summary}</p>
           </div>
 
           {goal.stats.length ? (
             <div className="lg:border-l lg:border-hairline lg:pl-10">
- <h2 className="font-heading text-title text-ink">Where we are today</h2>
+              <h2 className="font-heading text-title text-ink">Where we are today</h2>
               <dl className="mt-6 space-y-6" data-reveal-stagger="0.08">
                 {goal.stats.map((stat) => (
                   <div key={`${stat.value}-${stat.label}`} data-reveal="up">
@@ -105,7 +105,7 @@ export default async function GoalPage(props: PageProps<'/goals/[slug]'>) {
                     <dd>
                       <StatCounter
                         value={stat.value}
- className="block font-heading text-[clamp(1.5rem,3vw,2.1rem)] leading-tight tabular-nums"
+                        className="block font-heading text-[clamp(1.5rem,3vw,2.1rem)] leading-tight tabular-nums"
                       />
                       <span className="mt-1 block text-small text-stone">{stat.label}</span>
                     </dd>
@@ -142,7 +142,7 @@ export default async function GoalPage(props: PageProps<'/goals/[slug]'>) {
                   className="rounded-3xl border border-hairline bg-white p-6"
                 >
                   <p
- className="font-heading text-small tracking-wide tabular-nums"
+                    className="font-heading text-small tracking-wide tabular-nums"
                     style={{ color: goal.textColor }}
                   >
                     Target {target.label}
@@ -216,7 +216,7 @@ export default async function GoalPage(props: PageProps<'/goals/[slug]'>) {
                   <span className="eyebrow block">
                     {dir === 'next' ? 'Next goal' : 'Previous goal'}
                   </span>
- <span className="mt-1 block font-heading text-title text-ink group-hover:text-navy">
+                  <span className="mt-1 block font-heading text-title text-ink group-hover:text-navy">
                     {other.number}. {other.title}
                   </span>
                 </span>
