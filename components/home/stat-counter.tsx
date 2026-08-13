@@ -20,6 +20,28 @@ function parse(value: string) {
  * A figure that counts up when it scrolls into view. Renders its final value
  * server-side, so a non-numeric value, a reduced-motion visitor or a device we
  * chose not to animate on simply reads the number.
+ *
+ * KNOWN BUG — the "Where we are today" figures on a goal page still flash on
+ * entry, and the guard below did not fix it.
+ *
+ * What is established: the final value is server-rendered, and the tween starts
+ * from `{ v: 0 }` and writes each step into the element, so anything already on
+ * screen when the trigger fires shows the real number, snaps toward zero, then
+ * climbs back. A screenshot of goal 1 caught "35,102 MVR" against the deck's
+ * 35,351, which is that tween mid-flight. On the home page the same code reads
+ * as an intended count-up because those figures sit below the fold.
+ *
+ * What is not established: why the in-band guard below does not stop it. It was
+ * never observed working — the browser pane used to test this reports
+ * `visibilityState: "hidden"` with requestAnimationFrame suspended (0 frames in
+ * 500ms), which makes this component bail at the `visibilityState` check above
+ * and never install a tween at all. So the guard is unverified rather than
+ * disproven, and the real cause may be elsewhere in the section entirely — the
+ * `data-reveal-stagger` group on the same `dl`, or the view transition, are
+ * both untested candidates.
+ *
+ * Next step: reproduce in a real browser with the pane visible, and record what
+ * actually changes — the text content, the opacity, or the position.
  */
 export function StatCounter({ value, className = '' }: { value: string; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -28,6 +50,19 @@ export function StatCounter({ value, className = '' }: { value: string; classNam
     const el = ref.current
     const parsed = parse(value)
     if (!el || !parsed || !canAnimateRichly() || document.visibilityState === 'hidden') return
+
+    // Never count up a figure the reader is already looking at.
+    //
+    // The final value is server-rendered, and the tween starts from zero and
+    // writes each step into the element — so for anything already on screen the
+    // sequence was: the real number paints, snaps back to 0, then climbs to the
+    // real number again. Below the fold that is a count-up. Above it, it is the
+    // number appearing to be wrong.
+    //
+    // The threshold matches the ScrollTrigger start below, so the two agree on
+    // what counts as "in view": the goal pages put "Where we are today" inside
+    // that band on load, which is where this showed up.
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.92) return
 
     let cancelled = false
     let cleanup: (() => void) | undefined

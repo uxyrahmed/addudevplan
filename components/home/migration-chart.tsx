@@ -6,10 +6,21 @@ import { canAnimateRichly } from '@/lib/motion-prefs'
 import { MIGRATION_SERIES as DATA } from '@/lib/plan'
 
 const W = 720
-// Shorter than it is wide by design: five gridlines and two lines need the
-// horizontal run, not the vertical, and the extra height was only air.
-const H = 340
-const PAD = { top: 20, right: 34, bottom: 42, left: 46 }
+/**
+ * Tall enough to fill the row it shares with the ledger.
+ *
+ * It used to be 340 — "shorter than it is wide by design" — which was right
+ * when the chart sat under a standfirst on the home page. Beside a nine-row
+ * ledger it left the drawing floating in the middle of its column with a
+ * couple of hundred pixels of nothing above and below. Nothing about the data
+ * demanded the flat aspect, and the vertical run is where this chart's whole
+ * argument is: two lines starting level in 1958 and ending 35 points apart.
+ *
+ * The type does not stretch with it — text is sized in viewBox units and the
+ * box scales on width alone — so this only spreads the gridlines.
+ */
+const H = 560
+const PAD = { top: 24, right: 34, bottom: 48, left: 46 }
 const MAX = 45
 
 const x = (i: number) =>
@@ -70,12 +81,20 @@ export function MigrationChart() {
   }, [])
 
   return (
-    <figure>
+    // Fills the height its column is given. The ledger beside it is nine rows
+    // tall and this is one fixed-ratio drawing, so the chart column used to
+    // stop 226px above the ledger's last row and the pair stopped looking like
+    // a pair. The drawing cannot grow to take the slack — its aspect is locked
+    // — so the slack is split above and below it instead of left as one hole,
+    // the same way the atoll map handles the same problem.
+    <figure className="flex h-full flex-col">
       {/* Mirrors the ledger's header row exactly, so the two columns start on
           the same line and read as one pair rather than two loose objects. */}
       <figcaption className="flex items-baseline justify-between border-b border-hairline pb-2.5">
+        {/* "Share of the Maldives" left the reader to supply the noun, and the
+            two candidates — land and people — are not the same chart. */}
         <span className="font-body text-micro tracking-[0.1em] text-mist uppercase">
-          Share of the Maldives
+          Share of the national population
         </span>
         <span className="font-body text-micro tracking-[0.1em] text-mist uppercase">1958–2022</span>
       </figcaption>
@@ -84,7 +103,7 @@ export function MigrationChart() {
           576px floor forced a scrollbar and clipped the final year label. The
           chart scales instead, and the viewBox carries enough right padding for
           the last label to sit inside it. */}
-      <div className="mt-6">
+      <div className="flex flex-1 items-center py-6">
         <svg
           ref={ref}
           viewBox={`0 0 ${W} ${H}`}
@@ -164,9 +183,13 @@ export function MigrationChart() {
         ))}
       </div>
 
+      {/* Reads off the two lines and stops. It used to close on "the same story
+          as the bars", which pointed at a graphic with no name on the page and
+          asserted that the two charts mean the same thing — a reading, not a
+          measurement. */}
       <p className="mt-3.5 text-small text-stone">
-        Addu&rsquo;s share of the Maldivian population fell from 9% to 5.1%, while Male&rsquo;s
-        rose from 11% to 40% — the same story as the bars, seen nationally.
+        Addu&rsquo;s share of the Maldivian population fell from 9% to 5.1%. Male&rsquo;s rose from
+        11% to 40%.
       </p>
     </figure>
   )

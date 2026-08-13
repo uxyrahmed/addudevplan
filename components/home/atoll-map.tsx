@@ -253,28 +253,27 @@ export function AtollMap() {
       </div>
 
       {/* Sand for land and blue for sea need no legend. The two marks that
-          carry the argument do — and the sentence below carries it again in
-          words, for the widths where the map drops its names. */}
-      <figcaption className="border-t border-hairline pt-4 text-small text-stone">
-        <span className="flex flex-wrap items-center gap-x-6 gap-y-2">
-          <span className="inline-flex items-center gap-2">
-            <span aria-hidden className="h-[3px] w-7 rounded-full bg-navy" />
-            Link Road
-          </span>
-          <span className="inline-flex items-center gap-2">
-            <span
-              aria-hidden
-              className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-navy text-[9px] font-bold text-white"
-            >
-              1
-            </span>
-            Island of the city
-          </span>
+          carry the argument do.
+
+          A sentence used to sit under these marks restating the Link Road in
+          words. It was the lede from the column alongside, near enough verbatim
+          — the same claim printed twice, a gutter apart. The legend keeps the
+          job the graphic cannot do for itself; the argument is made once, in
+          the copy. */}
+      <figcaption className="flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-hairline pt-4 text-small text-stone">
+        <span className="inline-flex items-center gap-2">
+          <span aria-hidden className="h-[3px] w-7 rounded-full bg-navy" />
+          Link Road
         </span>
-        <p className="mt-3">
-          The Link Road runs north to south down the western chain, joining the four islands of the
-          city end to end.
-        </p>
+        <span className="inline-flex items-center gap-2">
+          <span
+            aria-hidden
+            className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-navy text-[9px] font-bold text-white"
+          >
+            1
+          </span>
+          Island of the city
+        </span>
       </figcaption>
     </figure>
   )

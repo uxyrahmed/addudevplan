@@ -73,6 +73,11 @@ export default async function AdminCommentsPage({
               key={g.slug}
               href={link({ goal: g.slug })}
               aria-current={active ? 'page' : undefined}
+              // Visibly a numbered chip; a screen reader would otherwise hear
+              // twelve links called "1" through "12" with nothing to tell them
+              // apart. The title serves the same purpose for a pointer.
+              aria-label={`Goal ${g.number}: ${g.title}`}
+              title={`Goal ${g.number}: ${g.title}`}
               className={`rounded-full px-3.5 py-1.5 text-small font-semibold transition-colors ${
                 active ? 'text-white' : 'bg-white text-stone hover:text-navy'
               }`}

@@ -1,6 +1,6 @@
 'use client'
 
-import { useId, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import ThumbsUpIcon from '@hugeicons/core-free-icons/ThumbsUpIcon'
 import HelpCircleIcon from '@hugeicons/core-free-icons/HelpCircleIcon'
 import Flag02Icon from '@hugeicons/core-free-icons/Flag02Icon'
@@ -32,6 +32,20 @@ export function FeedbackControl({ id, subject, accent }: Props) {
   const entry = feedback[id]
   const [open, setOpen] = useState(false)
   const fieldId = useId()
+  const field = useRef<HTMLTextAreaElement>(null)
+  const filled = useRef(false)
+
+  // One write, on the transition from "storage not read yet" to "read". Guarded
+  // by a ref rather than a dependency list because the saved comment must not
+  // be re-applied on later renders — that would overwrite what the visitor is
+  // in the middle of typing.
+  useEffect(() => {
+    if (!ready || filled.current) return
+    filled.current = true
+    const el = field.current
+    const saved = entry?.comment ?? ''
+    if (el && saved && el.value !== saved) el.value = saved
+  }, [ready, entry])
 
   const hasComment = Boolean(entry?.comment?.trim())
   const showComment = open || hasComment
@@ -83,11 +97,21 @@ export function FeedbackControl({ id, subject, accent }: Props) {
           <label htmlFor={fieldId} className="sr-only">
             Your comment on: {subject}
           </label>
+          {/* Filled by ref on the hydration flip, not remounted through a
+              changing `key`.
+
+              `defaultValue` is only read on mount, so the old fix keyed the
+              field on `ready` to force a fresh mount once the basket had been
+              restored. On a goal with twenty-four actions that tore down and
+              rebuilt twenty-four textareas in the same commit that hydration
+              landed in — the largest single piece of work on the page, done
+              once per visit, for a value that a two-line effect can write
+              directly. */}
           <textarea
+            ref={field}
             id={fieldId}
             rows={3}
-            defaultValue={ready ? (entry?.comment ?? '') : ''}
-            key={ready ? 'ready' : 'loading'}
+            defaultValue=""
             onChange={(e) => setComment(id, e.target.value)}
             placeholder="What would you change, add, or worry about?"
             tabIndex={showComment ? undefined : -1}

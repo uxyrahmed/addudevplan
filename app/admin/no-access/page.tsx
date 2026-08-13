@@ -34,7 +34,7 @@ export default async function NoAccessPage() {
         ) : (
           <>This account has not been given access to residents&rsquo; responses.</>
         )}{' '}
-        Ask the council&rsquo;s administrator to add it.
+        Ask your administrator to add it.
       </p>
 
       <form action={signOut} className="mt-8">

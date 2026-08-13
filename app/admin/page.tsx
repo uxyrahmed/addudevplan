@@ -16,8 +16,8 @@ export const metadata = { title: 'Overview' }
  */
 export const dynamic = 'force-dynamic'
 
-function when(iso: string | null) {
-  if (!iso) return 'nothing yet'
+/** Absent only before the first submission, where the tile says so instead. */
+function when(iso: string) {
   return new Date(iso).toLocaleString('en-GB', {
     day: 'numeric',
     month: 'short',
@@ -66,13 +66,25 @@ export default async function AdminOverviewPage() {
       ) : null}
 
       <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* "Last: nothing yet" read as a broken template. The empty case gets
+            its own words, and "Last:" — a label with no noun — gets a verb. */}
         <Stat
           label="Submissions"
           value={fmt(overview.submissions)}
-          note={`Last: ${when(overview.latest)}`}
+          note={
+            overview.latest ? `Most recent ${when(overview.latest)}` : 'None received yet'
+          }
         />
-        <Stat label="Responses" value={fmt(overview.responses)} note="Reactions and comments" />
-        <Stat label="Written comments" value={fmt(overview.comments)} />
+        <Stat
+          label="Responses"
+          value={fmt(overview.responses)}
+          note="Reactions and comments together"
+        />
+        <Stat
+          label="Written comments"
+          value={fmt(overview.comments)}
+          note="Responses that carry written text"
+        />
         <Stat
           label="Actions answered"
           value={`${fmt(overview.answeredActions)} / ${fmt(overview.totalActions)}`}

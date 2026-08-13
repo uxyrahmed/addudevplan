@@ -116,7 +116,11 @@ export const PLAN = {
 } as const
 
 export const VISION = {
-  headline: 'our aim is a multi-cultural hub for young professionals with',
+  // The deck sets this lowercase and unpunctuated, running straight into the
+  // figure beside it. On the page the two are separate blocks, so the fragment
+  // read as a sentence that had lost its opening. Capitalised, and the comma
+  // marks the join the deck's layout used to make on its own.
+  headline: 'Our aim is a multi-cultural hub for young professionals, with',
   figure: '35,000 residents by 2030',
   /** The 12 August draft renamed the vision; it was "Sustainable Addu". */
   name: 'Resilient, Inclusive, Sustainable Addu',
@@ -130,16 +134,38 @@ export const VISION = {
  */
 export const TURNING_POINT = {
   title: 'Addu is at a turning point',
-  body: `Nearly fifty years after the final RAF flight departed Gan on 29 March 1976, Addu has come full circle — from a community profoundly affected by the British military withdrawal and decades of outward migration to a growing city poised to become the gateway to the Southern Maldives. In the years that followed, many residents left Addu for employment in the rapidly expanding Maldives' tourism industry, pursue secondary and higher education, and establish careers in Malé. This sustained outward migration began to ease with the establishment of quality secondary education in Addu and continued investment in healthcare, infrastructure, and economic development, enabling more people to live, study, work, and build their futures closer to home. Today, with a land area of more than 1,250 hectares, a population exceeding 25,000, and expanding opportunities in tourism, trade, fisheries, agriculture, and emerging industries, Addu is increasingly becoming a destination in its own right. More than 1,700 Maldivians from other islands and over 4,700 foreign nationals now reside in the city — together representing around a quarter of its population. Its interconnected geography, diverse population, and established urban footprint offer a strong foundation for integrated planning, efficient service delivery, and sustainable growth. Building on these strengths, Addu is well positioned to become a resilient, inclusive, and sustainable city.`,
+  /**
+   * The deck sets this as one block. On a slide that is a paragraph; on a page
+   * it was 300 words without a single break, and it is the passage that has to
+   * explain why the plan exists at all.
+   *
+   * Broken at the four turns the sentences already make — what happened, what
+   * eased it, where the city stands today, and why that is a foundation. Not a
+   * word is changed, added or dropped: the breaks fall between the source's own
+   * sentences.
+   */
+  paragraphs: [
+    `Nearly fifty years after the final RAF flight departed Gan on 29 March 1976, Addu has come full circle — from a community profoundly affected by the British military withdrawal and decades of outward migration to a growing city poised to become the gateway to the Southern Maldives.`,
+    `In the years that followed, many residents left Addu for employment in the rapidly expanding Maldives' tourism industry, pursue secondary and higher education, and establish careers in Malé. This sustained outward migration began to ease with the establishment of quality secondary education in Addu and continued investment in healthcare, infrastructure, and economic development, enabling more people to live, study, work, and build their futures closer to home.`,
+    `Today, with a land area of more than 1,250 hectares, a population exceeding 25,000, and expanding opportunities in tourism, trade, fisheries, agriculture, and emerging industries, Addu is increasingly becoming a destination in its own right. More than 1,700 Maldivians from other islands and over 4,700 foreign nationals now reside in the city — together representing around a quarter of its population.`,
+    `Its interconnected geography, diverse population, and established urban footprint offer a strong foundation for integrated planning, efficient service delivery, and sustainable growth. Building on these strengths, Addu is well positioned to become a resilient, inclusive, and sustainable city.`,
+  ],
 } as const
 
+/**
+ * Two of these labels used to leave the reader guessing. "Connected
+ * communities" counted a different noun to the list of islands directly below
+ * it, and next to "50 islands in the atoll" the reader had no way to see that
+ * 4 and 50 count the same kind of thing. "Registered people" never said which
+ * register.
+ */
 export const HEADLINE_FACTS: Stat[] = [
   { value: '50', label: 'islands in the atoll' },
-  { value: '4', label: 'connected communities' },
+  { value: '4', label: 'islands in the city' },
   { value: '1,268', label: 'hectares of land' },
   // 35,558 in the 11 August draft; the 12 August population table revises the
   // 2025 register down to this.
-  { value: '35,334', label: 'registered people' },
+  { value: '35,334', label: 'people on the city register' },
 ]
 
 /**
@@ -1341,9 +1367,15 @@ export const GOALS: Goal[] = [
   },
 ]
 
+/**
+ * The draft's sentence still names the vision "Sustainable Addu City", which
+ * the 12 August draft renamed — so the page called one thing two names within
+ * a scroll. Named as `VISION.name` names it, and stated actively: the passive
+ * "will be pursued" leaves a resident with no idea who is doing the pursuing.
+ */
 export const INITIATIVES_INTRO = {
   title: 'Ten flagship initiatives',
-  body: 'Ten closely related initiatives will be pursued to achieve the vision of Sustainable Addu City.',
+  body: 'Ten closely related initiatives carry the vision of a resilient, inclusive, sustainable Addu.',
 } as const
 
 export const INITIATIVES: Initiative[] = [

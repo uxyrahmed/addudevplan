@@ -2,10 +2,23 @@ import { SmoothScroll } from '@/components/motion/smooth-scroll'
 import { ScrollProgress } from '@/components/motion/scroll-progress'
 import { Reveals } from '@/components/motion/reveals'
 import { SiteHeader } from '@/components/site/site-header'
-import { HeaderGoalLinks } from '@/components/site/header-goal-links'
 import { SiteFooter } from '@/components/site/site-footer'
 import { FeedbackProvider } from '@/components/feedback/feedback-store'
 import { FeedbackBasket } from '@/components/feedback/feedback-basket'
+import { GOALS } from '@/lib/plan'
+
+/**
+ * Just enough of the plan for the launcher's twelve segments: a number, a
+ * title for the tooltip, the plate colour, and the action ids to count
+ * against. Built here, in a server component, so `lib/plan.ts` — the largest
+ * module in the project — still never reaches the browser.
+ */
+const GOAL_PROGRESS = GOALS.map((goal) => ({
+  number: goal.number,
+  title: goal.title,
+  color: goal.color,
+  actionIds: goal.strategies.flatMap((strategy) => strategy.actions.map((action) => action.id)),
+}))
 
 /**
  * Everything the public consultation needs: the plan's chrome, the scroll and
@@ -28,10 +41,10 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       >
         Skip to content
       </a>
-      <SiteHeader goalNav={<HeaderGoalLinks />} />
+      <SiteHeader />
       <main id="main">{children}</main>
       <SiteFooter />
-      <FeedbackBasket />
+      <FeedbackBasket goals={GOAL_PROGRESS} />
     </FeedbackProvider>
   )
 }

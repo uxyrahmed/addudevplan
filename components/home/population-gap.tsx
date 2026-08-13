@@ -1,6 +1,5 @@
 import {
   LATEST_POPULATION,
-  LATEST_REGISTER,
   POPULATION,
   POPULATION_SCALE_MAX,
   fmt,
@@ -24,39 +23,54 @@ const pct = (n: number) => `${((n / POPULATION_SCALE_MAX) * 100).toFixed(2)}%`
  * gets its own line rather than being folded into the sum.
  */
 export function PopulationGap() {
-  const latest = LATEST_POPULATION
-  const gap = gapOf(latest)
-  const newerRegister = LATEST_REGISTER.year > latest.year ? LATEST_REGISTER : null
+  const gap = gapOf(LATEST_POPULATION)
 
   return (
-    <div>
-      <p className="max-w-[30ch] text-balance">
-        <span className="font-display text-display-1 leading-[1.02] text-navy tabular-nums">
-          {fmt(gap)}
-        </span>{' '}
-        <span className="text-lead text-ink">
-          people are registered in Addu but living somewhere else.
-        </span>
-      </p>
+    // Number over sentence, not a number set inline at the head of one. Inline,
+    // the balancer broke it as "9,710 people are registered in / Addu but living
+    // elsewhere." — a line ending on a preposition, and the figure reading as
+    // the first word of a paragraph rather than as the thing being reported.
+    // The vision section already stacks a figure over its unit this way.
+    <p>
+      <span className="block font-display text-display-1 leading-[1.02] text-navy tabular-nums">
+        {fmt(gap)}
+      </span>
+      <span className="mt-3 block max-w-[24ch] text-lead text-ink">
+        people are registered in Addu but living elsewhere.
+      </span>
+    </p>
+  )
+}
 
-      <p className="mt-7 text-small text-stone tabular-nums">
-        {fmt(latest.registered)} on the register
+/**
+ * The two figures the number above is the difference of.
+ *
+ * Split out of `PopulationGap` so the page can set it beside the figure rather
+ * than beneath it: as a fourth and fifth line under the number it left the
+ * column alongside holding two lines of text and a void.
+ *
+ * A second line used to note that the register had run on to 35,334 by 2025
+ * with no resident count published against it. True, and worth publishing —
+ * but it is a caveat about a year this figure is not drawn from, and it was
+ * the last thing read before the link out. The ledger on /background carries
+ * the same fact where it belongs: 2025 is a row there, with an empty bar and
+ * "Not yet counted" against it.
+ */
+export function PopulationSources() {
+  const latest = LATEST_POPULATION
+
+  return (
+    <div className="mt-6 border-t border-hairline pt-4">
+      {/* The year used to trail the two figures as a third dot-separated item,
+          where it read as another quantity rather than as the date they were
+          taken on. It leads the sentence instead. */}
+      <p className="text-small text-stone tabular-nums">
+        In {latest.year}: {fmt(latest.registered)} on the register
         <span aria-hidden className="mx-2 text-mist">
           ·
         </span>
         {fmt(latest.resident)} living here
-        <span aria-hidden className="mx-2 text-mist">
-          ·
-        </span>
-        {latest.year}
       </p>
-
-      {newerRegister ? (
-        <p className="mt-2 text-small text-mist tabular-nums">
-          {fmt(newerRegister.registered)} on the register by {newerRegister.year}, with no resident
-          count published against it yet.
-        </p>
-      ) : null}
     </div>
   )
 }
@@ -77,8 +91,11 @@ export function PopulationLedger() {
     <div>
       <div className="flex items-baseline justify-between border-b border-hairline pb-2.5">
         <span className="font-body text-micro tracking-[0.1em] text-mist uppercase">Year</span>
+        {/* "Not resident" named the category; the rows underneath said "away".
+            One phrase for one thing, and the phrase is the one the sentence
+            above the ledger already uses. */}
         <span className="font-body text-micro tracking-[0.1em] text-mist uppercase">
-          Not resident
+          Living elsewhere
         </span>
       </div>
 
@@ -98,8 +115,15 @@ export function PopulationLedger() {
                       <span className="text-ink">{fmt(row.resident)}</span> of{' '}
                       {fmt(row.registered)} registered
                     </p>
+                    {/* The word is the column header's job. Printed on all nine
+                        rows it was nine repetitions of a label the reader
+                        already has, in the one column that should be nothing
+                        but figures. Kept for a screen reader, which meets these
+                        rows one at a time and never sees the header beside
+                        them. */}
                     <p className="col-start-2 text-small text-plum tabular-nums sm:col-start-3 sm:text-right">
-                      {fmt(gapOf(row))} away
+                      {fmt(gapOf(row))}
+                      <span className="sr-only"> living elsewhere</span>
                     </p>
                   </>
                 ) : (
@@ -151,7 +175,9 @@ export function PopulationLedger() {
           <span aria-hidden className="h-2.5 w-7 rounded-[2px] border border-navy/35" />
           On the register
         </span>
-        <span className="text-mist">Same scale, from zero</span>
+        {/* The scale note is gone. The page's own standfirst already says the
+            years are drawn to one scale from zero, and a legend that has to
+            explain how to read a bar chart is a bar chart that has failed. */}
       </div>
     </div>
   )

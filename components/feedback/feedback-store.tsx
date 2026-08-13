@@ -184,7 +184,10 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
 
       if (!res.ok) {
         setStatus('error')
-        setError(data.error ?? 'Could not send your feedback. Please try again.')
+        setError(
+          data.error ??
+            'Your feedback could not be sent. Your answers are still on this device — please try again.',
+        )
         return
       }
 
@@ -194,7 +197,9 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
       // Offline, or the request never reached the server. The basket is still
       // in localStorage, so nothing the visitor typed is lost.
       setStatus('error')
-      setError('No connection. Your feedback is saved on this device — try sending again.')
+      setError(
+        'Your feedback did not reach us — the connection dropped. Your answers are saved on this device, so you can try again.',
+      )
     }
   }, [feedback])
 

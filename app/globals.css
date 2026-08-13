@@ -401,6 +401,7 @@ html[data-anim] [data-enter][data-entered] {
   }
 }
 
+
 /* ==========================================================================
    Reef divider — the seam between the hero and the plan
    ========================================================================== */
@@ -540,13 +541,11 @@ html[data-anim] [data-enter][data-entered] {
     border-color 0.4s var(--ease-out-expo),
     background-color 0.4s var(--ease-out-expo);
 }
+/* `.goal-card__number` is gone with the ghost numeral it faded — the card now
+   states the goal number once, at label size, in the goal's own colour. */
 .goal-card__badge,
-.goal-card__number,
 .goal-card__arrow {
   transition: all 0.4s var(--ease-out-expo);
-}
-.goal-card__number {
-  opacity: 0.14;
 }
 
 .goal-card__title {
@@ -566,9 +565,6 @@ html[data-anim] [data-enter][data-entered] {
   .goal-card:hover .goal-card__badge {
     transform: scale(1.05);
   }
-  .goal-card:hover .goal-card__number {
-    opacity: 0.3;
-  }
   .goal-card:hover .goal-card__arrow {
     transform: translateX(4px);
     background: var(--goal-ink);
@@ -587,7 +583,6 @@ html[data-anim] [data-enter][data-entered] {
 @media (prefers-reduced-motion: reduce) {
   .goal-card,
   .goal-card__badge,
-  .goal-card__number,
   .goal-card__arrow,
   .goal-card__title {
     transition-duration: 0.01ms;

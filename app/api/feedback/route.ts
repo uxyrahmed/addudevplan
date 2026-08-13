@@ -42,7 +42,7 @@ export async function POST(request: Request) {
   const pepper = process.env.FEEDBACK_HASH_SECRET
   if (!writeSecret || !pepper) {
     console.error('Feedback submission is not configured: set FEEDBACK_WRITE_SECRET and FEEDBACK_HASH_SECRET.')
-    return Response.json({ error: 'Feedback is not accepting submissions yet.' }, { status: 503 })
+    return Response.json({ error: 'We cannot receive responses right now. Your answers are saved on this device — please try again later.' }, { status: 503 })
   }
 
   let body: unknown
@@ -80,16 +80,22 @@ export async function POST(request: Request) {
     // The function raises these; anything else is genuinely unexpected.
     if (error.message.includes('rate_limited')) {
       return Response.json(
-        { error: 'Too many submissions from this connection in the last hour. Please try again later.' },
+        { error: 'This connection has sent feedback several times in the last hour. Your answers are saved on this device — please try again later.' },
         { status: 429 },
       )
     }
     if (error.message.includes('unauthorized')) {
       console.error('submit_feedback rejected the write secret — FEEDBACK_WRITE_SECRET is out of step with private.app_secrets.')
-      return Response.json({ error: 'Feedback is not accepting submissions yet.' }, { status: 503 })
+      return Response.json({ error: 'We cannot receive responses right now. Your answers are saved on this device — please try again later.' }, { status: 503 })
     }
     console.error('submit_feedback failed:', error.message)
-    return Response.json({ error: 'Could not save your feedback. Please try again.' }, { status: 502 })
+    return Response.json(
+      {
+        error:
+          'Your feedback could not be saved. Your answers are still on this device — please try sending again.',
+      },
+      { status: 502 },
+    )
   }
 
   const result = data as { submissionId: string; revision: number; responses: number }

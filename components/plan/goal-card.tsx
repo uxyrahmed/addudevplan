@@ -7,6 +7,16 @@ import type { Goal } from '@/lib/plan'
 /**
  * One goal in the grid. The whole card is the link — a 44px-plus target on a
  * phone — and the coloured badge is what carries over to the goal page.
+ *
+ * Rebuilt around what the card is actually for. It used to say "GOAL 1" in an
+ * eyebrow and "01" in a 42px ghost numeral directly above it: the same fact,
+ * twice, occupying the two most prominent positions on the card, while the
+ * goal's own one-line description — the sentence that tells a reader whether
+ * this is the goal about their water or their school — was not on it at all.
+ *
+ * So the eyebrow is gone, the number is set once as a small figure paired with
+ * the badge, and the tagline takes the space they were using. What is left
+ * reads top to bottom as identity, name, promise, size.
  */
 export function GoalCard({ goal }: { goal: Goal }) {
   const actions = goal.strategies.reduce((n, s) => n + s.actions.length, 0)
@@ -19,34 +29,41 @@ export function GoalCard({ goal }: { goal: Goal }) {
       href={`/goals/${goal.slug}`}
       transitionTypes={['page-forward']}
       data-reveal="up"
-      className="goal-card group relative flex scroll-mt-28 flex-col gap-5 rounded-3xl border border-hairline bg-white p-5 sm:p-6"
+      className="goal-card group relative flex scroll-mt-28 flex-col gap-4 rounded-3xl border border-hairline bg-white p-5 sm:p-6"
       style={{ ['--goal' as string]: goal.color, ['--goal-ink' as string]: goal.textColor }}
     >
-
-      <div className="flex items-start justify-between gap-4">
+      {/* Badge and number on one line, the number sized as a label rather than
+          as a graphic. At 42px and 14% opacity it was a watermark competing
+          with the badge for the top of the card; at label size in the goal's
+          own accessible colour it is legible, which a number identifying one
+          of twelve pages ought to be. */}
+      <div className="flex items-center gap-3">
         <span className="goal-card__badge">
-          <GoalBadge goal={goal} size={72} />
+          <GoalBadge goal={goal} size={52} />
         </span>
         <span
-          className="goal-card__number font-heading text-[2.6rem] leading-none tabular-nums"
+          className="font-heading text-small tabular-nums"
           style={{ color: goal.textColor }}
         >
-          {String(goal.number).padStart(2, '0')}
+          Goal {goal.number}
         </span>
       </div>
 
-      <div className="relative">
-        <p className="eyebrow" style={{ color: goal.textColor }}>
-          Goal {goal.number}
-        </p>
-        <h3 className="goal-card__title mt-2 font-heading text-title text-ink">{goal.title}</h3>
-      </div>
+      {/* Title only. The goal's tagline sat under it for a while; it is the
+          deck's own one-line description, but on a card that already carries a
+          badge, a number, a name and a count it was a fifth thing to read
+          before deciding whether to open. `goal.tagline` still runs on the goal
+          page's own hero, where there is room for it. */}
+      <h3 className="goal-card__title font-heading text-title text-ink">{goal.title}</h3>
 
       <div className="relative mt-auto flex items-center justify-between gap-3 border-t border-hairline pt-4 text-small">
+        {/* "Open for your input" promised the opposite of what the card opens
+            onto: a goal with no strategies has no actions, and no action means
+            nothing on that page to respond to. */}
         <span className="text-mist">
           {goal.strategies.length
             ? `${goal.strategies.length} strategies · ${actions} actions`
-            : 'Open for your input'}
+            : 'No strategies published yet'}
         </span>
         <span
           className="goal-card__arrow grid h-9 w-9 place-items-center rounded-full"

@@ -22,24 +22,38 @@ export function StrategyList({ goal }: { goal: Goal }) {
 
   if (!goal.strategies.length) {
     return (
+      // "Tell us what they should include" invited a reply on a screen that has
+      // nowhere to type one — every response control on this site belongs to an
+      // action, and this goal has none yet. The state is named instead.
       <p className="rounded-3xl border border-dashed border-hairline p-8 text-lead text-stone">
-        Strategies and actions for this goal are still to come. Tell us what they should include.
+        Strategies for this goal are not published yet. They will appear here, each action open for
+        your response, as soon as they are.
       </p>
     )
   }
 
   return (
     <>
+      {/* The counts hold their place but stay blank until the basket has been
+          read off localStorage.
+
+          `ready` is false for the first client render — the server cannot see
+          saved responses, so reading storage during render would break
+          hydration and it has to happen in an effect. Rendering `0` in the
+          meantime meant every arrival on a goal you had already answered
+          printed "responded to 0 of 12 · 0%", then flipped to the real figures
+          a commit later, with the bar animating up from empty. The layout is
+          identical either way, so nothing moves; only the numbers arrive. */}
       <div className="mb-12 rounded-2xl border border-hairline bg-white p-5" data-reveal="fade">
         <div className="flex items-baseline justify-between gap-4">
-          <p className="text-small font-semibold text-ink">
+          <p className="text-small font-semibold text-ink" aria-busy={!ready}>
             You have responded to{' '}
             <span className="tabular-nums" style={{ color: goal.textColor }}>
-              {answered}
+              {ready ? answered : '—'}
             </span>{' '}
             of {ids.length} actions
           </p>
-          <p className="text-small tabular-nums text-mist">{pct}%</p>
+          <p className="text-small tabular-nums text-mist">{ready ? `${pct}%` : ''}</p>
         </div>
         <div
           className="mt-3 h-1.5 overflow-hidden rounded-full bg-hairline"
@@ -49,9 +63,15 @@ export function StrategyList({ goal }: { goal: Goal }) {
           aria-valuemax={ids.length}
           aria-label={`Actions you have responded to in goal ${goal.number}`}
         >
+          {/* The transition arrives with the data. Before that the bar's real
+              width is unknown, and animating from a placeholder zero to the
+              truth is the fill running once for every page view rather than
+              once per answer. */}
           <div
-            className="h-full rounded-full transition-[width] duration-500 ease-[var(--ease-out-expo)]"
-            style={{ width: `%`, background: goal.textColor }}
+            className={`h-full rounded-full ${
+              ready ? 'transition-[width] duration-500 ease-[var(--ease-out-expo)]' : ''
+            }`}
+            style={{ width: `${pct}%`, background: goal.textColor }}
           />
         </div>
       </div>
