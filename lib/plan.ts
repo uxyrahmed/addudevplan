@@ -1,14 +1,26 @@
 /**
  * Addu Development Plan 2026–2031 — content model.
  *
- * Every string, figure and colour below is transcribed from the council's draft
- * slide deck. Goals, targets and strategies come from the 21 July draft; the
- * front-of-deck figures, the settlement timeline and the cover date are updated
- * to the 29 July draft, which revised them. Goal colours were read out of the
- * deck's own PDF colour operators, so they match the presentation exactly.
+ * Every string and figure below is transcribed from the council's draft slide
+ * deck, now the 12 August draft.
  *
- * Where the source deck is visibly unfinished (placeholder counts, targets that
- * read only "D"), the item is omitted here and the goal carries an `openNote`
+ * Goal colours are the fill values of the badge plates on that draft's
+ * twelve-goals slide, converted out of the Apple RGB profile the deck tags them
+ * with into sRGB — read raw they come out muddier than the slide looks, because
+ * the deck is colour-managed and a web page is not. The conversion was checked
+ * against a control: a colour the deck tags sRGB round-trips through the same
+ * pipeline unchanged. Note the palette is four colours cycled down the rows of
+ * that slide, so goals three apart share one; it is a layout rhythm, not a
+ * statement about which goals belong together.
+ *
+ * The 12 August draft also gives each goal three new slides — Financing, Data
+ * and Monitoring and Evaluation. None are carried here: every Financing table
+ * is printed with its cost columns empty, the Monitoring frames have no content
+ * at all, and the Data slides list the council's internal GIS layers rather than
+ * anything a resident is being consulted on.
+ *
+ * Where the source deck is visibly unfinished (placeholder counts, a target
+ * numbered twice), the item is omitted here and the goal carries an `openNote`
  * instead — the site would rather say "still open" than publish a wrong figure.
  */
 
@@ -89,20 +101,28 @@ export const PLAN = {
 export const VISION = {
   headline: 'our aim is a multi-cultural hub for young professionals with',
   figure: '35,000 residents by 2030',
-  name: 'Sustainable Addu',
+  /** The 12 August draft renamed the vision; it was "Sustainable Addu". */
+  name: 'Resilient, Inclusive, Sustainable Addu',
   kicker: 'Addu City Vision',
 } as const
 
+/**
+ * Rewritten wholesale for the 12 August draft. The earlier text opened on the
+ * city's "development trajectory"; this one opens on the day the RAF left, and
+ * tells the out-migration story the population ledger further down measures.
+ */
 export const TURNING_POINT = {
   title: 'Addu is at a turning point',
-  body: `Addu City stands at a pivotal moment in its development trajectory, emerging as a strategic urban centre with the scale, connectivity, and ambition to drive the next phase of decentralised growth in the Maldives. With a vision to become a vibrant, multicultural hub for young professionals and a target population of 35,000 by 2030, Addu offers a unique advantage among island systems — its contiguous geography and established urban footprint enable integrated planning, efficient infrastructure delivery, and the development of a dynamic economic base. Combined with its expanding land area and rich settlement history, Addu is well positioned to evolve into a leading regional growth pole.`,
+  body: `Nearly fifty years after the final RAF flight departed Gan on 29 March 1976, Addu has come full circle — from a community profoundly affected by the British military withdrawal and decades of outward migration to a growing city poised to become the gateway to the Southern Maldives. In the years that followed, many residents left Addu for employment in the rapidly expanding Maldives' tourism industry, pursue secondary and higher education, and establish careers in Malé. This sustained outward migration began to ease with the establishment of quality secondary education in Addu and continued investment in healthcare, infrastructure, and economic development, enabling more people to live, study, work, and build their futures closer to home. Today, with a land area of more than 1,250 hectares, a population exceeding 25,000, and expanding opportunities in tourism, trade, fisheries, agriculture, and emerging industries, Addu is increasingly becoming a destination in its own right. More than 1,700 Maldivians from other islands and over 4,700 foreign nationals now reside in the city — together representing around a quarter of its population. Its interconnected geography, diverse population, and established urban footprint offer a strong foundation for integrated planning, efficient service delivery, and sustainable growth. Building on these strengths, Addu is well positioned to become a resilient, inclusive, and sustainable city.`,
 } as const
 
 export const HEADLINE_FACTS: Stat[] = [
   { value: '50', label: 'islands in the atoll' },
   { value: '4', label: 'connected communities' },
   { value: '1,268', label: 'hectares of land' },
-  { value: '35,558', label: 'registered people' },
+  // 35,558 in the 11 August draft; the 12 August population table revises the
+  // 2025 register down to this.
+  { value: '35,334', label: 'registered people' },
 ]
 
 /**
@@ -156,6 +176,10 @@ export const TIMELINE: { year: string; text: string }[] = [
   },
   { year: '1945', text: 'British forces leave Addu.' },
   { year: '1948', text: 'Residents of Gan and Feydhoo return back home.' },
+  // The 12 August draft's box for this year ends "…Feydhoo to Maradhoo", losing
+  // the "-Feydhoo" earlier drafts carried. Read as a text-box truncation rather
+  // than a correction: Maradhoo-Feydhoo is the island this move created, and it
+  // is one of the four the city is built from.
   {
     year: '1957',
     text: 'British begin construction of military base in Gan. Relocation of residents of Gan to Feydhoo, and of Feydhoo to Maradhoo-Feydhoo.',
@@ -164,22 +188,73 @@ export const TIMELINE: { year: string; text: string }[] = [
   { year: '1976', text: 'British troops leave Gan.' },
 ]
 
-export type PopulationYear = { year: number; registered: number; resident: number }
+export type PopulationYear = {
+  year: number
+  registered: number
+  /**
+   * Everyone living in Addu, Maldivian and foreign. Absent for 2025, where the
+   * draft prints a register count and no resident count.
+   */
+  resident?: number
+  /** Resident Maldivians, where the draft splits the resident total. */
+  maldivians?: number
+  /** Resident foreign nationals, same. */
+  foreigners?: number
+}
+
+/** A year the draft measured on both sides, so a gap can be taken from it. */
+export type MeasuredYear = PopulationYear & { resident: number }
 
 /**
  * Registered against resident population. Structured rather than pre-formatted
  * strings so the gap is always derived, never hand-typed — a transcription slip
  * in the most important number on the page would be invisible otherwise.
+ *
+ * Rebuilt from the 12 August draft, which replaced the five-row table with ten
+ * rows and split the resident count into Maldivians and foreign nationals. That
+ * split resolves a long-standing ambiguity rather than merely adding detail:
+ * what earlier drafts labelled "resident" turns out to have been resident
+ * Maldivians only, so every row from 2006 on now carries a larger resident
+ * total than this file used to publish. 2014 moves 19,319 → 21,275 and 2022
+ * 20,343 → 25,062, and both of those figures reappear here in the `maldivians`
+ * column, which is what makes the reading safe rather than a guess. The 2022 and
+ * 2025 register counts were revised down at the same time.
  */
 export const POPULATION: PopulationYear[] = [
   { year: 1977, registered: 14799, resident: 14094 },
-  { year: 2006, registered: 29020, resident: 18026 },
-  { year: 2014, registered: 32057, resident: 19319 },
-  { year: 2022, registered: 35005, resident: 20343 },
-  { year: 2025, registered: 35558, resident: 25026 },
+  { year: 1985, registered: 18143, resident: 14957 },
+  { year: 1990, registered: 20818, resident: 15177 },
+  { year: 1995, registered: 23835, resident: 18004 },
+  { year: 2000, registered: 25184, resident: 18515 },
+  { year: 2006, registered: 29020, resident: 18026, maldivians: 17862 },
+  { year: 2014, registered: 32057, resident: 21275, maldivians: 19319, foreigners: 1956 },
+  { year: 2022, registered: 34772, resident: 25062, maldivians: 20343, foreigners: 4719 },
+  // The register is current to 2025; no resident count is published against it.
+  { year: 2025, registered: 35334 },
 ]
 
-export const LATEST_POPULATION = POPULATION[POPULATION.length - 1]
+/**
+ * The last row of the draft's table: 2030, stated as a composition rather than
+ * a single figure. It is the vision target, not a measurement, so it is kept
+ * out of `POPULATION` — the ledger charts what happened.
+ */
+export const POPULATION_2030 = {
+  year: 2030,
+  resident: 35000,
+  maldivians: 25000,
+  foreigners: 10000,
+} as const
+
+export const isMeasured = (row: PopulationYear): row is MeasuredYear => row.resident != null
+
+/** The years that can carry a gap — everything except the register-only 2025. */
+export const MEASURED_POPULATION = POPULATION.filter(isMeasured)
+
+/** The most recent year measured on both sides. */
+export const LATEST_POPULATION = MEASURED_POPULATION[MEASURED_POPULATION.length - 1]
+
+/** The most recent register count, whether or not a resident count matches it. */
+export const LATEST_REGISTER = POPULATION[POPULATION.length - 1]
 
 /** Everything in the ledger is drawn against one honest scale, starting at 0. */
 export const POPULATION_SCALE_MAX = 37000
@@ -187,13 +262,12 @@ export const POPULATION_SCALE_MAX = 37000
 /** The plan's own target, from the vision slide. */
 export const TARGET_RESIDENTS = 35000
 
-export const gapOf = (row: PopulationYear) => row.registered - row.resident
+export const gapOf = (row: MeasuredYear) => row.registered - row.resident
 export const fmt = (n: number) => n.toLocaleString('en-US')
 
 /**
- * Where today sits on a 0 → 35,000 scale, for the vision measure. Derived, so a
- * revised count or target moves the graphic rather than silently lying. Nothing
- * before this point is filled: it marks a distance still to cover, not progress.
+ * Where the last measured year sits on a 0 → 35,000 scale. Derived, so a
+ * revised count or target moves the figure rather than silently lying.
  */
 export const VISION_TODAY_PCT = `${((LATEST_POPULATION.resident / TARGET_RESIDENTS) * 100).toFixed(1)}%`
 
@@ -209,12 +283,11 @@ export const MIGRATION_SERIES = {
 } as const
 
 /**
- * The 2 August deck is mid-revision here: its heading reads "Five
- * interconnected pillars" while the paragraph under it still lists the original
- * four. The council confirmed the fifth is governance, so the count and the
- * list are reconciled below — but the words "and good governance" are ours, not
- * the deck's, and should be replaced with the council's own phrasing once the
- * prose catches up.
+ * The prose has caught up. Earlier drafts headed this slide "Five
+ * interconnected pillars" over a paragraph that still listed the original four,
+ * and this file supplied the missing governance clause itself. The 12 August
+ * draft writes it out — "and good governance grounded in trust, respect, and
+ * strong leadership" — so every word below is now the deck's own.
  */
 export const PILLARS_INTRO = {
   title: 'Five interconnected pillars',
@@ -235,10 +308,12 @@ export const PILLARS_INTRO = {
  * orange needed taking down.
  *
  * NOTE: the draft still does not state which goals sit under which pillar, so
- * this site deliberately does not assert a mapping. The deck accents each goal
- * in one of four of these hues — which is a strong hint, not a statement — and
- * that accent is what a goal's own colour follows. Add a `goals: number[]`
- * field here once the council confirms it.
+ * this site deliberately does not assert a mapping — and the goal colours are
+ * no longer evidence for one. The 12 August draft gives the goals their own
+ * four-colour palette, unrelated to these five hues, and cycles it down the
+ * rows of the contents slide, so goals 1, 5 and 9 share a colour by virtue of
+ * sitting in the same row. Add a `goals: number[]` field here once the council
+ * confirms the real grouping.
  */
 export const PILLARS: Pillar[] = [
   {
@@ -280,8 +355,8 @@ export const GOALS: Goal[] = [
     number: 1,
     slug: 'energy-security',
     title: 'Ensure energy security',
-    color: '#EE8A12',
-    textColor: '#AE650D',
+    color: '#2FB2B5',
+    textColor: '#228284',
     tagline: 'Every home a renewable energy producer',
     summary: `Addu generates 68,431,692 kWh of electricity annually to serve 7,389 connections, comprising 5,693 domestic, 1,455 business, and 241 institutional customers. The city's heavy reliance on imported diesel to meet this demand leaves households, businesses, and public services vulnerable to rising fuel costs, global market volatility, and supply disruptions. Frequent power outages caused by generation and network capacity constraints further underline the urgent need for a more reliable, resilient, and diversified energy system. With its abundant solar resources, Addu has exceptional potential to become a renewable-energy prosumer city, where households, businesses, and institutions generate, store, consume, and share clean electricity. The widespread adoption of solar PV and battery storage offers a practical and scalable pathway towards achieving this transition.`,
     stats: [
@@ -332,10 +407,18 @@ export const GOALS: Goal[] = [
   },
   {
     number: 2,
+    // Slug stays `water-security`, and deliberately: it is in published URLs,
+    // the home page's `#goal-` anchors and the badge's view-transition name.
+    // The deck renaming a heading is not a reason to break a link.
     slug: 'water-security',
-    title: 'Ensure water security',
-    color: '#EE8A12',
-    textColor: '#AE650D',
+    // The 12 August draft is mid-rename here — this goal's own slide reads
+    // "Safe diverse water sources" while the twelve-goals contents slide still
+    // reads "Ensure water security". Following the goal's own slide, which is
+    // the newer of the two and the one that describes what the goal covers:
+    // five sources, not a single security target.
+    title: 'Safe diverse water sources',
+    color: '#82357E',
+    textColor: '#82357E',
     tagline: 'Renewables-powered desalination and rainwater for all',
     summary: `Addu will secure its long-term water supply through five diversified sources — desalination, household and community-scale rainwater harvesting, responsibly managed groundwater, reclaimed wastewater, and mineralised bottled water. Solar PV and battery storage will support reliable desalination. Expanded rainwater systems will capture and store rainfall for domestic and public use, while carefully managed groundwater will provide a dedicated supply for gardening and landscaping. Expanded sewerage networks and advanced wastewater treatment will enable reclaimed water to be used safely for agriculture, irrigation, landscaping, and other non-potable purposes. Addu will also support the local production of mineralised drinking water in reusable glass bottles and large-volume containers for homes, restaurants, hotels, offices, and other businesses.`,
     stats: [
@@ -351,9 +434,10 @@ export const GOALS: Goal[] = [
       { id: 'g2-t3', label: '2.3', text: 'Enable whole-house water filtration in homes by 2028.' },
       { id: 'g2-t4', label: '2.4', text: "Maintain or improve groundwater quality in at least 90% of Addu City's monitoring stations, with no significant increase in salinity, nitrate, or faecal contamination from the 2026 baseline." },
       { id: 'g2-t5', label: '2.5', text: 'Achieve universal sewerage coverage for all households by 2028.' },
+      // The 11 August draft broke off before naming a year here, so this site
+      // withheld the target and said so. The 12 August draft finishes it.
+      { id: 'g2-t6', label: '2.6', text: 'Increase proportion of households who reuse wastewater to 25% by 2030.' },
     ],
-    openNote:
-      'The 11 August draft carries a sixth target — raising the share of households that reuse wastewater to 25% — but the sentence ends before it names a year, so it is left out here until the council completes it.',
     strategies: [
       {
         id: 'g2-s1',
@@ -394,17 +478,25 @@ export const GOALS: Goal[] = [
     number: 3,
     slug: 'food-security',
     title: 'Ensure food security',
-    color: '#AA6DDC',
-    textColor: '#945FBF',
+    color: '#51ACA3',
+    textColor: '#3D817A',
     tagline: 'Grow more at home, land more from the sea',
-    summary: `The Maldives imported approximately USD 790.5 million worth of food in 2025, underscoring the country's heavy dependence on external markets while revealing a significant economic opportunity to expand domestic production. Against a backdrop of rising global food prices, supply-chain disruptions, and climate-related shocks, strengthening food security has become a strategic priority for Addu City. With the largest land area among the Maldives' atolls, substantial agricultural potential, productive fisheries, and a growing population, Addu is uniquely positioned for sustainable food production and to contribute meaningfully to national food security.`,
+    summary: `Food security is a strategic priority for Addu City, particularly at a time when global food prices, supply chain disruptions, and climate-related shocks are placing increasing pressure on imported food systems. The Maldives imported approximately USD 790.5 million worth of food in 2025, highlighting the country's heavy dependence on external markets and the significant economic opportunity to strengthen domestic production. With the largest land area of any atoll in the Maldives, extensive agricultural potential, productive fisheries, and a growing population, Addu is uniquely positioned to become the nation's leading centre for sustainable food production. By expanding climate-smart agriculture, strengthening sustainable fisheries, promoting local food enterprises, and investing in enabling infrastructure such as food quality testing laboratories, cold storage, and a strategic food security fund, Addu can build a resilient, affordable, and nutritious food system that enhances self-sufficiency, creates jobs, and strengthens long-term economic and community resilience.`,
+    // The 12 August draft reworked this rail into six import categories. The
+    // USD 790.5 million total moved into the prose above, eggs merged into a
+    // dairy line, and beverages and confectionary — the largest category of the
+    // lot — appears for the first time.
+    //
+    // Ordered by value, where the draft appends the new dairy line beneath the
+    // smallest one. Six figures in one column invite comparison, and the deck's
+    // running order makes that comparison read as a mistake.
     stats: [
-      { value: 'USD 790.5 million', label: 'national food imports in 2025' },
+      { value: 'USD 163.5 million', label: 'beverages and confectionary' },
       { value: 'USD 156.7 million', label: 'meat, seafood and fish' },
+      { value: 'USD 109.1 million', label: 'dairy and eggs' },
       { value: 'USD 106.9 million', label: 'vegetables and root crops' },
       { value: 'USD 106.5 million', label: 'fruits, nuts and seeds' },
-      { value: 'USD 33.5 million', label: 'staples' },
-      { value: 'USD 24.3 million', label: 'eggs' },
+      { value: 'USD 33.5 million', label: 'staples import' },
     ],
     targets: [
       { id: 'g3-t1', label: '3.1', text: 'Ensure 75% of homes grow 05 types of tropical fruits and 05 vegetables at home by 2028.' },
@@ -487,8 +579,8 @@ export const GOALS: Goal[] = [
     number: 4,
     slug: 'future-ready-transport',
     title: 'Future ready transport',
-    color: '#EE8A12',
-    textColor: '#AE650D',
+    color: '#9CB854',
+    textColor: '#6A7E34',
     tagline: 'Free electric buses every 10 minutes',
     summary: `As incomes continue to rise, vehicle ownership is expected to increase, leading to greater traffic congestion, parking shortages, road safety concerns, and dependence on imported fossil fuels. To avoid becoming a car-dependent city, Addu will adopt a free electric bus service operating every 10 minutes during peak hours, supported by walking and cycling infrastructure and a planned transition to electric vehicles. Complemented by an expanding EV charging network, this strategy will lower transport emissions, reduce fuel imports, improve air quality, and establish Addu as a city for clean, affordable, inclusive and sustainable mobility.`,
     stats: [
@@ -554,8 +646,8 @@ export const GOALS: Goal[] = [
     number: 5,
     slug: 'connect-the-south',
     title: 'Connect the South',
-    color: '#EE8A12',
-    textColor: '#AE650D',
+    color: '#2FB2B5',
+    textColor: '#228284',
     tagline: 'One southern region, connected daily',
     summary: `Reliable connectivity between Addu, Fuvahmulah, and Huvadhoo is fundamental to creating an integrated southern economic region. Daily passenger services will improve access to healthcare, education, and employment for residents, while enabling visitors to travel between the Southern Atolls as a single tourism destination. Daily freight services will ensure the timely movement of medical supplies, laboratory samples, fresh food, fisheries products, e-commerce parcels, and essential goods, while supporting emergency response during disruptions. This target will be delivered through complementary investments to enhance Gan International Airport with new international routes and sustained regional air services, establish drone cargo corridors for time-critical deliveries, and develop a strategic gateway port.`,
     stats: [
@@ -610,8 +702,8 @@ export const GOALS: Goal[] = [
     number: 6,
     slug: 'diverse-quality-housing',
     title: 'Diverse quality housing',
-    color: '#EE8A12',
-    textColor: '#AE650D',
+    color: '#82357E',
+    textColor: '#82357E',
     tagline: '350 new homes and 1,000 rental units',
     summary: `Addu City is planning to attract professionals, skilled workers, and returning families. Accelerating housing delivery is essential to attract residents, and we will deliver new sustainable homes for families. To support Addu's transformation into a destination for wellness, education, aviation, and business, we will deliver spacious apartments across low-rise (3-4 storey) apartment buildings, providing high-quality accommodation for professionals and their families. These apartments will feature generous living spaces, lift access, secure parking, and energy-efficient design, offering an attractive lifestyle for professionals, entrepreneurs, and skilled workers. Together with complementary initiatives for affordable rental accommodation and mixed-use neighbourhoods, this goal will create attractive liveable communities.`,
     stats: [
@@ -667,10 +759,10 @@ export const GOALS: Goal[] = [
     number: 7,
     slug: 'connect-community-and-culture',
     title: 'Connect community and culture',
-    color: '#178E6B',
-    textColor: '#168665',
+    color: '#51ACA3',
+    textColor: '#3D817A',
     tagline: 'A community centre within a 10-minute walk',
-    summary: `Addu City will foster vibrant, inclusive, and connected communities by creating high-quality public spaces that encourage recreation, social interaction, culture, and healthy living. Through integrated community centres, active waterfronts, attractive parks, and shaded walkable streets, every resident will have easy access to places where people can gather, exercise, learn, celebrate, and build stronger community connections. We will safeguard historical sites, traditions, language, and cultural practices, and ensure that heritage is respected and sustained as a living part of everyday life. We will showcase local traditions and stories to create memorable experiences and enable longer stays, repeat visits, and positive word-of-mouth, contributing to sustainable tourism and local economic growth.`,
+    summary: `Addu City will foster vibrant, inclusive, and connected communities by creating high-quality public spaces that encourage recreation, social interaction, culture, and healthy living. Through integrated community centres, active waterfronts, attractive parks, and safe, shaded walkable streets, every resident will have easy access to places where people can gather, exercise, learn, celebrate, and build stronger community connections, making Addu City liveable and people-centred. We will safeguard historical sites, traditions, language, and cultural practices while promoting awareness and participation across generations. We will ensure that heritage is respected and sustained as a living part of everyday life and offer authentic, meaningful, and immersive encounters. We will showcase local traditions, stories, and heritage sites to create memorable experiences and enable longer stays, repeat visits, and positive word-of-mouth, contributing to sustainable tourism and local economic growth.`,
     stats: [
       { value: '45', label: 'mosques' },
       { value: '14', label: 'gyms (08) and indoor sports halls (06)' },
@@ -759,10 +851,10 @@ export const GOALS: Goal[] = [
     number: 8,
     slug: 'health-and-well-being',
     title: 'Health and well-being',
-    color: '#AA6DDC',
-    textColor: '#945FBF',
+    color: '#9CB854',
+    textColor: '#6A7E34',
     tagline: 'Comprehensive care within 10 minutes of home',
-    summary: `Addu City faces growing health challenges, including rising non-communicable diseases, mental health needs, and the high cost of care and medicines. Strengthening prevention — through cancer screening, nutrition, and active lifestyles — alongside improved mental health support is essential for long-term well-being. Upgrading island health centres into effective primary healthcare providers and positioning Addu Equatorial Hospital as the southern medical hub will improve access and quality of care. Investing in a skilled health workforce and affordable services will ensure a resilient, inclusive, and people-centred health system. There are 561 people in the health workforce in Addu.`,
+    summary: `Addu City faces growing health challenges, including rising non-communicable diseases, mental health needs, and the high cost of care and medicines. Strengthening prevention — through cancer screening, nutrition, and active lifestyles — alongside improved mental health support is essential for long-term well-being. Upgrading island health centres into effective primary healthcare providers and positioning Addu Equatorial Hospital as the southern medical hub will improve access and quality of care. Investing in a skilled health workforce and affordable services will ensure a resilient, inclusive, and people-centred health system. There are 561 people in the health workforce in Addu. There are 19 registered pharmacies.`,
     stats: [
       { value: '11', label: 'operational health facilities' },
       { value: '37', label: 'specialist doctors' },
@@ -849,8 +941,8 @@ export const GOALS: Goal[] = [
     number: 9,
     slug: 'education-excellence',
     title: 'Education excellence',
-    color: '#AA6DDC',
-    textColor: '#945FBF',
+    color: '#2FB2B5',
+    textColor: '#228284',
     tagline: '2,000 tertiary students a year by 2030',
     summary: `Education is central to Addu City's future competitiveness, workforce development, and social progress. Strengthening foundational learning through quality early childhood education, upgrading school infrastructure and science labs, and expanding vocational training pathways will align skills with emerging economic opportunities. Building digital capabilities and promoting lifelong learning will ensure adaptability in a rapidly changing world. Together, these investments will create a skilled, innovative, and resilient community.`,
     stats: [
@@ -860,7 +952,7 @@ export const GOALS: Goal[] = [
       { value: '05', label: 'universities and colleges' },
     ],
     openNote:
-      'Two items on this goal are unfinished in the 11 August draft: the count of tertiary students is still a placeholder, and two different targets are both numbered 9.3. Both are left as the council wrote them rather than guessed at.',
+      'Two items on this goal are still unfinished in the 12 August draft: the count of tertiary students is printed as "000", and two different targets are both numbered 9.3. Both are left as the council wrote them rather than guessed at.',
     targets: [
       { id: 'g9-t1', label: '9.1', text: 'Attract over 2,000 tertiary students annually by 2030.' },
       { id: 'g9-t2', label: '9.2', text: 'Introduce a new early childhood curriculum across Addu schools by 2028.' },
@@ -940,8 +1032,8 @@ export const GOALS: Goal[] = [
     number: 10,
     slug: 'inclusive-prosperity',
     title: 'Inclusive prosperity',
-    color: '#1D68A6',
-    textColor: '#1D68A6',
+    color: '#82357E',
+    textColor: '#82357E',
     tagline: 'Near-zero poverty and 500 businesses backed',
     summary: `Addu City is committed to achieving zero poverty by building a dynamic, innovative, and digitally enabled economy that creates opportunities for everyone. Through investment in entrepreneurship, future-ready skills, digital infrastructure, SMEs, and improved access to finance and markets, the city will generate quality jobs, empower local businesses, and strengthen economic resilience. Targeted support for women, youth, people with disabilities, and other vulnerable groups will ensure that every resident has the opportunity to participate in and benefit from sustainable economic growth, leading to greater inclusion, shared prosperity, and an improved quality of life.`,
     stats: [
@@ -1032,8 +1124,8 @@ export const GOALS: Goal[] = [
     number: 11,
     slug: 'wildlife-and-wellness-tourism',
     title: 'Wildlife and wellness tourism',
-    color: '#1D68A6',
-    textColor: '#1D68A6',
+    color: '#51ACA3',
+    textColor: '#3D817A',
     tagline: 'Beyond the Beach — where nature meets wellbeing',
     summary: `Addu will become the destination "Beyond the Beach" — where nature meets wellbeing. By combining world-class wildlife experiences with health, wellness, and active lifestyles, Addu will create a distinctive year-round visitor economy. Visitors will encounter manta rays, whale sharks, dolphins, turtles, White Terns, and spectacular coral reefs through world-class diving and immersive nature experiences, while wellness retreats, healthy local cuisine, outdoor recreation, and specialist healthcare at Addu Equatorial Hospital make Addu a destination for restoration, recovery, and rejuvenation. Supported by boutique eco-lodges and sustainable accommodation, Addu will offer an authentic Maldivian experience.`,
     stats: [
@@ -1121,8 +1213,8 @@ export const GOALS: Goal[] = [
     number: 12,
     slug: 'environment-protection',
     title: 'Environment protection',
-    color: '#178E6B',
-    textColor: '#168665',
+    color: '#9CB854',
+    textColor: '#6A7E34',
     tagline: 'Protected reefs and wetlands, and a circular economy',
     summary: `Addu City will protect and restore its unique natural environment while building a climate-resilient circular economy that supports sustainable growth and community wellbeing. The city will conserve coral reefs, wetlands, mangroves, beaches, and other ecologically significant ecosystems by designating and effectively managing protected areas and nature parks, restoring degraded habitats, and promoting responsible public access and eco-tourism. Through resource efficiency, waste reduction, recycling, nature-based solutions, and climate-resilient infrastructure, Addu will enhance biodiversity, strengthen resilience to climate change, and create a cleaner, healthier, and more sustainable city for present and future generations.`,
     stats: [
@@ -1220,22 +1312,26 @@ export const INITIATIVES: Initiative[] = [
   {
     number: '01',
     title: 'Home solar and battery storage',
-    text: 'We are taking a major step toward a cleaner, more affordable energy future for our community. We are launching a new initiative to install a 10 kW solar PV system on every household in Addu along with 15 kWh battery storage.',
+    // 10 kWp in the 12 August draft, where earlier ones read 10 kW. Peak watts,
+    // matching the "10 kWp solar PV" action under goal 1.
+    text: 'We are taking a major step toward a cleaner, more affordable energy future for our community. We are launching a new initiative to install 10 kWp solar PV system on every household in Addu along with 15 kWh battery storage.',
   },
   {
     number: '02',
     title: 'Free electric bus service',
     text: 'We will launch a free electric bus service across the City connecting all important places, designed to make daily travel easier, more affordable, and environmentally friendly for all residents and visitors.',
   },
+  // 03 and 04 trade places in the 12 August draft: food growing now comes
+  // before starter homes.
   {
     number: '03',
-    title: 'Starter homes for young families',
-    text: 'We will provide young families 250 starter homes. These homes will be powered by renewable energy, provide safe water, and include gardens and open spaces where children can play, learn, and grow.',
+    title: 'Every home is a food grower',
+    text: 'We will support households to grow essentials such as lime, chilli, ginger, cucumber, tomato, gourds, mangoes, passion fruit and guava by providing seed packs, compost, training, guidance, and ongoing support.',
   },
   {
     number: '04',
-    title: 'Every home is a food grower',
-    text: 'We will support households to grow essentials such as lime, chilli, ginger, cucumber, tomato, gourds, mangoes, passion fruit and guava by providing seed packs, compost, training, guidance, and ongoing support.',
+    title: 'Starter homes for young families',
+    text: 'We will provide young families 250 starter homes. These homes will be powered by renewable energy, provide safe water, and include gardens and open spaces where children can play, learn, and grow.',
   },
   {
     number: '05',

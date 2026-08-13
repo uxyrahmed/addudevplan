@@ -73,7 +73,7 @@ export default async function GoalPage(props: PageProps<'/goals/[slug]'>) {
           </div>
 
           <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8">
-            <GoalBadge goal={goal} hero priority />
+            <GoalBadge goal={goal} hero />
 
             <div className="min-w-0">
               <SplitHeading as="h1" immediate delay={0.08} className="font-display text-display-2">

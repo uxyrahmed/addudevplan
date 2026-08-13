@@ -250,10 +250,13 @@ export default function HomePage() {
             below it and the column of the page visibly stepped out here. */}
         <div className="shell">
           <SplitHeading className="font-display text-display-2">Twelve goals</SplitHeading>
+          {/* The draft's own sentence names a count of pillars — "four" — that
+              its pillars slide, two sections up, contradicts with five. The
+              clause is dropped rather than arbitrated: the site should not pick
+              a side on a number the council is still settling. */}
           <p className="mt-5 max-w-[62ch] text-lead text-slate">
-            Twelve goals aligned with five sustainability pillars will be pursued to achieve the
-            vision of Sustainable Addu City. Open any goal to read its targets and comment on each
-            action.
+            Twelve goals will be pursued to achieve the vision of Sustainable Addu City. Open any
+            goal to read its targets and comment on each action.
           </p>
 
           <GoalGrid />

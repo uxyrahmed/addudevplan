@@ -1,9 +1,11 @@
 import {
   LATEST_POPULATION,
+  LATEST_REGISTER,
   POPULATION,
   POPULATION_SCALE_MAX,
   fmt,
   gapOf,
+  isMeasured,
 } from '@/lib/plan'
 
 const pct = (n: number) => `${((n / POPULATION_SCALE_MAX) * 100).toFixed(2)}%`
@@ -15,10 +17,16 @@ const pct = (n: number) => `${((n / POPULATION_SCALE_MAX) * 100).toFixed(2)}%`
  * accurate and unpleasant — a consultation page should not open by putting a
  * sum in a resident's face. The figure still leads, but it is now the subject
  * of a plain sentence, and the two inputs sit underneath for anyone checking.
+ *
+ * Both inputs are read off the same year. The 12 August draft carries a newer
+ * register count than it has a resident count for, and subtracting across the
+ * two would overstate the gap by every arrival since — so the newer register
+ * gets its own line rather than being folded into the sum.
  */
 export function PopulationGap() {
   const latest = LATEST_POPULATION
   const gap = gapOf(latest)
+  const newerRegister = LATEST_REGISTER.year > latest.year ? LATEST_REGISTER : null
 
   return (
     <div>
@@ -37,7 +45,18 @@ export function PopulationGap() {
           ·
         </span>
         {fmt(latest.resident)} living here
+        <span aria-hidden className="mx-2 text-mist">
+          ·
+        </span>
+        {latest.year}
       </p>
+
+      {newerRegister ? (
+        <p className="mt-2 text-small text-mist tabular-nums">
+          {fmt(newerRegister.registered)} on the register by {newerRegister.year}, with no resident
+          count published against it yet.
+        </p>
+      ) : null}
     </div>
   )
 }
@@ -47,8 +66,11 @@ export function PopulationGap() {
  *
  * The outline runs to the registered count and the fill stops at the resident
  * count, so the gap is literal empty space. Read down the column and the void
- * widens from 1977 to 2022, then narrows for the first time in 2025 — the arc
- * is the argument, and it only exists because the rows share a scale.
+ * widens from 1977 to 2006, then narrows in 2014 and again in 2022 — the arc is
+ * the argument, and it only exists because the rows share a scale.
+ *
+ * 2025 draws an outline and no fill, which is the honest shape for a year the
+ * draft counts the register in but not the residents.
  */
 export function PopulationLedger() {
   return (
@@ -62,7 +84,7 @@ export function PopulationLedger() {
 
       <ol className="border-b border-hairline">
         {POPULATION.map((row) => {
-          const gap = gapOf(row)
+          const measured = isMeasured(row)
           return (
             <li key={row.year} className="border-t border-hairline py-2.5" data-reveal="up">
               {/* Three real columns rather than `justify-between`, which left a
@@ -70,17 +92,31 @@ export function PopulationLedger() {
                   against the right edge. */}
               <div className="grid grid-cols-[auto_1fr] items-baseline gap-x-6 gap-y-1 sm:grid-cols-[auto_1fr_auto] sm:gap-x-10">
                 <p className="font-heading text-title text-navy tabular-nums">{row.year}</p>
-                <p className="text-small text-stone tabular-nums">
-                  <span className="text-ink">{fmt(row.resident)}</span> of {fmt(row.registered)}{' '}
-                  registered
-                </p>
-                <p className="col-start-2 text-small text-plum tabular-nums sm:col-start-3 sm:text-right">
-                  {fmt(gap)} away
-                </p>
+                {measured ? (
+                  <>
+                    <p className="text-small text-stone tabular-nums">
+                      <span className="text-ink">{fmt(row.resident)}</span> of{' '}
+                      {fmt(row.registered)} registered
+                    </p>
+                    <p className="col-start-2 text-small text-plum tabular-nums sm:col-start-3 sm:text-right">
+                      {fmt(gapOf(row))} away
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-small text-stone tabular-nums">
+                      {fmt(row.registered)} registered
+                    </p>
+                    <p className="col-start-2 text-small text-mist sm:col-start-3 sm:text-right">
+                      Not yet counted
+                    </p>
+                  </>
+                )}
               </div>
 
               {/* Outline to registered, fill to resident. The remainder is the
-                  gap, left empty on purpose. */}
+                  gap, left empty on purpose — as is the whole bar for a year
+                  with no resident count. */}
               <div
                 aria-hidden
                 className="relative mt-2.5 h-2"
@@ -90,11 +126,13 @@ export function PopulationLedger() {
                   className="absolute inset-y-0 left-0 rounded-[2px] border border-navy/35"
                   style={{ width: 'var(--w)' }}
                 />
-                <span
-                  className="absolute inset-y-0 left-0 origin-left rounded-[2px] bg-navy"
-                  style={{ width: pct(row.resident) }}
-                  data-reveal="measure"
-                />
+                {measured ? (
+                  <span
+                    className="absolute inset-y-0 left-0 origin-left rounded-[2px] bg-navy"
+                    style={{ width: pct(row.resident) }}
+                    data-reveal="measure"
+                  />
+                ) : null}
               </div>
             </li>
           )

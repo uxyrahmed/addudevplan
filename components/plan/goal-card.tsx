@@ -8,7 +8,7 @@ import type { Goal } from '@/lib/plan'
  * One goal in the grid. The whole card is the link — a 44px-plus target on a
  * phone — and the coloured badge is what carries over to the goal page.
  */
-export function GoalCard({ goal, index = 0 }: { goal: Goal; index?: number }) {
+export function GoalCard({ goal }: { goal: Goal }) {
   const actions = goal.strategies.reduce((n, s) => n + s.actions.length, 0)
 
   return (
@@ -25,7 +25,7 @@ export function GoalCard({ goal, index = 0 }: { goal: Goal; index?: number }) {
 
       <div className="flex items-start justify-between gap-4">
         <span className="goal-card__badge">
-          <GoalBadge goal={goal} size={72} priority={index < 6} />
+          <GoalBadge goal={goal} size={72} />
         </span>
         <span
           className="goal-card__number font-heading text-[2.6rem] leading-none tabular-nums"

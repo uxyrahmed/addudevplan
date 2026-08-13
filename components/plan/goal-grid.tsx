@@ -20,11 +20,11 @@ export function GoalGrid() {
       className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
       data-reveal-stagger="0.035"
     >
-      {GOALS.map((goal, i) => (
+      {GOALS.map((goal) => (
         // `contents` so the card itself is the grid item and the cards in a row
         // stretch to a common height.
         <li key={goal.slug} className="contents">
-          <GoalCard goal={goal} index={i} />
+          <GoalCard goal={goal} />
         </li>
       ))}
     </ul>

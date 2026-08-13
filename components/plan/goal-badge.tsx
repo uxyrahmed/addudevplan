@@ -1,8 +1,18 @@
-import Image from 'next/image'
 import { Icon } from '@/components/ui/icon'
 import { ViewTransition } from '@/components/motion/view-transition'
-import { GLYPH_VIEWBOX, GOAL_GLYPHS } from '@/lib/goal-glyphs'
+import { GOAL_GLYPHS } from '@/lib/goal-glyphs'
 import type { Goal } from '@/lib/plan'
+
+/**
+ * Share of the plate the glyph occupies.
+ *
+ * The deck's own glyphs drew their artwork inside the middle half of a 100-unit
+ * box, so they could be rendered edge to edge and still sit in from the corners.
+ * A Hugeicons icon uses its whole 24-unit box, so the inset has to be stated:
+ * at 100% the glyph touches the rounded corners and the badge stops reading as
+ * a plate.
+ */
+const GLYPH_SCALE = '56%'
 
 type Props = {
   goal: Goal
@@ -20,29 +30,20 @@ type Props = {
   hero?: boolean
   /** Opt out of the shared-element morph (e.g. in a dense list). */
   morph?: boolean
-  priority?: boolean
   className?: string
 }
 
 /**
- * A goal's rounded-square badge: the deck's own glyph on the deck's own colour.
+ * A goal's rounded-square badge: a Hugeicons glyph on the deck's own colour.
  *
- * The glyph is vector for ten of the twelve goals — those paths came
- * straight out of the deck goals slide. The remaining two are raster in
- * the source deck, so they render as an alpha-masked PNG tinted white. Both
- * paths land on an identical CSS plate, so the set reads as one system.
+ * All twelve are vector and all twelve come from one icon family, so the set
+ * reads as a system at every size it is drawn at — the grid, the goal hero, and
+ * the morph between them.
  *
  * The badge carries the view-transition identity: tap a goal in the grid and
  * this square flies into the goal page's hero.
  */
-export function GoalBadge({
-  goal,
-  size = 96,
-  hero = false,
-  morph = true,
-  priority = false,
-  className = '',
-}: Props) {
+export function GoalBadge({ goal, size = 96, hero = false, morph = true, className = '' }: Props) {
   const glyph = GOAL_GLYPHS[goal.number]
 
   const badge = (
@@ -59,19 +60,7 @@ export function GoalBadge({
         borderRadius: 'var(--radius-badge)',
       }}
     >
-      {glyph ? (
-        <Icon icon={glyph} viewBox={GLYPH_VIEWBOX} size={hero ? '100%' : size} aria-hidden />
-      ) : (
-        <Image
-          src={`/plan/goals/goal-${String(goal.number).padStart(2, '0')}-glyph.png`}
-          alt=""
-          width={size}
-          height={size}
-          priority={priority}
-          sizes={`${size}px`}
-          className="block h-full w-full"
-        />
-      )}
+      <Icon icon={glyph} size={GLYPH_SCALE} aria-hidden />
     </span>
   )
 
