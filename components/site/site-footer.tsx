@@ -5,7 +5,7 @@ import { GOALS, PLAN } from '@/lib/plan'
 export function SiteFooter() {
   return (
     <footer className="border-t border-hairline bg-shell">
-      <div className="shell-wide py-14 sm:py-20">
+      <div className="shell py-14 sm:py-20">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_1.4fr]">
           <div>
             {/* The one place with room for the full lockup — bird, wordmark

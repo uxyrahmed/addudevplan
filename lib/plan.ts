@@ -27,6 +27,14 @@
 export type Pillar = {
   id: string
   name: string
+  /**
+   * The deck's own phrase for this pillar, lifted from the sentence in
+   * `PILLARS_INTRO.body` that names all five. The one-word `name` is a handle;
+   * this is what the deck actually calls it, and it is what the tiles carry —
+   * a tile reading "People" tells a reader nothing the heading above it has
+   * not already said.
+   */
+  phrase: string
   /** Plate colour, exactly as printed. */
   color: string
   /**
@@ -156,8 +164,19 @@ export const LAND = {
   islands: ['Hithadhoo', 'Maradhoo', 'Maradhoo-Feydhoo', 'Feydhoo'],
 } as const
 
-/** Share of the city that is made land, to one decimal. */
-export const RECLAIMED_PCT = (LAND.reclaimedHa / LAND.totalHa) * 100
+/**
+ * Reclamation is deliberately not charted on the home page.
+ *
+ * It is not a plan action — across all twelve goals the word appears once, and
+ * there it means reclaimed *wastewater*. The figure is also the least settled
+ * one in this block: the 21 July per-island table sums to 271 ha against the
+ * 253 ha above. A fact that nothing is being consulted on, and that the source
+ * has not finished revising, should not be the loudest thing in the geography
+ * section.
+ *
+ * `LAND.reclaimedHa` is kept as recorded source data — this file's job is to
+ * say what the draft says — but nothing on the site reads it.
+ */
 
 /**
  * Settlement history, from the timeline on slide 3 of the 29 July draft.
@@ -307,6 +326,11 @@ export const PILLARS_INTRO = {
  * the five are already dark enough to double as type; only Infrastructure's
  * orange needed taking down.
  *
+ * Ordered as `PILLARS_INTRO.body` names them: infrastructure, people, economy,
+ * environment, governance. The paragraph and the tiles sit one directly above
+ * the other on the page and used to disagree — the tiles ran governance third
+ * against a sentence that ran it last.
+ *
  * NOTE: the draft still does not state which goals sit under which pillar, so
  * this site deliberately does not assert a mapping — and the goal colours are
  * no longer evidence for one. The 12 August draft gives the goals their own
@@ -319,32 +343,37 @@ export const PILLARS: Pillar[] = [
   {
     id: 'infrastructure',
     name: 'Infrastructure',
+    phrase: 'Modern smart infrastructure',
     color: '#DC5818',
     textColor: '#C04E14',
   },
   {
     id: 'people',
     name: 'People',
+    phrase: 'Empowered people',
     color: '#350F4D',
     textColor: '#350F4D',
   },
   {
-    id: 'governance',
-    name: 'Governance',
-    color: '#3C6C0F',
-    textColor: '#3C6C0F',
+    id: 'economy',
+    name: 'Economy',
+    phrase: 'A diversified economy',
+    color: '#082767',
+    textColor: '#082767',
   },
   {
     id: 'environment',
     name: 'Environment',
+    phrase: 'A rich natural environment',
     color: '#0A5857',
     textColor: '#0A5857',
   },
   {
-    id: 'economy',
-    name: 'Economy',
-    color: '#082767',
-    textColor: '#082767',
+    id: 'governance',
+    name: 'Governance',
+    phrase: 'Good governance',
+    color: '#3C6C0F',
+    textColor: '#3C6C0F',
   },
 ]
 

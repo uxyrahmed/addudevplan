@@ -166,7 +166,7 @@ export function SiteHeader({ goalNav }: { goalNav?: React.ReactNode }) {
           className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-ink/45 to-transparent"
         />
       ) : null}
-      <div className="shell-wide flex h-16 items-center gap-4 sm:h-20">
+      <div className="shell flex h-16 items-center gap-4 sm:h-20">
         <Link
           href="/"
           className="-my-2 flex min-w-0 items-center gap-3 py-2"

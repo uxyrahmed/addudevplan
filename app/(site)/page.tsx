@@ -19,13 +19,11 @@ import {
   INITIATIVES,
   INITIATIVES_INTRO,
   LAND,
-  RECLAIMED_PCT,
   TIMELINE,
   PILLARS,
   PILLARS_INTRO,
   TOTAL_ACTIONS,
   TURNING_POINT,
-  fmt,
 } from '@/lib/plan'
 
 export default function HomePage() {
@@ -41,12 +39,22 @@ export default function HomePage() {
       {/* ---------------------------------------- Addu is at a turning point */}
       <section id="turning-point" className="scroll-mt-24 py-20 sm:py-32">
         <div className="shell">
-          <SplitHeading className="max-w-[16ch] font-display text-display-2 font-bold">
-            {TURNING_POINT.title}
-          </SplitHeading>
-          <p className="mt-8 max-w-[68ch] text-lead text-slate">
-            {TURNING_POINT.body}
-          </p>
+          {/* Heading beside the lede once there is width for it, rather than
+              above it. Stacked, the pair sat in the left two-thirds of a
+              1,472px container and left 554px of nothing down the right — worst
+              here, where the lede runs 544px tall. Every section opener on the
+              page splits the same way, so the rhythm holds down the page.
+
+              Below `xl` it stays stacked: putting a 1,445-character lede in a
+              400px column costs more than the space it reclaims. */}
+          <div className="xl:grid xl:grid-cols-[0.8fr_1.2fr] xl:items-baseline xl:gap-x-16">
+            <SplitHeading className="max-w-[16ch] font-display text-display-2 font-bold">
+              {TURNING_POINT.title}
+            </SplitHeading>
+            <p className="mt-8 max-w-[68ch] text-lead text-slate xl:mt-0">
+              {TURNING_POINT.body}
+            </p>
+          </div>
 
           <dl
             className="mt-14 grid grid-cols-2 gap-x-6 gap-y-10 border-t border-hairline pt-10 lg:grid-cols-4"
@@ -71,57 +79,24 @@ export default function HomePage() {
       {/* ------------------------------------------------ Geography & growth */}
       <section className="bg-shell py-20 sm:py-28">
         <div className="shell">
-          {/* Stretch, not `items-start`: the map column is shorter than the
-              copy beside it, and letting it fill the row lets its legend sit on
-              the same baseline as the island list rather than floating above
-              it. */}
-          <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
+          {/* `items-start`, not stretch. The copy used to be the taller column
+              and the map filled the row so its legend landed on the same
+              baseline as the island list. Cutting the reclamation figure
+              reversed that: the map is now the taller of the two, and
+              stretching would only open a gap beneath the list. Both columns
+              take their own height instead. */}
+          <div className="grid gap-14 lg:grid-cols-2 lg:items-start lg:gap-20">
             <div>
               <SplitHeading className="font-display text-display-3 font-bold">
                 One atoll, four connected communities
               </SplitHeading>
+              {/* The four islands are named on the map and again in the list
+                  below it, so this does not name them a third time. What is
+                  left is the only thing the section is actually arguing. */}
               <p className="mt-6 max-w-[62ch] text-lead text-slate">
-                The Link Road runs the length of the western chain, from Hithadhoo through
-                Maradhoo and Maradhoo-Feydhoo to Feydhoo, so one investment reaches every
-                community — and reclamation has added{' '}
-                <strong className="text-navy">{fmt(LAND.reclaimedHa)} hectares</strong> to a city
-                that now covers <strong className="text-navy">{fmt(LAND.totalHa)} hectares</strong>.
+                The Link Road runs the length of the western chain, joining four islands end to
+                end. That is what makes Addu one city rather than four.
               </p>
-
-              <dl className="mt-7 flex flex-wrap gap-x-12 gap-y-5 border-t border-hairline pt-5">
-                <div>
-                  <dt className="text-small text-stone">Total land area</dt>
-                  <dd className="font-heading text-display-3 text-navy tabular-nums">
-                    {fmt(LAND.totalHa)}
-                    <span className="ml-1.5 text-title text-stone">ha</span>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-small text-stone">Of which reclaimed</dt>
-                  <dd className="font-heading text-display-3 text-navy tabular-nums">
-                    {fmt(LAND.reclaimedHa)}
-                    <span className="ml-1.5 text-title text-stone">ha</span>
-                  </dd>
-                </div>
-              </dl>
-
-              {/* The two figures above state the amount; this states the share,
-                  which is the part worth noticing. Split from the derived
-                  percentage so a revised figure moves the bar. */}
-              <div className="mt-6 border-b border-hairline pb-6">
-                <div
-                  data-reveal="measure"
-                  className="flex h-2.5 overflow-hidden rounded-full"
-                  aria-hidden
-                >
-                  <div className="bg-navy" style={{ width: `${100 - RECLAIMED_PCT}%` }} />
-                  <div className="bg-sky" style={{ width: `${RECLAIMED_PCT}%` }} />
-                </div>
-                <p className="mt-3.5 flex items-center gap-2.5 text-small text-stone">
-                  <span aria-hidden className="h-2.5 w-2.5 shrink-0 rounded-full bg-sky" />
-                  One in every five hectares of the city is reclaimed land.
-                </p>
-              </div>
 
               {/* Two columns, so four islands are two rows. Numbered to match
                   the map beside it, which is what carries the key at the widths
@@ -219,23 +194,35 @@ export default function HomePage() {
       {/* ------------------------------------------------------------ Pillars */}
       <section id="pillars" className="scroll-mt-24 py-20 sm:py-32">
         <div className="shell">
-          <SplitHeading className="max-w-[18ch] font-display text-display-2 font-bold">
-            {PILLARS_INTRO.title}
-          </SplitHeading>
-          <p className="mt-8 max-w-[68ch] text-lead text-slate">{PILLARS_INTRO.body}</p>
+          <div className="xl:grid xl:grid-cols-[0.8fr_1.2fr] xl:items-baseline xl:gap-x-16">
+            <SplitHeading className="max-w-[18ch] font-display text-display-2 font-bold">
+              {PILLARS_INTRO.title}
+            </SplitHeading>
+            <p className="mt-8 max-w-[68ch] text-lead text-slate xl:mt-0">{PILLARS_INTRO.body}</p>
+          </div>
 
+          {/* Numbered, and carrying the deck's own phrase rather than a single
+              noun. At one column these tiles are 335px of flat colour, and
+              "People" left almost all of it empty: the numeral gives the tile a
+              top edge to hang from, and the phrase gives it something to say
+              that the heading above has not already said. */}
           <ul className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-hairline sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {PILLARS.map((pillar) => (
+            {PILLARS.map((pillar, i) => (
               <li
                 key={pillar.id}
-                className="flex min-h-40 flex-col justify-end p-6 text-white"
+                className="flex min-h-40 flex-col justify-between gap-8 p-6 text-white sm:min-h-48"
                 // The accessible variant, not the plate colour. White on three
                 // of the four printed colours measures 2.7–3.3:1, which fails
                 // for a tile that carries its own label. Same hue, legible.
                 style={{ background: pillar.textColor }}
               >
-                <h3 className="max-w-[14ch] font-heading text-title !text-white">
-                  {pillar.name}
+                {/* Ornamental: it numbers the five for the eye, and the
+                    heading below is what actually gets read out. */}
+                <span aria-hidden className="font-heading text-micro text-white/60 tabular-nums">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="max-w-[15ch] font-heading text-title !text-white">
+                  {pillar.phrase}
                 </h3>
               </li>
             ))}
@@ -245,19 +232,18 @@ export default function HomePage() {
 
       {/* -------------------------------------------------------------- Goals */}
       <section id="goals" className="scroll-mt-24 bg-shell py-20 sm:py-32">
-        {/* `shell`, like every other section. This was the one `shell-wide` on
-            the page, so the goal grid ran 320px past the headings above and
-            below it and the column of the page visibly stepped out here. */}
         <div className="shell">
-          <SplitHeading className="font-display text-display-2">Twelve goals</SplitHeading>
-          {/* The draft's own sentence names a count of pillars — "four" — that
-              its pillars slide, two sections up, contradicts with five. The
-              clause is dropped rather than arbitrated: the site should not pick
-              a side on a number the council is still settling. */}
-          <p className="mt-5 max-w-[62ch] text-lead text-slate">
-            Twelve goals will be pursued to achieve the vision of Sustainable Addu City. Open any
-            goal to read its targets and comment on each action.
-          </p>
+          <div className="xl:grid xl:grid-cols-[0.8fr_1.2fr] xl:items-baseline xl:gap-x-16">
+            <SplitHeading className="font-display text-display-2">Twelve goals</SplitHeading>
+            {/* The draft's own sentence names a count of pillars — "four" — that
+                its pillars slide, two sections up, contradicts with five. The
+                clause is dropped rather than arbitrated: the site should not pick
+                a side on a number the council is still settling. */}
+            <p className="mt-5 max-w-[62ch] text-lead text-slate xl:mt-0">
+              Twelve goals will be pursued to achieve the vision of Sustainable Addu City. Open any
+              goal to read its targets and comment on each action.
+            </p>
+          </div>
 
           <GoalGrid />
         </div>
@@ -266,12 +252,22 @@ export default function HomePage() {
       {/* -------------------------------------------------------- Initiatives */}
       <section id="initiatives" className="scroll-mt-24 py-20 sm:py-32">
         <div className="shell">
-          <SplitHeading className="max-w-[16ch] font-display text-display-2 font-bold">
-            {INITIATIVES_INTRO.title}
-          </SplitHeading>
-          <p className="mt-6 max-w-[62ch] text-lead text-slate">{INITIATIVES_INTRO.body}</p>
+          <div className="xl:grid xl:grid-cols-[0.8fr_1.2fr] xl:items-baseline xl:gap-x-16">
+            <SplitHeading className="max-w-[16ch] font-display text-display-2 font-bold">
+              {INITIATIVES_INTRO.title}
+            </SplitHeading>
+            <p className="mt-6 max-w-[62ch] text-lead text-slate xl:mt-0">
+              {INITIATIVES_INTRO.body}
+            </p>
+          </div>
 
-          <ol className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2" data-reveal-stagger="0.06">
+          {/* Three across once the container has the width for it. At two, a
+              wide viewport gave each initiative a 712px line for a 139px block
+              of text — a strip rather than a card. */}
+          <ol
+            className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2 xl:grid-cols-3"
+            data-reveal-stagger="0.06"
+          >
             {INITIATIVES.map((item) => (
               <li key={item.number} data-reveal="up" className="border-t border-hairline pt-6">
                 <div className="flex items-baseline gap-4">

@@ -131,7 +131,10 @@ export default async function GoalPage(props: PageProps<'/goals/[slug]'>) {
               <h2 className="font-display text-display-3 font-bold">Targets</h2>
             </div>
 
-            <ol className="mt-10 grid gap-4 sm:grid-cols-2" data-reveal-stagger="0.08">
+            <ol
+              className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
+              data-reveal-stagger="0.08"
+            >
               {goal.targets.map((target) => (
                 <li
                   key={target.id}

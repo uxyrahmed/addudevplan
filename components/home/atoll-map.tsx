@@ -44,16 +44,17 @@ const LABELS: { dx: number; dy: number; anchor: 'start' | 'end' }[] = [
  * The two ends of the Link Road, taken from the road's own first and last
  * point so they cannot drift from the line they cap.
  *
- * A stroke that simply stops mid-lagoon reads as an unfinished drawing. A ring
- * at each end says the road ends *there* — and naming them north and south is
- * what tells a reader which way the chain runs, which the road cannot say on
- * its own once it has finished drawing.
+ * A stroke that simply stops mid-lagoon reads as an unfinished drawing; a ring
+ * at each end says the road ends *there*.
+ *
+ * The rings used to carry "North" and "South" set beside them. That was the
+ * map making a third time a point already made twice — by the markers running
+ * 1–4 down the chain, and by the caption underneath that names the direction
+ * outright. The rings stay; the words go.
  */
 const ROAD_ENDS = [
-  // Set outboard of the ring, away from the land it sits on: the northern end
-  // has open reef above it, the southern end has the flat to its east.
-  { id: 'north', label: 'North', x: 160, y: 146, dx: 0, dy: -26, anchor: 'middle' },
-  { id: 'south', label: 'South', x: 579, y: 689, dx: 26, dy: 8, anchor: 'start' },
+  { id: 'north', x: 160, y: 146 },
+  { id: 'south', x: 579, y: 689 },
 ] as const
 
 export function AtollMap() {
@@ -192,27 +193,17 @@ export function AtollMap() {
           {/* Hollow, where the island markers are solid: this is where the road
               stops, not a place. */}
           {ROAD_ENDS.map((end) => (
-            <g key={end.id} data-end={end.id}>
-              <circle
-                cx={end.x}
-                cy={end.y}
-                r="8"
-                fill="white"
-                stroke="var(--color-navy)"
-                strokeWidth="4"
-                className="max-sm:[r:12] max-sm:[stroke-width:6]"
-              />
-              <text
-                x={end.x + end.dx}
-                y={end.y + end.dy}
-                textAnchor={end.anchor}
-                fill="var(--color-stone)"
-                fontSize="20"
-                className="font-heading max-sm:[font-size:30px]"
-              >
-                {end.label}
-              </text>
-            </g>
+            <circle
+              key={end.id}
+              data-end={end.id}
+              cx={end.x}
+              cy={end.y}
+              r="8"
+              fill="white"
+              stroke="var(--color-navy)"
+              strokeWidth="4"
+              className="max-sm:[r:12] max-sm:[stroke-width:6]"
+            />
           ))}
 
           {MARKERS.map(([x, y], i) => (
@@ -282,8 +273,7 @@ export function AtollMap() {
         </span>
         <p className="mt-3">
           The Link Road runs north to south down the western chain, joining the four islands of the
-          city end to end and crossing open reef where the chain breaks. It carries on past Feydhoo
-          to the south-east, beyond the city.
+          city end to end.
         </p>
       </figcaption>
     </figure>

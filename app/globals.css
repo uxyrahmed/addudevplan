@@ -216,14 +216,21 @@
    Utilities
    ========================================================================== */
 
+/**
+ * The one container width on the site.
+ *
+ * There used to be two: `shell` at 84rem for the sections, and `shell-wide` at
+ * 104rem for the hero, header and footer. That meant the page opened wide,
+ * stepped in for everything that was read, and opened out again at the footer
+ * — a seam visible on any viewport past about 1400px, and a standing trap,
+ * since a new section was one class away from sitting at the wrong width.
+ *
+ * Now there is one utility and one number, so the column cannot drift. The
+ * reading measure does not depend on this: the paragraphs and headings that
+ * need a limit carry their own `max-w-[NNch]`, which is what actually keeps a
+ * line of body copy readable at any container width.
+ */
 @utility shell {
-  width: 100%;
-  margin-inline: auto;
-  max-width: 84rem;
-  padding-inline: var(--shell-gutter);
-}
-
-@utility shell-wide {
   width: 100%;
   margin-inline: auto;
   max-width: 104rem;

@@ -84,7 +84,7 @@ export function Hero() {
 
       {/* The reef divider occupies the last 5rem of this section, so the
           content stops short of it rather than colliding with the swell. */}
-      <div className="shell-wide flex min-h-[92svh] flex-col justify-end pt-28 pb-32 sm:min-h-[96svh] sm:pb-36">
+      <div className="shell flex min-h-[92svh] flex-col justify-end pt-28 pb-32 sm:min-h-[96svh] sm:pb-36">
         <SplitHeading
           as="h1"
           immediate
