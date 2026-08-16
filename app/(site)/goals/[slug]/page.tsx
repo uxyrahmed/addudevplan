@@ -12,6 +12,7 @@ import { StatCounter } from '@/components/home/stat-counter'
 import { SplitHeading } from '@/components/motion/split-heading'
 import { ViewTransition } from '@/components/motion/view-transition'
 import { GOALS, getGoal, goalNeighbours } from '@/lib/plan'
+import { statGlyph } from '@/lib/stat-glyphs'
 
 export function generateStaticParams() {
   return GOALS.map((goal) => ({ slug: goal.slug }))
@@ -99,18 +100,43 @@ export default async function GoalPage(props: PageProps<'/goals/[slug]'>) {
             <div className="lg:border-l lg:border-hairline lg:pl-10">
               <h2 className="font-heading text-title text-ink">Where we are today</h2>
               <dl className="mt-6 space-y-6" data-reveal-stagger="0.08">
-                {goal.stats.map((stat) => (
-                  <div key={`${stat.value}-${stat.label}`} data-reveal="up">
-                    <dt className="sr-only">{stat.label}</dt>
-                    <dd>
-                      <StatCounter
-                        value={stat.value}
-                        className="block font-heading text-[clamp(1.5rem,3vw,2.1rem)] leading-tight tabular-nums"
-                      />
-                      <span className="mt-1 block text-small text-stone">{stat.label}</span>
-                    </dd>
-                  </div>
-                ))}
+                {goal.stats.map((stat) => {
+                  const glyph = statGlyph(goal.number, stat.label)
+                  return (
+                    <div key={`${stat.value}-${stat.label}`} data-reveal="up">
+                      <dt className="sr-only">{stat.label}</dt>
+                      {/* The glyph lives inside the `dd`, not beside it: a
+                          `dl > div` may only hold `dt` and `dd`, so hanging the
+                          plate off the wrapper would be invalid markup. It is
+                          decorative — the label names the figure in text, and
+                          `Icon` leaves it `aria-hidden` with no `label` prop. */}
+                      <dd className="flex items-start gap-4">
+                        {glyph ? (
+                          <span
+                            // Half a step down: the plate centres on the
+                            // figure's cap height rather than its line box, so
+                            // the column of glyphs reads level with the numbers.
+                            className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full"
+                            // 8%, against the 10% the Targets heading uses. That
+                            // plate appears once a page; this one repeats down a
+                            // rail, and at 10% the column of tints started
+                            // competing with the figures it labels.
+                            style={{ background: `${goal.color}14`, color: goal.textColor }}
+                          >
+                            <Icon icon={glyph} size={18} />
+                          </span>
+                        ) : null}
+                        <span className="min-w-0">
+                          <StatCounter
+                            value={stat.value}
+                            className="block font-heading text-[clamp(1.5rem,3vw,2.1rem)] leading-tight tabular-nums"
+                          />
+                          <span className="mt-1 block text-small text-stone">{stat.label}</span>
+                        </span>
+                      </dd>
+                    </div>
+                  )
+                })}
               </dl>
             </div>
           ) : null}
