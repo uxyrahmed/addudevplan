@@ -51,7 +51,28 @@ const body = Google_Sans({
   fallback: ['system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
 })
 
+/**
+ * Where the share card's image is served from.
+ *
+ * `opengraph-image.png` beside this file is picked up by Next's file
+ * convention, but a crawler is handed a URL, not a path, so it has to be
+ * absolute — without a base, a local build resolves it against localhost and
+ * the card comes back blank everywhere it is pasted.
+ *
+ * `VERCEL_PROJECT_PRODUCTION_URL` is the project's stable production domain.
+ * The obvious `VERCEL_URL` is deliberately not used: it names the individual
+ * deployment, so every push would mint a new image URL and none of the scrapes
+ * would share a cache. `NEXT_PUBLIC_SITE_URL` overrides both, for when the
+ * council puts this on a domain of its own.
+ */
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : 'http://localhost:3000')
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: `${PLAN.title} ${PLAN.period}`,
     template: `%s — ${PLAN.title}`,
