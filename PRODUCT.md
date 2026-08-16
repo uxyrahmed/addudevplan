@@ -43,9 +43,10 @@ responding costs a resident nothing.
 
 - The source of truth is the Addu City Council's draft slide deck, currently the
   **16 August draft**. The site's content model transcribes it.
-- A resident's responses accumulate in a browser-local basket across sittings, then
-  are reviewed and sent as one set. Until sent, the basket lives only in
-  `localStorage`.
+- A resident's responses are sent as they are made — a short quiet window coalesces a
+  burst, and every send replaces the basket rather than adding one. The basket also
+  lives in `localStorage`, so it survives a closed tab and syncs on return, and the
+  review panel reads back what has been sent rather than gating it.
 - The council reads results through an invite-only `/admin` panel: totals, reaction
   split per goal, comments in context, CSV and JSON export.
 - Access to results is two independent things — signing in proves identity, a row in
@@ -105,8 +106,9 @@ responding costs a resident nothing.
    layout; never invent, never inflate, never let a figure drift from its source.
 2. **Say "still open" rather than publish a wrong number.** An unfinished source
    becomes an `openNote`, not a guess.
-3. **Responding must cost nothing.** No account, no name, no email — and a basket that
-   survives a closed tab, so a resident can answer twelve goals across twelve sittings.
+3. **Responding must cost nothing.** No account, no name, no email, no final Send to
+   remember — and a basket that survives a closed tab, so a resident can answer twelve
+   goals across twelve sittings and have every one of them counted.
 4. **Both directions must be easy.** The consultation succeeds only if it is as light
    for the council to read the response as it is for a resident to give one.
 5. **This is an official publication.** It carries the city's identity and the

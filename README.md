@@ -45,7 +45,7 @@ relevant guide in `node_modules/next/dist/docs/` before writing new code. See
 | `app/layout.tsx` | The document shell only — fonts, metadata, global CSS |
 | `app/(site)/` | The public consultation: the home page, `goals/[slug]`, and the chrome around them. A route group, so the URLs are `/` and `/goals/…` |
 | `app/admin/` | The council's results panel, behind a sign-in |
-| `app/api/feedback/` | Where a submitted basket is posted |
+| `app/api/feedback/` | Where a basket is posted, and withdrawn |
 | `app/api/admin/export/` | CSV and JSON export of every response |
 | `proxy.ts` | Session refresh and the `/admin` gate. Next 16's rename of `middleware` |
 | `lib/plan.ts` | The whole content model: plan metadata, vision, pillars, goals, strategies, actions |
@@ -76,15 +76,35 @@ Two conventions matter when editing it:
 ## Feedback
 
 Every action carries three reactions — Support, Not sure, Concern — plus an optional
-comment. Responses accumulate into a basket that opens a review panel, grouped by goal,
-where a visitor can edit or remove any response, download a copy, or send the set to the
+comment. A reaction is one click and needs no confirming; a comment is posted
+deliberately, with a button or ⌘/Ctrl + Enter, so half a sentence never reaches the
 council.
 
-Until it is sent, a basket lives only in `localStorage`, so a visitor can respond over
-several sittings without an account. `submit` in
+**Answers send themselves.** There is no final step to miss: each edit starts a short
+quiet window, and when the answering stops the whole basket goes. A burst of clicks down
+one strategy is one request, not one per click. Every send carries the entire basket and
+the endpoint replaces the last one, so a send is idempotent — a coalesced burst, a
+retry, and a resend after a dropped connection all leave the same rows. A page being
+hidden flushes through `sendBeacon`; a failure retries on a backoff and the basket stays
+in `localStorage` meanwhile, so nothing typed is lost.
+
+The basket also lives in `localStorage`, so a visitor can respond over several sittings
+without an account, and anything the council has not acknowledged is sent again on the
+next visit. The review panel is now a record rather than a gate: it groups every goal,
+shows what has been sent, and lets a visitor edit or remove a response or download a
+copy.
+
 [`components/feedback/feedback-store.tsx`](components/feedback/feedback-store.tsx) posts
-it to `/api/feedback`, which validates every action id against `lib/plan.ts` and calls a
+to `/api/feedback`, which validates every action id against `lib/plan.ts` and calls a
 single database function.
+
+**The device and the council always agree.** Deleting your feedback is a real
+withdrawal, behind a confirmation: `DELETE /api/feedback` calls `withdraw_feedback`,
+which removes the submission for the caller's own cookie hash and takes the responses
+with it. The council's copy goes first and the device only clears if that succeeded, so
+a failure leaves both sides as they were rather than stranding a basket nobody can reach.
+Emptying the basket one response at a time withdraws it the same way — an endpoint with
+nothing to file would otherwise have quietly left the last set standing.
 
 ### Anonymity, and what stops a repeat submission
 
@@ -92,11 +112,13 @@ Nothing identifying is asked for or stored — no name, no email, no raw IP addr
 things keep one resident from counting twice, neither of which needs an identity:
 
 - **A per-browser token** in an `httpOnly` cookie. Sending again *replaces* that
-  browser's earlier basket rather than adding a second one, which is also what lets a
-  resident revise their mind. Only an HMAC of the token is stored.
-- **Coarse flood control** on an HMAC of the address, capped at 25 submissions an hour.
-  Sized to stop a script, not to ration a household — mobile carriers in Addu put many
-  genuine residents behind one address.
+  browser's earlier basket rather than adding a second one, which is what makes sending
+  on every edit safe as well as what lets a resident revise their mind. Only an HMAC of
+  the token is stored.
+- **Coarse flood control** on an HMAC of the address, capped at 25 *other* submitters an
+  hour: the check excludes a submitter's own revisions, so answering 230 actions costs a
+  resident nothing against it. Sized to stop a script, not to ration a household —
+  mobile carriers in Addu put many genuine residents behind one address.
 
 Both hashes use `FEEDBACK_HASH_SECRET` as a pepper, so neither can be reversed or
 replayed against a guessed list of addresses. Be honest about the ceiling: someone who
@@ -135,7 +157,10 @@ server-only secrets.
 
 `FEEDBACK_WRITE_SECRET` must match the row in `private.app_secrets`. It exists because
 the publishable key is public by design, so it alone cannot be what authorises a write:
-every submission goes through one `security definer` function that checks the secret,
-validates the payload and rate-limits before inserting. Nothing else in the app can write
-to these tables. A leak of that secret would let someone file junk feedback — not read a
-single response, which is what leaking a service-role key would cost.
+every submission goes through one `security definer` function — `submit_feedback` — that
+checks the secret, validates the payload and rate-limits before inserting. Its counterpart
+`withdraw_feedback` takes the same secret and can only ever reach the caller's own row,
+because the submitter hash it deletes by is derived from an `httpOnly` cookie the page
+cannot read. Nothing else in the app can write to these tables. A leak of that secret
+would let someone file junk feedback — not read a single response, which is what leaking
+a service-role key would cost.

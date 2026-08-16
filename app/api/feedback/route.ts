@@ -119,3 +119,53 @@ export async function POST(request: Request) {
     revised: result.revision > 1,
   })
 }
+
+/**
+ * Takes this browser's basket back out of the consultation.
+ *
+ * The submitter token is the whole of the authorisation, and it is only ever
+ * read from the httpOnly cookie — never from the body — so this can reach one
+ * basket and only one: the caller's own. The cookie is cleared with it, so what
+ * the resident does next is a first submission rather than a revision of
+ * something that is no longer there.
+ */
+export async function DELETE() {
+  const writeSecret = process.env.FEEDBACK_WRITE_SECRET
+  const pepper = process.env.FEEDBACK_HASH_SECRET
+  if (!writeSecret || !pepper) {
+    console.error('Feedback withdrawal is not configured: set FEEDBACK_WRITE_SECRET and FEEDBACK_HASH_SECRET.')
+    return Response.json({ error: 'We cannot reach your feedback right now — please try again later.' }, { status: 503 })
+  }
+
+  const cookieStore = await cookies()
+  const token = cookieStore.get(SUBMITTER_COOKIE)?.value
+
+  // Nothing was ever filed from this browser, so there is nothing to take back
+  // and the device can clear itself.
+  if (!token) return Response.json({ ok: true, removed: 0 })
+
+  const supabase = createAnonClient()
+  const { data, error } = await supabase.rpc('withdraw_feedback', {
+    p_secret: writeSecret,
+    p_submitter_hash: peppered(token, pepper),
+  })
+
+  if (error) {
+    if (error.message.includes('unauthorized')) {
+      console.error('withdraw_feedback rejected the write secret — FEEDBACK_WRITE_SECRET is out of step with private.app_secrets.')
+    } else {
+      console.error('withdraw_feedback failed:', error.message)
+    }
+    // Deliberately not clearing the cookie: the basket is still filed, and
+    // losing the token would make it unreachable for a retry.
+    return Response.json(
+      { error: 'Your feedback could not be withdrawn. Nothing has been changed — please try again.' },
+      { status: 502 },
+    )
+  }
+
+  cookieStore.delete(SUBMITTER_COOKIE)
+
+  const result = data as { removed: number }
+  return Response.json({ ok: true, removed: result.removed })
+}

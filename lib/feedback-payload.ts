@@ -1,3 +1,4 @@
+import { MAX_COMMENT_LENGTH } from './feedback-limits'
 import { GOALS } from './plan'
 import { REACTION_VALUES, type WireReaction } from './reactions'
 
@@ -19,8 +20,7 @@ export const ACTION_IDS: ReadonlySet<string> = new Set(
   GOALS.flatMap((goal) => goal.strategies.flatMap((s) => s.actions.map((a) => a.id))),
 )
 
-/** Matches the length check on public.responses.comment. */
-export const MAX_COMMENT_LENGTH = 4000
+export { MAX_COMMENT_LENGTH }
 
 const REACTIONS = new Set<string>(REACTION_VALUES)
 

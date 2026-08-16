@@ -26,6 +26,20 @@ const INDEX = new Map(
 
 const REACTION_BY_ID = new Map(REACTIONS.map((r) => [r.id, r]))
 
+/** Time of day for "sent at", in the reader's own locale and clock. */
+const TIME = new Intl.DateTimeFormat(undefined, { hour: 'numeric', minute: '2-digit' })
+
+/**
+ * Three plates for the send status: settled, in hand, and not landed. Tinted
+ * from the same three colours the reactions use, so the panel's palette says
+ * the same things the controls do.
+ */
+const TONE = {
+  done: { tint: 'color-mix(in oklab, #178E6B 10%, white)', ink: '#0f6b51' },
+  working: { tint: 'var(--color-shell)', ink: 'var(--color-stone)' },
+  trouble: { tint: 'color-mix(in oklab, #970E53 9%, white)', ink: '#7c0b45' },
+} as const
+
 /** Every action in a goal, in plan order. Static, so it is built once. */
 const GOAL_ACTION_IDS = new Map(
   GOALS.map((goal) => [
@@ -35,8 +49,13 @@ const GOAL_ACTION_IDS = new Map(
 )
 
 /**
- * The guide through the twelve goals, and the place a resident reads their own
- * submission back before it goes.
+ * The guide through the twelve goals, and the place a resident reads back what
+ * they have already sent.
+ *
+ * It no longer gates the sending. Answers go on their own, so the footer states
+ * where the basket has got to instead of asking for one more click that a
+ * consultation filled in over several visits was always going to lose people
+ * on.
  *
  * It used to be a flat list of whatever you had answered, which meant the one
  * screen that could show you the shape of the consultation showed you only the
@@ -50,16 +69,24 @@ const GOAL_ACTION_IDS = new Map(
  * being a dead end.
  */
 export function FeedbackPanel({ onClose }: { onClose: () => void }) {
-  const { feedback, count, countFor, clearAll, remove, submitted, status, error, revised, submit } =
+  const { feedback, count, countFor, clearAll, remove, status, error, revised, savedAt, saveNow } =
     useFeedback()
   const closeRef = useRef<HTMLButtonElement>(null)
+  const cancelRef = useRef<HTMLButtonElement>(null)
   const [openGoal, setOpenGoal] = useState<number | null>(null)
+  const [confirming, setConfirming] = useState(false)
+  const [clearing, setClearing] = useState(false)
 
   // Opened by choice, so move focus into it and let Escape close it.
   useEffect(() => {
     closeRef.current?.focus()
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
+      if (e.key !== 'Escape') return
+      // Escape belongs to the innermost thing that is open. Without this it
+      // would close the panel out from under the confirmation, which reads as
+      // the deletion having gone ahead.
+      if (confirming) setConfirming(false)
+      else onClose()
     }
     document.addEventListener('keydown', onKey)
     document.documentElement.style.overflow = 'hidden'
@@ -67,7 +94,20 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
       document.removeEventListener('keydown', onKey)
       document.documentElement.style.overflow = ''
     }
-  }, [onClose])
+  }, [onClose, confirming])
+
+  // Focus lands on Cancel, not on the destructive button: a confirmation that
+  // arms the dangerous option is not a confirmation.
+  useEffect(() => {
+    if (confirming) cancelRef.current?.focus()
+  }, [confirming])
+
+  async function confirmClear() {
+    setClearing(true)
+    await clearAll()
+    setClearing(false)
+    setConfirming(false)
+  }
 
   /** Your answers, grouped by goal and kept in plan order within each. */
   const answersByGoal = useMemo(() => {
@@ -85,6 +125,36 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
   const goalsStarted = GOALS.filter(
     (goal) => countFor(GOAL_ACTION_IDS.get(goal.number) ?? []) > 0,
   ).length
+
+  // Short on purpose. This is a status line, not an explanation: a resident
+  // reads it to find out whether their answers landed, and every extra clause
+  // is one more thing between them and that.
+  const state = useMemo(() => {
+    switch (status) {
+      case 'saving':
+        return { ...TONE.working, icon: Loading03Icon, message: 'Sending…' }
+      case 'pending':
+        return { ...TONE.working, icon: SentIcon, message: 'Sending shortly' }
+      case 'error':
+        return {
+          ...TONE.trouble,
+          icon: AlertCircleIcon,
+          message: error ?? 'Not sent yet. Your answers are saved on this device.',
+        }
+      case 'saved':
+        return {
+          ...TONE.done,
+          icon: CheckmarkCircle02Icon,
+          message: savedAt
+            ? `${revised ? 'Updated' : 'Sent'} at ${TIME.format(savedAt)}`
+            : revised
+              ? 'Updated'
+              : 'Sent',
+        }
+      default:
+        return { ...TONE.working, icon: SentIcon, message: 'Your answers send themselves' }
+    }
+  }, [status, error, revised, savedAt])
 
   function download() {
     const payload = {
@@ -149,32 +219,6 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
             already answered — that list was rarely long enough to overflow.
             Listing all twelve goals it always is. */}
         <div data-lenis-prevent className="min-h-0 flex-1 overflow-y-auto px-6 py-5">
-          {submitted ? (
-            <div
-              className="mb-5 flex items-start gap-3 rounded-2xl p-4 text-small"
-              style={{ background: 'color-mix(in oklab, #178E6B 10%, white)', color: '#0f6b51' }}
-            >
-              <Icon icon={CheckmarkCircle02Icon} size={20} />
-              <p>
-                {revised
-                  ? 'Thank you — your feedback has been updated. It replaces what you sent before.'
-                  : 'Thank you — we have received your feedback.'}{' '}
-                Change an answer on any goal page and you can send an updated set.
-              </p>
-            </div>
-          ) : null}
-
-          {status === 'error' && error ? (
-            <div
-              role="alert"
-              className="mb-5 flex items-start gap-3 rounded-2xl p-4 text-small"
-              style={{ background: 'color-mix(in oklab, #970E53 9%, white)', color: '#7c0b45' }}
-            >
-              <Icon icon={AlertCircleIcon} size={20} />
-              <p>{error}</p>
-            </div>
-          ) : null}
-
           <ol className="divide-y divide-hairline border-y border-hairline">
             {GOALS.map((goal) => {
               const ids = GOAL_ACTION_IDS.get(goal.number) ?? []
@@ -319,23 +363,38 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
         </div>
 
         <footer className="border-t border-hairline px-6 pt-4 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
-          <button
-            type="button"
-            onClick={submit}
-            disabled={status === 'sending' || submitted}
-            aria-busy={status === 'sending'}
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-navy px-5 py-3.5 text-small font-bold text-white transition-colors hover:bg-navy-deep disabled:cursor-default disabled:bg-stone"
+          {/* Where "Send my feedback" used to be.
+
+              Nothing here is a step any more — answers go as they are made — so
+              this states what has happened rather than asking for an action.
+              It keeps the button's position because that is where a visitor
+              looks to find out whether their feedback counted. */}
+          <div
+            className="flex items-start gap-3 rounded-2xl p-4 text-small"
+            style={{ background: state.tint, color: state.ink }}
           >
-            <Icon icon={status === 'sending' ? Loading03Icon : SentIcon} size={17} />
-            {status === 'sending' ? 'Sending…' : submitted ? 'Sent' : 'Send my feedback'}
-          </button>
-          {/* Said once, next to the button that does it, rather than in a
+            <span className={status === 'saving' ? 'motion-safe:animate-spin' : undefined}>
+              <Icon icon={state.icon} size={20} />
+            </span>
+            <div className="min-w-0 flex-1">
+              <p aria-live="polite">{state.message}</p>
+              {status === 'error' || status === 'pending' ? (
+                <button
+                  type="button"
+                  onClick={saveNow}
+                  className="mt-1.5 font-bold underline underline-offset-2"
+                >
+                  {status === 'error' ? 'Try again now' : 'Send now'}
+                </button>
+              ) : null}
+            </div>
+          </div>
+
+          {/* Said once, next to the thing that does it, rather than in a
               privacy page nobody opens. */}
-          {submitted ? null : (
-            <p className="mt-2.5 text-center text-micro tracking-normal text-mist">
-              Sent anonymously. Your name is not asked for or recorded.
-            </p>
-          )}
+          <p className="mt-2.5 text-center text-micro tracking-normal text-mist">
+            Sent anonymously
+          </p>
           <div className="mt-3 flex items-center justify-between gap-3 text-small">
             <button
               type="button"
@@ -347,13 +406,74 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
             </button>
             <button
               type="button"
-              onClick={clearAll}
+              onClick={() => setConfirming(true)}
               className="font-semibold text-stone hover:text-plum"
             >
-              Delete all responses
+              Delete my feedback
             </button>
           </div>
         </footer>
+
+        {/* Kept inside the sheet rather than floating over the page: the thing
+            being deleted is listed right behind it, and a resident should be
+            able to see what they are about to lose while they decide.
+
+            An `alertdialog` because it interrupts — a screen reader announces
+            the whole thing on open rather than waiting to be explored. */}
+        {confirming ? (
+          <div
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="clear-title"
+            aria-describedby="clear-body"
+            className="absolute inset-0 z-10 flex items-end bg-ink/45 sm:items-center sm:justify-center sm:p-6"
+          >
+            <div className="w-full rounded-t-[24px] bg-white p-6 sm:rounded-[24px]">
+              <h3 id="clear-title" className="text-title">
+                Delete your feedback?
+              </h3>
+              <p id="clear-body" className="mt-2 text-small text-stone">
+                This withdraws all {count} {count === 1 ? 'response' : 'responses'} from the
+                consultation and clears them from this device. The council will no longer have
+                them, and this cannot be undone.
+              </p>
+
+              <div className="mt-5 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+                <button
+                  ref={cancelRef}
+                  type="button"
+                  onClick={() => setConfirming(false)}
+                  disabled={clearing}
+                  className="rounded-full border border-hairline px-5 py-3 text-small font-bold text-ink transition-colors hover:bg-shell disabled:opacity-50"
+                >
+                  Keep my feedback
+                </button>
+                <button
+                  type="button"
+                  onClick={confirmClear}
+                  disabled={clearing}
+                  aria-busy={clearing}
+                  className="flex items-center justify-center gap-2 rounded-full px-5 py-3 text-small font-bold text-white transition-colors disabled:opacity-70"
+                  style={{ background: 'var(--color-plum)' }}
+                >
+                  <span className={clearing ? 'motion-safe:animate-spin' : undefined}>
+                    <Icon icon={clearing ? Loading03Icon : Delete02Icon} size={16} />
+                  </span>
+                  {clearing ? 'Deleting…' : 'Delete everything'}
+                </button>
+              </div>
+
+              {/* A withdrawal that failed leaves the council's copy in place,
+                  so it has to be said here rather than only in the status line
+                  the sheet is covering. */}
+              {status === 'error' && error ? (
+                <p role="alert" className="mt-3 text-small" style={{ color: '#7c0b45' }}>
+                  {error}
+                </p>
+              ) : null}
+            </div>
+          </div>
+        ) : null}
       </aside>
     </>
   )

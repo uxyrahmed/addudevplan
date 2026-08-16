@@ -177,6 +177,19 @@
     text-wrap: pretty;
   }
 
+  /* Tailwind v4's reset sets buttons to `cursor: default`, on the reasoning
+     that a native button is not a link. On a page whose whole purpose is being
+     clicked — three reaction buttons and a comment control on every one of 230
+     actions — that reads as "not interactive", so the pointer goes back.
+
+     Not on a disabled control: there the arrow is telling the truth. */
+  button:not(:disabled),
+  summary,
+  [role='button']:not([aria-disabled='true']),
+  label[for] {
+    cursor: pointer;
+  }
+
   ::selection {
     background: var(--color-sky);
     color: #fff;
