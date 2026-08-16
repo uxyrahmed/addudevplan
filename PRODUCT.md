@@ -42,7 +42,7 @@ responding costs a resident nothing.
 ## Operating Context
 
 - The source of truth is the Addu City Council's draft slide deck, currently the
-  **12 August draft**. The site's content model transcribes it.
+  **16 August draft**. The site's content model transcribes it.
 - A resident's responses accumulate in a browser-local basket across sittings, then
   are reviewed and sent as one set. Until sent, the basket lives only in
   `localStorage`.
@@ -53,9 +53,10 @@ responding costs a resident nothing.
 
 ## Capabilities and Constraints
 
-- The plan is four/five pillars and **twelve goals**, each with targets, numbered
-  strategies and actions. (The README still says fifteen goals — stale since the move
-  to the 12 August draft.)
+- The plan is **five pillars** and **twelve goals**, each with targets, numbered
+  strategies and actions. The deck disagreed with itself on the pillar count until the
+  16 August draft, which settles it at five in both places. It still does not say which
+  goals sit under which pillar, so the site asserts no mapping.
 - Every action carries three reactions — Support, Not sure, Concern — plus an optional
   comment.
 - **Action `id`s are stable keys.** Feedback is keyed on them; never renumber in place.

@@ -346,15 +346,21 @@ export default function HomePage() {
         <div className="shell">
           <div className="2xl:grid 2xl:grid-cols-[0.53fr_1fr] 2xl:items-start 2xl:gap-x-16">
             <SplitHeading className="font-display text-display-2">Twelve goals</SplitHeading>
-            {/* The draft's own sentence names a count of pillars — "four" — that
-                its pillars slide, two sections up, contradicts with five. The
-                clause is dropped rather than arbitrated: the site should not pick
-                a side on a number the council is still settling.
+            {/* The draft's own sentence used to name a count of pillars —
+                "four" — that its pillars slide, two sections up, contradicted
+                with five. The clause was dropped rather than arbitrated: the
+                site should not pick a side on a number the council is still
+                settling. The 16 August draft has settled it, and reads "aligned
+                with five sustainability pillars"; the clause could be restored
+                now, but the deck still does not say which goals sit under which
+                pillar, so restoring it would put a count on the page that
+                nothing below it can show.
 
                 The vision is named as the vision section names it, not as
-                "Sustainable Addu City". The 12 August draft renamed it and this
-                sentence had not caught up, so the page was calling the same
-                thing two names within one scroll. */}
+                "Sustainable Addu City". The draft's sentence still has not
+                caught up with its own rename, so carrying it verbatim would
+                have the page calling the same thing two names within one
+                scroll. */}
             <p className="mt-5 max-w-[68ch] text-lead text-slate 2xl:mt-2.5">
               Twelve goals carry the vision of a resilient, inclusive, sustainable Addu. Open any
               goal to read its targets and comment on each action.

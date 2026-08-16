@@ -1,7 +1,7 @@
 # Addu Development Plan 2026–2031 — consultation site
 
 A public consultation site for the Addu Development Plan 2026–2031, published by the
-Addu City Council. It presents the plan's vision, four pillars and fifteen goals, and
+Addu City Council. It presents the plan's vision, five pillars and twelve goals, and
 lets residents respond to every strategy and action in it.
 
 ## Getting started
@@ -62,9 +62,9 @@ relevant guide in `node_modules/next/dist/docs/` before writing new code. See
 ## Content
 
 All plan copy lives in [`lib/plan.ts`](lib/plan.ts), transcribed from the council's draft
-slide deck. Goals, targets and strategies come from the 21 July draft; front-of-deck
-figures, the settlement timeline and the cover date follow the 29 July revision. Goal
-colours are read from the deck's own colour values, so they match the presentation.
+slide deck — currently the 16 August draft. Where a figure has not been restated since an
+earlier revision, the comment at that figure names the draft it came from. Goal colours
+are read from the deck's own colour values, so they match the presentation.
 
 Two conventions matter when editing it:
 

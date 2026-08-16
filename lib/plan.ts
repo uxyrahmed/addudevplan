@@ -2,7 +2,16 @@
  * Addu Development Plan 2026–2031 — content model.
  *
  * Every string and figure below is transcribed from the council's draft slide
- * deck, now the 12 August draft.
+ * deck, now the 16 August draft.
+ *
+ * That draft changes less than its predecessors. All twelve goals keep their
+ * titles, all fifty-five targets are unchanged word for word, and every
+ * strategy and action is identical in wording and order. Two goal descriptions
+ * were rewritten — goal 3's opens on the import bill now, goal 7's is trimmed
+ * of four clauses — and goal 3's figure rail was rebuilt around the national
+ * total. Both are noted at the goals themselves. The population ledger, the
+ * turning-point passage, the settlement timeline, the pillars paragraph and
+ * all ten flagship initiatives carry over untouched.
  *
  * Goal colours are the fill values of the badge plates on that draft's
  * twelve-goals slide, converted out of the Apple RGB profile the deck tags them
@@ -13,11 +22,14 @@
  * that slide, so goals three apart share one; it is a layout rhythm, not a
  * statement about which goals belong together.
  *
- * The 12 August draft also gives each goal three new slides — Financing, Data
- * and Monitoring and Evaluation. None are carried here: every Financing table
- * is printed with its cost columns empty, the Monitoring frames have no content
- * at all, and the Data slides list the council's internal GIS layers rather than
- * anything a resident is being consulted on.
+ * Since the 12 August draft each goal also carries three further slides —
+ * Financing, Data and Monitoring and Evaluation. None are carried here: every
+ * Financing table is still printed with its cost columns empty, the Monitoring
+ * frames have no content at all, and the Data slides list the council's
+ * internal GIS layers rather than anything a resident is being consulted on.
+ * The Financing tables are useful for one thing only, and only in review: they
+ * relist every action of a goal in order, so they are the cross-check that the
+ * strategy slides above have been read correctly.
  *
  * Where the source deck is visibly unfinished (placeholder counts, a target
  * numbered twice), the item is omitted here and the goal carries an `openNote`
@@ -475,11 +487,11 @@ export const GOALS: Goal[] = [
     // the home page's `#goal-` anchors and the badge's view-transition name.
     // The deck renaming a heading is not a reason to break a link.
     slug: 'water-security',
-    // The 12 August draft is mid-rename here — this goal's own slide reads
+    // The 12 August draft was mid-rename here: this goal's own slide read
     // "Safe diverse water sources" while the twelve-goals contents slide still
-    // reads "Ensure water security". Following the goal's own slide, which is
-    // the newer of the two and the one that describes what the goal covers:
-    // five sources, not a single security target.
+    // read "Ensure water security". This site followed the goal's own slide,
+    // and the 16 August draft has settled it that way — both slides now read
+    // "Safe diverse water sources".
     title: 'Safe diverse water sources',
     color: '#82357E',
     textColor: '#82357E',
@@ -545,22 +557,34 @@ export const GOALS: Goal[] = [
     color: '#51ACA3',
     textColor: '#387770',
     tagline: 'Grow more at home, land more from the sea',
-    summary: `Food security is a strategic priority for Addu City, particularly at a time when global food prices, supply chain disruptions, and climate-related shocks are placing increasing pressure on imported food systems. The Maldives imported approximately USD 790.5 million worth of food in 2025, highlighting the country's heavy dependence on external markets and the significant economic opportunity to strengthen domestic production. With the largest land area of any atoll in the Maldives, extensive agricultural potential, productive fisheries, and a growing population, Addu is uniquely positioned to become the nation's leading centre for sustainable food production. By expanding climate-smart agriculture, strengthening sustainable fisheries, promoting local food enterprises, and investing in enabling infrastructure such as food quality testing laboratories, cold storage, and a strategic food security fund, Addu can build a resilient, affordable, and nutritious food system that enhances self-sufficiency, creates jobs, and strengthens long-term economic and community resilience.`,
-    // The 12 August draft reworked this rail into six import categories. The
-    // USD 790.5 million total moved into the prose above, eggs merged into a
-    // dairy line, and beverages and confectionary — the largest category of the
-    // lot — appears for the first time.
+    // Rewritten and shortened for the 16 August draft. The earlier text opened
+    // on food security as a priority and closed on a sentence naming the
+    // enabling investments — climate-smart agriculture, testing laboratories,
+    // cold storage, a strategic food security fund. This one opens on the
+    // import bill and drops that closing sentence entirely.
     //
-    // Ordered by value, where the draft appends the new dairy line beneath the
-    // smallest one. Six figures in one column invite comparison, and the deck's
-    // running order makes that comparison read as a mistake.
+    // The source reads "positioned for sustainable food production and
+    // contribute meaningfully"; the second "to" is restored so the sentence
+    // parses.
+    summary: `The Maldives imported approximately USD 790.5 million worth of food in 2025, underscoring the country's heavy dependence on external markets while revealing a significant economic opportunity to expand domestic production. Against a backdrop of rising global food prices, supply-chain disruptions, and climate-related shocks, strengthening food security has become a strategic priority for Addu City. With the largest land area among the Maldives' atolls, substantial agricultural potential, productive fisheries, and a growing population, Addu is uniquely positioned for sustainable food production and to contribute meaningfully to national food security.`,
+    // Reworked again in the 16 August draft. The 12 August rail was six import
+    // categories; this one restores the national total to the head of the
+    // column, splits eggs back out of the dairy line, and drops both the dairy
+    // and the beverages-and-confectionary categories.
+    //
+    // Printed order is kept, and it is already sound: the total leads and the
+    // five categories descend beneath it. The first row is a total the others
+    // are parts of, which is only safe because its label says so — "national
+    // food imports" against five category names. Do not retitle it to match
+    // their shape.
     stats: [
-      { value: 'USD 163.5 million', label: 'beverages and confectionary' },
+      { value: 'USD 790.5 million', label: 'national food imports in 2025' },
       { value: 'USD 156.7 million', label: 'meat, seafood and fish' },
-      { value: 'USD 109.1 million', label: 'dairy and eggs' },
       { value: 'USD 106.9 million', label: 'vegetables and root crops' },
       { value: 'USD 106.5 million', label: 'fruits, nuts and seeds' },
-      { value: 'USD 33.5 million', label: 'staples import' },
+      // "staple" in the deck, pluralised to sit with the other category labels.
+      { value: 'USD 33.5 million', label: 'staples' },
+      { value: 'USD 24.3 million', label: 'eggs' },
     ],
     targets: [
       { id: 'g3-t1', label: '3.1', text: 'Ensure 75% of homes grow 05 types of tropical fruits and 05 vegetables at home by 2028.' },
@@ -826,7 +850,13 @@ export const GOALS: Goal[] = [
     color: '#51ACA3',
     textColor: '#387770',
     tagline: 'A community centre within a 10-minute walk',
-    summary: `Addu City will foster vibrant, inclusive, and connected communities by creating high-quality public spaces that encourage recreation, social interaction, culture, and healthy living. Through integrated community centres, active waterfronts, attractive parks, and safe, shaded walkable streets, every resident will have easy access to places where people can gather, exercise, learn, celebrate, and build stronger community connections, making Addu City liveable and people-centred. We will safeguard historical sites, traditions, language, and cultural practices while promoting awareness and participation across generations. We will ensure that heritage is respected and sustained as a living part of everyday life and offer authentic, meaningful, and immersive encounters. We will showcase local traditions, stories, and heritage sites to create memorable experiences and enable longer stays, repeat visits, and positive word-of-mouth, contributing to sustainable tourism and local economic growth.`,
+    // Trimmed in the 16 August draft — four cuts, no additions. "safe, shaded
+    // walkable streets" loses "safe"; the first paragraph no longer closes on
+    // "making Addu City liveable and people-centred"; safeguarding heritage no
+    // longer carries "while promoting awareness and participation across
+    // generations"; and what is showcased is now "local traditions and
+    // stories" rather than "local traditions, stories, and heritage sites".
+    summary: `Addu City will foster vibrant, inclusive, and connected communities by creating high-quality public spaces that encourage recreation, social interaction, culture, and healthy living. Through integrated community centres, active waterfronts, attractive parks, and shaded walkable streets, every resident will have easy access to places where people can gather, exercise, learn, celebrate, and build stronger community connections. We will safeguard historical sites, traditions, language, and cultural practices. We will ensure that heritage is respected and sustained as a living part of everyday life and offer authentic, meaningful, and immersive encounters. We will showcase local traditions and stories to create memorable experiences and enable longer stays, repeat visits, and positive word-of-mouth, contributing to sustainable tourism and local economic growth.`,
     stats: [
       { value: '45', label: 'mosques' },
       { value: '14', label: 'gyms (08) and indoor sports halls (06)' },
@@ -1016,7 +1046,7 @@ export const GOALS: Goal[] = [
       { value: '05', label: 'universities and colleges' },
     ],
     openNote:
-      'Two items on this goal are still unfinished in the 12 August draft: the count of tertiary students is printed as "000", and two different targets are both numbered 9.3. Both are left as the council wrote them rather than guessed at.',
+      'Two items on this goal are still unfinished in the 16 August draft: the count of tertiary students is printed as "000", and two different targets are both numbered 9.3. Both are left as the council wrote them rather than guessed at.',
     targets: [
       { id: 'g9-t1', label: '9.1', text: 'Attract over 2,000 tertiary students annually by 2030.' },
       { id: 'g9-t2', label: '9.2', text: 'Introduce a new early childhood curriculum across Addu schools by 2028.' },
