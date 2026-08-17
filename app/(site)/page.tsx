@@ -8,6 +8,7 @@ import { StatCounter } from '@/components/home/stat-counter'
 import { AtollMap } from '@/components/home/atoll-map'
 import { PopulationGap, PopulationSources } from '@/components/home/population-gap'
 import { Vision } from '@/components/home/vision'
+import { PlanComment } from '@/components/feedback/plan-comment'
 import { SplitHeading } from '@/components/motion/split-heading'
 import { GoalGrid } from '@/components/plan/goal-grid'
 import { ViewTransition } from '@/components/motion/view-transition'
@@ -408,39 +409,47 @@ export default function HomePage() {
       {/* ----------------------------------------------------------- Feedback */}
       <section id="feedback" className="scroll-mt-24 bg-sand py-20 sm:py-32">
         <div className="shell">
-          {/* One column, and three sentences.
+          {/* Two ways in, side by side once there is width for them.
 
-              This used to be a lede beside a numbered 01/02/03 list — read a
-              goal, react to each action, review and send. Every line of it
-              described something the reader is about to be shown: the goal page
-              names its own sections, the three reaction buttons are labelled,
-              and the review panel opens itself the moment anything is in it. A
-              set of instructions for an interface that explains itself is a
-              section-worth of scrolling spent on nothing, immediately before the
-              one button that matters. The steps are gone and the paragraph
-              keeps only what the reader cannot see from here: that the count is
-              large, that a comment is optional, and that nothing is sent until
-              they say so. */}
-          <div className="max-w-[54ch]">
-            <SplitHeading className="max-w-[18ch] font-display text-display-2 font-bold">
-              Tell us what to change.
-            </SplitHeading>
-            <p className="mt-7 text-lead text-slate">
-              Every one of the {TOTAL_ACTIONS} actions in this plan takes a response — support it,
-              say you are unsure, or raise a concern, and add a comment if you want to explain.
-              Nothing is sent until you have reviewed them.
-            </p>
-            <Link
-              href={`/goals/${GOALS[0].slug}`}
-              transitionTypes={['page-forward']}
-              className="group mt-9 inline-flex items-center gap-2.5 rounded-full bg-navy px-6 py-3.5 font-heading text-small text-white transition-colors hover:bg-navy-deep"
-            >
-              <Icon icon={Comment01Icon} size={17} />
-              Start with goal 1
-              <span className="transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1">
-                <Icon icon={ArrowRight02Icon} size={17} />
-              </span>
-            </Link>
+              The left column is the plan's own invitation — read a goal, answer
+              its actions — and it used to be the only one. That suited the site
+              exactly as far as a reader who wanted to answer an action; a reader
+              who wanted to answer the plan had to pick an action to say it
+              under. The box on the right is for them, and it belongs here rather
+              than in a thirteenth goal page: this is the block a reader who has
+              finished the page arrives at with something to say.
+
+              It sits beside the invitation, not below it, so neither reads as
+              the afterthought. The left column keeps its 54ch measure; the
+              slack goes to the box.
+
+              The lede here used to end "Nothing is sent until you have reviewed
+              them", which stopped being true when the basket started sending
+              itself — and it would have been read as covering this box too. */}
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-start lg:gap-16">
+            <div className="max-w-[54ch]">
+              <SplitHeading className="max-w-[18ch] font-display text-display-2 font-bold">
+                Tell us what to change.
+              </SplitHeading>
+              <p className="mt-7 text-lead text-slate">
+                Every one of the {TOTAL_ACTIONS} actions in this plan takes a response — support it,
+                say you are unsure, or raise a concern, and add a comment if you want to explain.
+                Your answers send themselves as you make them.
+              </p>
+              <Link
+                href={`/goals/${GOALS[0].slug}`}
+                transitionTypes={['page-forward']}
+                className="group mt-9 inline-flex items-center gap-2.5 rounded-full bg-navy px-6 py-3.5 font-heading text-small text-white transition-colors hover:bg-navy-deep"
+              >
+                <Icon icon={Comment01Icon} size={17} />
+                Start with goal 1
+                <span className="transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1">
+                  <Icon icon={ArrowRight02Icon} size={17} />
+                </span>
+              </Link>
+            </div>
+
+            <PlanComment />
           </div>
         </div>
       </section>

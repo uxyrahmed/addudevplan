@@ -11,6 +11,7 @@ import {
   type ReactNode,
 } from 'react'
 
+import { OVERALL_ID } from '@/lib/feedback-scope'
 import { REACTION_META, REACTION_VALUES, type WireReaction } from '@/lib/reactions'
 
 export type Reaction = WireReaction
@@ -63,7 +64,14 @@ type Ctx = {
   remove: (id: string) => void
   /** Withdraws the basket from the council and clears this device. */
   clearAll: () => Promise<void>
+  /**
+   * Actions answered. The comment on the plan as a whole is not one of them —
+   * counting it would print "1 of 230 actions" for someone who has answered no
+   * action at all.
+   */
   count: number
+  /** What has been posted about the plan as a whole, or an empty string. */
+  overall: string
   countFor: (ids: string[]) => number
   status: SaveStatus
   /** Why the last send failed, in words a resident can act on. */
@@ -472,7 +480,8 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
       setComment,
       remove,
       clearAll,
-      count: ids.length,
+      count: ids.filter((id) => id !== OVERALL_ID).length,
+      overall: feedback[OVERALL_ID]?.comment?.trim() ?? '',
       countFor: (subset) => subset.filter((id) => !isEmpty(feedback[id])).length,
       status,
       error,

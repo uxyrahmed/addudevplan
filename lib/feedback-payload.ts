@@ -1,4 +1,5 @@
 import { MAX_COMMENT_LENGTH } from './feedback-limits'
+import { OVERALL_ID } from './feedback-scope'
 import { GOALS } from './plan'
 import { REACTION_VALUES, type WireReaction } from './reactions'
 
@@ -19,6 +20,12 @@ export type WireResponse = {
 export const ACTION_IDS: ReadonlySet<string> = new Set(
   GOALS.flatMap((goal) => goal.strategies.flatMap((s) => s.actions.map((a) => a.id))),
 )
+
+/**
+ * Every key a basket may carry: the plan's actions, plus the one response that
+ * is about the plan rather than about an action.
+ */
+const ACCEPTED_IDS: ReadonlySet<string> = new Set([...ACTION_IDS, OVERALL_ID])
 
 export { MAX_COMMENT_LENGTH }
 
@@ -44,8 +51,8 @@ export function validateSubmission(body: unknown): Validated {
   if (!Array.isArray(raw)) {
     return { ok: false, error: 'Expected a `responses` array.' }
   }
-  if (raw.length > ACTION_IDS.size) {
-    return { ok: false, error: 'More responses than the plan has actions.' }
+  if (raw.length > ACCEPTED_IDS.size) {
+    return { ok: false, error: 'More responses than the plan has places to respond.' }
   }
 
   const byId = new Map<string, WireResponse>()
@@ -59,13 +66,20 @@ export function validateSubmission(body: unknown): Validated {
 
     const id = actionId.trim()
     if (!id) continue
-    if (!ACTION_IDS.has(id)) {
+    if (!ACCEPTED_IDS.has(id)) {
       unknownIds.push(id)
       continue
     }
 
+    // The plan as a whole takes words, not a verdict. Three buttons on the
+    // whole document would turn a consultation into a referendum on it, and
+    // would put a number in the results that the council never asked for — so
+    // the rule is enforced here rather than only in the interface that omits
+    // them, and the stored row is comment-only whatever arrives on the wire.
     const cleanReaction =
-      typeof reaction === 'string' && REACTIONS.has(reaction) ? (reaction as WireReaction) : null
+      id !== OVERALL_ID && typeof reaction === 'string' && REACTIONS.has(reaction)
+        ? (reaction as WireReaction)
+        : null
 
     const cleanComment =
       typeof comment === 'string' && comment.trim() ? comment.trim().slice(0, MAX_COMMENT_LENGTH) : null

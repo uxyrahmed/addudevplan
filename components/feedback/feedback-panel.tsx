@@ -12,6 +12,7 @@ import Loading03Icon from '@hugeicons/core-free-icons/Loading03Icon'
 import ArrowRight01Icon from '@hugeicons/core-free-icons/ArrowRight01Icon'
 import ArrowDown01Icon from '@hugeicons/core-free-icons/ArrowDown01Icon'
 import { Icon } from '@/components/ui/icon'
+import { OVERALL_ID } from '@/lib/feedback-scope'
 import { GOALS, TOTAL_ACTIONS } from '@/lib/plan'
 import { REACTIONS, useFeedback } from './feedback-store'
 
@@ -69,8 +70,19 @@ const GOAL_ACTION_IDS = new Map(
  * being a dead end.
  */
 export function FeedbackPanel({ onClose }: { onClose: () => void }) {
-  const { feedback, count, countFor, clearAll, remove, status, error, revised, savedAt, saveNow } =
-    useFeedback()
+  const {
+    feedback,
+    count,
+    overall,
+    countFor,
+    clearAll,
+    remove,
+    status,
+    error,
+    revised,
+    savedAt,
+    saveNow,
+  } = useFeedback()
   const closeRef = useRef<HTMLButtonElement>(null)
   const cancelRef = useRef<HTMLButtonElement>(null)
   const [openGoal, setOpenGoal] = useState<number | null>(null)
@@ -126,6 +138,12 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
     (goal) => countFor(GOAL_ACTION_IDS.get(goal.number) ?? []) > 0,
   ).length
 
+  /**
+   * Everything the council would lose, which is one more than the action count
+   * whenever something has been said about the plan itself.
+   */
+  const filed = count + (overall ? 1 : 0)
+
   // Short on purpose. This is a status line, not an explanation: a resident
   // reads it to find out whether their answers landed, and every extra clause
   // is one more thing between them and that.
@@ -160,6 +178,10 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
     const payload = {
       plan: 'Addu Development Plan 2026–2031',
       exportedAt: new Date().toISOString(),
+      // Its own field rather than a row among the actions: it is not one, and a
+      // copy that quietly filed it under a goal would misrepresent what was
+      // sent.
+      onThePlanAsAWhole: overall || null,
       responses: GOALS.flatMap((goal) =>
         (answersByGoal.get(goal.number) ?? []).map((item) => ({
           goal: `${goal.number}. ${goal.title}`,
@@ -219,6 +241,50 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
             already answered — that list was rarely long enough to overflow.
             Listing all twelve goals it always is. */}
         <div data-lenis-prevent className="min-h-0 flex-1 overflow-y-auto px-6 py-5">
+          {/* The plan itself, above the twelve goals it is made of.
+
+              It has to be here whether or not anything has been written in it.
+              This panel is where a resident reads back what the council holds,
+              and a comment the council has that the device never shows is the
+              one failure this panel exists to prevent — while a resident who
+              has answered actions and never found the box would never learn it
+              was there. */}
+          <div className="mb-5 rounded-2xl bg-shell p-4">
+            <p className="text-small font-semibold text-ink">The plan as a whole</p>
+            {overall ? (
+              <>
+                <div className="mt-1.5 flex items-start justify-between gap-3">
+                  <p className="text-small text-stone italic">“{overall}”</p>
+                  <button
+                    type="button"
+                    onClick={() => remove(OVERALL_ID)}
+                    aria-label="Remove your comment on the plan as a whole"
+                    className="mt-0.5 shrink-0 rounded-md p-1 text-mist transition-colors hover:text-plum"
+                  >
+                    <Icon icon={Delete02Icon} size={15} />
+                  </button>
+                </div>
+                <Link
+                  href="/#feedback"
+                  onClick={onClose}
+                  className="mt-2.5 inline-flex items-center gap-1.5 text-small font-semibold text-navy hover:underline"
+                >
+                  Change what you said
+                  <Icon icon={ArrowRight01Icon} size={15} />
+                </Link>
+              </>
+            ) : (
+              <Link
+                href="/#feedback"
+                onClick={onClose}
+                className="mt-1.5 inline-flex items-center gap-1.5 text-small font-semibold text-navy hover:underline"
+              >
+                Say something about the plan itself
+                <Icon icon={ArrowRight01Icon} size={15} />
+              </Link>
+            )}
+          </div>
+
           <ol className="divide-y divide-hairline border-y border-hairline">
             {GOALS.map((goal) => {
               const ids = GOAL_ACTION_IDS.get(goal.number) ?? []
@@ -433,7 +499,7 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
                 Delete your feedback?
               </h3>
               <p id="clear-body" className="mt-2 text-small text-stone">
-                This withdraws all {count} {count === 1 ? 'response' : 'responses'} from the
+                This withdraws all {filed} {filed === 1 ? 'response' : 'responses'} from the
                 consultation and clears them from this device. The council will no longer have
                 them, and this cannot be undone.
               </p>

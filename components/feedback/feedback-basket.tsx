@@ -2,6 +2,8 @@
 
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
+import Comment01Icon from '@hugeicons/core-free-icons/Comment01Icon'
+import { Icon } from '@/components/ui/icon'
 import { useFeedback } from './feedback-store'
 
 /**
@@ -46,10 +48,14 @@ const STATE: Record<string, { label: string; dot: string }> = {
 }
 
 export function FeedbackBasket({ goals }: { goals: GoalProgress[] }) {
-  const { count, countFor, ready, status } = useFeedback()
+  const { count, overall, countFor, ready, status } = useFeedback()
   const [open, setOpen] = useState(false)
 
-  if (!ready || count === 0) return null
+  // A comment on the plan as a whole is not an action, so it does not move the
+  // count — but it is feedback the council now holds, and a launcher that
+  // stayed hidden would leave the one resident who wrote nothing else with no
+  // way to see it, revise it or take it back.
+  if (!ready || (count === 0 && !overall)) return null
 
   const total = goals.reduce((n, goal) => n + goal.actionIds.length, 0)
   const started = goals.filter((goal) => countFor(goal.actionIds) > 0).length
@@ -60,7 +66,11 @@ export function FeedbackBasket({ goals }: { goals: GoalProgress[] }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        aria-label={`Your feedback: ${count} of ${total} actions answered across ${started} of ${goals.length} goals — ${
+        aria-label={`Your feedback: ${count} of ${total} actions answered across ${started} of ${
+          goals.length
+        } goals${
+          overall ? ', and a comment on the plan as a whole' : ''
+        } — ${
           status === 'saved'
             ? 'sent to the council'
             : status === 'error'
@@ -73,29 +83,43 @@ export function FeedbackBasket({ goals }: { goals: GoalProgress[] }) {
             progress. `aria-hidden` because the button's own label already
             states the same thing in words — a screen reader should not have to
             hear twelve meters read out to learn one number. */}
-        <span aria-hidden className="flex items-end gap-[3px]">
-          {goals.map((goal) => {
-            const done = countFor(goal.actionIds)
-            const ratio = goal.actionIds.length ? done / goal.actionIds.length : 0
-            return (
-              <span
-                key={goal.number}
-                title={`Goal ${goal.number}: ${goal.title}`}
-                className="relative block h-5 w-[5px] overflow-hidden rounded-full bg-white/25"
-              >
+        <span aria-hidden className="flex items-center gap-2.5">
+          {/* The plan as a whole, ahead of the goals it is made of. Without it
+              a resident who has only written here would read "0 / 230 · Sent"
+              and have nothing on the pill to say what was sent. */}
+          {overall ? (
+            <span
+              title="Your comment on the plan as a whole"
+              className="grid h-5 w-5 place-items-center rounded-full bg-white/25"
+            >
+              <Icon icon={Comment01Icon} size={12} />
+            </span>
+          ) : null}
+
+          <span className="flex items-end gap-[3px]">
+            {goals.map((goal) => {
+              const done = countFor(goal.actionIds)
+              const ratio = goal.actionIds.length ? done / goal.actionIds.length : 0
+              return (
                 <span
-                  className="absolute inset-x-0 bottom-0 rounded-full transition-[height] duration-700 ease-[var(--ease-out-expo)]"
-                  style={{
-                    height: `${Math.max(ratio * 100, ratio > 0 ? 18 : 0)}%`,
-                    // The plate colour, not the darkened text variant: these
-                    // sit on navy, where the darkened set goes muddy and three
-                    // of the four stop being tellable apart.
-                    background: goal.color,
-                  }}
-                />
-              </span>
-            )
-          })}
+                  key={goal.number}
+                  title={`Goal ${goal.number}: ${goal.title}`}
+                  className="relative block h-5 w-[5px] overflow-hidden rounded-full bg-white/25"
+                >
+                  <span
+                    className="absolute inset-x-0 bottom-0 rounded-full transition-[height] duration-700 ease-[var(--ease-out-expo)]"
+                    style={{
+                      height: `${Math.max(ratio * 100, ratio > 0 ? 18 : 0)}%`,
+                      // The plate colour, not the darkened text variant: these
+                      // sit on navy, where the darkened set goes muddy and three
+                      // of the four stop being tellable apart.
+                      background: goal.color,
+                    }}
+                  />
+                </span>
+              )
+            })}
+          </span>
         </span>
 
         <span className="text-small font-bold tabular-nums">

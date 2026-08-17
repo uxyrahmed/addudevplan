@@ -49,6 +49,7 @@ relevant guide in `node_modules/next/dist/docs/` before writing new code. See
 | `app/api/admin/export/` | CSV and JSON export of every response |
 | `proxy.ts` | Session refresh and the `/admin` gate. Next 16's rename of `middleware` |
 | `lib/plan.ts` | The whole content model: plan metadata, vision, pillars, goals, strategies, actions |
+| `lib/feedback-scope.ts` | The reserved key for the one response that is about the plan rather than an action |
 | `lib/supabase/` | One client per context: browser, server (session-carrying), and anonymous |
 | `lib/admin/` | The session check and the queries behind the results screens |
 | `components/home/` | Home-page sections — hero, vision, population gap, migration chart, timeline |
@@ -79,6 +80,16 @@ Every action carries three reactions — Support, Not sure, Concern — plus an 
 comment. A reaction is one click and needs no confirming; a comment is posted
 deliberately, with a button or ⌘/Ctrl + Enter, so half a sentence never reaches the
 council.
+
+One response is not about an action. The plan as a whole takes a comment of its own,
+in the `#feedback` section of the home page and read back in the review panel, for
+what does not belong under any single action. It is words only — no reactions, since
+three buttons on the whole document would produce a for-or-against number on the plan
+that this consultation was not designed to collect, and the server strips a reaction
+off that key whatever arrives on the wire. It travels in the same basket as everything
+else and is keyed on the reserved id in
+[`lib/feedback-scope.ts`](lib/feedback-scope.ts), which is namespaced away from the
+plan's `g{goal}-s{strategy}-a{action}` ids and, like them, must never be renamed.
 
 **Answers send themselves.** There is no final step to miss: each edit starts a short
 quiet window, and when the answering stops the whole basket goes. A burst of clicks down
@@ -130,6 +141,11 @@ consultation chose not to ask.
 
 `/admin` shows the council what came in: totals, the reaction split per goal, every
 comment in context, and a CSV or JSON export. It is invite-only and `noindex`.
+
+Comments on the plan as a whole belong to no goal, so they get their own card on the
+overview and their own filter — `/admin/comments?goal=plan` — rather than being mixed
+into the twelve. They count towards the headline response and comment totals, because
+they are responses, and towards no goal's row.
 
 Access is two independent things. Signing in proves who you are; a row in
 `admin_viewers` decides whether you may read anything. Row-level security enforces the

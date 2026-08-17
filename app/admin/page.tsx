@@ -4,7 +4,8 @@ import { Icon } from '@/components/ui/icon'
 import { AdminShell } from '@/components/admin/admin-shell'
 import { ReactionBar } from '@/components/admin/reaction-bar'
 import { requireCouncilViewer } from '@/lib/admin/session'
-import { getOverview } from '@/lib/admin/results'
+import { OVERALL_SCOPE, getOverview } from '@/lib/admin/results'
+import { OVERALL_LABEL } from '@/lib/feedback-scope'
 import { REACTION_META, REACTION_VALUES } from '@/lib/reactions'
 import { fmt } from '@/lib/plan'
 
@@ -124,6 +125,31 @@ export default async function AdminOverviewPage() {
               </div>
             ))}
           </dl>
+        </section>
+      ) : null}
+
+      {/* Its own card, above the twelve. These answer the plan rather than any
+          action in it, so they sit in no goal's row and would otherwise be
+          reachable only by scrolling the whole comment list looking for them. */}
+      {overview.overallComments > 0 ? (
+        <section className="mt-10 rounded-2xl bg-white p-6">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+            <h2 className="font-heading text-title text-ink">{OVERALL_LABEL}</h2>
+            <span className="text-small text-stone tabular-nums">
+              {fmt(overview.overallComments)}{' '}
+              {overview.overallComments === 1 ? 'comment' : 'comments'}
+            </span>
+          </div>
+          <p className="mt-1.5 text-small text-stone">
+            Written about the plan itself rather than about one of its actions. Counted in the
+            totals above, and in no goal below.
+          </p>
+          <Link
+            href={`/admin/comments?goal=${OVERALL_SCOPE}`}
+            className="mt-3 inline-block text-small font-semibold text-navy hover:underline"
+          >
+            Read them
+          </Link>
         </section>
       ) : null}
 

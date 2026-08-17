@@ -11,6 +11,7 @@ import Delete02Icon from '@hugeicons/core-free-icons/Delete02Icon'
 import { Icon, type IconData } from '@/components/ui/icon'
 import { MAX_COMMENT_LENGTH } from '@/lib/feedback-limits'
 import { REACTIONS, useFeedback, type Reaction } from './feedback-store'
+import { useCommentDraft } from './use-comment-draft'
 
 const REACTION_ICON: Record<Reaction, IconData> = {
   support: ThumbsUpIcon,
@@ -40,42 +41,21 @@ type Props = {
  * and with ⌘/Ctrl+Enter, and until it is posted the field says so.
  */
 export function FeedbackControl({ id, subject, accent }: Props) {
-  const { feedback, setReaction, setComment, ready } = useFeedback()
+  const { feedback, setReaction } = useFeedback()
   const entry = feedback[id]
   const fieldId = useId()
   const field = useRef<HTMLTextAreaElement>(null)
+
+  // Typing, posting and removing follow the same rule here as in the box for
+  // the plan as a whole, so the rule lives in one place.
+  const { value, posted, trimmed, setDraft, unposted, canPost, post, discard } = useCommentDraft(id)
 
   // `null` until the chip is used, so the field opens by itself for an action
   // that already carries a comment and the toggle still works either way. The
   // old `open || hasComment` made the chip inert the moment a comment existed:
   // it could be opened and never closed again.
   const [open, setOpen] = useState<boolean | null>(null)
-
-  /** What has actually been posted. Empty until the basket has been restored. */
-  const posted = (ready && entry?.comment?.trim()) || ''
-
-  // `null` means untouched, so the field shows whatever has been posted —
-  // including the moment hydration restores it, with no effect to write it in
-  // and no remount to make it stick. Typing takes over; posting hands it back.
-  const [draft, setDraft] = useState<string | null>(null)
-  const value = draft ?? posted
-
-  const trimmed = value.trim()
-  const unposted = trimmed !== posted
-  const canPost = unposted && trimmed.length > 0
   const showComment = open ?? Boolean(posted)
-
-  function post() {
-    if (!canPost) return
-    setComment(id, trimmed)
-    setDraft(null)
-  }
-
-  function discard() {
-    setComment(id, '')
-    setDraft(null)
-    field.current?.focus()
-  }
 
   return (
     <div className="mt-3">
@@ -175,9 +155,7 @@ export function FeedbackControl({ id, subject, accent }: Props) {
                 'Cleared here only — Remove takes it out of your feedback'
               ) : posted ? (
                 'Posted with your feedback'
-              ) : (
-                'Optional'
-              )}
+              ) : null}
               {value.length > COUNTER_FROM ? (
                 <span className="tabular-nums">
                   {' '}
@@ -196,7 +174,10 @@ export function FeedbackControl({ id, subject, accent }: Props) {
               {posted ? (
                 <button
                   type="button"
-                  onClick={discard}
+                  onClick={() => {
+                    discard()
+                    field.current?.focus()
+                  }}
                   tabIndex={showComment ? undefined : -1}
                   aria-label={`Remove your comment on: ${subject}`}
                   className="inline-flex min-h-9 items-center gap-1.5 rounded-full px-3 py-1.5 text-small font-semibold text-stone transition-colors hover:text-plum"

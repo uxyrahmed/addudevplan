@@ -35,9 +35,10 @@ engagement that produces valuable feedback is.
 
 A government plan published as something a resident can actually answer, action by
 action. The plan is not summarised into a feedback form — the full draft is the
-site, and every individual action carries its own response control. Anonymity is
-structural, not a policy line: nothing identifying is ever asked for or stored, so
-responding costs a resident nothing.
+site, and every individual action carries its own response control, with one box for
+the plan itself so an answer that belongs to no action is not filed under one.
+Anonymity is structural, not a policy line: nothing identifying is ever asked for or
+stored, so responding costs a resident nothing.
 
 ## Operating Context
 
@@ -60,6 +61,11 @@ responding costs a resident nothing.
   goals sit under which pillar, so the site asserts no mapping.
 - Every action carries three reactions — Support, Not sure, Concern — plus an optional
   comment.
+- **The plan as a whole takes one comment, and no reaction.** What does not belong
+  under any single action has a box of its own, keyed on a reserved id beside the
+  action ids. Words only: three buttons on the whole document would collect a
+  for-or-against verdict on the plan, which is a different exercise from the one the
+  council is running.
 - **Action `id`s are stable keys.** Feedback is keyed on them; never renumber in place.
 - **Nothing unfinished is published.** Where the source deck has placeholder counts or
   incomplete targets, the item is omitted and the goal carries an `openNote`.

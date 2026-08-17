@@ -1,6 +1,7 @@
 import 'server-only'
 
 import { createClient } from '@/lib/supabase/server'
+import { OVERALL_ID } from '@/lib/feedback-scope'
 import { GOALS, type Goal, type Strategy } from '@/lib/plan'
 import type { WireReaction } from '@/lib/reactions'
 
@@ -39,6 +40,15 @@ export function describeAction(actionId: string) {
   return PLACE.get(actionId) ?? null
 }
 
+/**
+ * The `?goal=` value that means "what was said about the plan itself".
+ *
+ * A reserved word beside the twelve slugs rather than a second parameter, so a
+ * filtered view is still one bookmarkable link. It cannot shadow a goal — no
+ * goal is called this — and the page resolves a real slug first regardless.
+ */
+export const OVERALL_SCOPE = 'plan'
+
 export type GoalRollup = {
   goal: Goal
   support: number
@@ -63,6 +73,13 @@ export type Overview = {
   latest: string | null
   byGoal: GoalRollup[]
   byAction: Map<string, Tally>
+  /**
+   * What came in about the plan rather than about an action. Counted in the
+   * totals above — it is feedback like any other — but kept out of `byGoal` and
+   * `answeredActions`, which are about the twelve goals and the actions in
+   * them.
+   */
+  overallComments: number
 }
 
 /**
@@ -135,12 +152,22 @@ export async function getOverview(): Promise<Overview> {
     { responses: 0, comments: 0, support: 0, unsure: 0, concern: 0, answeredActions: 0, totalActions: 0 },
   )
 
+  // Added after the goal rollup rather than inside it. These are responses and
+  // they are written comments, so the two headline figures have to include them
+  // or the council is told it received less than it did — but they belong to no
+  // goal and to no action, so nothing else moves.
+  const overallTally = byAction.get(OVERALL_ID)
+  const overallComments = overallTally?.comments ?? 0
+
   return {
     submissions: submissionResult.count ?? 0,
     latest: submissionResult.data?.[0]?.created_at ?? null,
     byGoal,
     byAction,
+    overallComments,
     ...totals,
+    responses: totals.responses + (overallTally?.responses ?? 0),
+    comments: totals.comments + overallComments,
   }
 }
 
@@ -160,11 +187,14 @@ export const COMMENTS_PER_PAGE = 50
  * Paged rather than fetched whole: this is the one table that grows with every
  * response, and a consultation that goes well would otherwise render thousands
  * of rows into a single page.
+ *
+ * `scope` narrows it: a goal's slug, or `'plan'` for what was said about the
+ * plan as a whole. Unfiltered means everything, both kinds together.
  */
 export async function getComments({
   page = 0,
-  goalSlug,
-}: { page?: number; goalSlug?: string } = {}): Promise<{ rows: CommentRow[]; total: number }> {
+  scope,
+}: { page?: number; scope?: string } = {}): Promise<{ rows: CommentRow[]; total: number }> {
   const supabase = await createClient()
 
   let query = supabase
@@ -172,10 +202,12 @@ export async function getComments({
     .select('id, action_id, reaction, comment, created_at', { count: 'exact' })
     .not('comment', 'is', null)
 
-  // Filtering by goal means filtering by that goal's action ids, since the goal
-  // itself exists only in the repo.
-  if (goalSlug) {
-    const goal = GOALS.find((g) => g.slug === goalSlug)
+  if (scope === OVERALL_SCOPE) {
+    query = query.eq('action_id', OVERALL_ID)
+  } else if (scope) {
+    // Filtering by goal means filtering by that goal's action ids, since the
+    // goal itself exists only in the repo.
+    const goal = GOALS.find((g) => g.slug === scope)
     const ids = goal?.strategies.flatMap((s) => s.actions.map((a) => a.id)) ?? []
     // An unknown slug must return nothing rather than everything.
     query = query.in('action_id', ids.length ? ids : ['__none__'])

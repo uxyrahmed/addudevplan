@@ -1,6 +1,7 @@
 import { checkCouncilViewer } from '@/lib/admin/session'
 import { createClient } from '@/lib/supabase/server'
 import { describeAction } from '@/lib/admin/results'
+import { OVERALL_ID, OVERALL_LABEL } from '@/lib/feedback-scope'
 import { PLAN } from '@/lib/plan'
 
 /** Supabase caps a single select at 1000 rows, so an export walks the table. */
@@ -63,11 +64,16 @@ export async function GET(request: Request) {
 
   const enriched = rows.map((row) => {
     const place = describeAction(row.action_id)
+    const overall = row.action_id === OVERALL_ID
     return {
       submission: row.submission_id,
       submittedAt: row.created_at,
       goalNumber: place?.goal.number ?? null,
-      goal: place?.goal.title ?? null,
+      // The `goal` column is what a reader sorts and groups by, so the response
+      // that belongs to no goal says so there rather than leaving three empty
+      // cells and an id to decipher. `goal_number` stays empty, which is the
+      // honest answer: it is not one of the twelve.
+      goal: place?.goal.title ?? (overall ? OVERALL_LABEL : null),
       strategy: place ? `${place.strategy.number} ${place.strategy.title}` : null,
       action: place?.text ?? null,
       actionId: row.action_id,

@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { AdminShell } from '@/components/admin/admin-shell'
 import { requireCouncilViewer } from '@/lib/admin/session'
-import { COMMENTS_PER_PAGE, describeAction, getComments } from '@/lib/admin/results'
+import { COMMENTS_PER_PAGE, OVERALL_SCOPE, describeAction, getComments } from '@/lib/admin/results'
+import { OVERALL_ID, OVERALL_LABEL } from '@/lib/feedback-scope'
 import { REACTION_META } from '@/lib/reactions'
 import { GOALS, fmt } from '@/lib/plan'
 
@@ -21,13 +22,15 @@ export default async function AdminCommentsPage({
   const viewer = await requireCouncilViewer()
   const params = await searchParams
 
-  const goalSlug = one(params.goal)
-  const goal = goalSlug ? GOALS.find((g) => g.slug === goalSlug) : undefined
-  // An unrecognised slug is treated as no filter rather than as an error page.
-  const activeSlug = goal?.slug
+  const requested = one(params.goal)
+  const goal = requested ? GOALS.find((g) => g.slug === requested) : undefined
+  // A real goal wins over the reserved word, and anything else is treated as no
+  // filter rather than as an error page.
+  const onThePlan = !goal && requested === OVERALL_SCOPE
+  const activeSlug = goal?.slug ?? (onThePlan ? OVERALL_SCOPE : undefined)
 
   const page = Math.max(0, Number.parseInt(one(params.page) ?? '0', 10) || 0)
-  const { rows, total } = await getComments({ page, goalSlug: activeSlug })
+  const { rows, total } = await getComments({ page, scope: activeSlug })
 
   const lastPage = Math.max(0, Math.ceil(total / COMMENTS_PER_PAGE) - 1)
   const from = total === 0 ? 0 : page * COMMENTS_PER_PAGE + 1
@@ -46,7 +49,11 @@ export default async function AdminCommentsPage({
     <AdminShell viewer={viewer} current="/admin/comments">
       <p className="eyebrow text-plum">Comments</p>
       <h1 className="mt-2 font-heading text-display-3 text-navy">
-        {goal ? `What residents wrote on Goal ${goal.number}` : 'What residents wrote'}
+        {goal
+          ? `What residents wrote on Goal ${goal.number}`
+          : onThePlan
+            ? 'What residents wrote about the plan as a whole'
+            : 'What residents wrote'}
       </h1>
       <p className="mt-3 text-body text-slate">
         {total === 0
@@ -54,9 +61,9 @@ export default async function AdminCommentsPage({
           : `${fmt(from)}–${fmt(to)} of ${fmt(total)}, newest first.`}
       </p>
 
-      {/* Filter by goal. Plain links rather than a control, so a filtered view
-          can be bookmarked and sent to a colleague. */}
-      <nav aria-label="Filter by goal" className="mt-6 flex flex-wrap gap-1.5">
+      {/* Filter. Plain links rather than a control, so a filtered view can be
+          bookmarked and sent to a colleague. */}
+      <nav aria-label="Filter comments" className="mt-6 flex flex-wrap gap-1.5">
         <Link
           href={link({ goal: undefined })}
           aria-current={activeSlug ? undefined : 'page'}
@@ -64,7 +71,19 @@ export default async function AdminCommentsPage({
             activeSlug ? 'bg-white text-stone hover:text-navy' : 'bg-navy text-white'
           }`}
         >
-          All goals
+          Everything
+        </Link>
+        {/* Its own chip, ahead of the twelve. What a resident says about the
+            plan itself answers a different question from what they say about
+            action 7.3, and reading the two mixed together buries it. */}
+        <Link
+          href={link({ goal: OVERALL_SCOPE })}
+          aria-current={onThePlan ? 'page' : undefined}
+          className={`rounded-full px-3.5 py-1.5 text-small font-semibold transition-colors ${
+            onThePlan ? 'bg-navy text-white' : 'bg-white text-stone hover:text-navy'
+          }`}
+        >
+          {OVERALL_LABEL}
         </Link>
         {GOALS.map((g) => {
           const active = g.slug === activeSlug
@@ -104,6 +123,10 @@ export default async function AdminCommentsPage({
                   >
                     Goal {place.goal.number} · {place.goal.title}
                   </Link>
+                ) : row.actionId === OVERALL_ID ? (
+                  // Not an action, and not a fault either. Named plainly, or it
+                  // would fall through to the warning below and read as damage.
+                  <span className="text-small font-bold text-navy">{OVERALL_LABEL}</span>
                 ) : (
                   // An id the plan no longer has. Kept visible rather than
                   // hidden: it is a signal that lib/plan.ts was renumbered.
