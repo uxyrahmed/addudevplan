@@ -67,17 +67,17 @@ export function PlanComment() {
       />
 
       <div className="mt-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
-        {/* The same three states the per-action field reports, in the same
-            words, so a resident who has met one recognises the other. */}
+        {/* Speaks only where the buttons cannot.
+
+            A draft says nothing here: the Post button lighting up already says
+            there is something unposted, and a line repeating it — with the
+            keyboard shortcut after it — was a sentence charged for saying what
+            the control beside it says for free. What is left is the one state
+            no button shows: a box emptied while a comment is still filed. */}
         <p id={`${fieldId}-state`} className="text-micro tracking-normal text-mist">
-          {unposted && trimmed ? (
-            <>
-              Not posted yet
-              <span className="hidden sm:inline"> · ⌘/Ctrl + Enter posts it</span>
-            </>
-          ) : unposted ? (
+          {unposted && !trimmed ? (
             'Cleared here only — Remove takes it out of your feedback'
-          ) : posted ? (
+          ) : !unposted && posted ? (
             <span className="inline-flex items-center gap-1.5 text-stone">
               <Icon icon={Tick02Icon} size={14} />
               Posted with your feedback

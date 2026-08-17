@@ -140,20 +140,21 @@ export function FeedbackControl({ id, subject, accent }: Props) {
           />
 
           <div className="mt-2 mb-1 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+            {/* Speaks only where the buttons cannot.
+
+                A draft says nothing here. The Post button lighting up, and the
+                amber dot on the chip that survives the field being collapsed,
+                already say there is something unposted — a line repeating it in
+                words, with the keyboard shortcut trailing after, was paying for
+                what the controls beside it say for free. The chip's own
+                `aria-label` still carries "not posted yet" for a reader who
+                cannot see the dot. */}
             <p id={`${fieldId}-state`} className="text-micro tracking-normal text-mist">
-              {unposted && trimmed ? (
-                <>
-                  Not posted yet
-                  {/* Named on the row it belongs to rather than in a legend
-                      somewhere, and only while it would do something. */}
-                  <span className="hidden sm:inline"> · ⌘/Ctrl + Enter posts it</span>
-                </>
-              ) : unposted ? (
+              {unposted && !trimmed ? (
                 // Emptied the box, but the posted comment is still in the
-                // basket. Saying "not posted yet" here would read as though
-                // clearing the box had already withdrawn it.
+                // basket — the one state no control on the row shows.
                 'Cleared here only — Remove takes it out of your feedback'
-              ) : posted ? (
+              ) : !unposted && posted ? (
                 'Posted with your feedback'
               ) : null}
               {value.length > COUNTER_FROM ? (
