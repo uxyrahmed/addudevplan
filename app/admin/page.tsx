@@ -3,6 +3,7 @@ import Download01Icon from '@hugeicons/core-free-icons/Download01Icon'
 import { Icon } from '@/components/ui/icon'
 import { AdminShell } from '@/components/admin/admin-shell'
 import { ReactionBar } from '@/components/admin/reaction-bar'
+import { GoalActions } from '@/components/admin/goal-actions'
 import { requireCouncilViewer } from '@/lib/admin/session'
 import { OVERALL_SCOPE, getOverview } from '@/lib/admin/results'
 import { OVERALL_LABEL } from '@/lib/feedback-scope'
@@ -206,6 +207,8 @@ export default async function AdminOverviewPage() {
                     </Link>
                   ) : null}
                 </div>
+
+                <GoalActions goal={row.goal} byAction={overview.byAction} />
               </li>
             )
           })}
