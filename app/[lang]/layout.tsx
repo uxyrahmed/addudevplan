@@ -199,6 +199,21 @@ export async function generateMetadata(props: LayoutProps<'/[lang]'>): Promise<M
       description: t.metadata.ogDescription,
       type: 'website',
       locale: lang,
+      // Declared rather than left to the file convention. `opengraph-image.png`
+      // lives at the app root, because a metadata image inside `app/[lang]`
+      // fails the production build — Next cannot match the prerendered route
+      // back to a source route under a dynamic segment. From the root the file
+      // is still served, but it is no longer attached to these pages on its
+      // own, so the card is named here. `metadataBase` makes the path absolute,
+      // which is what a crawler needs.
+      images: [
+        {
+          url: '/opengraph-image.png',
+          width: 2400,
+          height: 1350,
+          alt: t.metadata.ogImageAlt,
+        },
+      ],
     },
   }
 }

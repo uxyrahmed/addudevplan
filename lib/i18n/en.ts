@@ -275,6 +275,19 @@ export const en = {
       'Twelve goals to make Addu a sustainable, resilient and inclusive city of 35,000 people by 2030. Read the plan and tell us what you think of every action.',
     ogDescription:
       'Twelve goals for a sustainable Addu. Read the plan and share your feedback on every strategy.',
+    /**
+     * The share card's alt text.
+     *
+     * Lives here rather than in an `opengraph-image.alt.txt` beside the image,
+     * which is where Next's file convention would put it. The image itself had
+     * to move out of `app/[lang]` — a metadata image under a dynamic segment
+     * fails the production build — and from the app root the convention no
+     * longer attaches it to these pages, so the card is declared by hand in
+     * `generateMetadata`. Its alt has to come with it, and being here means it
+     * is translated like everything else.
+     */
+    ogImageAlt:
+      'The plan’s cover: the City of Addu emblem above the title Addu Development Plan 2026–2031, set over a pale outline of the atoll.',
   },
 }
 
