@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import ArrowRight02Icon from '@hugeicons/core-free-icons/ArrowRight02Icon'
 import Comment01Icon from '@hugeicons/core-free-icons/Comment01Icon'
 import { Icon } from '@/components/ui/icon'
@@ -13,19 +14,28 @@ import { SplitHeading } from '@/components/motion/split-heading'
 import { GoalGrid } from '@/components/plan/goal-grid'
 import { ViewTransition } from '@/components/motion/view-transition'
 import { PILLAR_GLYPHS } from '@/lib/pillar-glyphs'
-import {
-  GOALS,
-  HEADLINE_FACTS,
-  INITIATIVES,
-  INITIATIVES_INTRO,
-  LAND,
-  PILLARS,
-  PILLARS_INTRO,
-  TOTAL_ACTIONS,
-  TURNING_POINT,
-} from '@/lib/plan'
+import { TOTAL_ACTIONS } from '@/lib/plan'
+import { localizePlan } from '@/lib/plan-i18n'
+import { getDictionary } from '@/lib/i18n/dictionaries'
+import { fill } from '@/lib/i18n/format'
+import { isLocale, localePath } from '@/lib/i18n/config'
 
-export default function HomePage() {
+export default async function HomePage({ params }: PageProps<'/[lang]'>) {
+  const { lang } = await params
+  if (!isLocale(lang)) notFound()
+
+  const t = getDictionary(lang)
+  const {
+    goals,
+    headlineFacts,
+    initiatives,
+    initiativesIntro,
+    islands,
+    pillars,
+    pillarsIntro,
+    turningPoint,
+  } = localizePlan(lang)
+
   return (
     <ViewTransition
       enter={{ 'page-forward': 'page-forward', 'page-back': 'page-back', default: 'none' }}
@@ -85,7 +95,7 @@ export default function HomePage() {
               outer edges flush with the shell, as every other section is. */}
           <div className="2xl:grid 2xl:grid-cols-[minmax(0,32rem)_minmax(0,72ch)] 2xl:grid-rows-[auto_1fr] 2xl:justify-between 2xl:gap-x-16">
             <SplitHeading className="max-w-[16ch] font-display text-display-2 font-bold 2xl:col-start-1 2xl:row-start-1">
-              {TURNING_POINT.title}
+              {turningPoint.title}
             </SplitHeading>
 
             {/* `text-body`, not `text-lead`. Four paragraphs at 21px was a lot
@@ -98,7 +108,7 @@ export default function HomePage() {
                 which it fills at 72ch, and hands the slack to the facts below
                 the heading, where it becomes room rather than a ragged edge. */}
             <div className="mt-8 max-w-[72ch] space-y-5 text-body text-slate 2xl:col-start-2 2xl:row-span-2 2xl:row-start-1 2xl:mt-0">
-              {TURNING_POINT.paragraphs.map((paragraph) => (
+              {turningPoint.paragraphs.map((paragraph) => (
                 <p key={paragraph.slice(0, 32)}>{paragraph}</p>
               ))}
             </div>
@@ -107,7 +117,7 @@ export default function HomePage() {
               className="mt-14 grid grid-cols-2 gap-x-6 gap-y-10 border-t border-hairline pt-10 lg:grid-cols-4 2xl:col-start-1 2xl:row-start-2 2xl:mt-12 2xl:grid-cols-2 2xl:self-end"
               data-reveal-stagger="0.09"
             >
-              {HEADLINE_FACTS.map((fact) => (
+              {headlineFacts.map((fact) => (
                 <div key={fact.label} data-reveal="up">
                   <dt className="sr-only">{fact.label}</dt>
                   <dd>
@@ -140,23 +150,20 @@ export default function HomePage() {
                   the list underneath, which names islands. One noun, used
                   everywhere: the headline facts say "islands in the city" too. */}
               <SplitHeading className="font-display text-display-3 font-bold">
-                One atoll, four islands, one city
+                {t.home.geographyTitle}
               </SplitHeading>
               {/* The four islands are named on the map and again in the list
                   below it, so this does not name them a third time. What is
                   left is the only thing the section is actually arguing. */}
-              <p className="mt-6 max-w-[62ch] text-lead text-slate">
-                The Link Road runs the length of the western chain, joining four islands end to
-                end. That is what makes Addu one city rather than four.
-              </p>
+              <p className="mt-6 max-w-[62ch] text-lead text-slate">{t.home.geographyBody}</p>
 
               {/* Two columns, so four islands are two rows. Numbered to match
                   the map beside it, which is what carries the key at the widths
                   where the map drops its own names. */}
               <div className="mt-6">
-                <p className="text-small text-ink">Islands of the city</p>
+                <p className="text-small text-ink">{t.home.islandsLabel}</p>
                 <ul className="mt-2.5 grid grid-cols-2 gap-x-8">
-                  {LAND.islands.map((island, i) => (
+                  {islands.map((island, i) => (
                     <li
                       key={island}
                       className="flex items-center gap-2.5 border-t border-hairline py-1.5 text-small text-stone"
@@ -181,7 +188,7 @@ export default function HomePage() {
                 for, which is most of why the section shouted. At its intended
                 size it also stops towering over the copy beside it. */}
             <div data-reveal="fade" className="mx-auto w-full max-w-[34rem]">
-              <AtollMap />
+              <AtollMap islands={islands} />
             </div>
           </div>
 
@@ -209,17 +216,14 @@ export default function HomePage() {
                 under the number while the right-hand column held two lines and
                 230px of nothing; split this way the columns come out level. */}
             <div className="grid gap-x-20 gap-y-8 lg:grid-cols-2 lg:items-start">
-              <PopulationGap />
+              <PopulationGap locale={lang} />
               <div className="max-w-[46ch]">
                 {/* States the target, and stops there. It used to add that
                     closing the gap "is what the whole plan is for", which is a
                     claim about the plan that this section's figures do not
                     make. */}
-                <p className="text-lead text-slate">
-                  In 1977 the gap was 705 people. The plan sets a target of 35,000 people living in
-                  Addu by 2030.
-                </p>
-                <PopulationSources />
+                <p className="text-lead text-slate">{t.home.gapTarget}</p>
+                <PopulationSources locale={lang} />
 
                 {/* A control, not a text link. This is the only route to the
                     evidence from the home page and it was competing with two
@@ -228,13 +232,13 @@ export default function HomePage() {
                     on the other end rather than saying "read more", so the
                     reader knows whether the trip is worth making. */}
                 <Link
-                  href="/background"
+                  href={localePath(lang, '/background')}
                   transitionTypes={['page-forward']}
                   className="group mt-6 inline-flex items-center gap-3 rounded-full border border-hairline bg-white px-5 py-3 text-small font-semibold text-navy transition-colors hover:border-navy hover:bg-navy hover:text-white"
                 >
-                  Settlement history and the counts year by year
-                  <span className="transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1">
-                    <Icon icon={ArrowRight02Icon} size={16} />
+                  {t.home.backgroundLink}
+                  <span className="transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
+                    <Icon icon={ArrowRight02Icon} size={16} directional />
                   </span>
                 </Link>
               </div>
@@ -243,7 +247,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Vision />
+      <Vision locale={lang} />
 
       {/* ------------------------------------------------------------ Pillars */}
       <section id="pillars" className="scroll-mt-24 py-20 sm:py-32">
@@ -256,9 +260,9 @@ export default function HomePage() {
               on the heading's cap rather than its line box. */}
           <div className="2xl:grid 2xl:grid-cols-[0.53fr_1fr] 2xl:items-start 2xl:gap-x-16">
             <SplitHeading className="max-w-[18ch] font-display text-display-2 font-bold">
-              {PILLARS_INTRO.title}
+              {pillarsIntro.title}
             </SplitHeading>
-            <p className="mt-8 max-w-[68ch] text-lead text-slate 2xl:mt-2.5">{PILLARS_INTRO.body}</p>
+            <p className="mt-8 max-w-[68ch] text-lead text-slate 2xl:mt-2.5">{pillarsIntro.body}</p>
           </div>
 
           {/* Numbered, and carrying the deck's own phrase rather than a single
@@ -267,7 +271,7 @@ export default function HomePage() {
               top edge to hang from, and the phrase gives it something to say
               that the heading above has not already said. */}
           <ul className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-hairline sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {PILLARS.map((pillar, i) => (
+            {pillars.map((pillar, i) => (
               <li
                 key={pillar.id}
                 // Numeral and heading as one block at the top, rather than
@@ -310,7 +314,7 @@ export default function HomePage() {
                   // inside its 24-unit box with room to spare, so aligning the
                   // box to the card's edge leaves the drawing floating 6px
                   // above it. The offset is that padding, measured.
-                  className="pointer-events-none absolute right-3 -bottom-2.5 -z-10 text-white opacity-25"
+                  className="pointer-events-none absolute end-3 -bottom-2.5 -z-10 text-white opacity-25"
                 >
                   <Icon
                     icon={PILLAR_GLYPHS[pillar.id]}
@@ -346,7 +350,7 @@ export default function HomePage() {
       <section id="goals" className="scroll-mt-24 bg-shell py-20 sm:py-32">
         <div className="shell">
           <div className="2xl:grid 2xl:grid-cols-[0.53fr_1fr] 2xl:items-start 2xl:gap-x-16">
-            <SplitHeading className="font-display text-display-2">Twelve goals</SplitHeading>
+            <SplitHeading className="font-display text-display-2">{t.home.goalsTitle}</SplitHeading>
             {/* The draft's own sentence used to name a count of pillars —
                 "four" — that its pillars slide, two sections up, contradicted
                 with five. The clause was dropped rather than arbitrated: the
@@ -362,13 +366,10 @@ export default function HomePage() {
                 caught up with its own rename, so carrying it verbatim would
                 have the page calling the same thing two names within one
                 scroll. */}
-            <p className="mt-5 max-w-[68ch] text-lead text-slate 2xl:mt-2.5">
-              Twelve goals carry the vision of a resilient, inclusive, sustainable Addu. Open any
-              goal to read its targets and comment on each action.
-            </p>
+            <p className="mt-5 max-w-[68ch] text-lead text-slate 2xl:mt-2.5">{t.home.goalsBody}</p>
           </div>
 
-          <GoalGrid />
+          <GoalGrid locale={lang} />
         </div>
       </section>
 
@@ -377,10 +378,10 @@ export default function HomePage() {
         <div className="shell">
           <div className="2xl:grid 2xl:grid-cols-[0.53fr_1fr] 2xl:items-start 2xl:gap-x-16">
             <SplitHeading className="max-w-[16ch] font-display text-display-2 font-bold">
-              {INITIATIVES_INTRO.title}
+              {initiativesIntro.title}
             </SplitHeading>
             <p className="mt-6 max-w-[68ch] text-lead text-slate 2xl:mt-2.5">
-              {INITIATIVES_INTRO.body}
+              {initiativesIntro.body}
             </p>
           </div>
 
@@ -391,7 +392,7 @@ export default function HomePage() {
             className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2 xl:grid-cols-3"
             data-reveal-stagger="0.06"
           >
-            {INITIATIVES.map((item) => (
+            {initiatives.map((item) => (
               <li key={item.number} data-reveal="up" className="border-t border-hairline pt-6">
                 <div className="flex items-baseline gap-4">
                   <span className="font-heading text-title text-navy tabular-nums">
@@ -429,22 +430,20 @@ export default function HomePage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:items-start lg:gap-16">
             <div className="max-w-[54ch]">
               <SplitHeading className="max-w-[18ch] font-display text-display-2 font-bold">
-                Tell us what to change.
+                {t.home.feedbackTitle}
               </SplitHeading>
               <p className="mt-7 text-lead text-slate">
-                Every one of the {TOTAL_ACTIONS} actions in this plan takes a response — support it,
-                say you are unsure, or raise a concern, and add a comment if you want to explain.
-                Your answers send themselves as you make them.
+                {fill(t.home.feedbackBody, { count: TOTAL_ACTIONS })}
               </p>
               <Link
-                href={`/goals/${GOALS[0].slug}`}
+                href={localePath(lang, `/goals/${goals[0]!.slug}`)}
                 transitionTypes={['page-forward']}
                 className="group mt-9 inline-flex items-center gap-2.5 rounded-full bg-navy px-6 py-3.5 font-heading text-small text-white transition-colors hover:bg-navy-deep"
               >
                 <Icon icon={Comment01Icon} size={17} />
-                Start with goal 1
-                <span className="transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1">
-                  <Icon icon={ArrowRight02Icon} size={17} />
+                {t.home.startWithGoalOne}
+                <span className="transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
+                  <Icon icon={ArrowRight02Icon} size={17} directional />
                 </span>
               </Link>
             </div>

@@ -179,55 +179,224 @@ export type CommentRow = {
   createdAt: string
 }
 
-export const COMMENTS_PER_PAGE = 50
+/**
+ * Actions per page, not comments per page.
+ *
+ * The unit of this screen is an action and everything said about it, so a page
+ * is a run of actions — which also means a thread can never be cut in half by a
+ * page edge. Twenty is chosen against the plan's own shape: goal 4 has the most
+ * actions at twenty-four, so a goal is one or two pages.
+ */
+export const ACTIONS_PER_PAGE = 20
 
 /**
- * What residents actually wrote, newest first.
+ * Every id that can carry a comment, in the order the site presents them: the
+ * plan itself, then goal 1's actions, then goal 2's, and so on.
  *
- * Paged rather than fetched whole: this is the one table that grows with every
- * response, and a consultation that goes well would otherwise render thousands
- * of rows into a single page.
+ * `PLACE` is built by walking GOALS in order and a Map keeps what it was given,
+ * so its keys are already the plan's own sequence.
+ */
+const PLAN_ORDER: string[] = [OVERALL_ID, ...PLACE.keys()]
+
+/** The ids in scope, still in plan order. An unknown slug matches nothing. */
+function scopedIds(scope?: string): string[] {
+  if (!scope) return PLAN_ORDER
+  if (scope === OVERALL_SCOPE) return [OVERALL_ID]
+  const goal = GOALS.find((g) => g.slug === scope)
+  if (!goal) return []
+  return goal.strategies.flatMap((s) => s.actions.map((a) => a.id))
+}
+
+/**
+ * What residents wrote, in the plan's own order.
  *
- * `scope` narrows it: a goal's slug, or `'plan'` for what was said about the
- * plan as a whole. Unfiltered means everything, both kinds together.
+ * Deliberately not newest first. The council reads this beside the document, so
+ * the screen walks the document: action 1.1, then 1.2, then 1.3. Sorting by
+ * arrival scattered one goal's replies through every page and made "what did
+ * people say about this action" a search rather than a place.
+ *
+ * Paged over actions rather than over comments, in three bounded queries:
+ *
+ * 1. `response_tallies` — the same grouped view the overview counts from — says
+ *    which actions carry comments at all. One row per action, a few hundred at
+ *    most however many residents respond.
+ * 2. That list, intersected with the scope and cut to this page, is at most
+ *    twenty ids; the comments themselves are fetched for those alone.
+ * 3. A count, for the total the heading reports.
+ *
+ * The raw `responses` table is never scanned whole — it is the one table that
+ * grows without limit.
+ *
+ * `reaction` narrows which comments show, not which actions do. A comment can
+ * be sent with no reaction at all, so the three never add up to the unfiltered
+ * total; that is why "Any reaction" is its own choice rather than three
+ * checkboxes. A thread whose comments are all held back by it is dropped.
  */
 export async function getComments({
   page = 0,
   scope,
-}: { page?: number; scope?: string } = {}): Promise<{ rows: CommentRow[]; total: number }> {
+  reaction,
+}: { page?: number; scope?: string; reaction?: WireReaction } = {}): Promise<{
+  threads: CommentThread[]
+  /** Comments matching the filters, across every page. */
+  total: number
+  /** Actions carrying at least one comment, across every page. */
+  totalActions: number
+}> {
   const supabase = await createClient()
+  const ids = scopedIds(scope)
+  if (ids.length === 0) return { threads: [], total: 0, totalActions: 0 }
 
-  let query = supabase
-    .from('responses')
-    .select('id, action_id, reaction, comment, created_at', { count: 'exact' })
-    .not('comment', 'is', null)
+  const { data: tallies, error: talliesError } = await supabase
+    .from('response_tallies')
+    .select('action_id, comments')
+    .gt('comments', 0)
 
-  if (scope === OVERALL_SCOPE) {
-    query = query.eq('action_id', OVERALL_ID)
-  } else if (scope) {
-    // Filtering by goal means filtering by that goal's action ids, since the
-    // goal itself exists only in the repo.
-    const goal = GOALS.find((g) => g.slug === scope)
-    const ids = goal?.strategies.flatMap((s) => s.actions.map((a) => a.id)) ?? []
-    // An unknown slug must return nothing rather than everything.
-    query = query.in('action_id', ids.length ? ids : ['__none__'])
+  if (talliesError) throw new Error(`Could not read comment counts: ${talliesError.message}`)
+
+  const totals = new Map<string, number>(
+    (tallies ?? []).map((row) => [row.action_id, row.comments ?? 0]),
+  )
+
+  // Which of those actions the filter actually leaves standing, and how many
+  // comments survive it.
+  //
+  // Unfiltered, the tally view answers both without another query. A reaction
+  // filter it cannot answer — it counts an action's comments, not its comments
+  // with a given reaction — so that case reads the matching `action_id`s and
+  // counts them here. One short column, only for the narrower of the two cases,
+  // and never the comment text: the raw table is still not scanned whole.
+  //
+  // Getting this from the tallies regardless would have the heading claim "46
+  // comments on 77 actions" when twenty-three of the seventy-seven carry a
+  // concern, and page over the other fifty-four for nothing.
+  let withComments: string[]
+  let total: number
+
+  if (reaction) {
+    // The scope is asked for by name only when it is a goal — a dozen or two
+    // ids. Unscoped it is every id in the plan, and naming two hundred and
+    // thirty-one of them builds a URL worth avoiding, so it is filtered here.
+    const scan = supabase
+      .from('responses')
+      .select('action_id')
+      .not('comment', 'is', null)
+      .eq('reaction', reaction)
+    const { data: matches, error: scanError } = await (scope ? scan.in('action_id', ids) : scan)
+
+    if (scanError) throw new Error(`Could not count comments: ${scanError.message}`)
+
+    const inScope = new Set(ids)
+    const matched = new Set<string>()
+    total = 0
+    for (const row of matches ?? []) {
+      if (!inScope.has(row.action_id)) continue
+      matched.add(row.action_id)
+      total += 1
+    }
+    withComments = ids.filter((id) => matched.has(id))
+  } else {
+    withComments = ids.filter((id) => totals.has(id))
+    total = withComments.reduce((n, id) => n + (totals.get(id) ?? 0), 0)
   }
 
-  const from = page * COMMENTS_PER_PAGE
-  const { data, error, count } = await query
-    .order('created_at', { ascending: false })
-    .range(from, from + COMMENTS_PER_PAGE - 1)
+  const pageIds = withComments.slice(page * ACTIONS_PER_PAGE, (page + 1) * ACTIONS_PER_PAGE)
+
+  const reading = supabase
+    .from('responses')
+    .select('id, action_id, reaction, comment, created_at')
+    .not('comment', 'is', null)
+    .in('action_id', pageIds.length ? pageIds : ['__none__'])
+    // Oldest first inside a thread, so it reads as the discussion it is.
+    .order('created_at', { ascending: true })
+
+  const { data, error } = await (reaction ? reading.eq('reaction', reaction) : reading)
 
   if (error) throw new Error(`Could not read comments: ${error.message}`)
 
-  return {
-    rows: (data ?? []).map((row) => ({
+  const byId = new Map<string, CommentRow[]>()
+  for (const row of data ?? []) {
+    const comment: CommentRow = {
       id: row.id,
       actionId: row.action_id,
       reaction: row.reaction,
       comment: row.comment as string,
       createdAt: row.created_at,
-    })),
-    total: count ?? 0,
+    }
+    const existing = byId.get(comment.actionId)
+    if (existing) existing.push(comment)
+    else byId.set(comment.actionId, [comment])
   }
+
+  const threads: CommentThread[] = pageIds
+    .filter((id) => byId.has(id))
+    .map((actionId) => {
+      const comments = byId.get(actionId) ?? []
+      return {
+        actionId,
+        comments,
+        // Never below what is on screen. The view is a moment behind the rows
+        // if a resident sends something between the two queries, and a thread
+        // reading "5 of 4" would look like a bug rather than a race.
+        totalComments: Math.max(totals.get(actionId) ?? 0, comments.length),
+      }
+    })
+
+  return { threads, total, totalActions: withComments.length }
+}
+
+export type CommentThread = {
+  actionId: string
+  comments: CommentRow[]
+  /**
+   * How many comments that action has received in total, against the
+   * `comments.length` shown here.
+   *
+   * The two differ only when a reaction filter is holding part of the thread
+   * back — a page never splits one. Stating both is the difference between
+   * "four people raised this" and "four of the nineteen who did", and a thread
+   * quietly showing four of nineteen would be the screen hiding feedback the
+   * council actually holds.
+   */
+  totalComments: number
+}
+
+/**
+ * The orders the goal table can be read in.
+ *
+ * Plan order is the default because that is the document the council knows, but
+ * it is the worst order for the question the screen is actually opened with —
+ * "where is this going badly?" — which is a scan for outliers across twelve
+ * rows. So the other three sort by the three things that make a goal worth
+ * looking at first: unease, attention, and silence.
+ *
+ * `quiet` sorts on the share of a goal's actions that nobody answered rather
+ * than on the raw count, or the goals with the most actions would always win.
+ *
+ * Every comparator falls back to plan order, so the twelve never shuffle
+ * unpredictably between two goals that tie — which, early in a consultation
+ * when most rows are zero, is most of them.
+ */
+export const GOAL_SORTS = {
+  plan: { label: 'Plan order', of: () => 0 },
+  concern: { label: 'Most concern', of: (g: GoalRollup) => g.concern },
+  responses: { label: 'Most responses', of: (g: GoalRollup) => g.responses },
+  quiet: {
+    label: 'Least answered',
+    of: (g: GoalRollup) =>
+      g.totalActions === 0 ? 0 : 1 - g.answeredActions / g.totalActions,
+  },
+} as const
+
+export type GoalSort = keyof typeof GOAL_SORTS
+
+export function isGoalSort(value: string | undefined): value is GoalSort {
+  return value !== undefined && value in GOAL_SORTS
+}
+
+/** A new array; the caller's rollup order is left alone. */
+export function sortGoals(rows: GoalRollup[], sort: GoalSort): GoalRollup[] {
+  if (sort === 'plan') return rows
+  const of = GOAL_SORTS[sort].of
+  return [...rows].sort((a, b) => of(b) - of(a) || a.goal.number - b.goal.number)
 }

@@ -3,6 +3,9 @@ import ArrowRight02Icon from '@hugeicons/core-free-icons/ArrowRight02Icon'
 import { Icon } from '@/components/ui/icon'
 import { GoalBadge } from './goal-badge'
 import type { Goal } from '@/lib/plan'
+import { localePath, type Locale } from '@/lib/i18n/config'
+import { getDictionary } from '@/lib/i18n/dictionaries'
+import { fill } from '@/lib/i18n/format'
 
 /**
  * One goal in the grid. The whole card is the link — a 44px-plus target on a
@@ -18,7 +21,8 @@ import type { Goal } from '@/lib/plan'
  * the badge, and the tagline takes the space they were using. What is left
  * reads top to bottom as identity, name, promise, size.
  */
-export function GoalCard({ goal }: { goal: Goal }) {
+export function GoalCard({ goal, locale }: { goal: Goal; locale: Locale }) {
+  const t = getDictionary(locale)
   const actions = goal.strategies.reduce((n, s) => n + s.actions.length, 0)
 
   return (
@@ -26,7 +30,7 @@ export function GoalCard({ goal }: { goal: Goal }) {
       // The goal page links back to this id, so returning lands on the card you
       // opened — which is also what lets the badge morph find its counterpart.
       id={`goal-${goal.slug}`}
-      href={`/goals/${goal.slug}`}
+      href={localePath(locale, `/goals/${goal.slug}`)}
       transitionTypes={['page-forward']}
       data-reveal="up"
       className="goal-card group relative flex scroll-mt-28 flex-col gap-4 rounded-3xl border border-hairline bg-white p-5 sm:p-6"
@@ -45,7 +49,7 @@ export function GoalCard({ goal }: { goal: Goal }) {
           className="font-heading text-small tabular-nums"
           style={{ color: goal.textColor }}
         >
-          Goal {goal.number}
+          {fill(t.goalCard.goalNumber, { number: goal.number })}
         </span>
       </div>
 
@@ -62,14 +66,14 @@ export function GoalCard({ goal }: { goal: Goal }) {
             nothing on that page to respond to. */}
         <span className="text-mist">
           {goal.strategies.length
-            ? `${goal.strategies.length} strategies · ${actions} actions`
-            : 'No strategies published yet'}
+            ? fill(t.goalCard.counts, { strategies: goal.strategies.length, actions })
+            : t.goalCard.noStrategies}
         </span>
         <span
           className="goal-card__arrow grid h-9 w-9 place-items-center rounded-full"
           style={{ background: `${goal.color}14`, color: goal.textColor }}
         >
-          <Icon icon={ArrowRight02Icon} size={17} />
+          <Icon icon={ArrowRight02Icon} size={17} directional />
         </span>
       </div>
     </Link>

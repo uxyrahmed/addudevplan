@@ -1,8 +1,9 @@
 import ArrowDown01Icon from '@hugeicons/core-free-icons/ArrowDown01Icon'
 import { Icon } from '@/components/ui/icon'
+import { COLS, COL_NAME, COL_WIDE } from '@/components/admin/columns'
 import { ReactionBar } from '@/components/admin/reaction-bar'
+import { ReactionFigures } from '@/components/admin/reaction-figures'
 import type { Tally } from '@/lib/admin/results'
-import { REACTION_META, REACTION_VALUES } from '@/lib/reactions'
 import { fmt, type Goal } from '@/lib/plan'
 
 /**
@@ -28,13 +29,20 @@ const NONE: Omit<Tally, 'actionId'> = {
  *
  * Grouped under strategy headings because that is how the plan reads; an
  * action's wording alone often does not say which part of the goal it serves.
+ *
+ * Set on the same column template as the goal rows above, so opening a goal
+ * extends the table rather than replacing it with a different one: an action's
+ * Concern figure lands directly under its goal's. The actions used to be drawn
+ * as small tinted cards inside the goal's own card, which put a container
+ * inside a container inside a container and made the numbers harder to compare,
+ * not easier.
  */
 export function GoalActions({ goal, byAction }: { goal: Goal; byAction: Map<string, Tally> }) {
   const total = goal.strategies.reduce((n, s) => n + s.actions.length, 0)
 
   return (
-    <details className="group mt-4 border-t border-hairline pt-3.5">
-      <summary className="flex cursor-pointer list-none items-center gap-2 text-small font-semibold text-navy transition-colors hover:text-plum [&::-webkit-details-marker]:hidden">
+    <details className="group">
+      <summary className="flex list-none items-center gap-2 px-5 pb-4 text-small font-semibold text-navy transition-colors hover:text-plum [&::-webkit-details-marker]:hidden">
         <Icon
           icon={ArrowDown01Icon}
           size={16}
@@ -43,55 +51,50 @@ export function GoalActions({ goal, byAction }: { goal: Goal; byAction: Map<stri
         {/* Names the goal, because a screen reader reaching this control out of
             context would otherwise hear twelve identical "Action by action". */}
         Action by action
-        <span className="sr-only"> for Goal {goal.number}: {goal.title}</span>
+        <span className="sr-only">
+          {' '}
+          for Goal {goal.number}: {goal.title}
+        </span>
         <span className="font-normal text-mist tabular-nums">({fmt(total)})</span>
       </summary>
 
-      <div className="mt-4 space-y-5">
+      <div className="border-t border-hairline bg-shell pb-2">
         {goal.strategies.map((strategy) => (
           <section key={strategy.id}>
-            <h4 className="text-small font-bold text-stone">
+            <h4 className="px-5 pt-4 pb-1.5 text-small leading-snug font-bold text-stone">
               {strategy.number} {strategy.title}
             </h4>
-            <ul className="mt-2.5 space-y-2">
+            <ul>
               {strategy.actions.map((action) => {
                 const tally = byAction.get(action.id) ?? NONE
-                const reacted = tally.support + tally.unsure + tally.concern
                 return (
-                  <li key={action.id} className="rounded-xl bg-shell p-3.5">
-                    <p className="text-small text-ink">{action.text}</p>
+                  <li key={action.id} className={`grid ${COLS} px-5 py-2.5`}>
+                    <p className={`${COL_NAME} text-small leading-snug text-ink`}>
+                      {action.text}
+                    </p>
 
-                    {reacted > 0 ? (
-                      <div className="mt-2.5">
-                        <ReactionBar
-                          support={tally.support}
-                          unsure={tally.unsure}
-                          concern={tally.concern}
-                          thin
-                        />
-                      </div>
-                    ) : null}
+                    <div className={COL_WIDE}>
+                      <ReactionBar
+                        support={tally.support}
+                        unsure={tally.unsure}
+                        concern={tally.concern}
+                        thin
+                      />
+                    </div>
 
-                    <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-small tabular-nums">
-                      {reacted > 0 ? (
-                        REACTION_VALUES.map((key) => (
-                          <span key={key} className="text-stone">
-                            <span style={{ color: REACTION_META[key].color }}>●</span>{' '}
-                            {REACTION_META[key].short} {fmt(tally[key])}
-                          </span>
-                        ))
-                      ) : (
-                        <span className="text-mist">No reactions yet</span>
-                      )}
-                      {/* Deliberately not a link: the comments screen filters by
-                          goal, not by action, so it could only send the reader
-                          to the whole goal — which is the row they came from. */}
-                      {tally.comments > 0 ? (
-                        <span className="text-stone">
-                          {fmt(tally.comments)}{' '}
-                          {tally.comments === 1 ? 'comment' : 'comments'}
-                        </span>
-                      ) : null}
+                    <ReactionFigures tally={tally} />
+
+                    {/* Deliberately not a link: the comments screen filters by
+                        goal, not by action, so it could only send the reader to
+                        the whole goal — which is the row they came from. */}
+                    <div className={`${COL_WIDE} text-small leading-tight tabular-nums xl:text-right`}>
+                      <span aria-hidden className="text-stone xl:hidden">
+                        Comments{' '}
+                      </span>
+                      <span className="sr-only">Comments: </span>
+                      <span className={tally.comments > 0 ? 'text-ink' : 'text-mist'}>
+                        {fmt(tally.comments)}
+                      </span>
                     </div>
                   </li>
                 )

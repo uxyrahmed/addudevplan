@@ -1,5 +1,6 @@
 import { GoalCard } from './goal-card'
-import { GOALS } from '@/lib/plan'
+import { localizedGoals } from '@/lib/plan-i18n'
+import type { Locale } from '@/lib/i18n/config'
 
 /**
  * All twelve goals.
@@ -9,7 +10,7 @@ import { GOALS } from '@/lib/plan'
  * browser at all. The cards render to HTML and nothing about this grid costs
  * anything at runtime.
  */
-export function GoalGrid() {
+export function GoalGrid({ locale }: { locale: Locale }) {
   return (
     <ul
       // Four columns at the top end: twelve goals make three full rows of four,
@@ -20,11 +21,11 @@ export function GoalGrid() {
       className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
       data-reveal-stagger="0.035"
     >
-      {GOALS.map((goal) => (
+      {localizedGoals(locale).map((goal) => (
         // `contents` so the card itself is the grid item and the cards in a row
         // stretch to a common height.
         <li key={goal.slug} className="contents">
-          <GoalCard goal={goal} />
+          <GoalCard goal={goal} locale={locale} />
         </li>
       ))}
     </ul>

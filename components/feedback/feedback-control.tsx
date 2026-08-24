@@ -12,6 +12,9 @@ import { Icon, type IconData } from '@/components/ui/icon'
 import { MAX_COMMENT_LENGTH } from '@/lib/feedback-limits'
 import { REACTIONS, useFeedback, type Reaction } from './feedback-store'
 import { useCommentDraft } from './use-comment-draft'
+import { useLocale } from '@/components/i18n/locale-provider'
+import { fill } from '@/lib/i18n/format'
+import { reactionWords } from '@/lib/i18n/reactions'
 
 const REACTION_ICON: Record<Reaction, IconData> = {
   support: ThumbsUpIcon,
@@ -41,6 +44,7 @@ type Props = {
  * and with ⌘/Ctrl+Enter, and until it is posted the field says so.
  */
 export function FeedbackControl({ id, subject, accent }: Props) {
+  const { t } = useLocale()
   const { feedback, setReaction } = useFeedback()
   const entry = feedback[id]
   const fieldId = useId()
@@ -62,13 +66,14 @@ export function FeedbackControl({ id, subject, accent }: Props) {
       <div className="flex flex-wrap items-center gap-1.5">
         {REACTIONS.map((r) => {
           const active = entry?.reaction === r.id
+          const words = reactionWords(t, r.id)
           return (
             <button
               key={r.id}
               type="button"
               onClick={() => setReaction(id, r.id)}
               aria-pressed={active}
-              aria-label={`${r.label}: ${subject}`}
+              aria-label={fill(t.control.reactionAria, { label: words.label, subject })}
               className="group relative inline-flex min-h-11 items-center gap-1.5 rounded-full border px-4 py-2 text-small font-semibold transition-colors duration-200"
               style={{
                 borderColor: active ? r.color : 'var(--color-hairline)',
@@ -77,7 +82,7 @@ export function FeedbackControl({ id, subject, accent }: Props) {
               }}
             >
               <Icon icon={REACTION_ICON[r.id]} size={15} />
-              <span>{r.short}</span>
+              <span>{words.short}</span>
             </button>
           )
         })}
@@ -93,13 +98,13 @@ export function FeedbackControl({ id, subject, accent }: Props) {
           // The dot's meaning belongs in here, not in an `sr-only` span beside
           // it: an `aria-label` replaces the element's contents outright, so
           // nothing written inside this button is ever announced.
-          aria-label={`${posted ? 'Edit your comment on' : 'Add a comment on'}: ${subject}${
-            unposted ? ' — not posted yet' : ''
-          }`}
+          aria-label={`${fill(posted ? t.control.editCommentAria : t.control.addCommentAria, {
+            subject,
+          })}${unposted ? t.control.notPostedSuffix : ''}`}
           className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-hairline px-4 py-2 text-small font-semibold text-stone transition-colors hover:border-navy hover:text-navy"
         >
           <Icon icon={Comment01Icon} size={15} />
-          <span>{posted ? 'Comment added' : 'Comment'}</span>
+          <span>{posted ? t.control.commentAdded : t.control.comment}</span>
           {unposted ? (
             /* A draft that has not been posted, so it is still visible once the
                field is collapsed. Amber, the palette's own unfinished colour;
@@ -117,7 +122,7 @@ export function FeedbackControl({ id, subject, accent }: Props) {
       <div className="collapse-row" data-open={showComment ? '' : undefined}>
         <div className="min-h-0 overflow-hidden">
           <label htmlFor={fieldId} className="sr-only">
-            Your comment on: {subject}
+            {fill(t.control.yourCommentOn, { subject })}
           </label>
           <textarea
             ref={field}
@@ -132,7 +137,7 @@ export function FeedbackControl({ id, subject, accent }: Props) {
                 post()
               }
             }}
-            placeholder="What would you change, add, or worry about?"
+            placeholder={t.control.placeholder}
             tabIndex={showComment ? undefined : -1}
             aria-hidden={showComment ? undefined : true}
             aria-describedby={`${fieldId}-state`}
@@ -153,9 +158,9 @@ export function FeedbackControl({ id, subject, accent }: Props) {
               {unposted && !trimmed ? (
                 // Emptied the box, but the posted comment is still in the
                 // basket — the one state no control on the row shows.
-                'Cleared here only — Remove takes it out of your feedback'
+                t.control.clearedHereOnly
               ) : !unposted && posted ? (
-                'Posted with your feedback'
+                t.control.postedWithFeedback
               ) : null}
               {value.length > COUNTER_FROM ? (
                 <span className="tabular-nums">
@@ -180,11 +185,11 @@ export function FeedbackControl({ id, subject, accent }: Props) {
                     field.current?.focus()
                   }}
                   tabIndex={showComment ? undefined : -1}
-                  aria-label={`Remove your comment on: ${subject}`}
+                  aria-label={fill(t.control.removeCommentAria, { subject })}
                   className="inline-flex min-h-9 items-center gap-1.5 rounded-full px-3 py-1.5 text-small font-semibold text-stone transition-colors hover:text-plum"
                 >
                   <Icon icon={Delete02Icon} size={14} />
-                  Remove
+                  {t.control.remove}
                 </button>
               ) : null}
 
@@ -193,11 +198,14 @@ export function FeedbackControl({ id, subject, accent }: Props) {
                 onClick={post}
                 disabled={!canPost}
                 tabIndex={showComment ? undefined : -1}
-                aria-label={`${posted ? 'Update' : 'Post'} your comment on: ${subject}`}
+                aria-label={fill(
+                  posted ? t.control.updateCommentAria : t.control.postCommentAria,
+                  { subject },
+                )}
                 className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-navy px-4 py-1.5 text-small font-bold text-white transition-colors hover:bg-navy-deep disabled:cursor-default disabled:bg-hairline disabled:text-mist"
               >
                 <Icon icon={SentIcon} size={14} />
-                {posted ? 'Update' : 'Post'}
+                {posted ? t.control.update : t.control.post}
               </button>
             </div>
           </div>

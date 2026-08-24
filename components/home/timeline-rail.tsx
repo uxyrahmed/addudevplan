@@ -5,6 +5,7 @@ import ArrowLeft01Icon from '@hugeicons/core-free-icons/ArrowLeft01Icon'
 import ArrowRight01Icon from '@hugeicons/core-free-icons/ArrowRight01Icon'
 import { Icon } from '@/components/ui/icon'
 import { prefersReducedMotion } from '@/lib/motion-prefs'
+import { useLocale } from '@/components/i18n/locale-provider'
 
 /**
  * Horizontal rail for the settlement timeline.
@@ -19,17 +20,27 @@ import { prefersReducedMotion } from '@/lib/motion-prefs'
  * reaches the client bundle.
  */
 export function TimelineRail({ children, label }: { children: ReactNode; label: string }) {
+  const { t, dir } = useLocale()
+  const rtl = dir === 'rtl'
   const rail = useRef<HTMLDivElement>(null)
-  const [canLeft, setCanLeft] = useState(false)
-  const [canRight, setCanRight] = useState(false)
+  /** Whether there is anything left to reach in each reading direction. */
+  const [canBack, setCanBack] = useState(false)
+  const [canForward, setCanForward] = useState(false)
 
   const measure = useCallback(() => {
     const el = rail.current
     if (!el) return
-    // A pixel of slack: sub-pixel layout means scrollLeft rarely hits the exact
-    // maximum, which would otherwise leave the right arrow enabled forever.
-    setCanLeft(el.scrollLeft > 1)
-    setCanRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 1)
+    // `scrollLeft` counts away from the *start* edge, and in a right-to-left
+    // container that edge is the right one — so it runs negative. Taking the
+    // magnitude turns it into "how far along the rail are we", which is the
+    // same question in both directions and is what the arrows are asking.
+    const travelled = Math.abs(el.scrollLeft)
+    const total = el.scrollWidth - el.clientWidth
+    // A pixel of slack: sub-pixel layout means the scroll offset rarely hits
+    // the exact maximum, which would otherwise leave the forward arrow enabled
+    // forever.
+    setCanBack(travelled > 1)
+    setCanForward(travelled < total - 1)
   }, [])
 
   useEffect(() => {
@@ -104,14 +115,16 @@ export function TimelineRail({ children, label }: { children: ReactNode; label: 
     }
   }, [])
 
-  const page = (dir: -1 | 1) => {
+  const page = (step: -1 | 1) => {
     const el = rail.current
     if (!el) return
     // A hidden document has no frames, so a smooth scroll there would never
     // advance — jump instead.
     const instant = prefersReducedMotion() || document.visibilityState === 'hidden'
     el.scrollBy({
-      left: dir * Math.max(240, el.clientWidth * 0.8),
+      // `scrollBy` is in physical pixels, and the rail runs the other way in
+      // Dhivehi — so "forward" has to become a leftward move there.
+      left: (rtl ? -step : step) * Math.max(240, el.clientWidth * 0.8),
       behavior: instant ? 'auto' : 'smooth',
     })
     // Re-measure from the button's own action rather than trusting the scroll
@@ -128,11 +141,23 @@ export function TimelineRail({ children, label }: { children: ReactNode; label: 
   return (
     <div className="mt-10">
       <div className="mb-5 flex justify-end gap-2">
-        <button type="button" onClick={() => page(-1)} disabled={!canLeft} aria-label="Scroll timeline back" className={button}>
-          <Icon icon={ArrowLeft01Icon} size={18} />
+        <button
+          type="button"
+          onClick={() => page(-1)}
+          disabled={!canBack}
+          aria-label={t.timeline.scrollBack}
+          className={button}
+        >
+          <Icon icon={ArrowLeft01Icon} size={18} directional />
         </button>
-        <button type="button" onClick={() => page(1)} disabled={!canRight} aria-label="Scroll timeline forward" className={button}>
-          <Icon icon={ArrowRight01Icon} size={18} />
+        <button
+          type="button"
+          onClick={() => page(1)}
+          disabled={!canForward}
+          aria-label={t.timeline.scrollForward}
+          className={button}
+        >
+          <Icon icon={ArrowRight01Icon} size={18} directional />
         </button>
       </div>
 

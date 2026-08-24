@@ -5,7 +5,8 @@ import { loadGsap } from '@/lib/gsap'
 import { canAnimateRichly } from '@/lib/motion-prefs'
 import { REVEAL_OBSERVER_INIT } from '@/lib/reveal-trigger'
 import { ISLAND, LAGOON, LINK_ROAD, MARKERS, OCEAN_EDGE, REEF } from '@/lib/atoll-geometry'
-import { LAND } from '@/lib/plan'
+import { useLocale } from '@/components/i18n/locale-provider'
+import { fill } from '@/lib/i18n/format'
 
 /**
  * Addu Atoll, from the council's own map artwork.
@@ -24,8 +25,9 @@ import { LAND } from '@/lib/plan'
 /**
  * Names for the source's numbered markers, north to south.
  *
- * Taken from LAND.islands rather than repeated here, so the map and the list
- * beside it cannot disagree about what the city is made of.
+ * Passed in from the page rather than repeated here, so the map and the list
+ * beside it cannot disagree about what the city is made of — and so the names
+ * arrive in whichever language the page is being read in.
  *
  * `anchor` places the name clear of the coast: the first island has open reef
  * to its west, the southern three have the lagoon to their east.
@@ -57,7 +59,18 @@ const ROAD_ENDS = [
   { id: 'south', x: 579, y: 689 },
 ] as const
 
-export function AtollMap() {
+/**
+ * `islands` comes down from the page rather than out of `lib/plan.ts`: the
+ * names are translated, and reaching for the plan module from a client
+ * component would put the whole of it — and every translation of it — in the
+ * home page's bundle to read four strings out of it.
+ *
+ * The order is the geography. The markers are numbered 1–4 from the north and
+ * read their names out of this array by index, so the page passes it in the
+ * order the plan holds it.
+ */
+export function AtollMap({ islands }: { islands: string[] }) {
+  const { t } = useLocale()
   const ref = useRef<SVGSVGElement>(null)
 
   useEffect(() => {
@@ -148,7 +161,7 @@ export function AtollMap() {
           viewBox="58 24 1000 790"
           className="block h-auto w-full"
           role="img"
-          aria-label={`Map of Addu Atoll. The four islands of the city — ${LAND.islands.join(', ')} — lie along the western side of the atoll from north to south, joined end to end by the Link Road, which crosses open water on causeways. The road runs on past Feydhoo to the south-east, beyond the city. The rest of the atoll is reef and lagoon.`}
+          aria-label={fill(t.map.aria, { islands: islands.join('، ') })}
         >
           <g fill="var(--reef)">
             {REEF.map((d) => (
@@ -207,7 +220,7 @@ export function AtollMap() {
           ))}
 
           {MARKERS.map(([x, y], i) => (
-            <g key={LAND.islands[i]} data-stop>
+            <g key={islands[i]} data-stop>
               <circle
                 cx={x}
                 cy={y}
@@ -238,14 +251,14 @@ export function AtollMap() {
           <g className="hidden font-heading sm:block">
             {MARKERS.map(([x, y], i) => (
               <text
-                key={LAND.islands[i]}
+                key={islands[i]}
                 x={x + LABELS[i].dx}
                 y={y + LABELS[i].dy}
                 textAnchor={LABELS[i].anchor}
                 fill="var(--color-ink)"
                 fontSize="25"
               >
-                {LAND.islands[i]}
+                {islands[i]}
               </text>
             ))}
           </g>
@@ -263,7 +276,7 @@ export function AtollMap() {
       <figcaption className="flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-hairline pt-4 text-small text-stone">
         <span className="inline-flex items-center gap-2">
           <span aria-hidden className="h-[3px] w-7 rounded-full bg-navy" />
-          Link Road
+          {t.map.linkRoad}
         </span>
         <span className="inline-flex items-center gap-2">
           <span
@@ -272,7 +285,7 @@ export function AtollMap() {
           >
             1
           </span>
-          Island of the city
+          {t.map.islandOfCity}
         </span>
       </figcaption>
     </figure>

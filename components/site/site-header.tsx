@@ -4,13 +4,22 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { PLAN } from '@/lib/plan'
+import { useLocale } from '@/components/i18n/locale-provider'
+import { splitLocale } from '@/lib/i18n/config'
+import { fill } from '@/lib/i18n/format'
+import type { Dictionary } from '@/lib/i18n/en'
 
-/** Section links. The id is both the anchor and the scrollspy target. */
+/**
+ * Section links. The id is both the anchor and the scrollspy target.
+ *
+ * The label is a lookup rather than a string, because this list is module-level
+ * and the language is not known until render — a `label: 'The plan'` here would
+ * be the one piece of the bar that never translated.
+ */
 const NAV = [
-  { id: 'turning-point', label: 'The plan' },
-  { id: 'goals', label: 'Twelve goals' },
-  { id: 'initiatives', label: 'Initiatives' },
+  { id: 'turning-point', label: (t: Dictionary) => t.header.thePlan },
+  { id: 'goals', label: (t: Dictionary) => t.header.twelveGoals },
+  { id: 'initiatives', label: (t: Dictionary) => t.header.initiatives },
 ] as const
 
 /**
@@ -24,7 +33,7 @@ const NAV = [
  * explanation and a second click instead of a response control. The goal grid
  * is where every action carries one.
  */
-const CTA = { id: 'goals', label: 'Have your say' } as const
+const CTA = { id: 'goals', label: (t: Dictionary) => t.header.haveYourSay } as const
 
 /**
  * No mobile menu.
@@ -42,11 +51,18 @@ const CTA = { id: 'goals', label: 'Have your say' } as const
  */
 export function SiteHeader() {
   const pathname = usePathname()
+  const { t, plan, href } = useLocale()
   const [lifted, setLifted] = useState(false)
   /** True while the bar overlaps a full-bleed dark hero. */
   const [overDark, setOverDark] = useState(false)
   /** Which section the reader is currently inside, for the nav's active state. */
   const [current, setCurrent] = useState<string | null>(null)
+
+  // The route without its language. Every path on the public site now opens
+  // with `/en` or `/dv`, and the three tests below — am I on the home page, am
+  // I inside a goal, where should this anchor point — are about the page, not
+  // about which edition of it is being read.
+  const route = splitLocale(pathname).rest
 
   // The old page's sections go with the route change, so the highlight goes
   // with them rather than the new page briefly inheriting it. Adjusted during
@@ -103,7 +119,7 @@ export function SiteHeader() {
   // under the bar. An observer rather than a scroll handler: no measuring on
   // the frames that have to stay smooth.
   useEffect(() => {
-    if (pathname !== '/') return
+    if (route !== '/') return
     const ids = [...NAV.map((n) => n.id), CTA.id] as string[]
     const sections = ids
       .map((id) => document.getElementById(id))
@@ -129,17 +145,17 @@ export function SiteHeader() {
     )
     sections.forEach((section) => observer.observe(section))
     return () => observer.disconnect()
-  }, [pathname])
+  }, [pathname, route])
 
   const light = overDark
   const solid = !light && lifted
   // A goal page is still "the goals" as far as the bar is concerned.
-  const activeId = pathname.startsWith('/goals/') ? 'goals' : current
+  const activeId = route.startsWith('/goals/') ? 'goals' : current
 
   // On the home page link to the bare anchor: the smooth scroller intercepts
   // those and eases to the section instead of jumping. Anywhere else it has to
-  // be a real route change first.
-  const to = (id: string) => (pathname === '/' ? `#${id}` : `/#${id}`)
+  // be a real route change first — and one that stays in this language.
+  const to = (id: string) => (route === '/' ? `#${id}` : href(`/#${id}`))
 
   return (
     <header
@@ -162,9 +178,9 @@ export function SiteHeader() {
       ) : null}
       <div className="shell flex h-16 items-center gap-4 sm:h-20">
         <Link
-          href="/"
+          href={href('/')}
           className="-my-2 flex min-w-0 items-center gap-3 py-2"
-          aria-label={`${PLAN.title} home`}
+          aria-label={fill(t.header.homeAria, { title: plan.title })}
         >
           {/* The bird alone, not the full lockup: at header size the
               "CITY OF ADDU" wordmark under it would be five pixels tall, and
@@ -204,14 +220,14 @@ export function SiteHeader() {
                 light ? 'text-white' : 'text-navy'
               }`}
             >
-              Addu Development Plan
+              {plan.title}
             </span>
             <span
               className={`block text-micro font-bold tracking-[0.12em] uppercase ${
                 light ? 'text-white/70' : 'text-mist'
               }`}
             >
-              {PLAN.period}
+              {plan.period}
             </span>
           </span>
         </Link>
@@ -219,7 +235,10 @@ export function SiteHeader() {
         {/* Pushed to the right edge as one group, so the links and the call to
             action read as a single cluster rather than drifting apart. The
             section links drop below `md`; the call to action does not. */}
-        <nav className="ml-auto flex shrink-0 items-center gap-0.5 lg:gap-1" aria-label="Main">
+        <nav
+          className="ms-auto flex shrink-0 items-center gap-0.5 lg:gap-1"
+          aria-label={t.header.navLabel}
+        >
           <span className="hidden items-center gap-0.5 md:flex lg:gap-1">
           {NAV.map((item) => {
             const active = activeId === item.id
@@ -242,7 +261,7 @@ export function SiteHeader() {
                       : 'text-slate hover:text-navy'
                 }`}
               >
-                {item.label}
+                {item.label(t)}
                 {/* A dot, not a filled pill. The active item changes as you
                     scroll, and a block of navy sliding between three labels is
                     a lot of movement for a fact you only glance at. */}
@@ -259,14 +278,26 @@ export function SiteHeader() {
 
           <Link
             href={to(CTA.id)}
-            className={`inline-flex shrink-0 items-center rounded-full px-3.5 py-2.5 text-small font-semibold whitespace-nowrap transition-colors md:ml-1.5 lg:ml-2 lg:px-4 ${
+            className={`inline-flex shrink-0 items-center rounded-full px-3.5 py-2.5 text-small font-semibold whitespace-nowrap transition-colors md:ms-1.5 lg:ms-2 lg:px-4 ${
               light
                 ? 'bg-white text-navy hover:bg-white/90'
                 : 'bg-navy text-white hover:bg-navy-deep'
             }`}
           >
-            {CTA.label}
+            {CTA.label(t)}
           </Link>
+
+          {/* No language switcher, for now.
+
+              The Dhivehi edition is complete but has not been read by a native
+              speaker, so it is unlisted rather than published: reachable by
+              typing or sharing a `/dv` URL, and not offered in the chrome. The
+              proxy stops negotiating on `Accept-Language` for the same reason —
+              a Dhivehi-preferring browser should not be walked into an
+              unreviewed edition it did not ask for.
+
+              `components/site/language-switcher.tsx` is left in place and
+              working. Restoring the control is this import and this one line. */}
         </nav>
       </div>
     </header>

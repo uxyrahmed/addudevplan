@@ -6,6 +6,9 @@ import {
   gapOf,
   isMeasured,
 } from '@/lib/plan'
+import { getDictionary } from '@/lib/i18n/dictionaries'
+import { fill, fillNodes } from '@/lib/i18n/format'
+import type { Locale } from '@/lib/i18n/config'
 
 const pct = (n: number) => `${((n / POPULATION_SCALE_MAX) * 100).toFixed(2)}%`
 
@@ -22,7 +25,8 @@ const pct = (n: number) => `${((n / POPULATION_SCALE_MAX) * 100).toFixed(2)}%`
  * two would overstate the gap by every arrival since — so the newer register
  * gets its own line rather than being folded into the sum.
  */
-export function PopulationGap() {
+export function PopulationGap({ locale }: { locale: Locale }) {
+  const t = getDictionary(locale)
   const gap = gapOf(LATEST_POPULATION)
 
   return (
@@ -35,9 +39,7 @@ export function PopulationGap() {
       <span className="block font-display text-display-1 leading-[1.02] text-navy tabular-nums">
         {fmt(gap)}
       </span>
-      <span className="mt-3 block max-w-[24ch] text-lead text-ink">
-        people are registered in Addu but living elsewhere.
-      </span>
+      <span className="mt-3 block max-w-[24ch] text-lead text-ink">{t.home.gapSentence}</span>
     </p>
   )
 }
@@ -56,7 +58,8 @@ export function PopulationGap() {
  * the same fact where it belongs: 2025 is a row there, with an empty bar and
  * "Not yet counted" against it.
  */
-export function PopulationSources() {
+export function PopulationSources({ locale }: { locale: Locale }) {
+  const t = getDictionary(locale)
   const latest = LATEST_POPULATION
 
   return (
@@ -65,11 +68,11 @@ export function PopulationSources() {
           where it read as another quantity rather than as the date they were
           taken on. It leads the sentence instead. */}
       <p className="text-small text-stone tabular-nums">
-        In {latest.year}: {fmt(latest.registered)} on the register
+        {fill(t.home.sourcesLine, { year: latest.year, registered: fmt(latest.registered) })}
         <span aria-hidden className="mx-2 text-mist">
           ·
         </span>
-        {fmt(latest.resident)} living here
+        {fill(t.home.sourcesResident, { resident: fmt(latest.resident) })}
       </p>
     </div>
   )
@@ -86,16 +89,20 @@ export function PopulationSources() {
  * 2025 draws an outline and no fill, which is the honest shape for a year the
  * draft counts the register in but not the residents.
  */
-export function PopulationLedger() {
+export function PopulationLedger({ locale }: { locale: Locale }) {
+  const t = getDictionary(locale)
+
   return (
     <div>
       <div className="flex items-baseline justify-between border-b border-hairline pb-2.5">
-        <span className="font-body text-micro tracking-[0.1em] text-mist uppercase">Year</span>
+        <span className="font-body text-micro tracking-[0.1em] text-mist uppercase">
+          {t.background.ledgerYear}
+        </span>
         {/* "Not resident" named the category; the rows underneath said "away".
             One phrase for one thing, and the phrase is the one the sentence
             above the ledger already uses. */}
         <span className="font-body text-micro tracking-[0.1em] text-mist uppercase">
-          Living elsewhere
+          {t.background.ledgerLivingElsewhere}
         </span>
       </div>
 
@@ -112,8 +119,10 @@ export function PopulationLedger() {
                 {measured ? (
                   <>
                     <p className="text-small text-stone tabular-nums">
-                      <span className="text-ink">{fmt(row.resident)}</span> of{' '}
-                      {fmt(row.registered)} registered
+                      {fillNodes(t.background.ledgerOf, {
+                        resident: <span className="text-ink">{fmt(row.resident)}</span>,
+                        registered: fmt(row.registered),
+                      })}
                     </p>
                     {/* The word is the column header's job. Printed on all nine
                         rows it was nine repetitions of a label the reader
@@ -121,18 +130,18 @@ export function PopulationLedger() {
                         but figures. Kept for a screen reader, which meets these
                         rows one at a time and never sees the header beside
                         them. */}
-                    <p className="col-start-2 text-small text-plum tabular-nums sm:col-start-3 sm:text-right">
+                    <p className="col-start-2 text-small text-plum tabular-nums sm:col-start-3 sm:text-end">
                       {fmt(gapOf(row))}
-                      <span className="sr-only"> living elsewhere</span>
+                      <span className="sr-only">{t.background.ledgerLivingElsewhereSr}</span>
                     </p>
                   </>
                 ) : (
                   <>
                     <p className="text-small text-stone tabular-nums">
-                      {fmt(row.registered)} registered
+                      {fill(t.background.ledgerRegistered, { registered: fmt(row.registered) })}
                     </p>
-                    <p className="col-start-2 text-small text-mist sm:col-start-3 sm:text-right">
-                      Not yet counted
+                    <p className="col-start-2 text-small text-mist sm:col-start-3 sm:text-end">
+                      {t.background.ledgerNotCounted}
                     </p>
                   </>
                 )}
@@ -147,12 +156,16 @@ export function PopulationLedger() {
                 style={{ ['--w' as string]: pct(row.registered) }}
               >
                 <span
-                  className="absolute inset-y-0 left-0 rounded-[2px] border border-navy/35"
+                  className="absolute inset-y-0 start-0 rounded-[2px] border border-navy/35"
                   style={{ width: 'var(--w)' }}
                 />
                 {measured ? (
                   <span
-                    className="absolute inset-y-0 left-0 origin-left rounded-[2px] bg-navy"
+                    // No `origin-*` here: the fill's `transform-origin` belongs
+                    // to `[data-reveal="measure"]` in globals.css, which flips
+                    // it to the right edge when the page runs right to left. A
+                    // utility class would pin it to one side in both.
+                    className="absolute inset-y-0 start-0 rounded-[2px] bg-navy"
                     style={{ width: pct(row.resident) }}
                     data-reveal="measure"
                   />
@@ -169,11 +182,11 @@ export function PopulationLedger() {
       <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-small text-stone">
         <span className="inline-flex items-center gap-2.5">
           <span aria-hidden className="h-2.5 w-7 rounded-[2px] bg-navy" />
-          Living here
+          {t.background.legendLivingHere}
         </span>
         <span className="inline-flex items-center gap-2.5">
           <span aria-hidden className="h-2.5 w-7 rounded-[2px] border border-navy/35" />
-          On the register
+          {t.background.legendOnRegister}
         </span>
         {/* The scale note is gone. The page's own standfirst already says the
             years are drawn to one scale from zero, and a legend that has to

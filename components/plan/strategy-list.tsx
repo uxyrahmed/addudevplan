@@ -3,6 +3,9 @@
 import { useMemo } from 'react'
 import { FeedbackControl } from '@/components/feedback/feedback-control'
 import { useFeedback } from '@/components/feedback/feedback-store'
+import { useLocale } from '@/components/i18n/locale-provider'
+import { fill, fillNodes } from '@/lib/i18n/format'
+import { isolate } from '@/lib/i18n/bidi'
 import type { Goal } from '@/lib/plan'
 
 /**
@@ -11,6 +14,7 @@ import type { Goal } from '@/lib/plan'
  * this goal they are, which is what makes twelve goals feel finishable.
  */
 export function StrategyList({ goal }: { goal: Goal }) {
+  const { t, dir } = useLocale()
   const { countFor, ready } = useFeedback()
 
   const ids = useMemo(
@@ -26,8 +30,7 @@ export function StrategyList({ goal }: { goal: Goal }) {
       // nowhere to type one — every response control on this site belongs to an
       // action, and this goal has none yet. The state is named instead.
       <p className="rounded-3xl border border-dashed border-hairline p-8 text-lead text-stone">
-        Strategies for this goal are not published yet. They will appear here, each action open for
-        your response, as soon as they are.
+        {t.strategies.notPublished}
       </p>
     )
   }
@@ -47,13 +50,21 @@ export function StrategyList({ goal }: { goal: Goal }) {
       <div className="mb-12 rounded-2xl border border-hairline bg-white p-5" data-reveal="fade">
         <div className="flex items-baseline justify-between gap-4">
           <p className="text-small font-semibold text-ink" aria-busy={!ready}>
-            You have responded to{' '}
-            <span className="tabular-nums" style={{ color: goal.textColor }}>
-              {ready ? answered : '—'}
-            </span>{' '}
-            of {ids.length} actions
+            {fillNodes(t.strategies.responded, {
+              answered: (
+                <span className="tabular-nums" style={{ color: goal.textColor }}>
+                  {ready ? answered : '—'}
+                </span>
+              ),
+              total: ids.length,
+            })}
           </p>
-          <p className="text-small tabular-nums text-mist">{ready ? `${pct}%` : ''}</p>
+          {/* Composed here rather than read from a dictionary, so it needs the
+              same bidirectional isolate the dictionary strings get — otherwise
+              the per-cent sign lands to the left of the figure. */}
+          <p className="text-small tabular-nums text-mist">
+            {ready ? (dir === 'rtl' ? isolate(`${pct}%`) : `${pct}%`) : ''}
+          </p>
         </div>
         <div
           className="mt-3 h-1.5 overflow-hidden rounded-full bg-hairline"
@@ -61,7 +72,7 @@ export function StrategyList({ goal }: { goal: Goal }) {
           aria-valuenow={answered}
           aria-valuemin={0}
           aria-valuemax={ids.length}
-          aria-label={`Actions you have responded to in goal ${goal.number}`}
+          aria-label={fill(t.strategies.progressAria, { number: goal.number })}
         >
           {/* The transition arrives with the data. Before that the bar's real
               width is unknown, and animating from a placeholder zero to the
@@ -88,12 +99,14 @@ export function StrategyList({ goal }: { goal: Goal }) {
                 {strategy.number}
               </span>
  <h3 className="pt-2 font-heading text-title " style={{ color: goal.textColor }}>
-                <span className="sr-only">Strategy {strategy.number}: </span>
+                <span className="sr-only">
+                  {fill(t.strategies.strategyPrefix, { number: strategy.number })}
+                </span>
                 {strategy.title}
               </h3>
             </div>
 
-            <ul className="mt-6 space-y-4 sm:ml-[4.25rem]">
+            <ul className="mt-6 space-y-4 sm:ms-[4.25rem]">
               {strategy.actions.map((action) => (
                 <li
                   key={action.id}

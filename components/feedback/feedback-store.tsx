@@ -13,6 +13,7 @@ import {
 
 import { OVERALL_ID } from '@/lib/feedback-scope'
 import { REACTION_META, REACTION_VALUES, type WireReaction } from '@/lib/reactions'
+import { useLocale } from '@/components/i18n/locale-provider'
 
 export type Reaction = WireReaction
 
@@ -106,8 +107,7 @@ function toResponses(feedback: Feedback) {
     .sort((a, b) => (a.actionId < b.actionId ? -1 : a.actionId > b.actionId ? 1 : 0))
 }
 
-const OFFLINE_MESSAGE =
-  'Your feedback has not reached us yet — the connection dropped. Your answers are saved on this device and we will keep trying.'
+
 
 /**
  * Holds the visitor's response to every strategy and action, and keeps the
@@ -130,6 +130,29 @@ const OFFLINE_MESSAGE =
  * write secret and does the de-duplication.
  */
 export function FeedbackProvider({ children }: { children: ReactNode }) {
+  const { t } = useLocale()
+
+  /**
+   * The four failure messages, read through a ref.
+   *
+   * The send loop and the withdrawal below are `useCallback`s with empty
+   * dependency lists — deliberately, because a new `saveNow` identity restarts
+   * the quiet window and a basket that never settles never sends. Naming `t` in
+   * those lists would do exactly that on every render. A ref keeps the current
+   * language available to them without making them new functions.
+   *
+   * Seeded at mount and kept current in an effect rather than written during
+   * render. In practice the seed is always right — switching language is a
+   * navigation across two root layouts, so this provider is remounted, never
+   * re-rendered into another language — but a ref written during render is a
+   * side effect in a render pass, and this one would be invisible if it ever
+   * started to matter.
+   */
+  const messages = useRef(t.errors)
+  useEffect(() => {
+    messages.current = t.errors
+  }, [t])
+
   const [feedback, setFeedback] = useState<Feedback>({})
   const [status, setStatus] = useState<SaveStatus>('idle')
   const [error, setError] = useState<string | null>(null)
@@ -240,18 +263,13 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
       const data = (await res.json().catch(() => ({}))) as { error?: string }
       if (!res.ok) {
         setStatus('error')
-        setError(
-          data.error ??
-            'Your feedback could not be withdrawn. Nothing has been changed — please try again.',
-        )
+        setError(data.error ?? messages.current.withdrawFailed)
         return false
       }
       return true
     } catch {
       setStatus('error')
-      setError(
-        'Your feedback could not be withdrawn — the connection dropped. Nothing has been changed, so you can try again.',
-      )
+      setError(messages.current.withdrawOffline)
       return false
     } finally {
       inFlight.current = false
@@ -320,8 +338,7 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
 
         if (!res.ok) {
           fail(
-            data.error ??
-              'Your feedback could not be sent. Your answers are still on this device — please try again.',
+            data.error ?? messages.current.sendFailed,
             // A rejected payload will be rejected again; a full queue or a
             // service that is down may not be.
             res.status === 429 || res.status >= 500,
@@ -343,7 +360,7 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
       } catch {
         // Offline, or the request never reached the server. The basket is still
         // in localStorage, so nothing the visitor typed is lost.
-        fail(OFFLINE_MESSAGE, true)
+        fail(messages.current.sendOffline, true)
       } finally {
         inFlight.current = false
       }

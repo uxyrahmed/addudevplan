@@ -3,7 +3,9 @@
 import { useEffect, useRef } from 'react'
 import { loadGsap } from '@/lib/gsap'
 import { canAnimateRichly } from '@/lib/motion-prefs'
-import { MIGRATION_SERIES as DATA } from '@/lib/plan'
+import { useLocale } from '@/components/i18n/locale-provider'
+import { fill } from '@/lib/i18n/format'
+import type { LocalizedPlan } from '@/lib/plan-i18n'
 
 const W = 720
 /**
@@ -23,18 +25,31 @@ const H = 560
 const PAD = { top: 24, right: 34, bottom: 48, left: 46 }
 const MAX = 45
 
-const x = (i: number) =>
-  PAD.left + (i / (DATA.years.length - 1)) * (W - PAD.left - PAD.right)
+/**
+ * Takes the number of years rather than reading it off a module-level series.
+ * The chart is handed its data now — the series names are translated — so the
+ * count is not known until render.
+ */
+const x = (i: number, n: number) =>
+  PAD.left + (i / (n - 1)) * (W - PAD.left - PAD.right)
 const y = (v: number) => H - PAD.bottom - (v / MAX) * (H - PAD.top - PAD.bottom)
 
-const path = (values: readonly number[]) =>
-  values.map((v, i) => `${i === 0 ? 'M' : 'L'}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ')
+const path = (values: readonly number[], n: number) =>
+  values.map((v, i) => `${i === 0 ? 'M' : 'L'}${x(i, n).toFixed(1)},${y(v).toFixed(1)}`).join(' ')
 
 /**
  * Addu's share of the national population against Male''s — the out-migration
  * story the plan opens with. Lines draw themselves in on scroll.
  */
-export function MigrationChart() {
+/**
+ * `data` arrives with its two series names already in the reader's language.
+ * The years and the values are the same figures either way, and are what the
+ * geometry above is drawn against.
+ */
+export function MigrationChart({ data }: { data: LocalizedPlan['migration'] }) {
+  const { t } = useLocale()
+  const DATA = data
+  const n = DATA.years.length
   const ref = useRef<SVGSVGElement>(null)
 
   useEffect(() => {
@@ -94,9 +109,11 @@ export function MigrationChart() {
         {/* "Share of the Maldives" left the reader to supply the noun, and the
             two candidates — land and people — are not the same chart. */}
         <span className="font-body text-micro tracking-[0.1em] text-mist uppercase">
-          Share of the national population
+          {t.chart.nationalShare}
         </span>
-        <span className="font-body text-micro tracking-[0.1em] text-mist uppercase">1958–2022</span>
+        <span className="font-body text-micro tracking-[0.1em] text-mist uppercase">
+          {t.chart.nationalShareYears}
+        </span>
       </figcaption>
 
       {/* No min-width and no horizontal scroll: in a half-width column the old
@@ -109,7 +126,7 @@ export function MigrationChart() {
           viewBox={`0 0 ${W} ${H}`}
           className="block h-auto w-full"
           role="img"
-          aria-label={`${DATA.subtitle}. Addu falls from 9% in 1958 to 5.1% in 2022, while Male' rises from 11% to 40%.`}
+          aria-label={fill(t.chart.chartAria, { subtitle: DATA.subtitle })}
         >
           {[0, 10, 20, 30, 40].map((tick) => (
             <g key={tick}>
@@ -136,7 +153,7 @@ export function MigrationChart() {
             i % 2 === 0 || i === DATA.years.length - 1 ? (
               <text
                 key={year}
-                x={x(i)}
+                x={x(i, n)}
                 y={H - PAD.bottom + 20}
                 textAnchor="middle"
                 className="fill-stone text-[14px]"
@@ -146,11 +163,11 @@ export function MigrationChart() {
             ) : null,
           )}
 
-          {DATA.series.map((s) => (
-            <g key={s.name}>
+          {DATA.series.map((s, si) => (
+            <g key={si}>
               <path
                 data-line
-                d={path(s.values)}
+                d={path(s.values, n)}
                 fill="none"
                 stroke={s.color}
                 strokeWidth="2.5"
@@ -161,7 +178,7 @@ export function MigrationChart() {
                 <circle
                   key={i}
                   data-dot
-                  cx={x(i)}
+                  cx={x(i, n)}
                   cy={y(v)}
                   r="3.5"
                   fill="white"
@@ -175,8 +192,8 @@ export function MigrationChart() {
       </div>
 
       <div className="mt-3.5 flex flex-wrap items-center gap-x-6 gap-y-2 text-small text-stone">
-        {DATA.series.map((s) => (
-          <span key={s.name} className="inline-flex items-center gap-2">
+        {DATA.series.map((s, si) => (
+          <span key={si} className="inline-flex items-center gap-2">
             <span className="h-0.5 w-6 rounded-full" style={{ background: s.color }} />
             {s.name}
           </span>
@@ -187,10 +204,7 @@ export function MigrationChart() {
           as the bars", which pointed at a graphic with no name on the page and
           asserted that the two charts mean the same thing — a reading, not a
           measurement. */}
-      <p className="mt-3.5 text-small text-stone">
-        Addu&rsquo;s share of the Maldivian population fell from 9% to 5.1%. Male&rsquo;s rose from
-        11% to 40%.
-      </p>
+      <p className="mt-3.5 text-small text-stone">{t.chart.reading}</p>
     </figure>
   )
 }

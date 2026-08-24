@@ -5,6 +5,9 @@ import { useState } from 'react'
 import Comment01Icon from '@hugeicons/core-free-icons/Comment01Icon'
 import { Icon } from '@/components/ui/icon'
 import { useFeedback } from './feedback-store'
+import { useLocale } from '@/components/i18n/locale-provider'
+import { fill } from '@/lib/i18n/format'
+import type { Dictionary } from '@/lib/i18n/en'
 
 /**
  * A compact record of how far through the plan you are, and the way into the
@@ -38,16 +41,34 @@ export type GoalProgress = {
  * sits on a launcher, not in a status bar, and the panel behind it carries the
  * full sentence.
  */
-const SENDING = { label: 'Sending', dot: 'rgba(255,255,255,0.75)' }
-const STATE: Record<string, { label: string; dot: string }> = {
-  idle: { label: 'Review', dot: 'rgba(255,255,255,0.45)' },
-  pending: SENDING,
-  saving: SENDING,
-  saved: { label: 'Sent', dot: '#5BD3AC' },
-  error: { label: 'Not sent', dot: '#FF9BC4' },
+const DOT = {
+  idle: 'rgba(255,255,255,0.45)',
+  sending: 'rgba(255,255,255,0.75)',
+  saved: '#5BD3AC',
+  error: '#FF9BC4',
+} as const
+
+/**
+ * The word is looked up per render rather than baked into the table, because
+ * the table is module-level and the reader's language is not known until the
+ * pill is drawn.
+ */
+function pillState(status: string, t: Dictionary): { label: string; dot: string } {
+  switch (status) {
+    case 'pending':
+    case 'saving':
+      return { label: t.basket.sending, dot: DOT.sending }
+    case 'saved':
+      return { label: t.basket.sent, dot: DOT.saved }
+    case 'error':
+      return { label: t.basket.notSent, dot: DOT.error }
+    default:
+      return { label: t.basket.review, dot: DOT.idle }
+  }
 }
 
 export function FeedbackBasket({ goals }: { goals: GoalProgress[] }) {
+  const { t } = useLocale()
   const { count, overall, countFor, ready, status } = useFeedback()
   const [open, setOpen] = useState(false)
 
@@ -59,25 +80,27 @@ export function FeedbackBasket({ goals }: { goals: GoalProgress[] }) {
 
   const total = goals.reduce((n, goal) => n + goal.actionIds.length, 0)
   const started = goals.filter((goal) => countFor(goal.actionIds) > 0).length
-  const state = STATE[status] ?? STATE.idle!
+  const state = pillState(status, t)
 
   return (
     <>
       <button
         type="button"
         onClick={() => setOpen(true)}
-        aria-label={`Your feedback: ${count} of ${total} actions answered across ${started} of ${
-          goals.length
-        } goals${
-          overall ? ', and a comment on the plan as a whole' : ''
-        } — ${
-          status === 'saved'
-            ? 'sent to the council'
-            : status === 'error'
-              ? 'not sent yet'
-              : 'sending'
-        }. Open to review it.`}
-        className="basket-launcher fixed bottom-4 left-1/2 z-[130] flex -translate-x-1/2 items-center gap-3.5 rounded-full bg-navy py-3 pr-4 pl-5 text-white shadow-[0_10px_40px_-8px_rgba(0,77,128,0.6)] transition-colors hover:bg-navy-deep sm:bottom-6"
+        aria-label={fill(t.basket.launcherAria, {
+          count,
+          total,
+          started,
+          goals: goals.length,
+          overall: overall ? t.basket.overallClause : '',
+          state:
+            status === 'saved'
+              ? t.basket.stateSent
+              : status === 'error'
+                ? t.basket.stateNotSent
+                : t.basket.stateSending,
+        })}
+        className="basket-launcher fixed bottom-4 left-1/2 z-[130] flex -translate-x-1/2 items-center gap-3.5 rounded-full bg-navy py-3 pe-4 ps-5 text-white shadow-[0_10px_40px_-8px_rgba(0,77,128,0.6)] transition-colors hover:bg-navy-deep sm:bottom-6"
       >
         {/* Twelve segments, in document order, each filled by its own goal's
             progress. `aria-hidden` because the button's own label already
@@ -89,7 +112,7 @@ export function FeedbackBasket({ goals }: { goals: GoalProgress[] }) {
               and have nothing on the pill to say what was sent. */}
           {overall ? (
             <span
-              title="Your comment on the plan as a whole"
+              title={t.basket.overallTitle}
               className="grid h-5 w-5 place-items-center rounded-full bg-white/25"
             >
               <Icon icon={Comment01Icon} size={12} />
@@ -103,7 +126,7 @@ export function FeedbackBasket({ goals }: { goals: GoalProgress[] }) {
               return (
                 <span
                   key={goal.number}
-                  title={`Goal ${goal.number}: ${goal.title}`}
+                  title={fill(t.basket.goalTitle, { number: goal.number, title: goal.title })}
                   className="relative block h-5 w-[5px] overflow-hidden rounded-full bg-white/25"
                 >
                   <span

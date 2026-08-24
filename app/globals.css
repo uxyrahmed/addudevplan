@@ -138,7 +138,13 @@
     -webkit-font-smoothing: antialiased;
     /* No `text-rendering: optimizeLegibility` — it forces kerning/ligature
        work on every text node and is a well-known jank source on long pages. */
-    overflow-x: hidden;
+
+    /* `clip`, not `hidden`. Both stop sideways scroll, but `hidden` makes this
+       element a scroll container — and the spec then promotes the other axis
+       from `visible` to `auto`, so every `position: sticky` inside the body
+       resolves against a box that never scrolls and silently stops sticking.
+       `clip` does neither. */
+    overflow-x: clip;
   }
 
   h1,
@@ -753,4 +759,213 @@ html[data-anim] [data-enter][data-entered] {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ==========================================================================
+   The Dhivehi edition — Thaana, and a page that runs the other way
+
+   Everything below is scoped to `[dir='rtl']` or `:lang(dv)` and is inert on
+   the English site. The layout itself needs almost none of it: the components
+   are built on flexbox, grid and logical properties, so `dir="rtl"` on <html>
+   turns the page round on its own. What is left are the things CSS cannot
+   mirror by itself — a transform's origin, an animation's direction, and a
+   font that has no Thaana in it.
+   ========================================================================== */
+
+/* Anything that grows from an edge grows from the reading edge.
+
+   `transform-origin` takes physical keywords only — there is no logical
+   `inline-start` for it — so the three places that animate a `scaleX` have to
+   be told which side they start from. Get this wrong and the reading-progress
+   rail fills from the far end backwards. */
+[dir='rtl'] .rule,
+[dir='rtl'] .scroll-rail,
+html[data-anim][dir='rtl'] [data-reveal='draw'],
+html[data-anim][dir='rtl'] [data-reveal='measure'] {
+  transform-origin: right center;
+}
+
+/* An arrow's meaning is its direction, so it turns round with the page.
+   Set on the glyph itself, never on a wrapper — the wrappers carry the hover
+   nudge, and two rules writing `transform` on one element is one of them
+   winning silently. */
+[dir='rtl'] .icon-directional {
+  transform: scaleX(-1);
+}
+
+/* The review panel is docked to the inline-end edge, so it slides in from the
+   left in Dhivehi. `translateX` is physical; the sheet's own position is not. */
+@media (min-width: 640px) {
+  @keyframes sheet-in-rtl {
+    from {
+      transform: translateX(-100%);
+    }
+  }
+  [dir='rtl'] .panel-sheet {
+    animation-name: sheet-in-rtl;
+  }
+}
+
+/* The goal card's arrow travels toward the edge it points at. */
+@media (hover: hover) {
+  [dir='rtl'] .goal-card:hover .goal-card__arrow {
+    transform: translateX(-4px);
+  }
+}
+[dir='rtl'] .goal-card:focus-visible .goal-card__arrow {
+  transform: translateX(-4px);
+}
+
+/* -- type -------------------------------------------------------------------
+
+   Two Thaana faces in front of the Latin ones, not instead of them.
+
+   None of the three faces the English site runs draws a single Thaana letter,
+   so a Dhivehi page set in them falls through to whatever the device happens to
+   have. The Dhivehi edition puts its own in front:
+
+     display  MV Aammu FK — the big statements
+     heading  MV Typewriter — strategy titles and their actions, card titles,
+              labels, buttons, figures
+     body     MV Faseyha — the long reads
+
+   All three carry a real bold except MV Aammu FK, which ships one cut. That is
+   the right place for the gap: the display role is a single line set once, and
+   the two roles that actually take emphasis inside them — a label, a `<strong>`
+   in a paragraph — both have a drawn bold to reach for.
+
+   The Latin faces stay behind them rather than being replaced, and both Thaana
+   faces carry a `unicode-range` that stops at their own script (see
+   `app/[lang]/layout.tsx`). So each run of text is drawn by the face built for
+   it: Thaana by the Thaana fonts, and every figure in the plan, every "kWh" and
+   "MVR", and the goal titles still waiting to be translated by the same
+   Merriweather / Questrial / Google Sans the English edition sets them in.
+
+   Scoped to `:lang(dv)` rather than `[dir='rtl']`: this is about the script
+   being set, not about which way the page runs. */
+:lang(dv) {
+  --font-display: var(--font-thaana-display-face), var(--font-display-face), ui-serif, Georgia,
+    'Times New Roman', serif;
+  /* Google Sans behind the Thaana title face, not Questrial.
+
+     Questrial ships one weight, and the Latin in this edition has to be able to
+     go bold — see the weight rule further down. Google Sans has a real 700, and
+     is already the edition's other Latin face, so the digits in a figure and
+     the digits in the sentence under it come from the same drawing. */
+  --font-heading: var(--font-thaana-heading-face), var(--font-body-face), ui-sans-serif,
+    system-ui, sans-serif;
+  --font-body: var(--font-thaana-body-face), var(--font-body-face), system-ui, -apple-system,
+    sans-serif;
+
+  /* Leading, re-set at the scale rather than on `body`.
+
+     Thaana hangs its vowels above and below the consonant, so a line height
+     tuned for Latin puts the fili of one line into the fili of the next. The
+     first attempt at this set `line-height` on `body` and did almost nothing:
+     practically every string on this site is inside a `text-body`, `text-lead`
+     or `text-small`, and those utilities set their own line height from the
+     tokens in `@theme` — which overrode the one on `body` everywhere it
+     mattered. Redefining the tokens themselves is what actually reaches the
+     type, because the utilities resolve them per element and custom properties
+     cascade.
+
+     Roughly a third more than the Latin values across the reading sizes, and
+     rather less than that on the display sizes, where the type is large enough
+     that the marks have room without opening the lines so far the heading stops
+     reading as one object. */
+  /* Sizes are not touched here. Both editions run the one scale from `@theme`
+     above — only the leading and the word spacing below change for Thaana. A
+     `--dv-text-scale` multiplier briefly sat here, shrinking the reading sizes
+     to 0.92; it was tried against MV Faseyha and reverted. */
+
+  --text-display-1--line-height: 1.5;
+  --text-display-2--line-height: 1.55;
+  --text-display-3--line-height: 1.6;
+  --text-title--line-height: 1.75;
+  --text-lead--line-height: 2.3;
+  --text-body--line-height: 2.35;
+  --text-small--line-height: 2.25;
+  --text-micro--line-height: 1.95;
+
+  /* Space between words, not between letters.
+
+     Thaana joins, so tracking is the wrong tool: adding it prises the letters
+     of a word apart and the word stops reading as one shape. What the script
+     does want is a clearer gap at the word boundary, which `word-spacing`
+     gives without touching anything inside the word. It is set here on the
+     element rather than as a `--text-*` token because it applies at every size
+     equally — a word boundary is a word boundary. */
+  word-spacing: 0.22em;
+}
+
+/* The inherited default, for anything not carrying a size utility. */
+:lang(dv) body {
+  line-height: 2.35;
+}
+
+/* Headings take the display face, all four levels.
+
+   In English the split is by rank: h1 and h2 carry the serif, h3 and h4 carry
+   the grotesque, so a card title never inherits a display face. Dhivehi does
+   not want that split. MV Aammu FK is the edition's voice and the goal pages
+   are where the headings do the most work — "why this matters", "where we are
+   today", each strategy's title — and setting those in the label face left the
+   page with no heading voice at all below the goal title.
+
+   This deliberately catches heading *elements* only. `.font-heading` on a
+   paragraph or a span — the action text, the stat figures, the buttons — is
+   furniture rather than a heading, and stays in MV Typewriter. The class beats
+   the element rule on its own; naming the element alongside `:lang(dv)` is what
+   puts this back in front. */
+:lang(dv) h1,
+:lang(dv) h2,
+:lang(dv) h3,
+:lang(dv) h4 {
+  font-family: var(--font-display);
+}
+
+/* Latin runs at the weight the Thaana beside them is drawn at.
+
+   MV Aammu FK is a heavy face and ships only that one weight, so a figure like
+   "18.7 މިލިއަން" came out with the Thaana half at full strength and the Latin
+   half at 400 — two weights inside one phrase, a space apart. It reads as a
+   rendering fault rather than as a typographic choice, and it turns up wherever
+   the two scripts meet in a title: the stat figures, the goal numbers, the
+   strategy numerals, the target labels, the year range in the wordmark.
+
+   So everything set in the title or display role goes to 700 in this edition.
+   On the Thaana side that is a no-op — one weight is all there is, and
+   `font-synthesis-weight: none` stops the browser inventing another — so this
+   only ever moves the Latin, which is the half that was out of step.
+
+   Body copy is deliberately not in this list. Google Sans does have a 700, so a
+   rule loose enough to catch a paragraph would set the untranslated English
+   passages in bold. */
+:lang(dv) h1,
+:lang(dv) h2,
+:lang(dv) h3,
+:lang(dv) h4,
+:lang(dv) .font-display,
+:lang(dv) .font-heading {
+  font-weight: 700;
+}
+
+/* The negative tracking has to go: it is set in English to close up
+   Merriweather's wide fit, and on Thaana it prises joined letterforms apart. */
+:lang(dv) .font-display,
+:lang(dv) [class*='text-display-'] {
+  letter-spacing: normal;
+}
+
+/* The tracked uppercase eyebrow does not survive translation.
+
+   `text-transform: uppercase` is a no-op in Thaana — it has no case — and the
+   0.14em–0.18em tracking that gives the Latin eyebrow its quiet authority
+   prises Thaana's joined forms apart instead. Both are dropped, and the label
+   keeps its job through size and colour, which is most of what it was doing
+   anyway. */
+:lang(dv) .eyebrow,
+:lang(dv) [class*='text-micro'] {
+  letter-spacing: normal;
+  text-transform: none;
 }

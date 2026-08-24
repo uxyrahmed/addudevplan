@@ -13,17 +13,59 @@ import ArrowRight01Icon from '@hugeicons/core-free-icons/ArrowRight01Icon'
 import ArrowDown01Icon from '@hugeicons/core-free-icons/ArrowDown01Icon'
 import { Icon } from '@/components/ui/icon'
 import { OVERALL_ID } from '@/lib/feedback-scope'
-import { GOALS, TOTAL_ACTIONS } from '@/lib/plan'
+import { TOTAL_ACTIONS, type Goal, type Strategy, type Action } from '@/lib/plan'
+import { localizePlan } from '@/lib/plan-i18n'
+import { useLocale } from '@/components/i18n/locale-provider'
+import { fill, plural } from '@/lib/i18n/format'
+import { reactionWords } from '@/lib/i18n/reactions'
+import type { Locale } from '@/lib/i18n/config'
 import { REACTIONS, useFeedback } from './feedback-store'
 
-/** action id -> where it sits, for labelling the review list. */
-const INDEX = new Map(
-  GOALS.flatMap((goal) =>
-    goal.strategies.flatMap((strategy) =>
-      strategy.actions.map((action) => [action.id, { goal, strategy, action }] as const),
+type PlanIndex = {
+  /** action id -> where it sits, for labelling the review list. */
+  index: Map<string, { goal: Goal; strategy: Strategy; action: Action }>
+  /** Every action in a goal, in plan order. */
+  actionIds: Map<number, string[]>
+}
+
+const INDEXES = new Map<Locale, PlanIndex>()
+
+/**
+ * The two lookups this panel reads the plan through, per language.
+ *
+ * Built once each and cached, the way they used to be module constants — they
+ * derive from `localizePlan`, which is itself static per locale, so there is
+ * nothing here that can change between renders. Cached by locale rather than
+ * built in a `useMemo` so the work is not repeated for every reader who opens
+ * the panel.
+ *
+ * The keys are the plan's own ids and goal numbers, which are the same in both
+ * languages: only the text differs, so a response filed in English reads back
+ * correctly in Dhivehi and the other way round.
+ */
+function planIndex(locale: Locale): PlanIndex {
+  const cached = INDEXES.get(locale)
+  if (cached) return cached
+
+  const { goals } = localizePlan(locale)
+  const built: PlanIndex = {
+    index: new Map(
+      goals.flatMap((goal) =>
+        goal.strategies.flatMap((strategy) =>
+          strategy.actions.map((action) => [action.id, { goal, strategy, action }] as const),
+        ),
+      ),
     ),
-  ),
-)
+    actionIds: new Map(
+      goals.map((goal) => [
+        goal.number,
+        goal.strategies.flatMap((strategy) => strategy.actions.map((action) => action.id)),
+      ]),
+    ),
+  }
+  INDEXES.set(locale, built)
+  return built
+}
 
 const REACTION_BY_ID = new Map(REACTIONS.map((r) => [r.id, r]))
 
@@ -40,14 +82,6 @@ const TONE = {
   working: { tint: 'var(--color-shell)', ink: 'var(--color-stone)' },
   trouble: { tint: 'color-mix(in oklab, #970E53 9%, white)', ink: '#7c0b45' },
 } as const
-
-/** Every action in a goal, in plan order. Static, so it is built once. */
-const GOAL_ACTION_IDS = new Map(
-  GOALS.map((goal) => [
-    goal.number,
-    goal.strategies.flatMap((strategy) => strategy.actions.map((action) => action.id)),
-  ]),
-)
 
 /**
  * The guide through the twelve goals, and the place a resident reads back what
@@ -70,6 +104,9 @@ const GOAL_ACTION_IDS = new Map(
  * being a dead end.
  */
 export function FeedbackPanel({ onClose }: { onClose: () => void }) {
+  const { t, locale, plan, href } = useLocale()
+  const { actionIds: GOAL_ACTION_IDS } = planIndex(locale)
+  const GOALS = localizePlan(locale).goals
   const {
     feedback,
     count,
@@ -123,16 +160,20 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
 
   /** Your answers, grouped by goal and kept in plan order within each. */
   const answersByGoal = useMemo(() => {
+    // Looked up in here rather than named as a dependency: `planIndex` returns
+    // the same cached maps for a given language, and a `Map` in a dependency
+    // list is a value the compiler has to assume something may mutate.
+    const { index } = planIndex(locale)
     const byGoal = new Map<number, { id: string; label: string; strategy: string }[]>()
     for (const id of Object.keys(feedback)) {
-      const hit = INDEX.get(id)
+      const hit = index.get(id)
       if (!hit) continue
       const list = byGoal.get(hit.goal.number) ?? []
       list.push({ id, label: hit.action.text, strategy: hit.strategy.title })
       byGoal.set(hit.goal.number, list)
     }
     return byGoal
-  }, [feedback])
+  }, [feedback, locale])
 
   const goalsStarted = GOALS.filter(
     (goal) => countFor(GOAL_ACTION_IDS.get(goal.number) ?? []) > 0,
@@ -150,33 +191,35 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
   const state = useMemo(() => {
     switch (status) {
       case 'saving':
-        return { ...TONE.working, icon: Loading03Icon, message: 'Sending…' }
+        return { ...TONE.working, icon: Loading03Icon, message: t.panel.statusSending }
       case 'pending':
-        return { ...TONE.working, icon: SentIcon, message: 'Sending shortly' }
+        return { ...TONE.working, icon: SentIcon, message: t.panel.statusSendingShortly }
       case 'error':
         return {
           ...TONE.trouble,
           icon: AlertCircleIcon,
-          message: error ?? 'Not sent yet. Your answers are saved on this device.',
+          message: error ?? t.panel.statusNotSent,
         }
       case 'saved':
         return {
           ...TONE.done,
           icon: CheckmarkCircle02Icon,
           message: savedAt
-            ? `${revised ? 'Updated' : 'Sent'} at ${TIME.format(savedAt)}`
+            ? fill(revised ? t.panel.statusUpdatedAt : t.panel.statusSentAt, {
+                time: TIME.format(savedAt),
+              })
             : revised
-              ? 'Updated'
-              : 'Sent',
+              ? t.panel.statusUpdated
+              : t.panel.statusSent,
         }
       default:
-        return { ...TONE.working, icon: SentIcon, message: 'Your answers send themselves' }
+        return { ...TONE.working, icon: SentIcon, message: t.panel.statusIdle }
     }
-  }, [status, error, revised, savedAt])
+  }, [status, error, revised, savedAt, t])
 
   function download() {
     const payload = {
-      plan: 'Addu Development Plan 2026–2031',
+      plan: `${plan.title} ${plan.period}`,
       exportedAt: new Date().toISOString(),
       // Its own field rather than a row among the actions: it is not one, and a
       // copy that quietly filed it under a goal would misrepresent what was
@@ -207,23 +250,28 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
       <aside
         role="dialog"
         aria-modal="true"
-        aria-label="Your feedback on the plan"
-        className="panel-sheet fixed inset-x-0 bottom-0 z-[150] flex max-h-[88dvh] flex-col rounded-t-[28px] bg-white sm:inset-y-0 sm:right-0 sm:left-auto sm:max-h-none sm:w-[min(31rem,100vw)] sm:rounded-t-none sm:rounded-l-[28px]"
+        aria-label={t.panel.dialogLabel}
+        className="panel-sheet fixed inset-x-0 bottom-0 z-[150] flex max-h-[88dvh] flex-col rounded-t-[28px] bg-white sm:inset-y-0 sm:end-0 sm:start-auto sm:max-h-none sm:w-[min(31rem,100vw)] sm:rounded-t-none sm:rounded-s-[28px]"
       >
         <header className="border-b border-hairline px-6 pt-6 pb-5">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h2 className="text-title">Your feedback</h2>
+              <h2 className="text-title">{t.panel.title}</h2>
               <p className="mt-1 text-small text-stone tabular-nums">
-                {count} of {TOTAL_ACTIONS} actions · {goalsStarted} of {GOALS.length} goals started
+                {fill(t.panel.summary, {
+                  count,
+                  total: TOTAL_ACTIONS,
+                  started: goalsStarted,
+                  goals: GOALS.length,
+                })}
               </p>
             </div>
             <button
               ref={closeRef}
               type="button"
               onClick={onClose}
-              aria-label="Close"
-              className="-mr-1 rounded-full p-2 text-stone transition-colors hover:bg-shell hover:text-ink"
+              aria-label={t.panel.close}
+              className="-me-1 rounded-full p-2 text-stone transition-colors hover:bg-shell hover:text-ink"
             >
               <Icon icon={Cancel01Icon} size={20} />
             </button>
@@ -250,7 +298,7 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
               has answered actions and never found the box would never learn it
               was there. */}
           <div className="mb-5 rounded-2xl bg-shell p-4">
-            <p className="text-small font-semibold text-ink">The plan as a whole</p>
+            <p className="text-small font-semibold text-ink">{t.panel.planAsWhole}</p>
             {overall ? (
               <>
                 <div className="mt-1.5 flex items-start justify-between gap-3">
@@ -258,29 +306,29 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
                   <button
                     type="button"
                     onClick={() => remove(OVERALL_ID)}
-                    aria-label="Remove your comment on the plan as a whole"
+                    aria-label={t.panel.removeOverallAria}
                     className="mt-0.5 shrink-0 rounded-md p-1 text-mist transition-colors hover:text-plum"
                   >
                     <Icon icon={Delete02Icon} size={15} />
                   </button>
                 </div>
                 <Link
-                  href="/#feedback"
+                  href={href('/#feedback')}
                   onClick={onClose}
                   className="mt-2.5 inline-flex items-center gap-1.5 text-small font-semibold text-navy hover:underline"
                 >
-                  Change what you said
-                  <Icon icon={ArrowRight01Icon} size={15} />
+                  {t.panel.changeWhatYouSaid}
+                  <Icon icon={ArrowRight01Icon} size={15} directional />
                 </Link>
               </>
             ) : (
               <Link
-                href="/#feedback"
+                href={href('/#feedback')}
                 onClick={onClose}
                 className="mt-1.5 inline-flex items-center gap-1.5 text-small font-semibold text-navy hover:underline"
               >
-                Say something about the plan itself
-                <Icon icon={ArrowRight01Icon} size={15} />
+                {t.panel.sayAboutPlan}
+                <Icon icon={ArrowRight01Icon} size={15} directional />
               </Link>
             )}
           </div>
@@ -336,9 +384,17 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
                         type="button"
                         onClick={() => setOpenGoal(isOpen ? null : goal.number)}
                         aria-expanded={isOpen}
-                        aria-label={`${isOpen ? 'Hide' : 'Show'} your ${answers.length} ${
-                          answers.length === 1 ? 'answer' : 'answers'
-                        } on goal ${goal.number}`}
+                        aria-label={fill(
+                          isOpen ? t.panel.hideAnswersAria : t.panel.showAnswersAria,
+                          {
+                            count: answers.length,
+                            noun: plural(answers.length, {
+                              one: t.panel.answerOne,
+                              other: t.panel.answerOther,
+                            }),
+                            number: goal.number,
+                          },
+                        )}
                         className="shrink-0 rounded-full p-1.5 text-stone transition-colors hover:bg-shell hover:text-ink"
                       >
                         <span
@@ -349,12 +405,15 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
                       </button>
                     ) : (
                       <Link
-                        href={`/goals/${goal.slug}`}
+                        href={href(`/goals/${goal.slug}`)}
                         onClick={onClose}
-                        aria-label={`Start goal ${goal.number}: ${goal.title}`}
+                        aria-label={fill(t.panel.startGoalAria, {
+                          number: goal.number,
+                          title: goal.title,
+                        })}
                         className="shrink-0 rounded-full p-1.5 text-mist transition-colors hover:bg-shell hover:text-navy"
                       >
-                        <Icon icon={ArrowRight01Icon} size={18} />
+                        <Icon icon={ArrowRight01Icon} size={18} directional />
                       </Link>
                     )}
                   </div>
@@ -371,7 +430,7 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
                     data-open={isOpen ? '' : undefined}
                   >
                     <div className="min-h-0 overflow-hidden">
-                      <ul className="space-y-2.5 border-l border-hairline pb-4 pl-4">
+                      <ul className="space-y-2.5 border-s border-hairline pb-4 ps-4">
                         {answers.map((item) => {
                           const entry = feedback[item.id]
                           const r = entry?.reaction ? REACTION_BY_ID.get(entry.reaction) : undefined
@@ -382,7 +441,9 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
                                 <button
                                   type="button"
                                   onClick={() => remove(item.id)}
-                                  aria-label={`Remove your feedback on: ${item.label}`}
+                                  aria-label={fill(t.panel.removeFeedbackAria, {
+                                    label: item.label,
+                                  })}
                                   className="mt-0.5 shrink-0 rounded-md p-1 text-mist transition-colors hover:text-plum"
                                 >
                                   <Icon icon={Delete02Icon} size={15} />
@@ -397,7 +458,7 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
                                       color: r.color,
                                     }}
                                   >
-                                    {r.short}
+                                    {reactionWords(t, r.id).short}
                                   </span>
                                 ) : null}
                                 {entry?.comment?.trim() ? (
@@ -409,14 +470,14 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
                         })}
                         <li>
                           <Link
-                            href={`/goals/${goal.slug}`}
+                            href={href(`/goals/${goal.slug}`)}
                             onClick={onClose}
                             className="inline-flex items-center gap-1.5 text-small font-semibold text-navy hover:underline"
                           >
                             {done < ids.length
-                              ? `Answer the remaining ${ids.length - done}`
-                              : 'Open this goal'}
-                            <Icon icon={ArrowRight01Icon} size={15} />
+                              ? fill(t.panel.answerRemaining, { count: ids.length - done })
+                              : t.panel.openThisGoal}
+                            <Icon icon={ArrowRight01Icon} size={15} directional />
                           </Link>
                         </li>
                       </ul>
@@ -450,7 +511,7 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
                   onClick={saveNow}
                   className="mt-1.5 font-bold underline underline-offset-2"
                 >
-                  {status === 'error' ? 'Try again now' : 'Send now'}
+                  {status === 'error' ? t.panel.tryAgainNow : t.panel.sendNow}
                 </button>
               ) : null}
             </div>
@@ -459,7 +520,7 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
           {/* Said once, next to the thing that does it, rather than in a
               privacy page nobody opens. */}
           <p className="mt-2.5 text-center text-micro tracking-normal text-mist">
-            Sent anonymously
+            {t.panel.sentAnonymously}
           </p>
           <div className="mt-3 flex items-center justify-between gap-3 text-small">
             <button
@@ -468,14 +529,14 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
               className="inline-flex items-center gap-1.5 font-semibold text-navy hover:underline"
             >
               <Icon icon={Download01Icon} size={15} />
-              Download a copy
+              {t.panel.downloadCopy}
             </button>
             <button
               type="button"
               onClick={() => setConfirming(true)}
               className="font-semibold text-stone hover:text-plum"
             >
-              Delete my feedback
+              {t.panel.deleteMyFeedback}
             </button>
           </div>
         </footer>
@@ -496,12 +557,16 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
           >
             <div className="w-full rounded-t-[24px] bg-white p-6 sm:rounded-[24px]">
               <h3 id="clear-title" className="text-title">
-                Delete your feedback?
+                {t.panel.confirmTitle}
               </h3>
               <p id="clear-body" className="mt-2 text-small text-stone">
-                This withdraws all {filed} {filed === 1 ? 'response' : 'responses'} from the
-                consultation and clears them from this device. The council will no longer have
-                them, and this cannot be undone.
+                {fill(t.panel.confirmBody, {
+                  count: filed,
+                  noun: plural(filed, {
+                    one: t.panel.responseOne,
+                    other: t.panel.responseOther,
+                  }),
+                })}
               </p>
 
               <div className="mt-5 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
@@ -512,7 +577,7 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
                   disabled={clearing}
                   className="rounded-full border border-hairline px-5 py-3 text-small font-bold text-ink transition-colors hover:bg-shell disabled:opacity-50"
                 >
-                  Keep my feedback
+                  {t.panel.keepMyFeedback}
                 </button>
                 <button
                   type="button"
@@ -525,7 +590,7 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
                   <span className={clearing ? 'motion-safe:animate-spin' : undefined}>
                     <Icon icon={clearing ? Loading03Icon : Delete02Icon} size={16} />
                   </span>
-                  {clearing ? 'Deleting…' : 'Delete everything'}
+                  {clearing ? t.panel.deleting : t.panel.deleteEverything}
                 </button>
               </div>
 

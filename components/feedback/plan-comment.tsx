@@ -8,6 +8,7 @@ import { Icon } from '@/components/ui/icon'
 import { MAX_COMMENT_LENGTH } from '@/lib/feedback-limits'
 import { OVERALL_ID } from '@/lib/feedback-scope'
 import { useCommentDraft } from './use-comment-draft'
+import { useLocale } from '@/components/i18n/locale-provider'
 
 /** Show the count only once the limit is close enough to matter. */
 const COUNTER_FROM = MAX_COMMENT_LENGTH - 400
@@ -30,6 +31,7 @@ const COUNTER_FROM = MAX_COMMENT_LENGTH - 400
  * the page and is the entire point of the block it sits in.
  */
 export function PlanComment() {
+  const { t } = useLocale()
   const fieldId = useId()
   const field = useRef<HTMLTextAreaElement>(null)
   const { value, posted, trimmed, setDraft, unposted, canPost, post, discard } =
@@ -44,7 +46,7 @@ export function PlanComment() {
           belongs to one action was saying what the heading and the placeholder
           already say between them, and paid three lines for it. */}
       <h3 id={`${fieldId}-title`} className="font-heading text-title text-ink">
-        On the plan as a whole
+        {t.planComment.title}
       </h3>
 
       <textarea
@@ -60,7 +62,7 @@ export function PlanComment() {
             post()
           }
         }}
-        placeholder="What should the council know about the plan as a whole?"
+        placeholder={t.planComment.placeholder}
         aria-labelledby={`${fieldId}-title`}
         aria-describedby={`${fieldId}-state`}
         className="mt-4 w-full resize-y rounded-2xl border border-hairline bg-shell px-4 py-3 text-small text-ink placeholder:text-mist focus:border-navy focus:bg-white focus:outline-none"
@@ -76,11 +78,11 @@ export function PlanComment() {
             no button shows: a box emptied while a comment is still filed. */}
         <p id={`${fieldId}-state`} className="text-micro tracking-normal text-mist">
           {unposted && !trimmed ? (
-            'Cleared here only — Remove takes it out of your feedback'
+            t.control.clearedHereOnly
           ) : !unposted && posted ? (
             <span className="inline-flex items-center gap-1.5 text-stone">
               <Icon icon={Tick02Icon} size={14} />
-              Posted with your feedback
+              {t.control.postedWithFeedback}
             </span>
           ) : null}
           {value.length > COUNTER_FROM ? (
@@ -102,7 +104,7 @@ export function PlanComment() {
               className="inline-flex min-h-11 items-center gap-1.5 rounded-full px-3 py-1.5 text-small font-semibold text-stone transition-colors hover:text-plum"
             >
               <Icon icon={Delete02Icon} size={15} />
-              Remove
+              {t.control.remove}
             </button>
           ) : null}
 
@@ -113,7 +115,7 @@ export function PlanComment() {
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-navy px-5 py-2 text-small font-bold text-white transition-colors hover:bg-navy-deep disabled:cursor-default disabled:bg-hairline disabled:text-mist"
           >
             <Icon icon={SentIcon} size={15} />
-            {posted ? 'Update' : 'Post'}
+            {posted ? t.control.update : t.control.post}
           </button>
         </div>
       </div>

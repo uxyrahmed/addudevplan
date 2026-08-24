@@ -15,6 +15,13 @@ const NAV = [
  * Deliberately not the public site's header: no goal navigation, no smooth
  * scrolling, no feedback basket — this is a reading tool for staff, and the
  * consultation's furniture would only get in the way of a long table.
+ *
+ * Two bands rather than one. The three things in this header answer three
+ * different questions — where am I, what can I read, who am I signed in as —
+ * and on one line they wrapped into each other at every width between a phone
+ * and a laptop, which put "Sign out" directly beside "Comments". Identity sits
+ * above; the tabs sit below on their own baseline, where the underline marking
+ * the open one has somewhere to go.
  */
 export function AdminShell({
   viewer,
@@ -28,7 +35,7 @@ export function AdminShell({
   return (
     <div className="min-h-dvh bg-shell">
       <header className="border-b border-hairline bg-white">
-        <div className="mx-auto flex max-w-[76rem] flex-wrap items-center gap-x-6 gap-y-3 px-6 py-4">
+        <div className="mx-auto flex max-w-[76rem] flex-wrap items-center gap-x-6 gap-y-2 px-6 pt-4">
           <Link href="/admin" className="flex items-center gap-3">
             <Image
               src="/plan/brand/city-of-addu-bird.png"
@@ -37,28 +44,10 @@ export function AdminShell({
               height={176}
               className="h-7 w-auto"
             />
-            <span className="font-heading text-small text-navy">
-              {PLAN.title} — consultation results
+            <span className="font-heading text-small leading-snug text-navy">
+              {PLAN.title} <span className="text-mist">— consultation results</span>
             </span>
           </Link>
-
-          <nav aria-label="Results" className="flex items-center gap-1">
-            {NAV.map((item) => {
-              const active = item.href === current
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  aria-current={active ? 'page' : undefined}
-                  className={`rounded-full px-3.5 py-1.5 text-small font-semibold transition-colors ${
-                    active ? 'bg-navy text-white' : 'text-stone hover:bg-shell hover:text-navy'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              )
-            })}
-          </nav>
 
           <div className="ml-auto flex items-center gap-4 text-small">
             <span className="text-stone">{viewer.name ?? viewer.email}</span>
@@ -72,6 +61,29 @@ export function AdminShell({
             </form>
           </div>
         </div>
+
+        <nav aria-label="Results" className="mx-auto max-w-[76rem] px-6">
+          <ul className="-mb-px flex items-center gap-6">
+            {NAV.map((item) => {
+              const active = item.href === current
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={active ? 'page' : undefined}
+                    className={`inline-block border-b-2 py-3 text-small font-semibold transition-colors ${
+                      active
+                        ? 'border-navy text-navy'
+                        : 'border-transparent text-stone hover:border-hairline hover:text-navy'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+        </nav>
       </header>
 
       <main className="mx-auto max-w-[76rem] px-6 py-10">{children}</main>

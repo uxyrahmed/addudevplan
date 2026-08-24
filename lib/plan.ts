@@ -1467,18 +1467,16 @@ export const INITIATIVES: Initiative[] = [
 
 /* --------------------------------------------------------------- helpers */
 
-export function getGoal(slug: string): Goal | undefined {
-  return GOALS.find((g) => g.slug === slug)
-}
-
-export function goalNeighbours(slug: string): { prev: Goal; next: Goal } | null {
-  const i = GOALS.findIndex((g) => g.slug === slug)
-  if (i === -1) return null
-  return {
-    prev: GOALS[(i - 1 + GOALS.length) % GOALS.length],
-    next: GOALS[(i + 1) % GOALS.length],
-  }
-}
+/*
+ * Looking a goal up by slug, and finding its neighbours, live in
+ * `lib/plan-i18n.ts` as `getLocalizedGoal` and `localizedGoalNeighbours`.
+ *
+ * There are deliberately no English-only versions here any more. There were,
+ * and they returned the goals in this file verbatim — which is correct only for
+ * a reader on the English site, and silently wrong for anyone else. A lookup
+ * that takes no language is a lookup that will eventually be called from a page
+ * that has one.
+ */
 
 /** Every action id in the plan — the feedback layer's universe. */
 export function allActions(): { goal: Goal; strategy: Strategy; action: Action }[] {

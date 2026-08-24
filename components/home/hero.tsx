@@ -9,13 +9,14 @@ import { Icon } from '@/components/ui/icon'
 import { SplitHeading } from '@/components/motion/split-heading'
 import { loadGsap } from '@/lib/gsap'
 import { canAnimateRichly } from '@/lib/motion-prefs'
-import { PLAN } from '@/lib/plan'
+import { useLocale } from '@/components/i18n/locale-provider'
 
 /**
  * Opening slide. The White Tern — endemic to Addu and the plan's own cover
  * animal — drifts on a slow parallax while the title lines rise.
  */
 export function Hero() {
+  const { t, plan, href } = useLocale()
   const root = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -72,7 +73,7 @@ export function Hero() {
         <div data-hero-image className="absolute inset-0 will-change-transform">
           <Image
             src="/plan/hero/white-tern.jpg"
-            alt="A White Tern in flight over Addu — a bird found only here."
+            alt={t.hero.imageAlt}
             fill
             priority
             sizes="100vw"
@@ -91,7 +92,7 @@ export function Hero() {
           delay={0.15}
           className="max-w-[22ch] font-display text-display-1 !text-white"
         >
-          Addu Development Plan
+          {plan.title}
         </SplitHeading>
 
         <p
@@ -99,19 +100,19 @@ export function Hero() {
           data-enter=""
           className="mt-4 font-heading text-[clamp(2rem,5vw,3.5rem)] leading-none text-white/90"
         >
-          {PLAN.period}
+          {plan.period}
         </p>
 
         <div className="mt-9 flex flex-wrap items-center gap-x-3 gap-y-4">
           <Link
             data-hero-cta
             data-enter=""
-            href="/#goals"
+            href={href('/#goals')}
             className="group inline-flex items-center gap-2.5 rounded-full bg-white px-6 py-3.5 font-heading text-small text-navy transition-colors hover:bg-sky hover:text-white"
           >
-            Explore the twelve goals
-            <span className="transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1">
-              <Icon icon={ArrowRight02Icon} size={18} />
+            {t.hero.exploreGoals}
+            <span className="transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
+              <Icon icon={ArrowRight02Icon} size={18} directional />
             </span>
           </Link>
 
@@ -124,7 +125,7 @@ export function Hero() {
             <span className="grid h-8 w-8 animate-bounce place-items-center rounded-full border border-white/35 motion-reduce:animate-none">
               <Icon icon={ArrowDown01Icon} size={16} />
             </span>
-            Start reading
+            {t.hero.startReading}
           </a>
         </div>
       </div>
