@@ -69,6 +69,16 @@ for (const file of manifest.files) {
 const MARKER = /\[\d{3,4}\]/
 const THAANA = /[ހ-޿]/
 const SLOT = /\{[a-zA-Z]+\}/g
+
+/**
+ * Unit symbols and currency codes, spelled as `lib/plan.ts` spells them.
+ *
+ * Kept in step with `scripts/i18n-units.mts`, which is what puts them into the
+ * Dhivehi in the first place. A symbol is not English left untranslated — it is
+ * the same mark in both languages, so a segment made only of figures and
+ * symbols is fully translated when it comes back unchanged.
+ */
+const SYMBOL = /\b(kWh|kWp|MWh|GWh|MW|kW|MVR|USD|cbm|sqm|ha|km)\b/g
 const FIGURE = /\d[\d,.]*/g
 
 /**
@@ -171,7 +181,13 @@ for (const name of returned) {
     // and the only correct answer is to hand it back unchanged. Testing the raw
     // English would see the Latin letters *inside* the braces and demand Thaana
     // of a segment with no word in it.
-    if (!THAANA.test(text) && /[A-Za-z]/.test(entry.en.replace(SLOT, ''))) {
+    //
+    // Unit symbols come out for the same reason. "16.2 kWh" is a figure and a
+    // symbol, and both are written identically in Dhivehi — so the correct
+    // translation is the English, character for character, and demanding Thaana
+    // of it rejects the right answer. `kWh` is not a word that was left
+    // untranslated; it is the unit's name in both languages.
+    if (!THAANA.test(text) && /[A-Za-z]/.test(entry.en.replace(SLOT, '').replace(SYMBOL, ''))) {
       problems.push({ id, kind: 'not translated', detail: text.slice(0, 60) })
       continue
     }

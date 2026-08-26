@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "i18n:extract": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n-extract.mts",
-    "i18n:apply": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n-apply.mts"
+    "i18n:apply": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n-apply.mts",
+    "i18n:units": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n-units.mts"
   },
   "dependencies": {
     "@hugeicons/core-free-icons": "^4.2.3",

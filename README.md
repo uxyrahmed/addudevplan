@@ -50,7 +50,7 @@ relevant guide in `node_modules/next/dist/docs/` before writing new code. See
 | `proxy.ts` | The `/admin` gate and session refresh, plus the locale redirect for any public path arriving without one. Next 16's rename of `middleware` |
 | `lib/plan.ts` | The whole content model: plan metadata, vision, pillars, goals, strategies, actions. English, and the source every translation overlays |
 | `lib/plan-translations/` | Translations of the plan itself, keyed by the ids in `lib/plan.ts`. Partial by design — a goal at a time. Generated; see `scripts/` |
-| `scripts/` | The translation round trip: `i18n-extract.mts` writes the English out, `i18n-apply.mts` puts what comes back in |
+| `scripts/` | The translation round trip: `i18n-extract.mts` writes the English out, `i18n-apply.mts` puts what comes back in, `i18n-units.mts` restores the unit symbols |
 | `translation/` | The English transcript that goes out, the Dhivehi that comes back, and the manifest tying the two together |
 | `lib/plan-i18n.ts` | Merges the two and caches the result per language |
 | `lib/i18n/` | The locale list, the UI dictionaries, and the `{name}` placeholder helpers |
@@ -128,6 +128,7 @@ Both files are **generated**. Editing them by hand loses the edit on the next ru
 npm run i18n:extract          # writes the English out to translation/english/
 npm run i18n:apply            # reports what came back; writes nothing
 npm run i18n:apply -- --write # regenerates both dv.ts files
+npm run i18n:units -- --write # puts unit symbols back where the English has one
 ```
 
 [`scripts/i18n-extract.mts`](scripts/i18n-extract.mts) walks both English sources and

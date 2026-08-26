@@ -68,6 +68,29 @@ This regenerates `lib/i18n/dv.ts` and `lib/plan-translations/dv.ts`. Both are
 generated files from then on — editing them by hand loses the edit the next time
 this runs. Fix the file in `dhivehi/` and re-run instead.
 
+## Units keep their symbols
+
+A translation tool will render `kWh` as `ކިލޯވޮޓް-އަވަރ` and `MVR` as
+`ދިވެހި ރުފިޔާ`. As prose that is right; in a figure rail it is not, because the
+English beside it reads `16.2 kWh` and a unit is a symbol rather than a word.
+
+```bash
+npm run i18n:units            # report
+npm run i18n:units -- --write # edit the transcripts, then re-run i18n:apply
+```
+
+The rule is narrow and checkable: **where the English writes a symbol, the
+Dhivehi writes the same symbol** — and only there. `1,268 hectares of land`
+spells its unit out in English, so the Dhivehi does too; `million` stays
+`މިލިއަން`, being a word and not a unit.
+
+It edits `translation/dhivehi/`, never the generated files, so the change
+survives the next `i18n:apply`. Dhivehi inflects the noun being replaced, and
+two of the three endings cannot simply be left in place — `ކިއުބިކް މީޓަރަށް`
+becomes `cbm އަށް` and `ކިއުބިކް މީޓަރެއް` becomes `cbm އެއް`, with alifu
+carrying the vowel that was written onto the noun. Only the genitive `ގެ` is
+already a whole word.
+
 ## What it refuses to accept
 
 A returned file can come back reordered, short, doubled, or with the tool's own
