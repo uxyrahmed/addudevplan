@@ -49,7 +49,9 @@ relevant guide in `node_modules/next/dist/docs/` before writing new code. See
 | `app/api/admin/export/` | CSV and JSON export of every response |
 | `proxy.ts` | The `/admin` gate and session refresh, plus the locale redirect for any public path arriving without one. Next 16's rename of `middleware` |
 | `lib/plan.ts` | The whole content model: plan metadata, vision, pillars, goals, strategies, actions. English, and the source every translation overlays |
-| `lib/plan-translations/` | Translations of the plan itself, keyed by the ids in `lib/plan.ts`. Partial by design — a goal at a time |
+| `lib/plan-translations/` | Translations of the plan itself, keyed by the ids in `lib/plan.ts`. Partial by design — a goal at a time. Generated; see `scripts/` |
+| `scripts/` | The translation round trip: `i18n-extract.mts` writes the English out, `i18n-apply.mts` puts what comes back in |
+| `translation/` | The English transcript that goes out, the Dhivehi that comes back, and the manifest tying the two together |
 | `lib/plan-i18n.ts` | Merges the two and caches the result per language |
 | `lib/i18n/` | The locale list, the UI dictionaries, and the `{name}` placeholder helpers |
 | `lib/feedback-scope.ts` | The reserved key for the one response that is about the plan rather than an action |
@@ -83,7 +85,8 @@ Two conventions matter when editing it:
 The consultation is published in English and Dhivehi. The language is a path segment —
 `/en/goals/energy-security`, `/dv/goals/energy-security` — so a Dhivehi link opens in
 Dhivehi for whoever it is sent to. A request arriving without one is redirected to the
-language the browser asks for; `/admin` is outside all of this and stays English at one
+default edition rather than negotiated on `Accept-Language` — see the note on the Dhivehi
+edition being unlisted below; `/admin` is outside all of this and stays English at one
 address.
 
 There are two things to translate, and they are separate on purpose:
@@ -100,35 +103,60 @@ There are two things to translate, and they are separate on purpose:
   cannot add a target, drop an action or renumber anything, because it holds no ids,
   figures or ordering of its own.
 
-**Dhivehi is complete** — all twelve goals with their 55 targets, 58 strategies and 230
-actions, plus the turning-point passage, the five pillars, the ten flagship initiatives
-and the settlement timeline.
+### Where the Dhivehi stands
 
-Every word of it was checked against **Radheef**, the Dhivehi dictionary, under the rule
-that a word with no entry there is not used. Two sources are treated as attestation: the
-36,271 headwords that carry at least one meaning, and — more usefully — the word forms
-appearing inside Radheef's own definitions, which are naturally inflected and so resolve
-the ordinary prose a lemma list cannot. Of 5,266 word tokens, about 89% resolve. What does
-not is deliberate and of three kinds:
+**The chrome is complete** — all 158 strings, so no English word appears inside a Dhivehi
+sentence anywhere in the interface.
 
-- **Technical terms Dhivehi has no native word for**, carried as the standard
-  transliteration the way Dhivehi technical writing carries them — `ސޯލާ ޕީވީ`,
-  `ބެޓެރި ސްޓޯރޭޖް`, `ވަރޓިޕޯޓް`. A Dhivehi word was searched for first in every case, and
-  found more often than not: "AI" became `މަސްނޫއީ ބުއްދި`, "meditation" `ފިކުރުކުރުން`,
-  "library" `ކުތުބުޚާނާ`, "eco-tourism" `ތިމާވެށީގެ ފަތުރުވެރިކަން`.
-- **Place names**, which a dictionary does not list: `ހިތަދޫ`, `މަރަދޫ`, `ފޭދޫ`.
-- **Inflected forms whose root is attested** but whose ending defeats a stemmer —
-  `ތިމާވެއްޓާ` against the headword `ތިމާވެށި`. Real Dhivehi; imperfect checking.
+**The plan is five goals in.** Goals 1 to 5 are translated, with their targets, strategies
+and actions, along with the cover, the vision, the turning-point passage, the settlement
+timeline, the five pillars and the ten flagship initiatives. Goals 6 to 12 are not, and
+fall through to the English underneath — which is the overlay working as intended, not a
+gap to be papered over.
 
-One word is none of those: `އިއާދަކުރަނިވި` ("renewable") has no Radheef entry in any
-spelling. It is the Maldivian government's own term and the dictionary predates it.
+An earlier machine translation covered all twelve goals and was withdrawn: it read as a
+government gazette throughout, because every string — button, error, screen-reader
+description and plan prose alike — had been translated in one undifferentiated run. None
+of it survives. `lib/i18n/dv.ts` and `lib/plan-translations/dv.ts` are regenerated
+wholesale from the current transcripts, never merged into.
 
-Spellings were settled against hit counts rather than taste — `ޝާމިލުވާ` over `ޝާމިލް`
-(9 hits to 0), `ތަސައްވުރު` over `ތަޞައްވުރު` (8 to 0), `އިޤުތިޞާދު` because it is an
-exact headword where `އިޤްތިޞާދު` and `އިގްތިސާދު` are not.
+### How it is made
 
-**It has not been read by a native speaker.** That is the one thing still owed before this
-goes in front of residents.
+Both files are **generated**. Editing them by hand loses the edit on the next run.
+
+```bash
+npm run i18n:extract          # writes the English out to translation/english/
+npm run i18n:apply            # reports what came back; writes nothing
+npm run i18n:apply -- --write # regenerates both dv.ts files
+```
+
+[`scripts/i18n-extract.mts`](scripts/i18n-extract.mts) walks both English sources and
+emits one numbered transcript in 19 files, each small enough to paste into a translation
+tool in one go. The files are split **by register rather than by page** — a file of
+nothing but buttons, headed by an instruction saying so, is the direct fix for what went
+wrong the first time.
+
+[`scripts/i18n-apply.mts`](scripts/i18n-apply.mts) reads whatever comes back into
+`translation/dhivehi/` and trusts nothing about it except the `[nnnn]` markers. A segment
+is dropped rather than repaired if a `{slot}` changed — losing one prints a sentence with
+a hole in it, inventing one prints a literal `{count}` to a resident — or if it holds no
+Thaana, which means the English came back unchanged. Changed figures warn without
+blocking, because a Dhivehi ordinal can legitimately swallow a digit the English had.
+
+The chrome is all-or-nothing for the reason above: `dv.ts` is typed as `Dictionary`, so a
+missing key does not compile, and a key filled with English would be worse than either
+language alone. Until every one is present, `--write` leaves that file untouched and says
+so. The plan overlay has no such gate — it is partial by design.
+
+[`translation/README.md`](translation/README.md) is the working guide.
+
+**It has not been read by a native speaker.** The checks above are mechanical: they prove
+a `{slot}` survived and the text is Thaana, never that it reads well. That is the one
+thing still owed before this goes in front of residents, and it is why `proxy.ts` does not
+negotiate on `Accept-Language` and the chrome carries no language switcher — `/dv` is
+reachable by typing or sharing the URL and by nothing else. Turning it on is one call:
+`matchLocale` in [`lib/i18n/config.ts`](lib/i18n/config.ts), kept and tested for exactly
+that.
 
 Dhivehi is written in Thaana and reads right to left. `dir="rtl"` on `<html>` does most of
 the work, because the layout is built on flexbox, grid and logical properties; what CSS

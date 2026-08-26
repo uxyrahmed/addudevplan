@@ -1,0 +1,25 @@
+=== ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
+File 5 of 19 · Search and share descriptions
+2 segments
+
+Translate every numbered segment below into Dhivehi (Thaana).
+
+RULES
+1. Keep every [nnnn] marker exactly as written, at the start of its own line.
+2. Return the same segments, in the same order. Never merge two or split one.
+3. Translate the text only. Add no notes, no explanations, no English.
+4. (No {slots} in this file.)
+5. Keep every digit in Latin numerals (0 1 2 3 4 5 6 7 8 9), and change no
+   figure. Dhivehi is written with the same digits, and every number here is
+   a measurement the council made: name the unit, never the quantity.
+
+REGISTER
+One or two sentences that appear in search results and on social media when
+someone shares the site. Plain and inviting.
+
+--- BEGIN ---
+
+[0155] Twelve goals to make Addu a sustainable, resilient and inclusive city of 35,000 people by 2030. Read the plan and tell us what you think of every action.
+[0156] Twelve goals for a sustainable Addu. Read the plan and share your feedback on every strategy.
+
+--- END ---

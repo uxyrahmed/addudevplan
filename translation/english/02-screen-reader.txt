@@ -1,0 +1,48 @@
+=== ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
+File 2 of 19 · Screen-reader descriptions
+21 segments
+
+Translate every numbered segment below into Dhivehi (Thaana).
+
+RULES
+1. Keep every [nnnn] marker exactly as written, at the start of its own line.
+2. Return the same segments, in the same order. Never merge two or split one.
+3. Translate the text only. Add no notes, no explanations, no English.
+4. Keep every {slot} exactly as written, in Latin letters: {title} {number} {label} {subject} {count} {total} {started} {goals} {overall} {state} {noun} {subtitle} {islands}
+   Each is a hole a number or a name is dropped into when the page is
+   built. Put it where Dhivehi wants it in the sentence — but do not
+   translate, rename, remove or duplicate one.
+5. Keep every digit in Latin numerals (0 1 2 3 4 5 6 7 8 9), and change no
+   figure. Dhivehi is written with the same digits, and every number here is
+   a measurement the council made: name the unit, never the quantity.
+
+REGISTER
+Descriptions read aloud by screen readers to blind residents. These are
+never seen on screen, so they can be longer than a label: write a full,
+plain sentence that describes what is there.
+
+--- BEGIN ---
+
+[0003] Main
+[0004] {title} home
+[0009] A White Tern in flight over Addu — a bird found only here.
+[0044] Actions you have responded to in goal {number}
+[0052] {label}: {subject}
+[0055] Add a comment on: {subject}
+[0056] Edit your comment on: {subject}
+[0063] Remove your comment on: {subject}
+[0066] Post your comment on: {subject}
+[0067] Update your comment on: {subject}
+[0074] Your feedback: {count} of {total} actions answered across {started} of {goals} goals{overall} — {state}. Open to review it.
+[0081] Your feedback on the plan
+[0086] Remove your comment on the plan as a whole
+[0089] Show your {count} {noun} on goal {number}
+[0090] Hide your {count} {noun} on goal {number}
+[0093] Start goal {number}: {title}
+[0094] Remove your feedback on: {label}
+[0136] living elsewhere
+[0144] {subtitle}. Addu falls from 9% in 1958 to 5.1% in 2022, while Male' rises from 11% to 40%.
+[0148] Map of Addu Atoll. The four islands of the city — {islands} — lie along the western side of the atoll from north to south, joined end to end by the Link Road, which crosses open water on causeways. The road runs on past Feydhoo to the south-east, beyond the city. The rest of the atoll is reef and lagoon.
+[0157] The plan’s cover: the City of Addu emblem above the title Addu Development Plan 2026–2031, set over a pale outline of the atoll.
+
+--- END ---

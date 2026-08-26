@@ -1,0 +1,67 @@
+=== ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
+File 18 of 19 · Goal 11: Wildlife and wellness tourism
+41 segments
+
+Translate every numbered segment below into Dhivehi (Thaana).
+
+RULES
+1. Keep every [nnnn] marker exactly as written, at the start of its own line.
+2. Return the same segments, in the same order. Never merge two or split one.
+3. Translate the text only. Add no notes, no explanations, no English.
+4. (No {slots} in this file.)
+5. Keep every digit in Latin numerals (0 1 2 3 4 5 6 7 8 9), and change no
+   figure. Dhivehi is written with the same digits, and every number here is
+   a measurement the council made: name the unit, never the quantity.
+
+REGISTER
+The council’s own plan text. Clear, concrete written Dhivehi. Where the
+English uses a technical term Dhivehi has no word for, use the term
+Maldivian technical and government writing actually uses, rather than
+inventing one. Do not soften, strengthen or explain what the plan says — say
+the same thing in Dhivehi.
+
+--- BEGIN ---
+
+[0599] Wildlife and wellness tourism
+[0600] Beyond the Beach — where nature meets wellbeing
+[0601] Addu will become the destination "Beyond the Beach" — where nature meets wellbeing. By combining world-class wildlife experiences with health, wellness, and active lifestyles, Addu will create a distinctive year-round visitor economy. Visitors will encounter manta rays, whale sharks, dolphins, turtles, White Terns, and spectacular coral reefs through world-class diving and immersive nature experiences, while wellness retreats, healthy local cuisine, outdoor recreation, and specialist healthcare at Addu Equatorial Hospital make Addu a destination for restoration, recovery, and rejuvenation. Supported by boutique eco-lodges and sustainable accommodation, Addu will offer an authentic Maldivian experience.
+[0602] beds in 03 registered resorts in Addu
+[0603] beds in 20 guesthouses and 01 hotel
+[0604] tourist arrivals to Addu in 2025
+[0605] tourists to Huvadhoo and Fuvahmulah in 2025
+[0606] arrivals from Gan International Airport
+[0607] Increase tourist bed capacity in Addu City to 4,000 beds by 2030.
+[0608] Achieve 700,000 international bednights by 2029.
+[0609] Attract 20,000 medical and wellness visitors by 2029.
+[0610] Southern gateway marina
+[0611] Construct cafés, restaurants, shops and seafood market
+[0612] Develop waterfront spa, gym, and wellness studio
+[0613] Provide fuel, water, power and waste reception facilities
+[0614] Establish maintenance, repair and engineering services
+[0615] Wellness resorts and boutique lodges
+[0616] Hankede integrated development
+[0617] Wellness resorts in Dhon Hera and Savaahili
+[0618] Boutique hotels in Dhoogas and Gan airport
+[0619] Feydhoo, Maradhoo and Hithadhoo tourism zone lodges
+[0620] World Class Wildlife Experiences
+[0621] Promote Addu as a diving destination
+[0622] Organise annual dive events and forum
+[0623] Promote shipwrecks and heritage dives
+[0624] Train certified wildlife guides and dive instructors
+[0625] Equatorial southern health hub
+[0626] Accredit AEH to international standard
+[0627] Enhance orthopaedic, ophthalmology, ENT, and dental care
+[0628] Establish fertility treatment, aesthetic, and anti-ageing care
+[0629] Advance diagnostics, telemedicine and surgery service
+[0630] Sports, events and lifestyle tourism
+[0631] Build climate controlled tournament grade indoor stadium
+[0632] Establish FIFA standard full sized outdoor training pitch
+[0633] Develop fitness, sauna, plunge pool, and healing space
+[0634] Develop convention centre, water theme park, and aquatic centre
+[0635] Healthy food destination
+[0636] Develop Feydhoo and Maradhoo waterfront
+[0637] Develop Maradhoo-Feydhoo Sunset Markets and food stalls
+[0638] Branding and marketing of Addu Delights
+[0639] Promotion and branding of Addu Kukulhu Reha & Folhi
+
+--- END ---

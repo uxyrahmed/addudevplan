@@ -1,0 +1,68 @@
+=== ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
+File 15 of 19 · Goal 8: Health and well-being
+42 segments
+
+Translate every numbered segment below into Dhivehi (Thaana).
+
+RULES
+1. Keep every [nnnn] marker exactly as written, at the start of its own line.
+2. Return the same segments, in the same order. Never merge two or split one.
+3. Translate the text only. Add no notes, no explanations, no English.
+4. (No {slots} in this file.)
+5. Keep every digit in Latin numerals (0 1 2 3 4 5 6 7 8 9), and change no
+   figure. Dhivehi is written with the same digits, and every number here is
+   a measurement the council made: name the unit, never the quantity.
+
+REGISTER
+The council’s own plan text. Clear, concrete written Dhivehi. Where the
+English uses a technical term Dhivehi has no word for, use the term
+Maldivian technical and government writing actually uses, rather than
+inventing one. Do not soften, strengthen or explain what the plan says — say
+the same thing in Dhivehi.
+
+--- BEGIN ---
+
+[0471] Health and well-being
+[0472] Comprehensive care within 10 minutes of home
+[0473] Addu City faces growing health challenges, including rising non-communicable diseases, mental health needs, and the high cost of care and medicines. Strengthening prevention — through cancer screening, nutrition, and active lifestyles — alongside improved mental health support is essential for long-term well-being. Upgrading island health centres into effective primary healthcare providers and positioning Addu Equatorial Hospital as the southern medical hub will improve access and quality of care. Investing in a skilled health workforce and affordable services will ensure a resilient, inclusive, and people-centred health system. There are 561 people in the health workforce in Addu. There are 19 registered pharmacies.
+[0474] operational health facilities
+[0475] specialist doctors
+[0476] medical officers
+[0477] nurses
+[0478] registered pharmacies
+[0479] Screen 90% of adults for diabetes, hypertension, and priority cancers every two years.
+[0480] Establish 50 bed hospitals in Feydhoo and Maradhoo by 2028.
+[0481] Ensure 100% of residents have access to comprehensive healthcare within 10 minutes of their home.
+[0482] Develop a virtual network of hospitals, clinics, pharmacies and wellness service providers by 2028.
+[0483] Active healthy community
+[0484] Develop gyms and fitness centres
+[0485] Organise group fitness activities and sports events
+[0486] Conduct nutrition education led by Chefs
+[0487] Prioritise mosquito and vector control
+[0488] Cancer prevention and early detection
+[0489] Conduct systemic free screening
+[0490] Establish a registry to track diagnosis and outcomes
+[0491] Implement tobacco control and insulin resistance awareness
+[0492] Conduct food, water and air quality audit and monitoring
+[0493] 24/7 mental health support
+[0494] Establish a trained team of counsellors
+[0495] Create spaces for walk-in counselling services
+[0496] Conduct training for counsellors and crisis responders
+[0497] Establish peer and youth ambassador groups
+[0498] Comprehensive modern care
+[0499] Establish hospitals in Feydhoo and Maradhoo
+[0500] Expand maternal, child health, and fertility treatment services
+[0501] Establish a hyperbaric chamber
+[0502] Establish veterinary care clinic
+[0503] Smart health services
+[0504] Establish digital appointment management system
+[0505] Establish digital surveillance for lifestyle diseases
+[0506] Launch electronic health record system
+[0507] Promote wearable health devices and digital monitoring
+[0508] Access to quality pharmaceuticals
+[0509] Develop an Addu Essential Medicine List
+[0510] Network the public and private pharmacies in region
+[0511] Enable digital stock monitoring
+[0512] Integrate tele-pharmacy, e-prescription and home delivery
+
+--- END ---

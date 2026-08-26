@@ -1,0 +1,68 @@
+=== ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
+File 16 of 19 · Goal 9: Education excellence
+42 segments
+
+Translate every numbered segment below into Dhivehi (Thaana).
+
+RULES
+1. Keep every [nnnn] marker exactly as written, at the start of its own line.
+2. Return the same segments, in the same order. Never merge two or split one.
+3. Translate the text only. Add no notes, no explanations, no English.
+4. (No {slots} in this file.)
+5. Keep every digit in Latin numerals (0 1 2 3 4 5 6 7 8 9), and change no
+   figure. Dhivehi is written with the same digits, and every number here is
+   a measurement the council made: name the unit, never the quantity.
+
+REGISTER
+The council’s own plan text. Clear, concrete written Dhivehi. Where the
+English uses a technical term Dhivehi has no word for, use the term
+Maldivian technical and government writing actually uses, rather than
+inventing one. Do not soften, strengthen or explain what the plan says — say
+the same thing in Dhivehi.
+
+--- BEGIN ---
+
+[0513] Education excellence
+[0514] 2,000 tertiary students a year by 2030
+[0515] Education is central to Addu City's future competitiveness, workforce development, and social progress. Strengthening foundational learning through quality early childhood education, upgrading school infrastructure and science labs, and expanding vocational training pathways will align skills with emerging economic opportunities. Building digital capabilities and promoting lifelong learning will ensure adaptability in a rapidly changing world. Together, these investments will create a skilled, innovative, and resilient community.
+[0516] Two items on this goal are still unfinished in the 16 August draft: the count of tertiary students is printed as "000", and two different targets are both numbered 9.3. Both are left as the council wrote them rather than guessed at.
+[0517] schools
+[0518] school students
+[0519] teachers
+[0520] universities and colleges
+[0521] Attract over 2,000 tertiary students annually by 2030.
+[0522] Introduce a new early childhood curriculum across Addu schools by 2028.
+[0523] Upgrade 100% of Addu City's schools to provide safe, inclusive, digitally connected and inquiry based learning environments.
+[0524] Provide lifelong learning opportunities so that at least 25% of adults participate in professional development or skills training.
+[0525] Tertiary education excellence
+[0526] Establish Nursing School
+[0527] Establish a Medical School and internship opportunities
+[0528] Establish Hotel School and Language School
+[0529] Expand training for pilots, air traffic control, and cabin crew
+[0530] Quality early childhood education
+[0531] Develop 06 pre-schools with modern facilities
+[0532] Build health and nutrition integrated facilities
+[0533] Develop a value based, inquiry driven new curriculum
+[0534] Develop outdoor and indoor spaces for play
+[0535] Modern school infrastructure
+[0536] Equip science labs in schools
+[0537] Upgrade ICT infrastructure in all schools
+[0538] Establish swimming pool and water sports facilities
+[0539] Develop facilities for music, arts and extra curricular activities
+[0540] Technical and vocational education
+[0541] Develop tourism, food and hospitality training workshop
+[0542] Establish diving, surfing and water sports school
+[0543] Establish marine and boating service workshop
+[0544] Develop health and wellness practical skills lab
+[0545] Lifelong learning ecosystem
+[0546] Establish centre for Islam, Quran and Hadith learning
+[0547] Establish centre for digital literacy and AI learning
+[0548] Develop a school for business and finance
+[0549] Establish a centre for arts and crafts
+[0550] Education promotion
+[0551] Establish a centre for education quality assurance
+[0552] Develop a strategy for education branding and promotion
+[0553] Establish a dedicated education promotion agency
+[0554] Publish annual performance reports
+
+--- END ---

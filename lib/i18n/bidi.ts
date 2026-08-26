@@ -32,24 +32,57 @@
  */
 const QUANTITY = /\d[\d.,]*(?:\s*(?:%|[A-Za-z][A-Za-z./]*))/g
 
+/**
+ * A span of years, joined by a dash.
+ *
+ * The other half of the same problem, and the one that is invisible until
+ * someone reads the page: "2026–2031" came out as "2031–2026". An en dash is a
+ * neutral, so between two numbers in a right-to-left paragraph it resolves to
+ * the paragraph direction and the two years are placed right to left — each one
+ * still spelled correctly, the pair in the wrong order. A reader sees a plan
+ * that runs backwards.
+ *
+ * `QUANTITY` cannot catch this. It matches a number followed by a *unit*, and
+ * deliberately leaves a bare number alone; here there are two bare numbers, and
+ * neither is wrong on its own. It is the pair that has to be one run.
+ *
+ * A hyphen-minus is not included, and must not be: U+002D is a European Number
+ * Separator, which the algorithm already keeps with the digits either side of
+ * it, so "(3-4 floor)" reads correctly with no help. Only the true dashes —
+ * U+2013 and U+2014 — are neutrals.
+ */
+const RANGE = /\d[\d,.]*\s*[–—]\s*\d[\d,.]*/g
+
 const LRI = '⁦'
 const PDI = '⁩'
 
 /**
  * Wraps every number-and-unit in `text` in a left-to-right isolate.
  *
- * Idempotent in practice — a string that already carries isolates is not
- * re-matched across them, because the isolate characters are not in the pattern
- * and a second pass would produce the same boundaries.
+ * Idempotent, and by construction rather than by luck. An earlier note here
+ * claimed a second pass could not re-match "because the isolate characters are
+ * not in the pattern" — but that is the reason it *does* re-match: the pattern
+ * skips straight over them and matches the same digits again, nesting a second
+ * pair around the first. Nested isolates render identically, so nothing looked
+ * wrong; the string just grew two invisible characters each time.
+ *
+ * `wrap` closes it properly by looking at the character immediately before the
+ * match. If an isolate opens there, this run is already inside one.
  */
 export function isolateQuantities(text: string): string {
   if (!text) return text
-  return text.replace(QUANTITY, (match) => {
+  const wrap = (match: string, offset: number, whole: string) =>
+    whole[offset - 1] === LRI ? match : `${LRI}${match}${PDI}`
+
+  // Ranges first. A wrapped range is not re-matched by `QUANTITY` afterwards:
+  // that pattern needs a unit directly after the digits, and what follows the
+  // closing year here is the isolate character.
+  return text.replace(RANGE, wrap).replace(QUANTITY, (match, offset: number, whole: string) => {
     // A bare number needs nothing: digits inside right-to-left text already
     // resolve as one left-to-right run, and wrapping them adds two invisible
     // characters to every year and count in the plan for no gain.
     if (!/[%A-Za-z]/.test(match)) return match
-    return `${LRI}${match}${PDI}`
+    return wrap(match, offset, whole)
   })
 }
 

@@ -1,0 +1,70 @@
+=== ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
+File 19 of 19 · Goal 12: Environment protection
+44 segments
+
+Translate every numbered segment below into Dhivehi (Thaana).
+
+RULES
+1. Keep every [nnnn] marker exactly as written, at the start of its own line.
+2. Return the same segments, in the same order. Never merge two or split one.
+3. Translate the text only. Add no notes, no explanations, no English.
+4. (No {slots} in this file.)
+5. Keep every digit in Latin numerals (0 1 2 3 4 5 6 7 8 9), and change no
+   figure. Dhivehi is written with the same digits, and every number here is
+   a measurement the council made: name the unit, never the quantity.
+
+REGISTER
+The council’s own plan text. Clear, concrete written Dhivehi. Where the
+English uses a technical term Dhivehi has no word for, use the term
+Maldivian technical and government writing actually uses, rather than
+inventing one. Do not soften, strengthen or explain what the plan says — say
+the same thing in Dhivehi.
+
+--- BEGIN ---
+
+[0640] Environment protection
+[0641] Protected reefs and wetlands, and a circular economy
+[0642] Addu City will protect and restore its unique natural environment while building a climate-resilient circular economy that supports sustainable growth and community wellbeing. The city will conserve coral reefs, wetlands, mangroves, beaches, and other ecologically significant ecosystems by designating and effectively managing protected areas and nature parks, restoring degraded habitats, and promoting responsible public access and eco-tourism. Through resource efficiency, waste reduction, recycling, nature-based solutions, and climate-resilient infrastructure, Addu will enhance biodiversity, strengthen resilience to climate change, and create a cleaner, healthier, and more sustainable city for present and future generations.
+[0643] protected areas
+[0644] UNESCO biosphere reserve
+[0645] hectares of protected areas
+[0646] hectares of beach area
+[0647] wetlands, covering 81.7 hectares
+[0648] Restore thriving populations of Addu's flagship species including White Terns, marine megafauna, sea turtles, beach crabs, corals, mangroves, and native flora by 2030.
+[0649] Zero net loss of critical habitats and protected areas by 2030.
+[0650] Attract at least 50,000 visitors annually to nature and wildlife attractions by 2028.
+[0651] Restore and protect 100% of priority public beaches through nature based solutions, restore beach vegetation, and beach nourishment by 2030.
+[0652] Phase out single use plastic bottles by 2028.
+[0653] Ensure waste is segregated to 4 types of recyclables (plastics, metals, compost, and paper/cardboard) by 2029.
+[0654] Protect ecologically significant areas
+[0655] Improve visitor experience at Addu Nature Park
+[0656] Develop management plan for Manta Cleaning Station
+[0657] Preserve sites for shark and whale watching
+[0658] Develop mangrove park and experience center
+[0659] Protect and restore threatened species
+[0660] Develop Dhon Dheeni protection plan
+[0661] Establish a botanical garden of rare and threatened species
+[0662] Establish zoned beach and reefs for birds, crabs and turtles
+[0663] Establish an interactive Coral Discovery Center
+[0664] Responsible wildlife interactions
+[0665] Develop management plans for rays, sharks, turtles and dolphins
+[0666] Establish viewing towers for White Terns, migratory birds and fauna
+[0667] Introduce electric wildlife boats and glass-bottom kayaks
+[0668] Organise annual wildlife festivals and "only in Addu" experiences
+[0669] Build climate resilience
+[0670] Develop roadside drainage system
+[0671] Construct flood control near wetlands
+[0672] Establish sea level and climate observation infrastructure
+[0673] Establish air and water quality monitoring systems
+[0674] Eliminate single use plastics
+[0675] Eliminate plastic water bottles
+[0676] Establish a water testing laboratory
+[0677] Enable glass bottling of water and soft drinks
+[0678] Launch an initiative for alternative bags
+[0679] A circular economy Addu
+[0680] Establish a 3 bin waste segregation at source system
+[0681] Build a modern recycling centre
+[0682] Develop infrastructure to convert organic waste to compost
+[0683] Establish Repair and Reuse Hub for furniture and appliances
+
+--- END ---

@@ -115,8 +115,12 @@ function build(locale: Locale): LocalizedPlan {
   return {
     plan: {
       title: pick(overlay.plan?.title, PLAN.title),
-      // Never translated: a span of years is written the same in both.
-      period: PLAN.period,
+      // Never translated — a span of years is written the same in both — but it
+      // still goes through `pick`, because being written the same is not the
+      // same as being *laid out* the same. The dash between the years is a
+      // neutral, so on a right-to-left page the pair resolves backwards and the
+      // plan announces itself as running 2031–2026. `rtlPick` isolates it.
+      period: pick(undefined, PLAN.period),
       author: pick(overlay.plan?.author, PLAN.author),
       date: pick(overlay.plan?.date, PLAN.date),
       callout: pick(overlay.plan?.callout, PLAN.callout),
@@ -143,7 +147,10 @@ function build(locale: Locale): LocalizedPlan {
     // by index, so this maps in place rather than rebuilding the list.
     islands: LAND.islands.map((island) => pick(overlay.islands?.[island], island)),
     timeline: TIMELINE.map((event) => ({
-      year: event.year,
+      // Same as `period` above: "1620–1648" is a range, and a range needs
+      // isolating even though it is identical in both languages. The overlay is
+      // still keyed on the untouched `event.year`, so the lookup is unaffected.
+      year: pick(undefined, event.year),
       text: pick(overlay.timeline?.[event.year], event.text),
     })),
     migration: {

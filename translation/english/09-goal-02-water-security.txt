@@ -1,0 +1,59 @@
+=== ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
+File 9 of 19 · Goal 2: Safe diverse water sources
+33 segments
+
+Translate every numbered segment below into Dhivehi (Thaana).
+
+RULES
+1. Keep every [nnnn] marker exactly as written, at the start of its own line.
+2. Return the same segments, in the same order. Never merge two or split one.
+3. Translate the text only. Add no notes, no explanations, no English.
+4. (No {slots} in this file.)
+5. Keep every digit in Latin numerals (0 1 2 3 4 5 6 7 8 9), and change no
+   figure. Dhivehi is written with the same digits, and every number here is
+   a measurement the council made: name the unit, never the quantity.
+
+REGISTER
+The council’s own plan text. Clear, concrete written Dhivehi. Where the
+English uses a technical term Dhivehi has no word for, use the term
+Maldivian technical and government writing actually uses, rather than
+inventing one. Do not soften, strengthen or explain what the plan says — say
+the same thing in Dhivehi.
+
+--- BEGIN ---
+
+[0255] Safe diverse water sources
+[0256] Renewables-powered desalination and rainwater for all
+[0257] Addu will secure its long-term water supply through five diversified sources — desalination, household and community-scale rainwater harvesting, responsibly managed groundwater, reclaimed wastewater, and mineralised bottled water. Solar PV and battery storage will support reliable desalination. Expanded rainwater systems will capture and store rainfall for domestic and public use, while carefully managed groundwater will provide a dedicated supply for gardening and landscaping. Expanded sewerage networks and advanced wastewater treatment will enable reclaimed water to be used safely for agriculture, irrigation, landscaping, and other non-potable purposes. Addu will also support the local production of mineralised drinking water in reusable glass bottles and large-volume containers for homes, restaurants, hotels, offices, and other businesses.
+[0258] residents
+[0259] of water per person per day
+[0260] 85 litres
+[0261] of potable water per day
+[0262] 3,000 cbm
+[0263] to produce a cbm of desalinated water
+[0264] 4 kWh
+[0265] needed per day to produce water
+[0266] 12,000 kWh
+[0267] Produce 3,000 cbm of desalinated water per day using renewable energy by 2028.
+[0268] Equip all homes with safe rainwater collection and storage tanks.
+[0269] Enable whole-house water filtration in homes by 2028.
+[0270] Maintain or improve groundwater quality in at least 90% of Addu City's monitoring stations, with no significant increase in salinity, nitrate, or faecal contamination from the 2026 baseline.
+[0271] Achieve universal sewerage coverage for all households by 2028.
+[0272] Increase proportion of households who reuse wastewater to 25% by 2030.
+[0273] Renewables powered desalination
+[0274] Increase desalination capacity to 3,000 cbm/day
+[0275] Install 3 MWp solar PV for water production
+[0276] Install 8 MWh battery storage for water production
+[0277] Establish 6,000 cbm water storage capacity
+[0278] Rainwater and groundwater harvesting
+[0279] Provide safe rainwater collection tanks to all homes
+[0280] Enable whole house water filtration for homes
+[0281] Build community rainwater storage tanks
+[0282] Develop guidelines for groundwater use and protection
+[0283] Effective sewage treatment
+[0284] Extend sewerage connection to all homes
+[0285] Upgrade sewage and wastewater treatment system
+[0286] Integrate solar PV to sewage treatment
+[0287] Invest in treated water reuse and 'sludge to compost'
+
+--- END ---

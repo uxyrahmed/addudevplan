@@ -1,0 +1,53 @@
+=== ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
+File 13 of 19 · Goal 6: Diverse quality housing
+27 segments
+
+Translate every numbered segment below into Dhivehi (Thaana).
+
+RULES
+1. Keep every [nnnn] marker exactly as written, at the start of its own line.
+2. Return the same segments, in the same order. Never merge two or split one.
+3. Translate the text only. Add no notes, no explanations, no English.
+4. (No {slots} in this file.)
+5. Keep every digit in Latin numerals (0 1 2 3 4 5 6 7 8 9), and change no
+   figure. Dhivehi is written with the same digits, and every number here is
+   a measurement the council made: name the unit, never the quantity.
+
+REGISTER
+The council’s own plan text. Clear, concrete written Dhivehi. Where the
+English uses a technical term Dhivehi has no word for, use the term
+Maldivian technical and government writing actually uses, rather than
+inventing one. Do not soften, strengthen or explain what the plan says — say
+the same thing in Dhivehi.
+
+--- BEGIN ---
+
+[0400] Diverse quality housing
+[0401] 350 new homes and 1,000 rental units
+[0402] Addu City is planning to attract professionals, skilled workers, and returning families. Accelerating housing delivery is essential to attract residents, and we will deliver new sustainable homes for families. To support Addu's transformation into a destination for wellness, education, aviation, and business, we will deliver spacious apartments across low-rise (3-4 storey) apartment buildings, providing high-quality accommodation for professionals and their families. These apartments will feature generous living spaces, lift access, secure parking, and energy-efficient design, offering an attractive lifestyle for professionals, entrepreneurs, and skilled workers. Together with complementary initiatives for affordable rental accommodation and mixed-use neighbourhoods, this goal will create attractive liveable communities.
+[0403] existing houses
+[0404] flats and row houses
+[0405] land plots released for housing
+[0406] housing units under construction
+[0407] planned housing units
+[0408] Develop 05 new starter home neighbourhoods by 2030.
+[0409] Provide 350 new sustainable homes for families by 2028.
+[0410] Develop accommodation for 150 families of professionals by 2028.
+[0411] Develop 1,000 high quality rental units by 2030.
+[0412] Starter home neighbourhoods
+[0413] Develop starter home neighbourhoods
+[0414] Build starter homes for young families
+[0415] Provide First Home Ownership Support
+[0416] Build display homes
+[0417] Residences for professionals
+[0418] Develop low rise (3-4 floor) apartment buildings
+[0419] Build spacious modern apartments
+[0420] Provide land for 2nd homes
+[0421] Provide land for private housing investment
+[0422] Diverse rental accommodation
+[0423] Develop purpose built student residences
+[0424] Develop serviced apartments for medical visitors
+[0425] Provide low-rise rental apartments for employees
+[0426] Integrate cafés, retail and childcare to mixed use precincts
+
+--- END ---

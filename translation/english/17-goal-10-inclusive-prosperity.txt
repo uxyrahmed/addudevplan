@@ -1,0 +1,70 @@
+=== ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
+File 17 of 19 · Goal 10: Inclusive prosperity
+44 segments
+
+Translate every numbered segment below into Dhivehi (Thaana).
+
+RULES
+1. Keep every [nnnn] marker exactly as written, at the start of its own line.
+2. Return the same segments, in the same order. Never merge two or split one.
+3. Translate the text only. Add no notes, no explanations, no English.
+4. (No {slots} in this file.)
+5. Keep every digit in Latin numerals (0 1 2 3 4 5 6 7 8 9), and change no
+   figure. Dhivehi is written with the same digits, and every number here is
+   a measurement the council made: name the unit, never the quantity.
+
+REGISTER
+The council’s own plan text. Clear, concrete written Dhivehi. Where the
+English uses a technical term Dhivehi has no word for, use the term
+Maldivian technical and government writing actually uses, rather than
+inventing one. Do not soften, strengthen or explain what the plan says — say
+the same thing in Dhivehi.
+
+--- BEGIN ---
+
+[0555] Inclusive prosperity
+[0556] Near-zero poverty and 500 businesses backed
+[0557] Addu City is committed to achieving zero poverty by building a dynamic, innovative, and digitally enabled economy that creates opportunities for everyone. Through investment in entrepreneurship, future-ready skills, digital infrastructure, SMEs, and improved access to finance and markets, the city will generate quality jobs, empower local businesses, and strengthen economic resilience. Targeted support for women, youth, people with disabilities, and other vulnerable groups will ensure that every resident has the opportunity to participate in and benefit from sustainable economic growth, leading to greater inclusion, shared prosperity, and an improved quality of life.
+[0558] persons living below poverty
+[0559] persons with special needs
+[0560] registered companies
+[0561] registered sole proprietorships
+[0562] partnerships
+[0563] Reduce poverty to near zero by 2029.
+[0564] Support 500 businesses and start-ups by 2030.
+[0565] Deliver 100% of Addu City Council services online through a single digital platform, with 90% of transactions completed digitally by 2030.
+[0566] Provide free high-speed public Wi-Fi in major tourism, business, education, healthcare, and public spaces by 2028.
+[0567] Establish a citywide digital marketplace with 500 local businesses and entrepreneurs actively selling products and services online by 2029.
+[0568] Enable 100% of registered businesses to accept secure digital payments and ensure 90% of retail transactions can be completed cashlessly by 2030.
+[0569] Economic inclusion for zero poverty
+[0570] Implement skills development program
+[0571] Establish apprenticeship scheme and job matching service
+[0572] Improve access to micro-finance and banking
+[0573] Provide targeted social support and case management
+[0574] SME and local enterprise development
+[0575] Establish an affordable SME finance scheme
+[0576] Organise annual Addu business fair
+[0577] Establish co-working space and incubation programme
+[0578] Launch freelance and remote work programme
+[0579] Strengthen local supply chain
+[0580] Establish a cold chain facility
+[0581] Develop island level mini cold storage units
+[0582] Introduce refrigerated transport vehicles and vessels
+[0583] Conduct training for cold chain handling and logistics
+[0584] Digital Innovation Hub
+[0585] Establish Addu Digital Skills and Innovation Centre
+[0586] Develop Digital City Platform for all services
+[0587] Provide public wi-fi in key medical, tourism and business areas
+[0588] Launch SMEs Go Digital and innovation startup grants
+[0589] Addu Digital Marketplace
+[0590] Establish Addu Marketplace
+[0591] Launch digital finance and payment literacy initiative
+[0592] Establish trusted delivery and digital cargo booking
+[0593] Establish a container ferry service between Addu and Malé
+[0594] Digital marketing and branding
+[0595] Train businesses in social media and AI-assisted marketing
+[0596] Launch a digital empowerment programme for women
+[0597] Conduct an "Earn Online" public awareness campaign
+[0598] Develop "Made in Addu" branding
+
+--- END ---

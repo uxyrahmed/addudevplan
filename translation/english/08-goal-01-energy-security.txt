@@ -1,0 +1,55 @@
+=== ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
+File 8 of 19 · Goal 1: Ensure energy security
+29 segments
+
+Translate every numbered segment below into Dhivehi (Thaana).
+
+RULES
+1. Keep every [nnnn] marker exactly as written, at the start of its own line.
+2. Return the same segments, in the same order. Never merge two or split one.
+3. Translate the text only. Add no notes, no explanations, no English.
+4. (No {slots} in this file.)
+5. Keep every digit in Latin numerals (0 1 2 3 4 5 6 7 8 9), and change no
+   figure. Dhivehi is written with the same digits, and every number here is
+   a measurement the council made: name the unit, never the quantity.
+
+REGISTER
+The council’s own plan text. Clear, concrete written Dhivehi. Where the
+English uses a technical term Dhivehi has no word for, use the term
+Maldivian technical and government writing actually uses, rather than
+inventing one. Do not soften, strengthen or explain what the plan says — say
+the same thing in Dhivehi.
+
+--- BEGIN ---
+
+[0226] Ensure energy security
+[0227] Every home a renewable energy producer
+[0228] Addu generates 68,431,692 kWh of electricity annually to serve 7,389 connections, comprising 5,693 domestic, 1,455 business, and 241 institutional customers. The city's heavy reliance on imported diesel to meet this demand leaves households, businesses, and public services vulnerable to rising fuel costs, global market volatility, and supply disruptions. Frequent power outages caused by generation and network capacity constraints further underline the urgent need for a more reliable, resilient, and diversified energy system. With its abundant solar resources, Addu has exceptional potential to become a renewable-energy prosumer city, where households, businesses, and institutions generate, store, consume, and share clean electricity. The widespread adoption of solar PV and battery storage offers a practical and scalable pathway towards achieving this transition.
+[0229] per day average household consumption
+[0230] 16.2 kWh
+[0231] litres of diesel per year
+[0232] 18.7 million
+[0233] MVR to buy diesel per year
+[0234] 130 million
+[0235] MVR subsidy per year
+[0236] 71.4 million
+[0237] per year for each household
+[0238] 35,351 MVR
+[0239] Transform 85% of homes to renewable energy producers by 2028.
+[0240] Enable 75% of businesses to install rooftop solar PV and participate in virtual power plants by 2028.
+[0241] Equip 100% of government buildings with rooftop solar PV and battery storage, integrating them into Addu's virtual power plant network by 2028.
+[0242] Every home is a prosumer
+[0243] Provide 10 kWp solar PV and 15 kWh battery to homes
+[0244] Provide smart meters to homes
+[0245] Organise financing for prosumer model
+[0246] All entities as producers
+[0247] Establish solar PV and battery storage in public buildings
+[0248] Enable solar PV and battery storage in businesses
+[0249] Launch Virtual Power Plants
+[0250] Backup diesel hybrid system
+[0251] Procure 30 MW capacity diesel generators
+[0252] Upgrade existing grid to a smart grid
+[0253] Establish utility scale renewable energy systems
+[0254] Invest in battery storage to stabilise grid
+
+--- END ---

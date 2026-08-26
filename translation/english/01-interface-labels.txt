@@ -1,0 +1,88 @@
+=== ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
+File 1 of 19 · Interface labels and buttons
+60 segments
+
+Translate every numbered segment below into Dhivehi (Thaana).
+
+RULES
+1. Keep every [nnnn] marker exactly as written, at the start of its own line.
+2. Return the same segments, in the same order. Never merge two or split one.
+3. Translate the text only. Add no notes, no explanations, no English.
+4. Keep every {slot} exactly as written, in Latin letters: {year} {registered} {resident} {number} {title} {total} {label} {strategies} {actions}
+   Each is a hole a number or a name is dropped into when the page is
+   built. Put it where Dhivehi wants it in the sentence — but do not
+   translate, rename, remove or duplicate one.
+5. Keep every digit in Latin numerals (0 1 2 3 4 5 6 7 8 9), and change no
+   figure. Dhivehi is written with the same digits, and every number here is
+   a measurement the council made: name the unit, never the quantity.
+
+REGISTER
+Short interface labels, buttons and links a resident taps. Use plain,
+everyday Dhivehi — the way a person actually speaks — not newspaper or
+gazette Dhivehi. Keep them short: if the English is two words, the Dhivehi
+should not be eight.
+
+--- BEGIN ---
+
+[0001] Skip to content
+[0002] Language
+[0005] The plan
+[0006] Twelve goals
+[0007] Initiatives
+[0008] Have your say
+[0010] Explore the twelve goals
+[0011] Start reading
+[0012] One atoll, four islands, one city
+[0014] Islands of the city
+[0017] In {year}: {registered} on the register
+[0018] {resident} living here
+[0019] Settlement history and the counts year by year
+[0020] residents by 2030
+[0021] Twelve goals
+[0025] Start with goal 1
+[0026] Goal {number}: {title}
+[0027] Back to the goals
+[0028] Goal {number} of {total}
+[0029] Why this matters
+[0030] Where we are today
+[0031] Targets
+[0032] Target {label}
+[0033] Strategies and actions
+[0035] Still open:
+[0036] Other goals
+[0037] Next goal
+[0038] Previous goal
+[0039] Goal {number}
+[0040] {strategies} strategies · {actions} actions
+[0041] No strategies published yet
+[0046] I support this
+[0047] Support
+[0048] I'm not sure
+[0049] Not sure
+[0050] I have a concern
+[0051] Concern
+[0121] Settlement and population
+[0123] Back to the plan
+[0124] Settlement and population
+[0126] A city moved, emptied and rebuilt
+[0128] Settlement history, 1620 to 1976
+[0129] Registered here, living elsewhere
+[0131] Year
+[0132] Living elsewhere
+[0133] {resident} of {registered} registered
+[0134] {registered} registered
+[0135] Not yet counted
+[0137] Living here
+[0138] On the register
+[0140] Scroll timeline back
+[0141] Scroll timeline forward
+[0142] Share of the national population
+[0143] 1958–2022
+[0146] Link Road
+[0147] Island of the city
+[0149] All goals
+[0150] Twelve goals
+[0151] Behind the plan
+[0152] Settlement and population
+
+--- END ---

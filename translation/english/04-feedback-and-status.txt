@@ -1,0 +1,86 @@
+=== ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
+File 4 of 19 · Feedback controls and status messages
+59 segments
+
+Translate every numbered segment below into Dhivehi (Thaana).
+
+RULES
+1. Keep every [nnnn] marker exactly as written, at the start of its own line.
+2. Return the same segments, in the same order. Never merge two or split one.
+3. Translate the text only. Add no notes, no explanations, no English.
+4. Keep every {slot} exactly as written, in Latin letters: {answered} {total} {number} {subject} {title} {count} {started} {goals} {time} {noun}
+   Each is a hole a number or a name is dropped into when the page is
+   built. Put it where Dhivehi wants it in the sentence — but do not
+   translate, rename, remove or duplicate one.
+5. Keep every digit in Latin numerals (0 1 2 3 4 5 6 7 8 9), and change no
+   figure. Dhivehi is written with the same digits, and every number here is
+   a measurement the council made: name the unit, never the quantity.
+
+REGISTER
+Messages the site shows a resident about their own feedback — what has been
+saved, what has been sent, what went wrong. Calm and direct, speaking to one
+person. No apology and no officialese.
+
+--- BEGIN ---
+
+[0042] Strategies for this goal are not published yet. They will appear here, each action open for your response, as soon as they are.
+[0043] You have responded to {answered} of {total} actions
+[0045] Strategy {number}:
+[0053] Comment
+[0054] Comment added
+[0057] — not posted yet
+[0058] Your comment on: {subject}
+[0059] What would you change, add, or worry about?
+[0060] Cleared here only — Remove takes it out of your feedback
+[0061] Posted with your feedback
+[0062] Remove
+[0064] Post
+[0065] Update
+[0068] On the plan as a whole
+[0069] What should the council know about the plan as a whole?
+[0070] Review
+[0071] Sending
+[0072] Sent
+[0073] Not sent
+[0075] , and a comment on the plan as a whole
+[0076] sent to the council
+[0077] not sent yet
+[0078] sending
+[0079] Your comment on the plan as a whole
+[0080] Goal {number}: {title}
+[0082] Your feedback
+[0083] {count} of {total} actions · {started} of {goals} goals started
+[0084] Close
+[0085] The plan as a whole
+[0087] Change what you said
+[0088] Say something about the plan itself
+[0091] answer
+[0092] answers
+[0095] Answer the remaining {count}
+[0096] Open this goal
+[0097] Sending…
+[0098] Sending shortly
+[0099] Not sent yet. Your answers are saved on this device.
+[0100] Sent at {time}
+[0101] Updated at {time}
+[0102] Sent
+[0103] Updated
+[0104] Your answers send themselves
+[0105] Try again now
+[0106] Send now
+[0107] Sent anonymously
+[0108] Download a copy
+[0109] Delete my feedback
+[0110] Delete your feedback?
+[0111] This withdraws all {count} {noun} from the consultation and clears them from this device. The council will no longer have them, and this cannot be undone.
+[0112] response
+[0113] responses
+[0114] Keep my feedback
+[0115] Deleting…
+[0116] Delete everything
+[0117] Your feedback has not reached us yet — the connection dropped. Your answers are saved on this device and we will keep trying.
+[0118] Your feedback could not be sent. Your answers are still on this device — please try again.
+[0119] Your feedback could not be withdrawn. Nothing has been changed — please try again.
+[0120] Your feedback could not be withdrawn — the connection dropped. Nothing has been changed, so you can try again.
+
+--- END ---

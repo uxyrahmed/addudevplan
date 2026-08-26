@@ -1,0 +1,70 @@
+=== ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
+File 14 of 19 · Goal 7: Connect community and culture
+44 segments
+
+Translate every numbered segment below into Dhivehi (Thaana).
+
+RULES
+1. Keep every [nnnn] marker exactly as written, at the start of its own line.
+2. Return the same segments, in the same order. Never merge two or split one.
+3. Translate the text only. Add no notes, no explanations, no English.
+4. (No {slots} in this file.)
+5. Keep every digit in Latin numerals (0 1 2 3 4 5 6 7 8 9), and change no
+   figure. Dhivehi is written with the same digits, and every number here is
+   a measurement the council made: name the unit, never the quantity.
+
+REGISTER
+The council’s own plan text. Clear, concrete written Dhivehi. Where the
+English uses a technical term Dhivehi has no word for, use the term
+Maldivian technical and government writing actually uses, rather than
+inventing one. Do not soften, strengthen or explain what the plan says — say
+the same thing in Dhivehi.
+
+--- BEGIN ---
+
+[0427] Connect community and culture
+[0428] A community centre within a 10-minute walk
+[0429] Addu City will foster vibrant, inclusive, and connected communities by creating high-quality public spaces that encourage recreation, social interaction, culture, and healthy living. Through integrated community centres, active waterfronts, attractive parks, and shaded walkable streets, every resident will have easy access to places where people can gather, exercise, learn, celebrate, and build stronger community connections. We will safeguard historical sites, traditions, language, and cultural practices. We will ensure that heritage is respected and sustained as a living part of everyday life and offer authentic, meaningful, and immersive encounters. We will showcase local traditions and stories to create memorable experiences and enable longer stays, repeat visits, and positive word-of-mouth, contributing to sustainable tourism and local economic growth.
+[0430] mosques
+[0431] gyms (08) and indoor sports halls (06)
+[0432] library and art gallery
+[0433] retail and wholesale shops
+[0434] cafés and restaurants
+[0435] Ensure every resident lives within a 10-minute walk of a community centre by 2028.
+[0436] Develop a continuous 17 km waterfront promenade from Hithadhoo to Gan by 2030.
+[0437] Establish four themed parks by 2028.
+[0438] Complete streetscaping of all main roads by 2030.
+[0439] Increase annual visits to Addu's museums and heritage attractions to 50,000 visitors by 2030.
+[0440] Host at least 06 major cultural events (traditional arts, crafts, music, and cuisine) annually by 2030.
+[0441] Integrated creative community centres
+[0442] Develop childcare services
+[0443] Build library and games rooms
+[0444] Develop prayer rooms and counselling rooms
+[0445] Build community function rooms and quality restrooms
+[0446] Beach and waterfront lifestyle
+[0447] Develop Feydhoo-Hithadhoo waterfront promenade
+[0448] Create zones for beach volleyball, football, cricket and tennis
+[0449] Establish kiosks for kayaks, paddle boards, and sports gear
+[0450] Develop beach showers, change rooms and fitness decks
+[0451] Themed parks and green spaces
+[0452] Establish Addu Rose Garden and Botanical Garden
+[0453] Develop a Kurumba and Coco park
+[0454] Establish Addu Dheeni and Kokaa park
+[0455] Develop green parks and outdoor spaces
+[0456] Shaded walkable streets
+[0457] Plant local shade trees along all major roads
+[0458] Place flower pots and decorative lighting on lamp posts
+[0459] Establish smart lighting, wi-fi and security cameras
+[0460] Develop running, walking and bicycle tracks
+[0461] Showcase Addu Heritage
+[0462] Establish Addu Museum and World War Memorial
+[0463] Develop HMS Maarangaa — 21st century Indian Ocean Museum
+[0464] Develop Astra light and sound museum
+[0465] Develop Gan Memory Garden
+[0466] Celebrate living culture
+[0467] Build Fehele Kilhi Cultural Village
+[0468] Establish Addu dialect standards
+[0469] Launch Annual Addu Awards
+[0470] Organise Addu Cultural Festival
+
+--- END ---

@@ -1,0 +1,77 @@
+=== ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
+File 10 of 19 · Goal 3: Ensure food security
+51 segments
+
+Translate every numbered segment below into Dhivehi (Thaana).
+
+RULES
+1. Keep every [nnnn] marker exactly as written, at the start of its own line.
+2. Return the same segments, in the same order. Never merge two or split one.
+3. Translate the text only. Add no notes, no explanations, no English.
+4. (No {slots} in this file.)
+5. Keep every digit in Latin numerals (0 1 2 3 4 5 6 7 8 9), and change no
+   figure. Dhivehi is written with the same digits, and every number here is
+   a measurement the council made: name the unit, never the quantity.
+
+REGISTER
+The council’s own plan text. Clear, concrete written Dhivehi. Where the
+English uses a technical term Dhivehi has no word for, use the term
+Maldivian technical and government writing actually uses, rather than
+inventing one. Do not soften, strengthen or explain what the plan says — say
+the same thing in Dhivehi.
+
+--- BEGIN ---
+
+[0288] Ensure food security
+[0289] Grow more at home, land more from the sea
+[0290] The Maldives imported approximately USD 790.5 million worth of food in 2025, underscoring the country's heavy dependence on external markets while revealing a significant economic opportunity to expand domestic production. Against a backdrop of rising global food prices, supply-chain disruptions, and climate-related shocks, strengthening food security has become a strategic priority for Addu City. With the largest land area among the Maldives' atolls, substantial agricultural potential, productive fisheries, and a growing population, Addu is uniquely positioned for sustainable food production and to contribute meaningfully to national food security.
+[0291] national food imports in 2025
+[0292] USD 790.5 million
+[0293] meat, seafood and fish
+[0294] USD 156.7 million
+[0295] vegetables and root crops
+[0296] USD 106.9 million
+[0297] fruits, nuts and seeds
+[0298] USD 106.5 million
+[0299] staples
+[0300] USD 33.5 million
+[0301] eggs
+[0302] USD 24.3 million
+[0303] Ensure 75% of homes grow 05 types of tropical fruits and 05 vegetables at home by 2028.
+[0304] Enable commercial production of 03 fruits and 03 vegetables to supply 30% of the need of the Maldives tourism market by 2030.
+[0305] Ensure ice and fuel are available to fishers in Hithadhoo and Maradhoo harbours by 2028.
+[0306] Supply at least 50% of Valhomas (smoked fish) and Rihaakuru (fish paste) sold in the Maldives by 2030.
+[0307] Produce at least 30,000 eggs per day to meet a minimum of 80% of local household, hospitality, business, and institutional demand.
+[0308] Ensure that 100% of food producers, processors, distributors and food-service establishments in Addu City are registered and undergo risk-based inspection.
+[0309] Every home a proud grower
+[0310] Establish a nursery and seed bank
+[0311] Distribute starter kits for households
+[0312] Launch home gardening app
+[0313] Establish home grower's market
+[0314] Organic agriculture revival
+[0315] Launch coconut & kurumba cultivation and replanting
+[0316] Allocate land for banana, breadfruit and yam plantation
+[0317] Establish orchards for papaya, mango, guava and passionfruit
+[0318] Establish crop and soil safety monitoring
+[0319] Technology driven fresh food
+[0320] Develop solar-powered climate-controlled greenhouses
+[0321] Establish vertical farms with hydroponic and aeroponic tech
+[0322] Introduce smart precision fertiliser use and irrigation
+[0323] Introduce drones + AI to track stress, pests and diseases
+[0324] High quality resilient fisheries
+[0325] Invest in renewables powered ice production
+[0326] Expand fisheries fuel storage capacity for 03 months
+[0327] Establish quality assurance for 'valhomas' and 'rihaakuru'
+[0328] Brand and promote 'valhomas', 'rihaakuru' and fish products
+[0329] Fresh eggs every day
+[0330] Build demonstration poultry farms
+[0331] Establish a PPP for quality feed development
+[0332] Conduct training on egg handling, storage and quality
+[0333] Establish a biosecurity and disease management system
+[0334] Trusted quality local food
+[0335] Establish a food quality laboratory
+[0336] Establish a food fund to support growers and producers
+[0337] Register bakers and snack producers
+[0338] Establish training and certification for food producers
+
+--- END ---
