@@ -1,5 +1,6 @@
 import {
   LATEST_POPULATION,
+  LATEST_REGISTER,
   POPULATION,
   POPULATION_SCALE_MAX,
   fmt,
@@ -13,50 +14,53 @@ import type { Locale } from '@/lib/i18n/config'
 const pct = (n: number) => `${((n / POPULATION_SCALE_MAX) * 100).toFixed(2)}%`
 
 /**
- * The gap, stated as a sentence that happens to start with the number.
+ * The register, stated as a sentence that happens to start with the number.
  *
- * An earlier version set this as a subtraction with a rule under it. It was
- * accurate and unpleasant — a consultation page should not open by putting a
- * sum in a resident's face. The figure still leads, but it is now the subject
- * of a plain sentence, and the two inputs sit underneath for anyone checking.
+ * This block used to lead on the gap between the two counts — the register
+ * minus the residents, 9,710 people registered here and living elsewhere. The
+ * council replaced both the figure and the sentence beside it in review, and
+ * what is left is the plainer fact: how many people the city's register holds.
  *
- * Both inputs are read off the same year. The 12 August draft carries a newer
- * register count than it has a resident count for, and subtracting across the
- * two would overstate the gap by every arrival since — so the newer register
- * gets its own line rather than being folded into the sum.
+ * The register, not the census. `LATEST_REGISTER` is the last row of the table
+ * whether or not a resident count was ever published against it, which is the
+ * one the council named — 2025, a year `LATEST_POPULATION` skips because it
+ * carries no residents to measure.
+ *
+ * The gap has not been suppressed, only moved: `/background` still draws it on
+ * every row of the ledger, where the two counts sit side by side.
  */
-export function PopulationGap({ locale }: { locale: Locale }) {
+export function PopulationRegister({ locale }: { locale: Locale }) {
   const t = getDictionary(locale)
-  const gap = gapOf(LATEST_POPULATION)
 
   return (
     // Number over sentence, not a number set inline at the head of one. Inline,
-    // the balancer broke it as "9,710 people are registered in / Addu but living
-    // elsewhere." — a line ending on a preposition, and the figure reading as
-    // the first word of a paragraph rather than as the thing being reported.
-    // The vision section already stacks a figure over its unit this way.
+    // the balancer broke the old wording as "9,710 people are registered in /
+    // Addu but living elsewhere." — a line ending on a preposition, and the
+    // figure reading as the first word of a paragraph rather than as the thing
+    // being reported. The vision section stacks a figure over its unit the same
+    // way.
     <p>
       <span className="block font-display text-display-1 leading-[1.02] text-navy tabular-nums">
-        {fmt(gap)}
+        {fmt(LATEST_REGISTER.registered)}
       </span>
-      <span className="mt-3 block max-w-[24ch] text-lead text-ink">{t.home.gapSentence}</span>
+      <span className="mt-3 block max-w-[24ch] text-lead text-ink">{t.home.registerSentence}</span>
     </p>
   )
 }
 
 /**
- * The two figures the number above is the difference of.
+ * The last year counted on both sides, under the sentences that cite it.
  *
- * Split out of `PopulationGap` so the page can set it beside the figure rather
- * than beneath it: as a fourth and fifth line under the number it left the
- * column alongside holding two lines of text and a void.
+ * It used to be provenance for a subtraction — the register and the resident
+ * count the gap above was the difference of. With the gap gone from this page
+ * it is provenance for the target sentence instead, which names 25,062 as
+ * where Addu had got to by 2022 and 35,000 as where the plan means to be by
+ * 2030. This line is where a reader checks the first of those, and sees what
+ * the register said in the same year.
  *
- * A second line used to note that the register had run on to 35,334 by 2025
- * with no resident count published against it. True, and worth publishing —
- * but it is a caveat about a year this figure is not drawn from, and it was
- * the last thing read before the link out. The ledger on /background carries
- * the same fact where it belongs: 2025 is a row there, with an empty bar and
- * "Not yet counted" against it.
+ * Split out so the page can set it beside the figure rather than beneath it:
+ * as a fourth and fifth line under the number it left the column alongside
+ * holding two lines of text and a void.
  */
 export function PopulationSources({ locale }: { locale: Locale }) {
   const t = getDictionary(locale)
@@ -188,9 +192,14 @@ export function PopulationLedger({ locale }: { locale: Locale }) {
           <span aria-hidden className="h-2.5 w-7 rounded-[2px] border border-navy/35" />
           {t.background.legendOnRegister}
         </span>
-        {/* The scale note is gone. The page's own standfirst already says the
-            years are drawn to one scale from zero, and a legend that has to
-            explain how to read a bar chart is a bar chart that has failed. */}
+        {/* No scale note. A legend that has to explain how to read a bar chart
+            is a bar chart that has failed — and the marks carry the reading on
+            their own: every row starts at the same left edge and runs against
+            the same maximum, so the lengths are comparable by looking at them.
+
+            It used to lean on the standfirst above, which said the years were
+            drawn to one scale from zero. The council replaced that sentence in
+            review; the reasoning here never depended on it. */}
       </div>
     </div>
   )

@@ -44,7 +44,7 @@ type Props = {
  * this square flies into the goal page's hero.
  */
 export function GoalBadge({ goal, size = 96, hero = false, morph = true, className = '' }: Props) {
-  const glyph = GOAL_GLYPHS[goal.number]
+  const glyph = GOAL_GLYPHS[goal.slug]
 
   const badge = (
     <span

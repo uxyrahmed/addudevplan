@@ -87,8 +87,14 @@ import WaterEnergyIcon from '@hugeicons/core-free-icons/WaterEnergyIcon'
 import WheatIcon from '@hugeicons/core-free-icons/WheatIcon'
 import type { IconData } from '@/components/ui/icon'
 
-const STAT_GLYPHS: Record<number, Record<string, IconData>> = {
-  1: {
+/**
+ * Keyed on `slug`, not on `number` — see the note on [[GOAL_GLYPHS]]. The
+ * council renumbered six goals in the 1 September review, and a rail keyed on
+ * position would have drawn the water goal's droplets against the transport
+ * goal's motorcycles.
+ */
+const STAT_GLYPHS: Record<string, Record<string, IconData>> = {
+  'energy-security': {
     'per day average household consumption': EnergyIcon,
     'litres of diesel per year': OilBarrelIcon,
     // Notes, coins, a bill: three money glyphs in one rail, so they are read
@@ -98,14 +104,14 @@ const STAT_GLYPHS: Record<number, Record<string, IconData>> = {
     'MVR subsidy per year': Coins01Icon,
     'per year for each household': Invoice01Icon,
   },
-  2: {
+  'water-security': {
     residents: UserGroupIcon,
     'of water per person per day': DropletIcon,
     'of potable water per day': GlassWaterIcon,
     'to produce a cbm of desalinated water': WaterEnergyIcon,
     'needed per day to produce water': FlashIcon,
   },
-  3: {
+  'food-security': {
     // The total is the one row that is not a food category, and its glyph says
     // so — the bill arrives by sea, which is the whole point of the goal.
     'national food imports in 2025': CargoShipIcon,
@@ -115,54 +121,54 @@ const STAT_GLYPHS: Record<number, Record<string, IconData>> = {
     staples: WheatIcon,
     eggs: EggsIcon,
   },
-  4: {
+  'future-ready-transport': {
     'motorcycles — 81% of households own one': Motorbike01Icon,
     'cars — 54% of households own one': Car01Icon,
     '05 for 50 passengers and 08 for 30 passengers': Bus01Icon,
     'passengers use buses daily': UserGroupIcon,
   },
-  5: {
+  'connect-the-south': {
     residents: UserGroupIcon,
     '04 in Huvadhoo, 01 in Fuvahmulah': AirportIcon,
     'inhabited islands in four atolls': MapsLocation01Icon,
     'with 2,865 beds': Hotel01Icon,
     'with 978 beds': Home01Icon,
   },
-  6: {
+  'diverse-quality-housing': {
     'existing houses': Home01Icon,
     'flats and row houses': ApartmentIcon,
     'land plots released for housing': RealEstate01Icon,
     'housing units under construction': CraneIcon,
     'planned housing units': PencilRulerIcon,
   },
-  7: {
+  'connect-community-and-culture': {
     mosques: Mosque01Icon,
     'gyms (08) and indoor sports halls (06)': Dumbbell01Icon,
     'library and art gallery': LibraryIcon,
     'retail and wholesale shops': Store01Icon,
     'cafés and restaurants': Restaurant01Icon,
   },
-  8: {
+  'health-and-well-being': {
     'operational health facilities': Hospital01Icon,
     'specialist doctors': Doctor01Icon,
     'medical officers': StethoscopeIcon,
     nurses: InjectionIcon,
     'registered pharmacies': Medicine01Icon,
   },
-  9: {
+  'education-excellence': {
     schools: School01Icon,
     'school students': StudentsIcon,
     teachers: TeacherIcon,
     'universities and colleges': Mortarboard01Icon,
   },
-  10: {
+  'inclusive-prosperity': {
     'persons living below poverty': CharityIcon,
     'persons with special needs': AccessibilityIcon,
     'registered companies': Building02Icon,
     'registered sole proprietorships': Briefcase01Icon,
     partnerships: HandshakeIcon,
   },
-  11: {
+  'wildlife-and-wellness-tourism': {
     // A double bed for the resorts, a single for the guesthouses — the two
     // rows count the same noun, and the figures alone do not separate them.
     'beds in 03 registered resorts in Addu': BedDoubleIcon,
@@ -171,7 +177,7 @@ const STAT_GLYPHS: Record<number, Record<string, IconData>> = {
     'tourists to Huvadhoo and Fuvahmulah in 2025': Luggage01Icon,
     'arrivals from Gan International Airport': AirportIcon,
   },
-  12: {
+  'environment-protection': {
     'protected areas': Leaf01Icon,
     'UNESCO biosphere reserve': EarthIcon,
     'hectares of protected areas': MapsSquare01Icon,
@@ -184,6 +190,6 @@ const STAT_GLYPHS: Record<number, Record<string, IconData>> = {
  * The glyph for one figure, or `undefined` if the label has no entry — the rail
  * renders the figure without a glyph rather than breaking.
  */
-export function statGlyph(goalNumber: number, label: string): IconData | undefined {
-  return STAT_GLYPHS[goalNumber]?.[label]
+export function statGlyph(goalSlug: string, label: string): IconData | undefined {
+  return STAT_GLYPHS[goalSlug]?.[label]
 }

@@ -121,7 +121,7 @@ export default async function GoalPage(props: PageProps<'/[lang]/goals/[slug]'>)
               <h2 className="font-heading text-title text-ink">{t.goal.whereWeAreToday}</h2>
               <dl className="mt-6 space-y-6" data-reveal-stagger="0.08">
                 {goal.stats.map((stat) => {
-                  const glyph = statGlyph(goal.number, stat.label)
+                  const glyph = statGlyph(goal.slug, stat.label)
                   return (
                     <div key={`${stat.value}-${stat.label}`} data-reveal="up">
                       <dt className="sr-only">{stat.label}</dt>
