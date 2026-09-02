@@ -290,7 +290,12 @@ export const TIMELINE: { year: string; text: string }[] = [
 
 export type PopulationYear = {
   year: number
-  registered: number
+  /**
+   * On the city register. Absent before 1977, which the council's own
+   * 1958–2022 table does not reach back for — those years carry a resident
+   * count and nothing else.
+   */
+  registered?: number
   /**
    * Everyone living in Addu, Maldivian and foreign. Absent for 2025, where the
    * draft prints a register count and no resident count.
@@ -302,13 +307,18 @@ export type PopulationYear = {
   foreigners?: number
 }
 
-/** A year the draft measured on both sides, so a gap can be taken from it. */
+/** A year with a resident count — every row the ledger draws. */
 export type MeasuredYear = PopulationYear & { resident: number }
 
+/** A year with a register count. The home page's headline figure needs one. */
+export type RegisteredYear = PopulationYear & { registered: number }
+
 /**
- * Registered against resident population. Structured rather than pre-formatted
- * strings so the gap is always derived, never hand-typed — a transcription slip
- * in the most important number on the page would be invisible otherwise.
+ * How many people have lived in Addu, and how many the register holds.
+ *
+ * Structured rather than pre-formatted strings, so every figure on the site is
+ * read off this table — a transcription slip in the most important number on
+ * the page would be invisible otherwise.
  *
  * Rebuilt from the 12 August draft, which replaced the five-row table with ten
  * rows and split the resident count into Maldivians and foreign nationals. That
@@ -319,8 +329,29 @@ export type MeasuredYear = PopulationYear & { resident: number }
  * 20,343 → 25,062, and both of those figures reappear here in the `maldivians`
  * column, which is what makes the reading safe rather than a guess. The 2022 and
  * 2025 register counts were revised down at the same time.
+ *
+ * **The four years before 1977 come from the council's own table**, supplied in
+ * `Addu population for website.docx` at the 1 September review and asked to be
+ * what the ledger draws. That table is twelve years, 1958 to 2022, one figure
+ * each — and every one of the eight years it shares with this file matches the
+ * `resident` column exactly, none of them the `registered` column. So it is
+ * read as the resident series carried back to 1958, and 1958–1974 land here
+ * with no register count beside them, which is the honest shape: the council
+ * did not supply one.
+ *
+ * The review note called it "registered population". Three things say
+ * otherwise — the eight exact matches above, the twelve years being precisely
+ * `MIGRATION_SERIES.years`, whose subtitle reads "Resident population as a
+ * share of the Maldives population", and the council's own new heading for
+ * this section, "25,000 residents", against a 2022 figure of 25,062. Worth
+ * confirming with them, but not worth labelling the axis against the numbers.
  */
 export const POPULATION: PopulationYear[] = [
+  // 1958–1974: the council's table, which publishes no register count for them.
+  { year: 1958, resident: 6500 },
+  { year: 1963, resident: 8547 },
+  { year: 1966, resident: 9501 },
+  { year: 1974, resident: 13524 },
   { year: 1977, registered: 14799, resident: 14094 },
   { year: 1985, registered: 18143, resident: 14957 },
   { year: 1990, registered: 20818, resident: 15177 },
@@ -347,22 +378,46 @@ export const POPULATION_2030 = {
 
 export const isMeasured = (row: PopulationYear): row is MeasuredYear => row.resident != null
 
-/** The years that can carry a gap — everything except the register-only 2025. */
+const hasRegister = (row: PopulationYear): row is RegisteredYear => row.registered != null
+
+/** Every year the register was counted in — 1977 onwards. */
+const REGISTERED_POPULATION = POPULATION.filter(hasRegister)
+
+/** Every year with a resident count — 1958 to 2022, which is what the ledger draws. */
 export const MEASURED_POPULATION = POPULATION.filter(isMeasured)
 
-/** The most recent year measured on both sides. */
-export const LATEST_POPULATION = MEASURED_POPULATION[MEASURED_POPULATION.length - 1]
+/**
+ * The most recent year with a resident count.
+ *
+ * The source for the home page's four headline facts and for the sources line
+ * under the register — 2022, the last census.
+ */
+export const LATEST_POPULATION = MEASURED_POPULATION[MEASURED_POPULATION.length - 1]!
 
-/** The most recent register count, whether or not a resident count matches it. */
-export const LATEST_REGISTER = POPULATION[POPULATION.length - 1]
+/**
+ * The most recent register count, whether or not a resident count matches it.
+ *
+ * Found by filtering rather than taken off the end of `POPULATION`: the four
+ * years the council added in review carry no register, so the last row of the
+ * table is no longer guaranteed to be a row that has one. It happens still to
+ * be 2025, and this keeps it true if the table grows again.
+ */
+export const LATEST_REGISTER = REGISTERED_POPULATION[REGISTERED_POPULATION.length - 1]!
 
-/** Everything in the ledger is drawn against one honest scale, starting at 0. */
-export const POPULATION_SCALE_MAX = 37000
+/**
+ * The ledger's scale, derived rather than declared.
+ *
+ * It used to be a hand-set 37,000, sized for a register count the ledger no
+ * longer draws — against a series topping out at 25,062 every bar would have
+ * come up two-thirds short. Rounded up to the next 5,000 so the axis lands on
+ * a round number and a revised census moves it on its own.
+ */
+export const POPULATION_SCALE_MAX =
+  Math.ceil(Math.max(...MEASURED_POPULATION.map((row) => row.resident)) / 5000) * 5000
 
 /** The plan's own target, from the vision slide. */
 export const TARGET_RESIDENTS = 35000
 
-export const gapOf = (row: MeasuredYear) => row.registered - row.resident
 export const fmt = (n: number) => n.toLocaleString('en-US')
 
 /**

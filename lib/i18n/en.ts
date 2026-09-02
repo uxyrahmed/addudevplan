@@ -230,13 +230,7 @@ export const en = {
     ledgerBody:
       'Since the British departed Gan in 1976, decades of outward migration occurred.',
     ledgerYear: 'Year',
-    ledgerLivingElsewhere: 'Living elsewhere',
-    ledgerOf: '{resident} of {registered} registered',
-    ledgerRegistered: '{registered} registered',
-    ledgerNotCounted: 'Not yet counted',
-    ledgerLivingElsewhereSr: ' living elsewhere',
-    legendLivingHere: 'Living here',
-    legendOnRegister: 'On the register',
+    ledgerLivingHere: 'Living here',
 
     closing:
       'This plan is an integrated blueprint for transforming Addu into a resilient, inclusive and sustainable city.',
