@@ -25,7 +25,7 @@ the same thing in Dhivehi.
 [0513] Education excellence
 [0514] 2,000 tertiary students a year by 2030
 [0515] Education is central to Addu City's future competitiveness, workforce development, and social progress. Strengthening foundational learning through quality early childhood education, upgrading school infrastructure and science labs, and expanding vocational training pathways will align skills with emerging economic opportunities. Building digital capabilities and promoting lifelong learning will ensure adaptability in a rapidly changing world. Together, these investments will create a skilled, innovative, and resilient community.
-[0516] Two items on this goal are still unfinished in the 16 August draft: the count of tertiary students is printed as "000", and two different targets are both numbered 9.3. Both are left as the council wrote them rather than guessed at.
+[0516] One item on this goal is still unfinished in the draft: the count of tertiary students is printed as "000". It is left as the council wrote it rather than guessed at.
 [0517] schools
 [0518] school students
 [0519] teachers

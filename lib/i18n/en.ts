@@ -223,7 +223,7 @@ export const en = {
 
     settlementTitle: 'Communities relocated and new administrations formed',
     settlementBody:
-      'Since the establishment of Hithadhoo in 1620, several community relocations have occurred in Addu, mainly due to the establishment of Gan Airport by the British RAF during WWII, and the reestablishment of British military base in Gan.',
+      'Since Hithadhoo was established in 1620, several community relocations have occurred in Addu. These relocations were mainly due to the British RAF establishing Gan Airport during WWII and the subsequent reestablishment of the British military base in Gan in 1957.',
     settlementRailLabel: 'Settlement history, 1620 to 2026',
 
     ledgerTitle: '25,000 residents',
@@ -247,7 +247,7 @@ export const en = {
     chartAria:
       "{subtitle}. Addu falls from 9% in 1958 to 5.1% in 2022, while Male' rises from 11% to 40%.",
     reading:
-      'Addu’s share of the Maldivian population fell from 9% to 5.1%. Male’s rose from 11% to 40%.',
+      'Addu’s share of the Maldivian population fell from 9% in 1958 to 5.1% in 2022. Male’s rose from 11% to 40%.',
   },
 
   map: {

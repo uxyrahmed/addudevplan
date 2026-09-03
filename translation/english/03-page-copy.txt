@@ -23,20 +23,20 @@ written in Dhivehi, not translated into it.
 
 --- BEGIN ---
 
-[0013] The Link Road runs the length of the western chain, joining four islands end to end. That is what makes Addu one city rather than four.
-[0015] people are registered in Addu but living elsewhere.
-[0016] In 1977 the gap was 705 people. The plan sets a target of 35,000 people living in Addu by 2030.
+[0013] The Link Road runs the length of the western chain, joining four islands end to end. There are two inhabited islands and three resorts on the eastern chain. Gan in the southern tip serves as the international airport.
+[0015] people are registered in Addu.
+[0016] The population of Addu has increased from 14,094 to 25,062 by 2022. This plan sets a target of 35,000 residents in Addu by 2030.
 [0022] Twelve goals carry the vision of a resilient, inclusive, sustainable Addu. Open any goal to read its targets and comment on each action.
 [0023] Tell us what to change.
 [0024] Every one of the {count} actions in this plan takes a response — support it, say you are unsure, or raise a concern, and add a comment if you want to explain. Your answers send themselves as you make them.
 [0034] Tell us what you think of each action below. One tap to react, and a comment box if you want to explain why.
 [0122] The record behind the plan: where Addu’s people have been settled since 1620, and the registered and resident population counts from 1977 to 2025.
-[0125] The record the plan is built on: where Addu’s people have been settled since 1620, and how the number registered here compares with the number living here from 1977 onwards.
-[0127] Addu’s people have been relocated island to island for most of a century.
-[0130] Every year we have counted, drawn to one scale that starts at zero.
-[0139] The plan sets out what we intend to do about this — and every action in it takes your response.
-[0145] Addu’s share of the Maldivian population fell from 9% to 5.1%. Male’s rose from 11% to 40%.
-[0153] Published on {date} by {author}. Every action has its own place to respond.
-[0154] Open for consultation — figures and targets can change with your feedback.
+[0125] The following is a brief timeline of settlement history in Addu from 1620 to 2025.
+[0127] Since Hithadhoo was established in 1620, several community relocations have occurred in Addu. These relocations were mainly due to the British RAF establishing Gan Airport during WWII and the subsequent reestablishment of the British military base in Gan in 1957.
+[0130] Since the British departed Gan in 1976, decades of outward migration occurred.
+[0133] This plan is an integrated blueprint for transforming Addu into a resilient, inclusive and sustainable city.
+[0139] Addu’s share of the Maldivian population fell from 9% in 1958 to 5.1% in 2022. Male’s rose from 11% to 40%.
+[0147] Published on {date} by {author}. Every action has its own place to respond.
+[0148] Open for consultation — figures and targets can change with your feedback.
 
 --- END ---

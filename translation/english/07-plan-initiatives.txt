@@ -1,6 +1,6 @@
 === ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
 File 7 of 19 · The plan: flagship initiatives
-22 segments
+24 segments
 
 Translate every numbered segment below into Dhivehi (Thaana).
 
@@ -22,27 +22,29 @@ the same thing in Dhivehi.
 
 --- BEGIN ---
 
-[0204] Ten flagship initiatives
-[0205] Ten closely related initiatives carry the vision of a resilient, inclusive, sustainable Addu.
-[0206] Home solar and battery storage
-[0207] We are taking a major step toward a cleaner, more affordable energy future for our community. We are launching a new initiative to install 10 kWp solar PV system on every household in Addu along with 15 kWh battery storage.
-[0208] Free electric bus service
-[0209] We will launch a free electric bus service across the City connecting all important places, designed to make daily travel easier, more affordable, and environmentally friendly for all residents and visitors.
-[0210] Every home is a food grower
-[0211] We will support households to grow essentials such as lime, chilli, ginger, cucumber, tomato, gourds, mangoes, passion fruit and guava by providing seed packs, compost, training, guidance, and ongoing support.
-[0212] Starter homes for young families
-[0213] We will provide young families 250 starter homes. These homes will be powered by renewable energy, provide safe water, and include gardens and open spaces where children can play, learn, and grow.
-[0214] Active healthy community
-[0215] We will develop gyms, group fitness activities, and sports events that encourage participation across all age groups complemented by nutrition education led by chefs, fostering healthy eating and sustainable lifestyles.
-[0216] Higher and tertiary education excellence
-[0217] We will increase access to quality tertiary education in nursing, medical training, hospitality, pilot training, cabin crew, and technical roles in aviation aligning education with industry needs.
-[0218] Zero poverty
-[0219] We want a future where no one is left behind. We will support vulnerable members of our community through focused efforts in skills development, employment creation, mentoring, entrepreneurship and SME development.
-[0220] Live aboard hub and marina
-[0221] We will develop a marina to provide safe and modern berthing, fuel, water, power, waste management and maintenance. The hub will create a vibrant waterfront with dining, boutique shopping, and wellness facilities.
-[0222] Biodiversity conservation
-[0223] We will launch an integrated biodiversity conservation initiative focused on protecting the White Tern, manta rays, whale sharks, turtles, and dolphins and strengthen the management of Eidhigali Nature Park.
-[0224] Creative community centres
-[0225] We will build integrated community centres with open green spaces to create inclusive welcoming spaces for children, young people, and elderly. These spaces will feature library, multi-purpose rooms, meditation, and recreation.
+[0202] Eleven flagship initiatives
+[0203] Eleven closely related initiatives carry the vision of a resilient, inclusive, sustainable Addu.
+[0204] Home solar and battery storage
+[0205] We are taking a major step toward a cleaner, more affordable energy future for our community. We are launching a new initiative to install 10 kWp solar PV system on every household in Addu along with 15 kWh battery storage.
+[0206] Free electric bus service
+[0207] We will launch a free electric bus service across the City connecting all important places, designed to make daily travel easier, more affordable, and environmentally friendly for all residents and visitors.
+[0208] Modern Smart Link Road
+[0209] Transform the 13km Feydhoo-Hithadhoo Link Road into a safe, climate-resilient and technology-enabled road through complete resurfacing, improved drainage, smart lighting, and safer junctions.
+[0210] Starter homes for young families
+[0211] We will provide young families 250 starter homes. These homes will be powered by renewable energy, provide safe water, and include gardens and open spaces where children can play, learn, and grow.
+[0212] Creative community centres
+[0213] We will build integrated community centres with open green spaces to create inclusive welcoming spaces for children, young people, and elderly. These spaces will feature library, multi-purpose rooms, meditation, and recreation.
+[0214] Every home is a food grower
+[0215] We will support households to grow essentials such as lime, chilli, ginger, cucumber, tomato, gourds, mangoes, passion fruit and guava by providing seed packs, compost, training, guidance, and ongoing support.
+[0216] Active healthy community
+[0217] We will develop gyms, group fitness activities, and sports events that encourage participation across all age groups complemented by nutrition education led by chefs, fostering healthy eating and sustainable lifestyles.
+[0218] Higher and tertiary education excellence
+[0219] We will increase access to quality tertiary education in nursing, medical training, hospitality, pilot training, cabin crew, and technical roles in aviation aligning education with industry needs.
+[0220] Zero poverty
+[0221] We want a future where no one is left behind. We will support vulnerable members of our community through focused efforts in skills development, employment creation, mentoring, entrepreneurship and SME development.
+[0222] Live aboard hub and marina
+[0223] We will develop a marina to provide safe and modern berthing, fuel, water, power, waste management and maintenance. The hub will create a vibrant waterfront with dining, boutique shopping, and wellness facilities.
+[0224] Biodiversity conservation
+[0225] We will launch an integrated biodiversity conservation initiative focused on protecting the White Tern, manta rays, whale sharks, turtles, and dolphins and strengthen the management of Eidhigali Nature Park.
 
 --- END ---

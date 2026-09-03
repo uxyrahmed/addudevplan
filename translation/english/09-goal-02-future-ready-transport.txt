@@ -1,0 +1,58 @@
+=== ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
+File 9 of 19 · Goal 2: Future ready transport
+32 segments
+
+Translate every numbered segment below into Dhivehi (Thaana).
+
+RULES
+1. Keep every [nnnn] marker exactly as written, at the start of its own line.
+2. Return the same segments, in the same order. Never merge two or split one.
+3. Translate the text only. Add no notes, no explanations, no English.
+4. (No {slots} in this file.)
+5. Keep every digit in Latin numerals (0 1 2 3 4 5 6 7 8 9), and change no
+   figure. Dhivehi is written with the same digits, and every number here is
+   a measurement the council made: name the unit, never the quantity.
+
+REGISTER
+The council’s own plan text. Clear, concrete written Dhivehi. Where the
+English uses a technical term Dhivehi has no word for, use the term
+Maldivian technical and government writing actually uses, rather than
+inventing one. Do not soften, strengthen or explain what the plan says — say
+the same thing in Dhivehi.
+
+--- BEGIN ---
+
+[0255] Future ready transport
+[0256] Free electric buses every 10 minutes
+[0257] As incomes continue to rise, vehicle ownership is expected to increase, leading to greater traffic congestion, parking shortages, road safety concerns, and dependence on imported fossil fuels. To avoid becoming a car-dependent city, Addu will adopt a free electric bus service operating every 10 minutes during peak hours, supported by walking and cycling infrastructure and a planned transition to electric vehicles. Complemented by an expanding EV charging network, this strategy will lower transport emissions, reduce fuel imports, improve air quality, and establish Addu as a city for clean, affordable, inclusive and sustainable mobility.
+[0258] motorcycles — 81% of households own one
+[0259] cars — 54% of households own one
+[0260] 05 for 50 passengers and 08 for 30 passengers
+[0261] 13 buses
+[0262] passengers use buses daily
+[0263] Operate free electric buses every 10 minutes during peak hours by 2028.
+[0264] Ensure 50% of motorcycles and cars used in Addu are electric vehicles by 2030.
+[0265] Ensure that 100% of homes with vehicle access provide at least one off-street car parking space within the property boundary.
+[0266] Develop 36 km of quality roads that meet international standard by 2028.
+[0267] Free electric bus service
+[0268] Procure electric buses
+[0269] Establish solar bus charging stations
+[0270] Launch an app for bus routes and schedules
+[0271] Build climate smart next generation bus shelters
+[0272] Catalyse EV transition
+[0273] Establish solar super charging stations for electric vehicles
+[0274] Procure electric vehicles for council use
+[0275] Procure super hybrid pickup trucks for council works
+[0276] Establish smart battery swapping service for motorcycles
+[0277] Smart parking
+[0278] Incentivise home garage development
+[0279] Launch automatic license plate recognition
+[0280] Establish IoT sensor detection parking slots
+[0281] Launch a cashless paid parking application
+[0282] Modern Smart Link Road
+[0283] Upgrade Link Road to modern smart standard
+[0284] Install international standard road marking
+[0285] Install digital signage and intelligent vehicle detection
+[0286] Enable AI assisted traffic management and road safety
+
+--- END ---
