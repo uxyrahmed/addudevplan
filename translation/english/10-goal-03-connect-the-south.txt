@@ -1,0 +1,55 @@
+=== ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
+File 10 of 19 · Goal 3: Connect the South
+29 segments
+
+Translate every numbered segment below into Dhivehi (Thaana).
+
+RULES
+1. Keep every [nnnn] marker exactly as written, at the start of its own line.
+2. Return the same segments, in the same order. Never merge two or split one.
+3. Translate the text only. Add no notes, no explanations, no English.
+4. (No {slots} in this file.)
+5. Keep every digit in Latin numerals (0 1 2 3 4 5 6 7 8 9), and change no
+   figure. Dhivehi is written with the same digits, and every number here is
+   a measurement the council made: name the unit, never the quantity.
+
+REGISTER
+The council’s own plan text. Clear, concrete written Dhivehi. Where the
+English uses a technical term Dhivehi has no word for, use the term
+Maldivian technical and government writing actually uses, rather than
+inventing one. Do not soften, strengthen or explain what the plan says — say
+the same thing in Dhivehi.
+
+--- BEGIN ---
+
+[0287] Connect the South
+[0288] One southern region, connected daily
+[0289] Reliable connectivity between Addu, Fuvahmulah, and Huvadhoo is fundamental to creating an integrated southern economic region. Daily passenger services will improve access to healthcare, education, and employment for residents, while enabling visitors to travel between the Southern Atolls as a single tourism destination. Daily freight services will ensure the timely movement of medical supplies, laboratory samples, fresh food, fisheries products, e-commerce parcels, and essential goods, while supporting emergency response during disruptions. This target will be delivered through complementary investments to enhance Gan International Airport with new international routes and sustained regional air services, establish drone cargo corridors for time-critical deliveries, and develop a strategic gateway port.
+[0290] residents
+[0291] 04 in Huvadhoo, 01 in Fuvahmulah
+[0292] 06 airports
+[0293] inhabited islands in four atolls
+[0294] with 2,865 beds
+[0295] 11 resorts + 02 hotels
+[0296] with 978 beds
+[0297] 72 guesthouses
+[0298] Establish direct air connectivity to four international destinations from Addu by 2028.
+[0299] Establish daily passenger connectivity between Southern Atolls by 2028.
+[0300] Establish daily cargo connectivity between Southern Atolls by 2028.
+[0301] Air connectivity
+[0302] Upgrade Gan Airport terminal facilities
+[0303] Route development for Middle East and East Asia
+[0304] Sustain daily connectivity to Huvadhoo and Fuvahmulah
+[0305] Launch seaplane services
+[0306] Air cargo hub
+[0307] Develop drone corridor and logistics
+[0308] Establish drone vertiport and vertistops
+[0309] Facilitate traffic management services for UAS
+[0310] Expand air cargo cold chain logistics
+[0311] Strategic gateway port
+[0312] Develop new berth for RoRo and heavy machinery
+[0313] Establish a container terminal
+[0314] Establish paved RoRo vehicle yard
+[0315] Establish machinery and equipment hub
+
+--- END ---

@@ -2,16 +2,22 @@
  * Addu Development Plan 2026–2031 — content model.
  *
  * Every string and figure below is transcribed from the council's draft slide
- * deck, now the 16 August draft.
+ * deck, now the 3 September draft.
  *
- * That draft changes less than its predecessors. All twelve goals keep their
- * titles, all fifty-five targets are unchanged word for word, and every
- * strategy and action is identical in wording and order. Two goal descriptions
- * were rewritten — goal 3's opens on the import bill now, goal 7's is trimmed
- * of four clauses — and goal 3's figure rail was rebuilt around the national
- * total. Both are noted at the goals themselves. The population ledger, the
- * turning-point passage, the settlement timeline, the pillars paragraph and
- * all ten flagship initiatives carry over untouched.
+ * The 16 August draft changed less than its predecessors: all twelve goals
+ * kept their titles, all fifty-five targets were unchanged word for word, and
+ * every strategy and action was identical in wording and order. Two goal
+ * descriptions were rewritten — goal 3's opens on the import bill now, goal 7's
+ * is trimmed of four clauses — and goal 3's figure rail was rebuilt around the
+ * national total. Both are noted at the goals themselves.
+ *
+ * The 3 September draft moves rather than rewrites. The flagship initiatives
+ * go from ten to eleven, in a new order, with the Modern Smart Link Road
+ * entering at 03. Three goals change position — water to 4, housing to 5,
+ * community to 6 — and two lose a word from their titles: water's "diverse"
+ * and community's "and culture". No target, strategy or action changes. The
+ * population ledger, the turning-point passage, the settlement timeline and
+ * the pillars paragraph carry over untouched.
  *
  * Goal colours are the fill values of the badge plates on that draft's
  * twelve-goals slide, converted out of the Apple RGB profile the deck tags them
@@ -31,9 +37,12 @@
  * relist every action of a goal in order, so they are the cross-check that the
  * strategy slides above have been read correctly.
  *
- * Where the source deck is visibly unfinished (placeholder counts, a target
- * numbered twice), the item is omitted here and the goal carries an `openNote`
- * instead — the site would rather say "still open" than publish a wrong figure.
+ * Where the source deck is visibly unfinished (a placeholder count), the item
+ * is omitted here and the goal carries an `openNote` instead — the site would
+ * rather say "still open" than publish a wrong figure. A label the deck simply
+ * mistypes is different, and is corrected: goal 9 prints two targets as 9.3,
+ * and the second of them is 9.4 here. That is reading the slide, not filling a
+ * gap in it — there is no fourth number to guess at.
  */
 
 export type Pillar = {
@@ -555,8 +564,10 @@ export const PILLARS: Pillar[] = [
  *
  * **`number` is the position; the ids are history.** The 1 September review
  * moved six goals — 4 and 5 up to 2 and 3, 6 and 7 to 4 and 5, and 2 and 3
- * down to 6 and 7 — and asked the numbering to follow. The numbers and the
- * printed target labels did. The ids did not, and must not: the consultation
+ * down to 6 and 7 — and the 3 September review moved three more: water up to
+ * 4, housing to 5, community to 6. Both asked the numbering to follow. The
+ * numbers and the printed target labels did. The ids did not, and must not:
+ * the consultation
  * holds live responses keyed on `g{goal}-s{strategy}-a{action}`, and
  * `validateSubmission` drops any id the plan no longer contains. Renumbering
  * them would not migrate that feedback, it would delete it from the results —
@@ -752,10 +763,79 @@ export const GOALS: Goal[] = [
   },
   {
     number: 4,
-    slug: 'diverse-quality-housing',
-    title: 'Diverse quality housing',
+    // Slug stays `water-security`, and deliberately: it is in published URLs,
+    // the home page's `#goal-` anchors and the badge's view-transition name.
+    // The deck renaming a heading is not a reason to break a link.
+    slug: 'water-security',
+    // Renamed twice. The 12 August draft was mid-rename — this goal's own
+    // slide read "Safe diverse water sources" while the twelve-goals contents
+    // slide still read "Ensure water security" — and the 16 August draft
+    // settled both on the former. The 3 September review then struck
+    // "diverse", leaving what is here.
+    title: 'Safe water sources',
     color: '#9CB854',
     textColor: '#627430',
+    tagline: 'Renewables-powered desalination and rainwater for all',
+    summary: `Addu will secure its long-term water supply through five diversified sources — desalination, household and community-scale rainwater harvesting, responsibly managed groundwater, reclaimed wastewater, and mineralised bottled water. Solar PV and battery storage will support reliable desalination. Expanded rainwater systems will capture and store rainfall for domestic and public use, while carefully managed groundwater will provide a dedicated supply for gardening and landscaping. Expanded sewerage networks and advanced wastewater treatment will enable reclaimed water to be used safely for agriculture, irrigation, landscaping, and other non-potable purposes. Addu will also support the local production of mineralised drinking water in reusable glass bottles and large-volume containers for homes, restaurants, hotels, offices, and other businesses.`,
+    stats: [
+      { value: '35,000', label: 'residents' },
+      { value: '85 litres', label: 'of water per person per day' },
+      { value: '3,000 cbm', label: 'of potable water per day' },
+      { value: '4 kWh', label: 'to produce a cbm of desalinated water' },
+      { value: '12,000 kWh', label: 'needed per day to produce water' },
+    ],
+    targets: [
+      { id: 'g2-t1', label: '4.1', text: 'Produce 3,000 cbm of desalinated water per day using renewable energy by 2028.' },
+      { id: 'g2-t2', label: '4.2', text: 'Equip all homes with safe rainwater collection and storage tanks.' },
+      { id: 'g2-t3', label: '4.3', text: 'Enable whole-house water filtration in homes by 2028.' },
+      { id: 'g2-t4', label: '4.4', text: "Maintain or improve groundwater quality in at least 90% of Addu City's monitoring stations, with no significant increase in salinity, nitrate, or faecal contamination from the 2026 baseline." },
+      { id: 'g2-t5', label: '4.5', text: 'Achieve universal sewerage coverage for all households by 2028.' },
+      // The 11 August draft broke off before naming a year here, so this site
+      // withheld the target and said so. The 12 August draft finishes it.
+      { id: 'g2-t6', label: '4.6', text: 'Increase proportion of households who reuse wastewater to 25% by 2030.' },
+    ],
+    strategies: [
+      {
+        id: 'g2-s1',
+        number: '01',
+        title: 'Renewables powered desalination',
+        actions: [
+          { id: 'g2-s1-a1', text: 'Increase desalination capacity to 3,000 cbm/day' },
+          { id: 'g2-s1-a2', text: 'Install 3 MWp solar PV for water production' },
+          { id: 'g2-s1-a3', text: 'Install 8 MWh battery storage for water production' },
+          { id: 'g2-s1-a4', text: 'Establish 6,000 cbm water storage capacity' },
+        ],
+      },
+      {
+        id: 'g2-s2',
+        number: '02',
+        title: 'Rainwater and groundwater harvesting',
+        actions: [
+          { id: 'g2-s2-a1', text: 'Provide safe rainwater collection tanks to all homes' },
+          { id: 'g2-s2-a2', text: 'Enable whole house water filtration for homes' },
+          { id: 'g2-s2-a3', text: 'Build community rainwater storage tanks' },
+          { id: 'g2-s2-a4', text: 'Develop guidelines for groundwater use and protection' },
+        ],
+      },
+      {
+        id: 'g2-s3',
+        number: '03',
+        title: 'Effective sewage treatment',
+        actions: [
+          { id: 'g2-s3-a1', text: 'Extend sewerage connection to all homes' },
+          { id: 'g2-s3-a2', text: 'Upgrade sewage and wastewater treatment system' },
+          { id: 'g2-s3-a3', text: 'Integrate solar PV to sewage treatment' },
+          { id: 'g2-s3-a4', text: "Invest in treated water reuse and 'sludge to compost'" },
+        ],
+      },
+    ],
+  },
+  {
+    number: 5,
+    slug: 'diverse-quality-housing',
+    title: 'Diverse quality housing',
+    color: '#2FB2B5',
+    textColor: '#1F7879',
     tagline: '350 new homes and 1,000 rental units',
     summary: `Addu City is planning to attract professionals, skilled workers, and returning families. Accelerating housing delivery is essential to attract residents, and we will deliver new sustainable homes for families. To support Addu's transformation into a destination for wellness, education, aviation, and business, we will deliver spacious apartments across low-rise (3-4 storey) apartment buildings, providing high-quality accommodation for professionals and their families. These apartments will feature generous living spaces, lift access, secure parking, and energy-efficient design, offering an attractive lifestyle for professionals, entrepreneurs, and skilled workers. Together with complementary initiatives for affordable rental accommodation and mixed-use neighbourhoods, this goal will create attractive liveable communities.`,
     stats: [
@@ -766,10 +846,10 @@ export const GOALS: Goal[] = [
       { value: '200', label: 'planned housing units' },
     ],
     targets: [
-      { id: 'g6-t1', label: '4.1', text: 'Develop 05 new starter home neighbourhoods by 2030.' },
-      { id: 'g6-t2', label: '4.2', text: 'Provide 350 new sustainable homes for families by 2028.' },
-      { id: 'g6-t3', label: '4.3', text: 'Develop accommodation for 150 families of professionals by 2028.' },
-      { id: 'g6-t4', label: '4.4', text: 'Develop 1,000 high quality rental units by 2030.' },
+      { id: 'g6-t1', label: '5.1', text: 'Develop 05 new starter home neighbourhoods by 2030.' },
+      { id: 'g6-t2', label: '5.2', text: 'Provide 350 new sustainable homes for families by 2028.' },
+      { id: 'g6-t3', label: '5.3', text: 'Develop accommodation for 150 families of professionals by 2028.' },
+      { id: 'g6-t4', label: '5.4', text: 'Develop 1,000 high quality rental units by 2030.' },
     ],
     strategies: [
       {
@@ -808,11 +888,15 @@ export const GOALS: Goal[] = [
     ],
   },
   {
-    number: 5,
+    number: 6,
     slug: 'connect-community-and-culture',
-    title: 'Connect community and culture',
-    color: '#2FB2B5',
-    textColor: '#1F7879',
+    // "and culture" struck in the 3 September review. The slug keeps it: it is
+    // in published URLs, the home page's `#goal-` anchors and the badge's
+    // view-transition name, and the goal still carries the heritage and
+    // cultural-events strategies the old title named.
+    title: 'Connect community',
+    color: '#82357E',
+    textColor: '#82357E',
     tagline: 'A community centre within a 10-minute walk',
     // Trimmed in the 16 August draft — four cuts, no additions. "safe, shaded
     // walkable streets" loses "safe"; the first paragraph no longer closes on
@@ -829,12 +913,12 @@ export const GOALS: Goal[] = [
       { value: '87', label: "cafés and restaurants" },
     ],
     targets: [
-      { id: 'g7-t1', label: '5.1', text: 'Ensure every resident lives within a 10-minute walk of a community centre by 2028.' },
-      { id: 'g7-t2', label: '5.2', text: 'Develop a continuous 17 km waterfront promenade from Hithadhoo to Gan by 2030.' },
-      { id: 'g7-t3', label: '5.3', text: 'Establish four themed parks by 2028.' },
-      { id: 'g7-t4', label: '5.4', text: 'Complete streetscaping of all main roads by 2030.' },
-      { id: 'g7-t5', label: '5.5', text: "Increase annual visits to Addu's museums and heritage attractions to 50,000 visitors by 2030." },
-      { id: 'g7-t6', label: '5.6', text: 'Host at least 06 major cultural events (traditional arts, crafts, music, and cuisine) annually by 2030.' },
+      { id: 'g7-t1', label: '6.1', text: 'Ensure every resident lives within a 10-minute walk of a community centre by 2028.' },
+      { id: 'g7-t2', label: '6.2', text: 'Develop a continuous 17 km waterfront promenade from Hithadhoo to Gan by 2030.' },
+      { id: 'g7-t3', label: '6.3', text: 'Establish four themed parks by 2028.' },
+      { id: 'g7-t4', label: '6.4', text: 'Complete streetscaping of all main roads by 2030.' },
+      { id: 'g7-t5', label: '6.5', text: "Increase annual visits to Addu's museums and heritage attractions to 50,000 visitors by 2030." },
+      { id: 'g7-t6', label: '6.6', text: 'Host at least 06 major cultural events (traditional arts, crafts, music, and cuisine) annually by 2030.' },
     ],
     strategies: [
       {
@@ -901,75 +985,6 @@ export const GOALS: Goal[] = [
           { id: 'g7-s6-a2', text: 'Establish Addu dialect standards' },
           { id: 'g7-s6-a3', text: 'Launch Annual Addu Awards' },
           { id: 'g7-s6-a4', text: 'Organise Addu Cultural Festival' },
-        ],
-      },
-    ],
-  },
-  {
-    number: 6,
-    // Slug stays `water-security`, and deliberately: it is in published URLs,
-    // the home page's `#goal-` anchors and the badge's view-transition name.
-    // The deck renaming a heading is not a reason to break a link.
-    slug: 'water-security',
-    // The 12 August draft was mid-rename here: this goal's own slide read
-    // "Safe diverse water sources" while the twelve-goals contents slide still
-    // read "Ensure water security". This site followed the goal's own slide,
-    // and the 16 August draft has settled it that way — both slides now read
-    // "Safe diverse water sources".
-    title: 'Safe diverse water sources',
-    color: '#82357E',
-    textColor: '#82357E',
-    tagline: 'Renewables-powered desalination and rainwater for all',
-    summary: `Addu will secure its long-term water supply through five diversified sources — desalination, household and community-scale rainwater harvesting, responsibly managed groundwater, reclaimed wastewater, and mineralised bottled water. Solar PV and battery storage will support reliable desalination. Expanded rainwater systems will capture and store rainfall for domestic and public use, while carefully managed groundwater will provide a dedicated supply for gardening and landscaping. Expanded sewerage networks and advanced wastewater treatment will enable reclaimed water to be used safely for agriculture, irrigation, landscaping, and other non-potable purposes. Addu will also support the local production of mineralised drinking water in reusable glass bottles and large-volume containers for homes, restaurants, hotels, offices, and other businesses.`,
-    stats: [
-      { value: '35,000', label: 'residents' },
-      { value: '85 litres', label: 'of water per person per day' },
-      { value: '3,000 cbm', label: 'of potable water per day' },
-      { value: '4 kWh', label: 'to produce a cbm of desalinated water' },
-      { value: '12,000 kWh', label: 'needed per day to produce water' },
-    ],
-    targets: [
-      { id: 'g2-t1', label: '6.1', text: 'Produce 3,000 cbm of desalinated water per day using renewable energy by 2028.' },
-      { id: 'g2-t2', label: '6.2', text: 'Equip all homes with safe rainwater collection and storage tanks.' },
-      { id: 'g2-t3', label: '6.3', text: 'Enable whole-house water filtration in homes by 2028.' },
-      { id: 'g2-t4', label: '6.4', text: "Maintain or improve groundwater quality in at least 90% of Addu City's monitoring stations, with no significant increase in salinity, nitrate, or faecal contamination from the 2026 baseline." },
-      { id: 'g2-t5', label: '6.5', text: 'Achieve universal sewerage coverage for all households by 2028.' },
-      // The 11 August draft broke off before naming a year here, so this site
-      // withheld the target and said so. The 12 August draft finishes it.
-      { id: 'g2-t6', label: '6.6', text: 'Increase proportion of households who reuse wastewater to 25% by 2030.' },
-    ],
-    strategies: [
-      {
-        id: 'g2-s1',
-        number: '01',
-        title: 'Renewables powered desalination',
-        actions: [
-          { id: 'g2-s1-a1', text: 'Increase desalination capacity to 3,000 cbm/day' },
-          { id: 'g2-s1-a2', text: 'Install 3 MWp solar PV for water production' },
-          { id: 'g2-s1-a3', text: 'Install 8 MWh battery storage for water production' },
-          { id: 'g2-s1-a4', text: 'Establish 6,000 cbm water storage capacity' },
-        ],
-      },
-      {
-        id: 'g2-s2',
-        number: '02',
-        title: 'Rainwater and groundwater harvesting',
-        actions: [
-          { id: 'g2-s2-a1', text: 'Provide safe rainwater collection tanks to all homes' },
-          { id: 'g2-s2-a2', text: 'Enable whole house water filtration for homes' },
-          { id: 'g2-s2-a3', text: 'Build community rainwater storage tanks' },
-          { id: 'g2-s2-a4', text: 'Develop guidelines for groundwater use and protection' },
-        ],
-      },
-      {
-        id: 'g2-s3',
-        number: '03',
-        title: 'Effective sewage treatment',
-        actions: [
-          { id: 'g2-s3-a1', text: 'Extend sewerage connection to all homes' },
-          { id: 'g2-s3-a2', text: 'Upgrade sewage and wastewater treatment system' },
-          { id: 'g2-s3-a3', text: 'Integrate solar PV to sewage treatment' },
-          { id: 'g2-s3-a4', text: "Invest in treated water reuse and 'sludge to compost'" },
         ],
       },
     ],
@@ -1192,12 +1207,14 @@ export const GOALS: Goal[] = [
       { value: '05', label: 'universities and colleges' },
     ],
     openNote:
-      'Two items on this goal are still unfinished in the 16 August draft: the count of tertiary students is printed as "000", and two different targets are both numbered 9.3. Both are left as the council wrote them rather than guessed at.',
+      'One item on this goal is still unfinished in the draft: the count of tertiary students is printed as "000". It is left as the council wrote it rather than guessed at.',
     targets: [
       { id: 'g9-t1', label: '9.1', text: 'Attract over 2,000 tertiary students annually by 2030.' },
       { id: 'g9-t2', label: '9.2', text: 'Introduce a new early childhood curriculum across Addu schools by 2028.' },
       { id: 'g9-t3', label: '9.3', text: "Upgrade 100% of Addu City's schools to provide safe, inclusive, digitally connected and inquiry based learning environments." },
-      { id: 'g9-t4', label: '9.3', text: 'Provide lifelong learning opportunities so that at least 25% of adults participate in professional development or skills training.' },
+      // The deck prints this one 9.3 as well, which is a slip in the slide
+      // rather than two targets sharing a number: it is the fourth of four.
+      { id: 'g9-t4', label: '9.4', text: 'Provide lifelong learning opportunities so that at least 25% of adults participate in professional development or skills training.' },
     ],
     strategies: [
       {
@@ -1550,10 +1567,21 @@ export const GOALS: Goal[] = [
  * "will be pursued" leaves a resident with no idea who is doing the pursuing.
  */
 export const INITIATIVES_INTRO = {
-  title: 'Ten flagship initiatives',
-  body: 'Ten closely related initiatives carry the vision of a resilient, inclusive, sustainable Addu.',
+  title: 'Eleven flagship initiatives',
+  body: 'Eleven closely related initiatives carry the vision of a resilient, inclusive, sustainable Addu.',
 } as const
 
+/**
+ * Eleven since the 3 September draft, and reordered throughout. The Modern
+ * Smart Link Road is the new one, entering at 03; food growing and the
+ * community centres, which the 12 August draft had at 03 and 10, now sit at
+ * 06 and 05.
+ *
+ * `number` is the position on the slide, and nothing keys on it but the
+ * Dhivehi overlay in `lib/plan-translations/dv.ts` — which is regenerated from
+ * `translation/` rather than edited, so a renumbering has to go through
+ * `npm run i18n:apply` to follow.
+ */
 export const INITIATIVES: Initiative[] = [
   {
     number: '01',
@@ -1567,12 +1595,10 @@ export const INITIATIVES: Initiative[] = [
     title: 'Free electric bus service',
     text: 'We will launch a free electric bus service across the City connecting all important places, designed to make daily travel easier, more affordable, and environmentally friendly for all residents and visitors.',
   },
-  // 03 and 04 trade places in the 12 August draft: food growing now comes
-  // before starter homes.
   {
     number: '03',
-    title: 'Every home is a food grower',
-    text: 'We will support households to grow essentials such as lime, chilli, ginger, cucumber, tomato, gourds, mangoes, passion fruit and guava by providing seed packs, compost, training, guidance, and ongoing support.',
+    title: 'Modern Smart Link Road',
+    text: 'Transform the 13km Feydhoo-Hithadhoo Link Road into a safe, climate-resilient and technology-enabled road through complete resurfacing, improved drainage, smart lighting, and safer junctions.',
   },
   {
     number: '04',
@@ -1581,33 +1607,41 @@ export const INITIATIVES: Initiative[] = [
   },
   {
     number: '05',
+    title: 'Creative community centres',
+    text: 'We will build integrated community centres with open green spaces to create inclusive welcoming spaces for children, young people, and elderly. These spaces will feature library, multi-purpose rooms, meditation, and recreation.',
+  },
+  {
+    number: '06',
+    title: 'Every home is a food grower',
+    text: 'We will support households to grow essentials such as lime, chilli, ginger, cucumber, tomato, gourds, mangoes, passion fruit and guava by providing seed packs, compost, training, guidance, and ongoing support.',
+  },
+  {
+    number: '07',
     title: 'Active healthy community',
     text: 'We will develop gyms, group fitness activities, and sports events that encourage participation across all age groups complemented by nutrition education led by chefs, fostering healthy eating and sustainable lifestyles.',
   },
   {
-    number: '06',
+    number: '08',
     title: 'Higher and tertiary education excellence',
     text: 'We will increase access to quality tertiary education in nursing, medical training, hospitality, pilot training, cabin crew, and technical roles in aviation aligning education with industry needs.',
   },
   {
-    number: '07',
+    number: '09',
     title: 'Zero poverty',
     text: 'We want a future where no one is left behind. We will support vulnerable members of our community through focused efforts in skills development, employment creation, mentoring, entrepreneurship and SME development.',
   },
   {
-    number: '08',
+    number: '10',
     title: 'Live aboard hub and marina',
+    // The 3 September slide ends on a two-word fragment — "community
+    // enjoyment." — left over from an earlier sentence. Not carried: it is a
+    // dangling clause, not a claim the council is making.
     text: 'We will develop a marina to provide safe and modern berthing, fuel, water, power, waste management and maintenance. The hub will create a vibrant waterfront with dining, boutique shopping, and wellness facilities.',
   },
   {
-    number: '09',
+    number: '11',
     title: 'Biodiversity conservation',
     text: 'We will launch an integrated biodiversity conservation initiative focused on protecting the White Tern, manta rays, whale sharks, turtles, and dolphins and strengthen the management of Eidhigali Nature Park.',
-  },
-  {
-    number: '10',
-    title: 'Creative community centres',
-    text: 'We will build integrated community centres with open green spaces to create inclusive welcoming spaces for children, young people, and elderly. These spaces will feature library, multi-purpose rooms, meditation, and recreation.',
   },
 ]
 

@@ -87,7 +87,7 @@
             "t": "chrome",
             "path": "home.geographyTitle"
           },
-          "en": "One atoll, four islands, one city",
+          "en": "A connected atoll",
           "slots": []
         },
         {
@@ -366,7 +366,7 @@
             "t": "chrome",
             "path": "background.metaTitle"
           },
-          "en": "Settlement and population",
+          "en": "Settlement history",
           "slots": []
         },
         {
@@ -384,7 +384,7 @@
             "t": "chrome",
             "path": "background.title"
           },
-          "en": "Settlement and population",
+          "en": "Settlement history",
           "slots": []
         },
         {
@@ -393,7 +393,7 @@
             "t": "chrome",
             "path": "background.settlementTitle"
           },
-          "en": "A city moved, emptied and rebuilt",
+          "en": "Communities relocated and new administrations formed",
           "slots": []
         },
         {
@@ -402,7 +402,7 @@
             "t": "chrome",
             "path": "background.settlementRailLabel"
           },
-          "en": "Settlement history, 1620 to 1976",
+          "en": "Settlement history, 1620 to 2026",
           "slots": []
         },
         {
@@ -411,7 +411,7 @@
             "t": "chrome",
             "path": "background.ledgerTitle"
           },
-          "en": "Registered here, living elsewhere",
+          "en": "25,000 residents",
           "slots": []
         },
         {
@@ -427,63 +427,13 @@
           "id": "0132",
           "ref": {
             "t": "chrome",
-            "path": "background.ledgerLivingElsewhere"
-          },
-          "en": "Living elsewhere",
-          "slots": []
-        },
-        {
-          "id": "0133",
-          "ref": {
-            "t": "chrome",
-            "path": "background.ledgerOf"
-          },
-          "en": "{resident} of {registered} registered",
-          "slots": [
-            "{resident}",
-            "{registered}"
-          ]
-        },
-        {
-          "id": "0134",
-          "ref": {
-            "t": "chrome",
-            "path": "background.ledgerRegistered"
-          },
-          "en": "{registered} registered",
-          "slots": [
-            "{registered}"
-          ]
-        },
-        {
-          "id": "0135",
-          "ref": {
-            "t": "chrome",
-            "path": "background.ledgerNotCounted"
-          },
-          "en": "Not yet counted",
-          "slots": []
-        },
-        {
-          "id": "0137",
-          "ref": {
-            "t": "chrome",
-            "path": "background.legendLivingHere"
+            "path": "background.ledgerLivingHere"
           },
           "en": "Living here",
           "slots": []
         },
         {
-          "id": "0138",
-          "ref": {
-            "t": "chrome",
-            "path": "background.legendOnRegister"
-          },
-          "en": "On the register",
-          "slots": []
-        },
-        {
-          "id": "0140",
+          "id": "0134",
           "ref": {
             "t": "chrome",
             "path": "timeline.scrollBack"
@@ -492,7 +442,7 @@
           "slots": []
         },
         {
-          "id": "0141",
+          "id": "0135",
           "ref": {
             "t": "chrome",
             "path": "timeline.scrollForward"
@@ -501,7 +451,7 @@
           "slots": []
         },
         {
-          "id": "0142",
+          "id": "0136",
           "ref": {
             "t": "chrome",
             "path": "chart.nationalShare"
@@ -510,7 +460,7 @@
           "slots": []
         },
         {
-          "id": "0143",
+          "id": "0137",
           "ref": {
             "t": "chrome",
             "path": "chart.nationalShareYears"
@@ -519,7 +469,7 @@
           "slots": []
         },
         {
-          "id": "0146",
+          "id": "0140",
           "ref": {
             "t": "chrome",
             "path": "map.linkRoad"
@@ -528,7 +478,7 @@
           "slots": []
         },
         {
-          "id": "0147",
+          "id": "0141",
           "ref": {
             "t": "chrome",
             "path": "map.islandOfCity"
@@ -537,7 +487,7 @@
           "slots": []
         },
         {
-          "id": "0149",
+          "id": "0143",
           "ref": {
             "t": "chrome",
             "path": "footer.allGoalsLabel"
@@ -546,7 +496,7 @@
           "slots": []
         },
         {
-          "id": "0150",
+          "id": "0144",
           "ref": {
             "t": "chrome",
             "path": "footer.twelveGoals"
@@ -555,7 +505,7 @@
           "slots": []
         },
         {
-          "id": "0151",
+          "id": "0145",
           "ref": {
             "t": "chrome",
             "path": "footer.behindThePlan"
@@ -564,12 +514,12 @@
           "slots": []
         },
         {
-          "id": "0152",
+          "id": "0146",
           "ref": {
             "t": "chrome",
             "path": "footer.settlementAndPopulation"
           },
-          "en": "Settlement and population",
+          "en": "Settlement history",
           "slots": []
         }
       ]
@@ -769,16 +719,7 @@
           ]
         },
         {
-          "id": "0136",
-          "ref": {
-            "t": "chrome",
-            "path": "background.ledgerLivingElsewhereSr"
-          },
-          "en": " living elsewhere",
-          "slots": []
-        },
-        {
-          "id": "0144",
+          "id": "0138",
           "ref": {
             "t": "chrome",
             "path": "chart.chartAria"
@@ -789,18 +730,18 @@
           ]
         },
         {
-          "id": "0148",
+          "id": "0142",
           "ref": {
             "t": "chrome",
             "path": "map.aria"
           },
-          "en": "Map of Addu Atoll. The four islands of the city — {islands} — lie along the western side of the atoll from north to south, joined end to end by the Link Road, which crosses open water on causeways. The road runs on past Feydhoo to the south-east, beyond the city. The rest of the atoll is reef and lagoon.",
+          "en": "Map of Addu Atoll. The four islands of the city — {islands} — lie along the western side of the atoll from north to south, joined end to end by the Link Road, which crosses open water on causeways. The road runs on past Feydhoo to the south-east to Gan, which is outside the city and carries the international airport and its runway. The rest of the atoll is reef and lagoon.",
           "slots": [
             "{islands}"
           ]
         },
         {
-          "id": "0157",
+          "id": "0151",
           "ref": {
             "t": "chrome",
             "path": "metadata.ogImageAlt"
@@ -820,25 +761,25 @@
             "t": "chrome",
             "path": "home.geographyBody"
           },
-          "en": "The Link Road runs the length of the western chain, joining four islands end to end. That is what makes Addu one city rather than four.",
+          "en": "The Link Road runs the length of the western chain, joining four islands end to end. There are two inhabited islands and three resorts on the eastern chain. Gan in the southern tip serves as the international airport.",
           "slots": []
         },
         {
           "id": "0015",
           "ref": {
             "t": "chrome",
-            "path": "home.gapSentence"
+            "path": "home.registerSentence"
           },
-          "en": "people are registered in Addu but living elsewhere.",
+          "en": "people are registered in Addu.",
           "slots": []
         },
         {
           "id": "0016",
           "ref": {
             "t": "chrome",
-            "path": "home.gapTarget"
+            "path": "home.registerTarget"
           },
-          "en": "In 1977 the gap was 705 people. The plan sets a target of 35,000 people living in Addu by 2030.",
+          "en": "The population of Addu has increased from 14,094 to 25,062 by 2022. This plan sets a target of 35,000 residents in Addu by 2030.",
           "slots": []
         },
         {
@@ -894,7 +835,7 @@
             "t": "chrome",
             "path": "background.lede"
           },
-          "en": "The record the plan is built on: where Addu’s people have been settled since 1620, and how the number registered here compares with the number living here from 1977 onwards.",
+          "en": "The following is a brief timeline of settlement history in Addu from 1620 to 2025.",
           "slots": []
         },
         {
@@ -903,7 +844,7 @@
             "t": "chrome",
             "path": "background.settlementBody"
           },
-          "en": "Addu’s people have been relocated island to island for most of a century.",
+          "en": "Since Hithadhoo was established in 1620, several community relocations have occurred in Addu. These relocations were mainly due to the British RAF establishing Gan Airport during WWII and the subsequent reestablishment of the British military base in Gan in 1957.",
           "slots": []
         },
         {
@@ -912,29 +853,29 @@
             "t": "chrome",
             "path": "background.ledgerBody"
           },
-          "en": "Every year we have counted, drawn to one scale that starts at zero.",
+          "en": "Since the British departed Gan in 1976, decades of outward migration occurred.",
+          "slots": []
+        },
+        {
+          "id": "0133",
+          "ref": {
+            "t": "chrome",
+            "path": "background.closing"
+          },
+          "en": "This plan is an integrated blueprint for transforming Addu into a resilient, inclusive and sustainable city.",
           "slots": []
         },
         {
           "id": "0139",
           "ref": {
             "t": "chrome",
-            "path": "background.closing"
-          },
-          "en": "The plan sets out what we intend to do about this — and every action in it takes your response.",
-          "slots": []
-        },
-        {
-          "id": "0145",
-          "ref": {
-            "t": "chrome",
             "path": "chart.reading"
           },
-          "en": "Addu’s share of the Maldivian population fell from 9% to 5.1%. Male’s rose from 11% to 40%.",
+          "en": "Addu’s share of the Maldivian population fell from 9% in 1958 to 5.1% in 2022. Male’s rose from 11% to 40%.",
           "slots": []
         },
         {
-          "id": "0153",
+          "id": "0147",
           "ref": {
             "t": "chrome",
             "path": "footer.imprint"
@@ -946,7 +887,7 @@
           ]
         },
         {
-          "id": "0154",
+          "id": "0148",
           "ref": {
             "t": "chrome",
             "path": "footer.openForConsultation"
@@ -1522,7 +1463,7 @@
       "title": "Search and share descriptions",
       "segments": [
         {
-          "id": "0155",
+          "id": "0149",
           "ref": {
             "t": "chrome",
             "path": "metadata.description"
@@ -1531,7 +1472,7 @@
           "slots": []
         },
         {
-          "id": "0156",
+          "id": "0150",
           "ref": {
             "t": "chrome",
             "path": "metadata.ogDescription"
@@ -1546,7 +1487,7 @@
       "title": "The plan: cover, vision and background",
       "segments": [
         {
-          "id": "0158",
+          "id": "0152",
           "ref": {
             "t": "planMeta",
             "field": "title"
@@ -1555,7 +1496,7 @@
           "slots": []
         },
         {
-          "id": "0159",
+          "id": "0153",
           "ref": {
             "t": "planMeta",
             "field": "author"
@@ -1564,7 +1505,7 @@
           "slots": []
         },
         {
-          "id": "0160",
+          "id": "0154",
           "ref": {
             "t": "planMeta",
             "field": "date"
@@ -1573,7 +1514,7 @@
           "slots": []
         },
         {
-          "id": "0161",
+          "id": "0155",
           "ref": {
             "t": "planMeta",
             "field": "callout"
@@ -1582,7 +1523,7 @@
           "slots": []
         },
         {
-          "id": "0162",
+          "id": "0156",
           "ref": {
             "t": "vision",
             "field": "kicker"
@@ -1591,7 +1532,7 @@
           "slots": []
         },
         {
-          "id": "0163",
+          "id": "0157",
           "ref": {
             "t": "vision",
             "field": "name"
@@ -1600,7 +1541,7 @@
           "slots": []
         },
         {
-          "id": "0164",
+          "id": "0158",
           "ref": {
             "t": "vision",
             "field": "headline"
@@ -1609,7 +1550,7 @@
           "slots": []
         },
         {
-          "id": "0165",
+          "id": "0159",
           "ref": {
             "t": "vision",
             "field": "figure"
@@ -1618,7 +1559,7 @@
           "slots": []
         },
         {
-          "id": "0166",
+          "id": "0160",
           "ref": {
             "t": "turningTitle"
           },
@@ -1626,7 +1567,7 @@
           "slots": []
         },
         {
-          "id": "0167",
+          "id": "0161",
           "ref": {
             "t": "turningPara",
             "index": 0
@@ -1635,7 +1576,7 @@
           "slots": []
         },
         {
-          "id": "0168",
+          "id": "0162",
           "ref": {
             "t": "turningPara",
             "index": 1
@@ -1644,16 +1585,16 @@
           "slots": []
         },
         {
-          "id": "0169",
+          "id": "0163",
           "ref": {
             "t": "turningPara",
             "index": 2
           },
-          "en": "Today, with a land area of more than 1,250 hectares, a population exceeding 25,000, and expanding opportunities in tourism, trade, fisheries, agriculture, and emerging industries, Addu is increasingly becoming a destination in its own right. More than 1,700 Maldivians from other islands and over 4,700 foreign nationals now reside in the city — together representing around a quarter of its population.",
+          "en": "Today, with a land area of more than 1,250 hectares, more than 25,000 residents, and expanding opportunities in tourism, trade, fisheries, agriculture, and emerging industries, Addu is increasingly becoming a destination in its own right. More than 1,700 Maldivians from other islands and over 4,700 foreign nationals now reside in the city — together representing around a quarter of its population.",
           "slots": []
         },
         {
-          "id": "0170",
+          "id": "0164",
           "ref": {
             "t": "turningPara",
             "index": 3
@@ -1662,25 +1603,34 @@
           "slots": []
         },
         {
-          "id": "0171",
+          "id": "0165",
           "ref": {
             "t": "fact",
-            "label": "islands in the atoll"
+            "label": "residents in 2022 Census"
           },
-          "en": "islands in the atoll",
+          "en": "residents in 2022 Census",
           "slots": []
         },
         {
-          "id": "0172",
+          "id": "0166",
           "ref": {
             "t": "fact",
-            "label": "islands in the city"
+            "label": "resident Maldivians in 2022"
           },
-          "en": "islands in the city",
+          "en": "resident Maldivians in 2022",
           "slots": []
         },
         {
-          "id": "0173",
+          "id": "0167",
+          "ref": {
+            "t": "fact",
+            "label": "foreigners in 2022"
+          },
+          "en": "foreigners in 2022",
+          "slots": []
+        },
+        {
+          "id": "0168",
           "ref": {
             "t": "fact",
             "label": "hectares of land"
@@ -1689,16 +1639,7 @@
           "slots": []
         },
         {
-          "id": "0174",
-          "ref": {
-            "t": "fact",
-            "label": "people on the city register"
-          },
-          "en": "people on the city register",
-          "slots": []
-        },
-        {
-          "id": "0175",
+          "id": "0169",
           "ref": {
             "t": "island",
             "name": "Hithadhoo"
@@ -1707,7 +1648,7 @@
           "slots": []
         },
         {
-          "id": "0176",
+          "id": "0170",
           "ref": {
             "t": "island",
             "name": "Maradhoo"
@@ -1716,7 +1657,7 @@
           "slots": []
         },
         {
-          "id": "0177",
+          "id": "0171",
           "ref": {
             "t": "island",
             "name": "Maradhoo-Feydhoo"
@@ -1725,7 +1666,7 @@
           "slots": []
         },
         {
-          "id": "0178",
+          "id": "0172",
           "ref": {
             "t": "island",
             "name": "Feydhoo"
@@ -1734,7 +1675,7 @@
           "slots": []
         },
         {
-          "id": "0179",
+          "id": "0173",
           "ref": {
             "t": "timeline",
             "year": "1620–1648"
@@ -1743,7 +1684,7 @@
           "slots": []
         },
         {
-          "id": "0180",
+          "id": "0174",
           "ref": {
             "t": "timeline",
             "year": "1799"
@@ -1752,7 +1693,7 @@
           "slots": []
         },
         {
-          "id": "0181",
+          "id": "0175",
           "ref": {
             "t": "timeline",
             "year": "1941"
@@ -1761,7 +1702,7 @@
           "slots": []
         },
         {
-          "id": "0182",
+          "id": "0176",
           "ref": {
             "t": "timeline",
             "year": "1942"
@@ -1770,7 +1711,7 @@
           "slots": []
         },
         {
-          "id": "0183",
+          "id": "0177",
           "ref": {
             "t": "timeline",
             "year": "1945"
@@ -1779,7 +1720,7 @@
           "slots": []
         },
         {
-          "id": "0184",
+          "id": "0178",
           "ref": {
             "t": "timeline",
             "year": "1948"
@@ -1788,7 +1729,7 @@
           "slots": []
         },
         {
-          "id": "0185",
+          "id": "0179",
           "ref": {
             "t": "timeline",
             "year": "1957"
@@ -1797,7 +1738,7 @@
           "slots": []
         },
         {
-          "id": "0186",
+          "id": "0180",
           "ref": {
             "t": "timeline",
             "year": "1960"
@@ -1806,7 +1747,25 @@
           "slots": []
         },
         {
-          "id": "0187",
+          "id": "0181",
+          "ref": {
+            "t": "timeline",
+            "year": "1969"
+          },
+          "en": "Maradhoo and Maradhoo-Feydhoo established as Maradhoo, and Meedhoo and Hulhudhoo as Hulhumeedhoo, as two administrative islands.",
+          "slots": []
+        },
+        {
+          "id": "0182",
+          "ref": {
+            "t": "timeline",
+            "year": "1975"
+          },
+          "en": "Separate administrative offices established for Maradhoo, Maradhoo-Feydhoo, Hulhudhoo and Meedhoo.",
+          "slots": []
+        },
+        {
+          "id": "0183",
           "ref": {
             "t": "timeline",
             "year": "1976"
@@ -1815,7 +1774,25 @@
           "slots": []
         },
         {
-          "id": "0188",
+          "id": "0184",
+          "ref": {
+            "t": "timeline",
+            "year": "2011"
+          },
+          "en": "Addu City Council established.",
+          "slots": []
+        },
+        {
+          "id": "0185",
+          "ref": {
+            "t": "timeline",
+            "year": "2026"
+          },
+          "en": "Hulhudhoo and Meedhoo established as separate administrative jurisdictions following a referendum.",
+          "slots": []
+        },
+        {
+          "id": "0186",
           "ref": {
             "t": "migration",
             "field": "title"
@@ -1824,7 +1801,7 @@
           "slots": []
         },
         {
-          "id": "0189",
+          "id": "0187",
           "ref": {
             "t": "migration",
             "field": "subtitle"
@@ -1833,7 +1810,7 @@
           "slots": []
         },
         {
-          "id": "0190",
+          "id": "0188",
           "ref": {
             "t": "series",
             "name": "Addu"
@@ -1842,7 +1819,7 @@
           "slots": []
         },
         {
-          "id": "0191",
+          "id": "0189",
           "ref": {
             "t": "series",
             "name": "Male'"
@@ -1851,7 +1828,7 @@
           "slots": []
         },
         {
-          "id": "0192",
+          "id": "0190",
           "ref": {
             "t": "pillarsIntro",
             "field": "title"
@@ -1860,7 +1837,7 @@
           "slots": []
         },
         {
-          "id": "0193",
+          "id": "0191",
           "ref": {
             "t": "pillarsIntro",
             "field": "body"
@@ -1869,7 +1846,7 @@
           "slots": []
         },
         {
-          "id": "0194",
+          "id": "0192",
           "ref": {
             "t": "pillar",
             "id": "infrastructure",
@@ -1879,7 +1856,7 @@
           "slots": []
         },
         {
-          "id": "0195",
+          "id": "0193",
           "ref": {
             "t": "pillar",
             "id": "infrastructure",
@@ -1889,7 +1866,7 @@
           "slots": []
         },
         {
-          "id": "0196",
+          "id": "0194",
           "ref": {
             "t": "pillar",
             "id": "people",
@@ -1899,7 +1876,7 @@
           "slots": []
         },
         {
-          "id": "0197",
+          "id": "0195",
           "ref": {
             "t": "pillar",
             "id": "people",
@@ -1909,7 +1886,7 @@
           "slots": []
         },
         {
-          "id": "0198",
+          "id": "0196",
           "ref": {
             "t": "pillar",
             "id": "economy",
@@ -1919,7 +1896,7 @@
           "slots": []
         },
         {
-          "id": "0199",
+          "id": "0197",
           "ref": {
             "t": "pillar",
             "id": "economy",
@@ -1929,7 +1906,7 @@
           "slots": []
         },
         {
-          "id": "0200",
+          "id": "0198",
           "ref": {
             "t": "pillar",
             "id": "environment",
@@ -1939,7 +1916,7 @@
           "slots": []
         },
         {
-          "id": "0201",
+          "id": "0199",
           "ref": {
             "t": "pillar",
             "id": "environment",
@@ -1949,7 +1926,7 @@
           "slots": []
         },
         {
-          "id": "0202",
+          "id": "0200",
           "ref": {
             "t": "pillar",
             "id": "governance",
@@ -1959,7 +1936,7 @@
           "slots": []
         },
         {
-          "id": "0203",
+          "id": "0201",
           "ref": {
             "t": "pillar",
             "id": "governance",
@@ -1975,25 +1952,25 @@
       "title": "The plan: flagship initiatives",
       "segments": [
         {
-          "id": "0204",
+          "id": "0202",
           "ref": {
             "t": "initiativesIntro",
             "field": "title"
           },
-          "en": "Ten flagship initiatives",
+          "en": "Eleven flagship initiatives",
           "slots": []
         },
         {
-          "id": "0205",
+          "id": "0203",
           "ref": {
             "t": "initiativesIntro",
             "field": "body"
           },
-          "en": "Ten closely related initiatives carry the vision of a resilient, inclusive, sustainable Addu.",
+          "en": "Eleven closely related initiatives carry the vision of a resilient, inclusive, sustainable Addu.",
           "slots": []
         },
         {
-          "id": "0206",
+          "id": "0204",
           "ref": {
             "t": "initiative",
             "number": "01",
@@ -2003,7 +1980,7 @@
           "slots": []
         },
         {
-          "id": "0207",
+          "id": "0205",
           "ref": {
             "t": "initiative",
             "number": "01",
@@ -2013,7 +1990,7 @@
           "slots": []
         },
         {
-          "id": "0208",
+          "id": "0206",
           "ref": {
             "t": "initiative",
             "number": "02",
@@ -2023,7 +2000,7 @@
           "slots": []
         },
         {
-          "id": "0209",
+          "id": "0207",
           "ref": {
             "t": "initiative",
             "number": "02",
@@ -2033,27 +2010,27 @@
           "slots": []
         },
         {
-          "id": "0210",
+          "id": "0208",
           "ref": {
             "t": "initiative",
             "number": "03",
             "field": "title"
           },
-          "en": "Every home is a food grower",
+          "en": "Modern Smart Link Road",
           "slots": []
         },
         {
-          "id": "0211",
+          "id": "0209",
           "ref": {
             "t": "initiative",
             "number": "03",
             "field": "text"
           },
-          "en": "We will support households to grow essentials such as lime, chilli, ginger, cucumber, tomato, gourds, mangoes, passion fruit and guava by providing seed packs, compost, training, guidance, and ongoing support.",
+          "en": "Transform the 13km Feydhoo-Hithadhoo Link Road into a safe, climate-resilient and technology-enabled road through complete resurfacing, improved drainage, smart lighting, and safer junctions.",
           "slots": []
         },
         {
-          "id": "0212",
+          "id": "0210",
           "ref": {
             "t": "initiative",
             "number": "04",
@@ -2063,7 +2040,7 @@
           "slots": []
         },
         {
-          "id": "0213",
+          "id": "0211",
           "ref": {
             "t": "initiative",
             "number": "04",
@@ -2073,123 +2050,143 @@
           "slots": []
         },
         {
-          "id": "0214",
+          "id": "0212",
           "ref": {
             "t": "initiative",
             "number": "05",
-            "field": "title"
-          },
-          "en": "Active healthy community",
-          "slots": []
-        },
-        {
-          "id": "0215",
-          "ref": {
-            "t": "initiative",
-            "number": "05",
-            "field": "text"
-          },
-          "en": "We will develop gyms, group fitness activities, and sports events that encourage participation across all age groups complemented by nutrition education led by chefs, fostering healthy eating and sustainable lifestyles.",
-          "slots": []
-        },
-        {
-          "id": "0216",
-          "ref": {
-            "t": "initiative",
-            "number": "06",
-            "field": "title"
-          },
-          "en": "Higher and tertiary education excellence",
-          "slots": []
-        },
-        {
-          "id": "0217",
-          "ref": {
-            "t": "initiative",
-            "number": "06",
-            "field": "text"
-          },
-          "en": "We will increase access to quality tertiary education in nursing, medical training, hospitality, pilot training, cabin crew, and technical roles in aviation aligning education with industry needs.",
-          "slots": []
-        },
-        {
-          "id": "0218",
-          "ref": {
-            "t": "initiative",
-            "number": "07",
-            "field": "title"
-          },
-          "en": "Zero poverty",
-          "slots": []
-        },
-        {
-          "id": "0219",
-          "ref": {
-            "t": "initiative",
-            "number": "07",
-            "field": "text"
-          },
-          "en": "We want a future where no one is left behind. We will support vulnerable members of our community through focused efforts in skills development, employment creation, mentoring, entrepreneurship and SME development.",
-          "slots": []
-        },
-        {
-          "id": "0220",
-          "ref": {
-            "t": "initiative",
-            "number": "08",
-            "field": "title"
-          },
-          "en": "Live aboard hub and marina",
-          "slots": []
-        },
-        {
-          "id": "0221",
-          "ref": {
-            "t": "initiative",
-            "number": "08",
-            "field": "text"
-          },
-          "en": "We will develop a marina to provide safe and modern berthing, fuel, water, power, waste management and maintenance. The hub will create a vibrant waterfront with dining, boutique shopping, and wellness facilities.",
-          "slots": []
-        },
-        {
-          "id": "0222",
-          "ref": {
-            "t": "initiative",
-            "number": "09",
-            "field": "title"
-          },
-          "en": "Biodiversity conservation",
-          "slots": []
-        },
-        {
-          "id": "0223",
-          "ref": {
-            "t": "initiative",
-            "number": "09",
-            "field": "text"
-          },
-          "en": "We will launch an integrated biodiversity conservation initiative focused on protecting the White Tern, manta rays, whale sharks, turtles, and dolphins and strengthen the management of Eidhigali Nature Park.",
-          "slots": []
-        },
-        {
-          "id": "0224",
-          "ref": {
-            "t": "initiative",
-            "number": "10",
             "field": "title"
           },
           "en": "Creative community centres",
           "slots": []
         },
         {
-          "id": "0225",
+          "id": "0213",
+          "ref": {
+            "t": "initiative",
+            "number": "05",
+            "field": "text"
+          },
+          "en": "We will build integrated community centres with open green spaces to create inclusive welcoming spaces for children, young people, and elderly. These spaces will feature library, multi-purpose rooms, meditation, and recreation.",
+          "slots": []
+        },
+        {
+          "id": "0214",
+          "ref": {
+            "t": "initiative",
+            "number": "06",
+            "field": "title"
+          },
+          "en": "Every home is a food grower",
+          "slots": []
+        },
+        {
+          "id": "0215",
+          "ref": {
+            "t": "initiative",
+            "number": "06",
+            "field": "text"
+          },
+          "en": "We will support households to grow essentials such as lime, chilli, ginger, cucumber, tomato, gourds, mangoes, passion fruit and guava by providing seed packs, compost, training, guidance, and ongoing support.",
+          "slots": []
+        },
+        {
+          "id": "0216",
+          "ref": {
+            "t": "initiative",
+            "number": "07",
+            "field": "title"
+          },
+          "en": "Active healthy community",
+          "slots": []
+        },
+        {
+          "id": "0217",
+          "ref": {
+            "t": "initiative",
+            "number": "07",
+            "field": "text"
+          },
+          "en": "We will develop gyms, group fitness activities, and sports events that encourage participation across all age groups complemented by nutrition education led by chefs, fostering healthy eating and sustainable lifestyles.",
+          "slots": []
+        },
+        {
+          "id": "0218",
+          "ref": {
+            "t": "initiative",
+            "number": "08",
+            "field": "title"
+          },
+          "en": "Higher and tertiary education excellence",
+          "slots": []
+        },
+        {
+          "id": "0219",
+          "ref": {
+            "t": "initiative",
+            "number": "08",
+            "field": "text"
+          },
+          "en": "We will increase access to quality tertiary education in nursing, medical training, hospitality, pilot training, cabin crew, and technical roles in aviation aligning education with industry needs.",
+          "slots": []
+        },
+        {
+          "id": "0220",
+          "ref": {
+            "t": "initiative",
+            "number": "09",
+            "field": "title"
+          },
+          "en": "Zero poverty",
+          "slots": []
+        },
+        {
+          "id": "0221",
+          "ref": {
+            "t": "initiative",
+            "number": "09",
+            "field": "text"
+          },
+          "en": "We want a future where no one is left behind. We will support vulnerable members of our community through focused efforts in skills development, employment creation, mentoring, entrepreneurship and SME development.",
+          "slots": []
+        },
+        {
+          "id": "0222",
+          "ref": {
+            "t": "initiative",
+            "number": "10",
+            "field": "title"
+          },
+          "en": "Live aboard hub and marina",
+          "slots": []
+        },
+        {
+          "id": "0223",
           "ref": {
             "t": "initiative",
             "number": "10",
             "field": "text"
           },
-          "en": "We will build integrated community centres with open green spaces to create inclusive welcoming spaces for children, young people, and elderly. These spaces will feature library, multi-purpose rooms, meditation, and recreation.",
+          "en": "We will develop a marina to provide safe and modern berthing, fuel, water, power, waste management and maintenance. The hub will create a vibrant waterfront with dining, boutique shopping, and wellness facilities.",
+          "slots": []
+        },
+        {
+          "id": "0224",
+          "ref": {
+            "t": "initiative",
+            "number": "11",
+            "field": "title"
+          },
+          "en": "Biodiversity conservation",
+          "slots": []
+        },
+        {
+          "id": "0225",
+          "ref": {
+            "t": "initiative",
+            "number": "11",
+            "field": "text"
+          },
+          "en": "We will launch an integrated biodiversity conservation initiative focused on protecting the White Tern, manta rays, whale sharks, turtles, and dolphins and strengthen the management of Eidhigali Nature Park.",
           "slots": []
         }
       ]
@@ -2511,920 +2508,11 @@
       ]
     },
     {
-      "name": "09-goal-02-water-security.txt",
-      "title": "Goal 2: Safe diverse water sources",
+      "name": "09-goal-02-future-ready-transport.txt",
+      "title": "Goal 2: Future ready transport",
       "segments": [
         {
           "id": "0255",
-          "ref": {
-            "t": "goal",
-            "slug": "water-security",
-            "field": "title"
-          },
-          "en": "Safe diverse water sources",
-          "slots": []
-        },
-        {
-          "id": "0256",
-          "ref": {
-            "t": "goal",
-            "slug": "water-security",
-            "field": "tagline"
-          },
-          "en": "Renewables-powered desalination and rainwater for all",
-          "slots": []
-        },
-        {
-          "id": "0257",
-          "ref": {
-            "t": "goal",
-            "slug": "water-security",
-            "field": "summary"
-          },
-          "en": "Addu will secure its long-term water supply through five diversified sources — desalination, household and community-scale rainwater harvesting, responsibly managed groundwater, reclaimed wastewater, and mineralised bottled water. Solar PV and battery storage will support reliable desalination. Expanded rainwater systems will capture and store rainfall for domestic and public use, while carefully managed groundwater will provide a dedicated supply for gardening and landscaping. Expanded sewerage networks and advanced wastewater treatment will enable reclaimed water to be used safely for agriculture, irrigation, landscaping, and other non-potable purposes. Addu will also support the local production of mineralised drinking water in reusable glass bottles and large-volume containers for homes, restaurants, hotels, offices, and other businesses.",
-          "slots": []
-        },
-        {
-          "id": "0258",
-          "ref": {
-            "t": "goalStat",
-            "slug": "water-security",
-            "label": "residents",
-            "field": "label"
-          },
-          "en": "residents",
-          "slots": []
-        },
-        {
-          "id": "0259",
-          "ref": {
-            "t": "goalStat",
-            "slug": "water-security",
-            "label": "of water per person per day",
-            "field": "label"
-          },
-          "en": "of water per person per day",
-          "slots": []
-        },
-        {
-          "id": "0260",
-          "ref": {
-            "t": "goalStat",
-            "slug": "water-security",
-            "label": "of water per person per day",
-            "field": "value"
-          },
-          "en": "85 litres",
-          "slots": []
-        },
-        {
-          "id": "0261",
-          "ref": {
-            "t": "goalStat",
-            "slug": "water-security",
-            "label": "of potable water per day",
-            "field": "label"
-          },
-          "en": "of potable water per day",
-          "slots": []
-        },
-        {
-          "id": "0262",
-          "ref": {
-            "t": "goalStat",
-            "slug": "water-security",
-            "label": "of potable water per day",
-            "field": "value"
-          },
-          "en": "3,000 cbm",
-          "slots": []
-        },
-        {
-          "id": "0263",
-          "ref": {
-            "t": "goalStat",
-            "slug": "water-security",
-            "label": "to produce a cbm of desalinated water",
-            "field": "label"
-          },
-          "en": "to produce a cbm of desalinated water",
-          "slots": []
-        },
-        {
-          "id": "0264",
-          "ref": {
-            "t": "goalStat",
-            "slug": "water-security",
-            "label": "to produce a cbm of desalinated water",
-            "field": "value"
-          },
-          "en": "4 kWh",
-          "slots": []
-        },
-        {
-          "id": "0265",
-          "ref": {
-            "t": "goalStat",
-            "slug": "water-security",
-            "label": "needed per day to produce water",
-            "field": "label"
-          },
-          "en": "needed per day to produce water",
-          "slots": []
-        },
-        {
-          "id": "0266",
-          "ref": {
-            "t": "goalStat",
-            "slug": "water-security",
-            "label": "needed per day to produce water",
-            "field": "value"
-          },
-          "en": "12,000 kWh",
-          "slots": []
-        },
-        {
-          "id": "0267",
-          "ref": {
-            "t": "target",
-            "slug": "water-security",
-            "id": "g2-t1"
-          },
-          "en": "Produce 3,000 cbm of desalinated water per day using renewable energy by 2028.",
-          "slots": []
-        },
-        {
-          "id": "0268",
-          "ref": {
-            "t": "target",
-            "slug": "water-security",
-            "id": "g2-t2"
-          },
-          "en": "Equip all homes with safe rainwater collection and storage tanks.",
-          "slots": []
-        },
-        {
-          "id": "0269",
-          "ref": {
-            "t": "target",
-            "slug": "water-security",
-            "id": "g2-t3"
-          },
-          "en": "Enable whole-house water filtration in homes by 2028.",
-          "slots": []
-        },
-        {
-          "id": "0270",
-          "ref": {
-            "t": "target",
-            "slug": "water-security",
-            "id": "g2-t4"
-          },
-          "en": "Maintain or improve groundwater quality in at least 90% of Addu City's monitoring stations, with no significant increase in salinity, nitrate, or faecal contamination from the 2026 baseline.",
-          "slots": []
-        },
-        {
-          "id": "0271",
-          "ref": {
-            "t": "target",
-            "slug": "water-security",
-            "id": "g2-t5"
-          },
-          "en": "Achieve universal sewerage coverage for all households by 2028.",
-          "slots": []
-        },
-        {
-          "id": "0272",
-          "ref": {
-            "t": "target",
-            "slug": "water-security",
-            "id": "g2-t6"
-          },
-          "en": "Increase proportion of households who reuse wastewater to 25% by 2030.",
-          "slots": []
-        },
-        {
-          "id": "0273",
-          "ref": {
-            "t": "strategy",
-            "slug": "water-security",
-            "id": "g2-s1"
-          },
-          "en": "Renewables powered desalination",
-          "slots": []
-        },
-        {
-          "id": "0274",
-          "ref": {
-            "t": "action",
-            "slug": "water-security",
-            "strategy": "g2-s1",
-            "id": "g2-s1-a1"
-          },
-          "en": "Increase desalination capacity to 3,000 cbm/day",
-          "slots": []
-        },
-        {
-          "id": "0275",
-          "ref": {
-            "t": "action",
-            "slug": "water-security",
-            "strategy": "g2-s1",
-            "id": "g2-s1-a2"
-          },
-          "en": "Install 3 MWp solar PV for water production",
-          "slots": []
-        },
-        {
-          "id": "0276",
-          "ref": {
-            "t": "action",
-            "slug": "water-security",
-            "strategy": "g2-s1",
-            "id": "g2-s1-a3"
-          },
-          "en": "Install 8 MWh battery storage for water production",
-          "slots": []
-        },
-        {
-          "id": "0277",
-          "ref": {
-            "t": "action",
-            "slug": "water-security",
-            "strategy": "g2-s1",
-            "id": "g2-s1-a4"
-          },
-          "en": "Establish 6,000 cbm water storage capacity",
-          "slots": []
-        },
-        {
-          "id": "0278",
-          "ref": {
-            "t": "strategy",
-            "slug": "water-security",
-            "id": "g2-s2"
-          },
-          "en": "Rainwater and groundwater harvesting",
-          "slots": []
-        },
-        {
-          "id": "0279",
-          "ref": {
-            "t": "action",
-            "slug": "water-security",
-            "strategy": "g2-s2",
-            "id": "g2-s2-a1"
-          },
-          "en": "Provide safe rainwater collection tanks to all homes",
-          "slots": []
-        },
-        {
-          "id": "0280",
-          "ref": {
-            "t": "action",
-            "slug": "water-security",
-            "strategy": "g2-s2",
-            "id": "g2-s2-a2"
-          },
-          "en": "Enable whole house water filtration for homes",
-          "slots": []
-        },
-        {
-          "id": "0281",
-          "ref": {
-            "t": "action",
-            "slug": "water-security",
-            "strategy": "g2-s2",
-            "id": "g2-s2-a3"
-          },
-          "en": "Build community rainwater storage tanks",
-          "slots": []
-        },
-        {
-          "id": "0282",
-          "ref": {
-            "t": "action",
-            "slug": "water-security",
-            "strategy": "g2-s2",
-            "id": "g2-s2-a4"
-          },
-          "en": "Develop guidelines for groundwater use and protection",
-          "slots": []
-        },
-        {
-          "id": "0283",
-          "ref": {
-            "t": "strategy",
-            "slug": "water-security",
-            "id": "g2-s3"
-          },
-          "en": "Effective sewage treatment",
-          "slots": []
-        },
-        {
-          "id": "0284",
-          "ref": {
-            "t": "action",
-            "slug": "water-security",
-            "strategy": "g2-s3",
-            "id": "g2-s3-a1"
-          },
-          "en": "Extend sewerage connection to all homes",
-          "slots": []
-        },
-        {
-          "id": "0285",
-          "ref": {
-            "t": "action",
-            "slug": "water-security",
-            "strategy": "g2-s3",
-            "id": "g2-s3-a2"
-          },
-          "en": "Upgrade sewage and wastewater treatment system",
-          "slots": []
-        },
-        {
-          "id": "0286",
-          "ref": {
-            "t": "action",
-            "slug": "water-security",
-            "strategy": "g2-s3",
-            "id": "g2-s3-a3"
-          },
-          "en": "Integrate solar PV to sewage treatment",
-          "slots": []
-        },
-        {
-          "id": "0287",
-          "ref": {
-            "t": "action",
-            "slug": "water-security",
-            "strategy": "g2-s3",
-            "id": "g2-s3-a4"
-          },
-          "en": "Invest in treated water reuse and 'sludge to compost'",
-          "slots": []
-        }
-      ]
-    },
-    {
-      "name": "10-goal-03-food-security.txt",
-      "title": "Goal 3: Ensure food security",
-      "segments": [
-        {
-          "id": "0288",
-          "ref": {
-            "t": "goal",
-            "slug": "food-security",
-            "field": "title"
-          },
-          "en": "Ensure food security",
-          "slots": []
-        },
-        {
-          "id": "0289",
-          "ref": {
-            "t": "goal",
-            "slug": "food-security",
-            "field": "tagline"
-          },
-          "en": "Grow more at home, land more from the sea",
-          "slots": []
-        },
-        {
-          "id": "0290",
-          "ref": {
-            "t": "goal",
-            "slug": "food-security",
-            "field": "summary"
-          },
-          "en": "The Maldives imported approximately USD 790.5 million worth of food in 2025, underscoring the country's heavy dependence on external markets while revealing a significant economic opportunity to expand domestic production. Against a backdrop of rising global food prices, supply-chain disruptions, and climate-related shocks, strengthening food security has become a strategic priority for Addu City. With the largest land area among the Maldives' atolls, substantial agricultural potential, productive fisheries, and a growing population, Addu is uniquely positioned for sustainable food production and to contribute meaningfully to national food security.",
-          "slots": []
-        },
-        {
-          "id": "0291",
-          "ref": {
-            "t": "goalStat",
-            "slug": "food-security",
-            "label": "national food imports in 2025",
-            "field": "label"
-          },
-          "en": "national food imports in 2025",
-          "slots": []
-        },
-        {
-          "id": "0292",
-          "ref": {
-            "t": "goalStat",
-            "slug": "food-security",
-            "label": "national food imports in 2025",
-            "field": "value"
-          },
-          "en": "USD 790.5 million",
-          "slots": []
-        },
-        {
-          "id": "0293",
-          "ref": {
-            "t": "goalStat",
-            "slug": "food-security",
-            "label": "meat, seafood and fish",
-            "field": "label"
-          },
-          "en": "meat, seafood and fish",
-          "slots": []
-        },
-        {
-          "id": "0294",
-          "ref": {
-            "t": "goalStat",
-            "slug": "food-security",
-            "label": "meat, seafood and fish",
-            "field": "value"
-          },
-          "en": "USD 156.7 million",
-          "slots": []
-        },
-        {
-          "id": "0295",
-          "ref": {
-            "t": "goalStat",
-            "slug": "food-security",
-            "label": "vegetables and root crops",
-            "field": "label"
-          },
-          "en": "vegetables and root crops",
-          "slots": []
-        },
-        {
-          "id": "0296",
-          "ref": {
-            "t": "goalStat",
-            "slug": "food-security",
-            "label": "vegetables and root crops",
-            "field": "value"
-          },
-          "en": "USD 106.9 million",
-          "slots": []
-        },
-        {
-          "id": "0297",
-          "ref": {
-            "t": "goalStat",
-            "slug": "food-security",
-            "label": "fruits, nuts and seeds",
-            "field": "label"
-          },
-          "en": "fruits, nuts and seeds",
-          "slots": []
-        },
-        {
-          "id": "0298",
-          "ref": {
-            "t": "goalStat",
-            "slug": "food-security",
-            "label": "fruits, nuts and seeds",
-            "field": "value"
-          },
-          "en": "USD 106.5 million",
-          "slots": []
-        },
-        {
-          "id": "0299",
-          "ref": {
-            "t": "goalStat",
-            "slug": "food-security",
-            "label": "staples",
-            "field": "label"
-          },
-          "en": "staples",
-          "slots": []
-        },
-        {
-          "id": "0300",
-          "ref": {
-            "t": "goalStat",
-            "slug": "food-security",
-            "label": "staples",
-            "field": "value"
-          },
-          "en": "USD 33.5 million",
-          "slots": []
-        },
-        {
-          "id": "0301",
-          "ref": {
-            "t": "goalStat",
-            "slug": "food-security",
-            "label": "eggs",
-            "field": "label"
-          },
-          "en": "eggs",
-          "slots": []
-        },
-        {
-          "id": "0302",
-          "ref": {
-            "t": "goalStat",
-            "slug": "food-security",
-            "label": "eggs",
-            "field": "value"
-          },
-          "en": "USD 24.3 million",
-          "slots": []
-        },
-        {
-          "id": "0303",
-          "ref": {
-            "t": "target",
-            "slug": "food-security",
-            "id": "g3-t1"
-          },
-          "en": "Ensure 75% of homes grow 05 types of tropical fruits and 05 vegetables at home by 2028.",
-          "slots": []
-        },
-        {
-          "id": "0304",
-          "ref": {
-            "t": "target",
-            "slug": "food-security",
-            "id": "g3-t2"
-          },
-          "en": "Enable commercial production of 03 fruits and 03 vegetables to supply 30% of the need of the Maldives tourism market by 2030.",
-          "slots": []
-        },
-        {
-          "id": "0305",
-          "ref": {
-            "t": "target",
-            "slug": "food-security",
-            "id": "g3-t3"
-          },
-          "en": "Ensure ice and fuel are available to fishers in Hithadhoo and Maradhoo harbours by 2028.",
-          "slots": []
-        },
-        {
-          "id": "0306",
-          "ref": {
-            "t": "target",
-            "slug": "food-security",
-            "id": "g3-t4"
-          },
-          "en": "Supply at least 50% of Valhomas (smoked fish) and Rihaakuru (fish paste) sold in the Maldives by 2030.",
-          "slots": []
-        },
-        {
-          "id": "0307",
-          "ref": {
-            "t": "target",
-            "slug": "food-security",
-            "id": "g3-t5"
-          },
-          "en": "Produce at least 30,000 eggs per day to meet a minimum of 80% of local household, hospitality, business, and institutional demand.",
-          "slots": []
-        },
-        {
-          "id": "0308",
-          "ref": {
-            "t": "target",
-            "slug": "food-security",
-            "id": "g3-t6"
-          },
-          "en": "Ensure that 100% of food producers, processors, distributors and food-service establishments in Addu City are registered and undergo risk-based inspection.",
-          "slots": []
-        },
-        {
-          "id": "0309",
-          "ref": {
-            "t": "strategy",
-            "slug": "food-security",
-            "id": "g3-s1"
-          },
-          "en": "Every home a proud grower",
-          "slots": []
-        },
-        {
-          "id": "0310",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s1",
-            "id": "g3-s1-a1"
-          },
-          "en": "Establish a nursery and seed bank",
-          "slots": []
-        },
-        {
-          "id": "0311",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s1",
-            "id": "g3-s1-a2"
-          },
-          "en": "Distribute starter kits for households",
-          "slots": []
-        },
-        {
-          "id": "0312",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s1",
-            "id": "g3-s1-a3"
-          },
-          "en": "Launch home gardening app",
-          "slots": []
-        },
-        {
-          "id": "0313",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s1",
-            "id": "g3-s1-a4"
-          },
-          "en": "Establish home grower's market",
-          "slots": []
-        },
-        {
-          "id": "0314",
-          "ref": {
-            "t": "strategy",
-            "slug": "food-security",
-            "id": "g3-s2"
-          },
-          "en": "Organic agriculture revival",
-          "slots": []
-        },
-        {
-          "id": "0315",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s2",
-            "id": "g3-s2-a1"
-          },
-          "en": "Launch coconut & kurumba cultivation and replanting",
-          "slots": []
-        },
-        {
-          "id": "0316",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s2",
-            "id": "g3-s2-a2"
-          },
-          "en": "Allocate land for banana, breadfruit and yam plantation",
-          "slots": []
-        },
-        {
-          "id": "0317",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s2",
-            "id": "g3-s2-a3"
-          },
-          "en": "Establish orchards for papaya, mango, guava and passionfruit",
-          "slots": []
-        },
-        {
-          "id": "0318",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s2",
-            "id": "g3-s2-a4"
-          },
-          "en": "Establish crop and soil safety monitoring",
-          "slots": []
-        },
-        {
-          "id": "0319",
-          "ref": {
-            "t": "strategy",
-            "slug": "food-security",
-            "id": "g3-s3"
-          },
-          "en": "Technology driven fresh food",
-          "slots": []
-        },
-        {
-          "id": "0320",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s3",
-            "id": "g3-s3-a1"
-          },
-          "en": "Develop solar-powered climate-controlled greenhouses",
-          "slots": []
-        },
-        {
-          "id": "0321",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s3",
-            "id": "g3-s3-a2"
-          },
-          "en": "Establish vertical farms with hydroponic and aeroponic tech",
-          "slots": []
-        },
-        {
-          "id": "0322",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s3",
-            "id": "g3-s3-a3"
-          },
-          "en": "Introduce smart precision fertiliser use and irrigation",
-          "slots": []
-        },
-        {
-          "id": "0323",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s3",
-            "id": "g3-s3-a4"
-          },
-          "en": "Introduce drones + AI to track stress, pests and diseases",
-          "slots": []
-        },
-        {
-          "id": "0324",
-          "ref": {
-            "t": "strategy",
-            "slug": "food-security",
-            "id": "g3-s4"
-          },
-          "en": "High quality resilient fisheries",
-          "slots": []
-        },
-        {
-          "id": "0325",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s4",
-            "id": "g3-s4-a1"
-          },
-          "en": "Invest in renewables powered ice production",
-          "slots": []
-        },
-        {
-          "id": "0326",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s4",
-            "id": "g3-s4-a2"
-          },
-          "en": "Expand fisheries fuel storage capacity for 03 months",
-          "slots": []
-        },
-        {
-          "id": "0327",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s4",
-            "id": "g3-s4-a3"
-          },
-          "en": "Establish quality assurance for 'valhomas' and 'rihaakuru'",
-          "slots": []
-        },
-        {
-          "id": "0328",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s4",
-            "id": "g3-s4-a4"
-          },
-          "en": "Brand and promote 'valhomas', 'rihaakuru' and fish products",
-          "slots": []
-        },
-        {
-          "id": "0329",
-          "ref": {
-            "t": "strategy",
-            "slug": "food-security",
-            "id": "g3-s5"
-          },
-          "en": "Fresh eggs every day",
-          "slots": []
-        },
-        {
-          "id": "0330",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s5",
-            "id": "g3-s5-a1"
-          },
-          "en": "Build demonstration poultry farms",
-          "slots": []
-        },
-        {
-          "id": "0331",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s5",
-            "id": "g3-s5-a2"
-          },
-          "en": "Establish a PPP for quality feed development",
-          "slots": []
-        },
-        {
-          "id": "0332",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s5",
-            "id": "g3-s5-a3"
-          },
-          "en": "Conduct training on egg handling, storage and quality",
-          "slots": []
-        },
-        {
-          "id": "0333",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s5",
-            "id": "g3-s5-a4"
-          },
-          "en": "Establish a biosecurity and disease management system",
-          "slots": []
-        },
-        {
-          "id": "0334",
-          "ref": {
-            "t": "strategy",
-            "slug": "food-security",
-            "id": "g3-s6"
-          },
-          "en": "Trusted quality local food",
-          "slots": []
-        },
-        {
-          "id": "0335",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s6",
-            "id": "g3-s6-a1"
-          },
-          "en": "Establish a food quality laboratory",
-          "slots": []
-        },
-        {
-          "id": "0336",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s6",
-            "id": "g3-s6-a2"
-          },
-          "en": "Establish a food fund to support growers and producers",
-          "slots": []
-        },
-        {
-          "id": "0337",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s6",
-            "id": "g3-s6-a3"
-          },
-          "en": "Register bakers and snack producers",
-          "slots": []
-        },
-        {
-          "id": "0338",
-          "ref": {
-            "t": "action",
-            "slug": "food-security",
-            "strategy": "g3-s6",
-            "id": "g3-s6-a4"
-          },
-          "en": "Establish training and certification for food producers",
-          "slots": []
-        }
-      ]
-    },
-    {
-      "name": "11-goal-04-future-ready-transport.txt",
-      "title": "Goal 4: Future ready transport",
-      "segments": [
-        {
-          "id": "0339",
           "ref": {
             "t": "goal",
             "slug": "future-ready-transport",
@@ -3434,7 +2522,7 @@
           "slots": []
         },
         {
-          "id": "0340",
+          "id": "0256",
           "ref": {
             "t": "goal",
             "slug": "future-ready-transport",
@@ -3444,7 +2532,7 @@
           "slots": []
         },
         {
-          "id": "0341",
+          "id": "0257",
           "ref": {
             "t": "goal",
             "slug": "future-ready-transport",
@@ -3454,7 +2542,7 @@
           "slots": []
         },
         {
-          "id": "0342",
+          "id": "0258",
           "ref": {
             "t": "goalStat",
             "slug": "future-ready-transport",
@@ -3465,7 +2553,7 @@
           "slots": []
         },
         {
-          "id": "0343",
+          "id": "0259",
           "ref": {
             "t": "goalStat",
             "slug": "future-ready-transport",
@@ -3476,7 +2564,7 @@
           "slots": []
         },
         {
-          "id": "0344",
+          "id": "0260",
           "ref": {
             "t": "goalStat",
             "slug": "future-ready-transport",
@@ -3487,7 +2575,7 @@
           "slots": []
         },
         {
-          "id": "0345",
+          "id": "0261",
           "ref": {
             "t": "goalStat",
             "slug": "future-ready-transport",
@@ -3498,7 +2586,7 @@
           "slots": []
         },
         {
-          "id": "0346",
+          "id": "0262",
           "ref": {
             "t": "goalStat",
             "slug": "future-ready-transport",
@@ -3509,7 +2597,7 @@
           "slots": []
         },
         {
-          "id": "0347",
+          "id": "0263",
           "ref": {
             "t": "target",
             "slug": "future-ready-transport",
@@ -3519,7 +2607,7 @@
           "slots": []
         },
         {
-          "id": "0348",
+          "id": "0264",
           "ref": {
             "t": "target",
             "slug": "future-ready-transport",
@@ -3529,7 +2617,7 @@
           "slots": []
         },
         {
-          "id": "0349",
+          "id": "0265",
           "ref": {
             "t": "target",
             "slug": "future-ready-transport",
@@ -3539,7 +2627,7 @@
           "slots": []
         },
         {
-          "id": "0350",
+          "id": "0266",
           "ref": {
             "t": "target",
             "slug": "future-ready-transport",
@@ -3549,7 +2637,7 @@
           "slots": []
         },
         {
-          "id": "0351",
+          "id": "0267",
           "ref": {
             "t": "strategy",
             "slug": "future-ready-transport",
@@ -3559,7 +2647,7 @@
           "slots": []
         },
         {
-          "id": "0352",
+          "id": "0268",
           "ref": {
             "t": "action",
             "slug": "future-ready-transport",
@@ -3570,7 +2658,7 @@
           "slots": []
         },
         {
-          "id": "0353",
+          "id": "0269",
           "ref": {
             "t": "action",
             "slug": "future-ready-transport",
@@ -3581,7 +2669,7 @@
           "slots": []
         },
         {
-          "id": "0354",
+          "id": "0270",
           "ref": {
             "t": "action",
             "slug": "future-ready-transport",
@@ -3592,7 +2680,7 @@
           "slots": []
         },
         {
-          "id": "0355",
+          "id": "0271",
           "ref": {
             "t": "action",
             "slug": "future-ready-transport",
@@ -3603,7 +2691,7 @@
           "slots": []
         },
         {
-          "id": "0356",
+          "id": "0272",
           "ref": {
             "t": "strategy",
             "slug": "future-ready-transport",
@@ -3613,7 +2701,7 @@
           "slots": []
         },
         {
-          "id": "0357",
+          "id": "0273",
           "ref": {
             "t": "action",
             "slug": "future-ready-transport",
@@ -3624,7 +2712,7 @@
           "slots": []
         },
         {
-          "id": "0358",
+          "id": "0274",
           "ref": {
             "t": "action",
             "slug": "future-ready-transport",
@@ -3635,7 +2723,7 @@
           "slots": []
         },
         {
-          "id": "0359",
+          "id": "0275",
           "ref": {
             "t": "action",
             "slug": "future-ready-transport",
@@ -3646,7 +2734,7 @@
           "slots": []
         },
         {
-          "id": "0360",
+          "id": "0276",
           "ref": {
             "t": "action",
             "slug": "future-ready-transport",
@@ -3657,7 +2745,7 @@
           "slots": []
         },
         {
-          "id": "0361",
+          "id": "0277",
           "ref": {
             "t": "strategy",
             "slug": "future-ready-transport",
@@ -3667,7 +2755,7 @@
           "slots": []
         },
         {
-          "id": "0362",
+          "id": "0278",
           "ref": {
             "t": "action",
             "slug": "future-ready-transport",
@@ -3678,7 +2766,7 @@
           "slots": []
         },
         {
-          "id": "0363",
+          "id": "0279",
           "ref": {
             "t": "action",
             "slug": "future-ready-transport",
@@ -3689,7 +2777,7 @@
           "slots": []
         },
         {
-          "id": "0364",
+          "id": "0280",
           "ref": {
             "t": "action",
             "slug": "future-ready-transport",
@@ -3700,7 +2788,7 @@
           "slots": []
         },
         {
-          "id": "0365",
+          "id": "0281",
           "ref": {
             "t": "action",
             "slug": "future-ready-transport",
@@ -3711,7 +2799,7 @@
           "slots": []
         },
         {
-          "id": "0366",
+          "id": "0282",
           "ref": {
             "t": "strategy",
             "slug": "future-ready-transport",
@@ -3721,7 +2809,7 @@
           "slots": []
         },
         {
-          "id": "0367",
+          "id": "0283",
           "ref": {
             "t": "action",
             "slug": "future-ready-transport",
@@ -3732,7 +2820,7 @@
           "slots": []
         },
         {
-          "id": "0368",
+          "id": "0284",
           "ref": {
             "t": "action",
             "slug": "future-ready-transport",
@@ -3743,7 +2831,7 @@
           "slots": []
         },
         {
-          "id": "0369",
+          "id": "0285",
           "ref": {
             "t": "action",
             "slug": "future-ready-transport",
@@ -3754,7 +2842,7 @@
           "slots": []
         },
         {
-          "id": "0370",
+          "id": "0286",
           "ref": {
             "t": "action",
             "slug": "future-ready-transport",
@@ -3767,11 +2855,11 @@
       ]
     },
     {
-      "name": "12-goal-05-connect-the-south.txt",
-      "title": "Goal 5: Connect the South",
+      "name": "10-goal-03-connect-the-south.txt",
+      "title": "Goal 3: Connect the South",
       "segments": [
         {
-          "id": "0371",
+          "id": "0287",
           "ref": {
             "t": "goal",
             "slug": "connect-the-south",
@@ -3781,7 +2869,7 @@
           "slots": []
         },
         {
-          "id": "0372",
+          "id": "0288",
           "ref": {
             "t": "goal",
             "slug": "connect-the-south",
@@ -3791,7 +2879,7 @@
           "slots": []
         },
         {
-          "id": "0373",
+          "id": "0289",
           "ref": {
             "t": "goal",
             "slug": "connect-the-south",
@@ -3801,7 +2889,7 @@
           "slots": []
         },
         {
-          "id": "0374",
+          "id": "0290",
           "ref": {
             "t": "goalStat",
             "slug": "connect-the-south",
@@ -3812,7 +2900,7 @@
           "slots": []
         },
         {
-          "id": "0375",
+          "id": "0291",
           "ref": {
             "t": "goalStat",
             "slug": "connect-the-south",
@@ -3823,7 +2911,7 @@
           "slots": []
         },
         {
-          "id": "0376",
+          "id": "0292",
           "ref": {
             "t": "goalStat",
             "slug": "connect-the-south",
@@ -3834,7 +2922,7 @@
           "slots": []
         },
         {
-          "id": "0377",
+          "id": "0293",
           "ref": {
             "t": "goalStat",
             "slug": "connect-the-south",
@@ -3845,7 +2933,7 @@
           "slots": []
         },
         {
-          "id": "0378",
+          "id": "0294",
           "ref": {
             "t": "goalStat",
             "slug": "connect-the-south",
@@ -3856,7 +2944,7 @@
           "slots": []
         },
         {
-          "id": "0379",
+          "id": "0295",
           "ref": {
             "t": "goalStat",
             "slug": "connect-the-south",
@@ -3867,7 +2955,7 @@
           "slots": []
         },
         {
-          "id": "0380",
+          "id": "0296",
           "ref": {
             "t": "goalStat",
             "slug": "connect-the-south",
@@ -3878,7 +2966,7 @@
           "slots": []
         },
         {
-          "id": "0381",
+          "id": "0297",
           "ref": {
             "t": "goalStat",
             "slug": "connect-the-south",
@@ -3889,7 +2977,7 @@
           "slots": []
         },
         {
-          "id": "0382",
+          "id": "0298",
           "ref": {
             "t": "target",
             "slug": "connect-the-south",
@@ -3899,7 +2987,7 @@
           "slots": []
         },
         {
-          "id": "0383",
+          "id": "0299",
           "ref": {
             "t": "target",
             "slug": "connect-the-south",
@@ -3909,7 +2997,7 @@
           "slots": []
         },
         {
-          "id": "0384",
+          "id": "0300",
           "ref": {
             "t": "target",
             "slug": "connect-the-south",
@@ -3919,7 +3007,7 @@
           "slots": []
         },
         {
-          "id": "0385",
+          "id": "0301",
           "ref": {
             "t": "strategy",
             "slug": "connect-the-south",
@@ -3929,7 +3017,7 @@
           "slots": []
         },
         {
-          "id": "0386",
+          "id": "0302",
           "ref": {
             "t": "action",
             "slug": "connect-the-south",
@@ -3940,7 +3028,7 @@
           "slots": []
         },
         {
-          "id": "0387",
+          "id": "0303",
           "ref": {
             "t": "action",
             "slug": "connect-the-south",
@@ -3951,7 +3039,7 @@
           "slots": []
         },
         {
-          "id": "0388",
+          "id": "0304",
           "ref": {
             "t": "action",
             "slug": "connect-the-south",
@@ -3962,7 +3050,7 @@
           "slots": []
         },
         {
-          "id": "0389",
+          "id": "0305",
           "ref": {
             "t": "action",
             "slug": "connect-the-south",
@@ -3973,7 +3061,7 @@
           "slots": []
         },
         {
-          "id": "0390",
+          "id": "0306",
           "ref": {
             "t": "strategy",
             "slug": "connect-the-south",
@@ -3983,7 +3071,7 @@
           "slots": []
         },
         {
-          "id": "0391",
+          "id": "0307",
           "ref": {
             "t": "action",
             "slug": "connect-the-south",
@@ -3994,7 +3082,7 @@
           "slots": []
         },
         {
-          "id": "0392",
+          "id": "0308",
           "ref": {
             "t": "action",
             "slug": "connect-the-south",
@@ -4005,7 +3093,7 @@
           "slots": []
         },
         {
-          "id": "0393",
+          "id": "0309",
           "ref": {
             "t": "action",
             "slug": "connect-the-south",
@@ -4016,7 +3104,7 @@
           "slots": []
         },
         {
-          "id": "0394",
+          "id": "0310",
           "ref": {
             "t": "action",
             "slug": "connect-the-south",
@@ -4027,7 +3115,7 @@
           "slots": []
         },
         {
-          "id": "0395",
+          "id": "0311",
           "ref": {
             "t": "strategy",
             "slug": "connect-the-south",
@@ -4037,7 +3125,7 @@
           "slots": []
         },
         {
-          "id": "0396",
+          "id": "0312",
           "ref": {
             "t": "action",
             "slug": "connect-the-south",
@@ -4048,7 +3136,7 @@
           "slots": []
         },
         {
-          "id": "0397",
+          "id": "0313",
           "ref": {
             "t": "action",
             "slug": "connect-the-south",
@@ -4059,7 +3147,7 @@
           "slots": []
         },
         {
-          "id": "0398",
+          "id": "0314",
           "ref": {
             "t": "action",
             "slug": "connect-the-south",
@@ -4070,7 +3158,7 @@
           "slots": []
         },
         {
-          "id": "0399",
+          "id": "0315",
           "ref": {
             "t": "action",
             "slug": "connect-the-south",
@@ -4083,11 +3171,368 @@
       ]
     },
     {
-      "name": "13-goal-06-diverse-quality-housing.txt",
-      "title": "Goal 6: Diverse quality housing",
+      "name": "11-goal-04-water-security.txt",
+      "title": "Goal 4: Safe water sources",
       "segments": [
         {
-          "id": "0400",
+          "id": "0316",
+          "ref": {
+            "t": "goal",
+            "slug": "water-security",
+            "field": "title"
+          },
+          "en": "Safe water sources",
+          "slots": []
+        },
+        {
+          "id": "0317",
+          "ref": {
+            "t": "goal",
+            "slug": "water-security",
+            "field": "tagline"
+          },
+          "en": "Renewables-powered desalination and rainwater for all",
+          "slots": []
+        },
+        {
+          "id": "0318",
+          "ref": {
+            "t": "goal",
+            "slug": "water-security",
+            "field": "summary"
+          },
+          "en": "Addu will secure its long-term water supply through five diversified sources — desalination, household and community-scale rainwater harvesting, responsibly managed groundwater, reclaimed wastewater, and mineralised bottled water. Solar PV and battery storage will support reliable desalination. Expanded rainwater systems will capture and store rainfall for domestic and public use, while carefully managed groundwater will provide a dedicated supply for gardening and landscaping. Expanded sewerage networks and advanced wastewater treatment will enable reclaimed water to be used safely for agriculture, irrigation, landscaping, and other non-potable purposes. Addu will also support the local production of mineralised drinking water in reusable glass bottles and large-volume containers for homes, restaurants, hotels, offices, and other businesses.",
+          "slots": []
+        },
+        {
+          "id": "0319",
+          "ref": {
+            "t": "goalStat",
+            "slug": "water-security",
+            "label": "residents",
+            "field": "label"
+          },
+          "en": "residents",
+          "slots": []
+        },
+        {
+          "id": "0320",
+          "ref": {
+            "t": "goalStat",
+            "slug": "water-security",
+            "label": "of water per person per day",
+            "field": "label"
+          },
+          "en": "of water per person per day",
+          "slots": []
+        },
+        {
+          "id": "0321",
+          "ref": {
+            "t": "goalStat",
+            "slug": "water-security",
+            "label": "of water per person per day",
+            "field": "value"
+          },
+          "en": "85 litres",
+          "slots": []
+        },
+        {
+          "id": "0322",
+          "ref": {
+            "t": "goalStat",
+            "slug": "water-security",
+            "label": "of potable water per day",
+            "field": "label"
+          },
+          "en": "of potable water per day",
+          "slots": []
+        },
+        {
+          "id": "0323",
+          "ref": {
+            "t": "goalStat",
+            "slug": "water-security",
+            "label": "of potable water per day",
+            "field": "value"
+          },
+          "en": "3,000 cbm",
+          "slots": []
+        },
+        {
+          "id": "0324",
+          "ref": {
+            "t": "goalStat",
+            "slug": "water-security",
+            "label": "to produce a cbm of desalinated water",
+            "field": "label"
+          },
+          "en": "to produce a cbm of desalinated water",
+          "slots": []
+        },
+        {
+          "id": "0325",
+          "ref": {
+            "t": "goalStat",
+            "slug": "water-security",
+            "label": "to produce a cbm of desalinated water",
+            "field": "value"
+          },
+          "en": "4 kWh",
+          "slots": []
+        },
+        {
+          "id": "0326",
+          "ref": {
+            "t": "goalStat",
+            "slug": "water-security",
+            "label": "needed per day to produce water",
+            "field": "label"
+          },
+          "en": "needed per day to produce water",
+          "slots": []
+        },
+        {
+          "id": "0327",
+          "ref": {
+            "t": "goalStat",
+            "slug": "water-security",
+            "label": "needed per day to produce water",
+            "field": "value"
+          },
+          "en": "12,000 kWh",
+          "slots": []
+        },
+        {
+          "id": "0328",
+          "ref": {
+            "t": "target",
+            "slug": "water-security",
+            "id": "g2-t1"
+          },
+          "en": "Produce 3,000 cbm of desalinated water per day using renewable energy by 2028.",
+          "slots": []
+        },
+        {
+          "id": "0329",
+          "ref": {
+            "t": "target",
+            "slug": "water-security",
+            "id": "g2-t2"
+          },
+          "en": "Equip all homes with safe rainwater collection and storage tanks.",
+          "slots": []
+        },
+        {
+          "id": "0330",
+          "ref": {
+            "t": "target",
+            "slug": "water-security",
+            "id": "g2-t3"
+          },
+          "en": "Enable whole-house water filtration in homes by 2028.",
+          "slots": []
+        },
+        {
+          "id": "0331",
+          "ref": {
+            "t": "target",
+            "slug": "water-security",
+            "id": "g2-t4"
+          },
+          "en": "Maintain or improve groundwater quality in at least 90% of Addu City's monitoring stations, with no significant increase in salinity, nitrate, or faecal contamination from the 2026 baseline.",
+          "slots": []
+        },
+        {
+          "id": "0332",
+          "ref": {
+            "t": "target",
+            "slug": "water-security",
+            "id": "g2-t5"
+          },
+          "en": "Achieve universal sewerage coverage for all households by 2028.",
+          "slots": []
+        },
+        {
+          "id": "0333",
+          "ref": {
+            "t": "target",
+            "slug": "water-security",
+            "id": "g2-t6"
+          },
+          "en": "Increase proportion of households who reuse wastewater to 25% by 2030.",
+          "slots": []
+        },
+        {
+          "id": "0334",
+          "ref": {
+            "t": "strategy",
+            "slug": "water-security",
+            "id": "g2-s1"
+          },
+          "en": "Renewables powered desalination",
+          "slots": []
+        },
+        {
+          "id": "0335",
+          "ref": {
+            "t": "action",
+            "slug": "water-security",
+            "strategy": "g2-s1",
+            "id": "g2-s1-a1"
+          },
+          "en": "Increase desalination capacity to 3,000 cbm/day",
+          "slots": []
+        },
+        {
+          "id": "0336",
+          "ref": {
+            "t": "action",
+            "slug": "water-security",
+            "strategy": "g2-s1",
+            "id": "g2-s1-a2"
+          },
+          "en": "Install 3 MWp solar PV for water production",
+          "slots": []
+        },
+        {
+          "id": "0337",
+          "ref": {
+            "t": "action",
+            "slug": "water-security",
+            "strategy": "g2-s1",
+            "id": "g2-s1-a3"
+          },
+          "en": "Install 8 MWh battery storage for water production",
+          "slots": []
+        },
+        {
+          "id": "0338",
+          "ref": {
+            "t": "action",
+            "slug": "water-security",
+            "strategy": "g2-s1",
+            "id": "g2-s1-a4"
+          },
+          "en": "Establish 6,000 cbm water storage capacity",
+          "slots": []
+        },
+        {
+          "id": "0339",
+          "ref": {
+            "t": "strategy",
+            "slug": "water-security",
+            "id": "g2-s2"
+          },
+          "en": "Rainwater and groundwater harvesting",
+          "slots": []
+        },
+        {
+          "id": "0340",
+          "ref": {
+            "t": "action",
+            "slug": "water-security",
+            "strategy": "g2-s2",
+            "id": "g2-s2-a1"
+          },
+          "en": "Provide safe rainwater collection tanks to all homes",
+          "slots": []
+        },
+        {
+          "id": "0341",
+          "ref": {
+            "t": "action",
+            "slug": "water-security",
+            "strategy": "g2-s2",
+            "id": "g2-s2-a2"
+          },
+          "en": "Enable whole house water filtration for homes",
+          "slots": []
+        },
+        {
+          "id": "0342",
+          "ref": {
+            "t": "action",
+            "slug": "water-security",
+            "strategy": "g2-s2",
+            "id": "g2-s2-a3"
+          },
+          "en": "Build community rainwater storage tanks",
+          "slots": []
+        },
+        {
+          "id": "0343",
+          "ref": {
+            "t": "action",
+            "slug": "water-security",
+            "strategy": "g2-s2",
+            "id": "g2-s2-a4"
+          },
+          "en": "Develop guidelines for groundwater use and protection",
+          "slots": []
+        },
+        {
+          "id": "0344",
+          "ref": {
+            "t": "strategy",
+            "slug": "water-security",
+            "id": "g2-s3"
+          },
+          "en": "Effective sewage treatment",
+          "slots": []
+        },
+        {
+          "id": "0345",
+          "ref": {
+            "t": "action",
+            "slug": "water-security",
+            "strategy": "g2-s3",
+            "id": "g2-s3-a1"
+          },
+          "en": "Extend sewerage connection to all homes",
+          "slots": []
+        },
+        {
+          "id": "0346",
+          "ref": {
+            "t": "action",
+            "slug": "water-security",
+            "strategy": "g2-s3",
+            "id": "g2-s3-a2"
+          },
+          "en": "Upgrade sewage and wastewater treatment system",
+          "slots": []
+        },
+        {
+          "id": "0347",
+          "ref": {
+            "t": "action",
+            "slug": "water-security",
+            "strategy": "g2-s3",
+            "id": "g2-s3-a3"
+          },
+          "en": "Integrate solar PV to sewage treatment",
+          "slots": []
+        },
+        {
+          "id": "0348",
+          "ref": {
+            "t": "action",
+            "slug": "water-security",
+            "strategy": "g2-s3",
+            "id": "g2-s3-a4"
+          },
+          "en": "Invest in treated water reuse and 'sludge to compost'",
+          "slots": []
+        }
+      ]
+    },
+    {
+      "name": "12-goal-05-diverse-quality-housing.txt",
+      "title": "Goal 5: Diverse quality housing",
+      "segments": [
+        {
+          "id": "0349",
           "ref": {
             "t": "goal",
             "slug": "diverse-quality-housing",
@@ -4097,7 +3542,7 @@
           "slots": []
         },
         {
-          "id": "0401",
+          "id": "0350",
           "ref": {
             "t": "goal",
             "slug": "diverse-quality-housing",
@@ -4107,7 +3552,7 @@
           "slots": []
         },
         {
-          "id": "0402",
+          "id": "0351",
           "ref": {
             "t": "goal",
             "slug": "diverse-quality-housing",
@@ -4117,7 +3562,7 @@
           "slots": []
         },
         {
-          "id": "0403",
+          "id": "0352",
           "ref": {
             "t": "goalStat",
             "slug": "diverse-quality-housing",
@@ -4128,7 +3573,7 @@
           "slots": []
         },
         {
-          "id": "0404",
+          "id": "0353",
           "ref": {
             "t": "goalStat",
             "slug": "diverse-quality-housing",
@@ -4139,7 +3584,7 @@
           "slots": []
         },
         {
-          "id": "0405",
+          "id": "0354",
           "ref": {
             "t": "goalStat",
             "slug": "diverse-quality-housing",
@@ -4150,7 +3595,7 @@
           "slots": []
         },
         {
-          "id": "0406",
+          "id": "0355",
           "ref": {
             "t": "goalStat",
             "slug": "diverse-quality-housing",
@@ -4161,7 +3606,7 @@
           "slots": []
         },
         {
-          "id": "0407",
+          "id": "0356",
           "ref": {
             "t": "goalStat",
             "slug": "diverse-quality-housing",
@@ -4172,7 +3617,7 @@
           "slots": []
         },
         {
-          "id": "0408",
+          "id": "0357",
           "ref": {
             "t": "target",
             "slug": "diverse-quality-housing",
@@ -4182,7 +3627,7 @@
           "slots": []
         },
         {
-          "id": "0409",
+          "id": "0358",
           "ref": {
             "t": "target",
             "slug": "diverse-quality-housing",
@@ -4192,7 +3637,7 @@
           "slots": []
         },
         {
-          "id": "0410",
+          "id": "0359",
           "ref": {
             "t": "target",
             "slug": "diverse-quality-housing",
@@ -4202,7 +3647,7 @@
           "slots": []
         },
         {
-          "id": "0411",
+          "id": "0360",
           "ref": {
             "t": "target",
             "slug": "diverse-quality-housing",
@@ -4212,7 +3657,7 @@
           "slots": []
         },
         {
-          "id": "0412",
+          "id": "0361",
           "ref": {
             "t": "strategy",
             "slug": "diverse-quality-housing",
@@ -4222,7 +3667,7 @@
           "slots": []
         },
         {
-          "id": "0413",
+          "id": "0362",
           "ref": {
             "t": "action",
             "slug": "diverse-quality-housing",
@@ -4233,7 +3678,7 @@
           "slots": []
         },
         {
-          "id": "0414",
+          "id": "0363",
           "ref": {
             "t": "action",
             "slug": "diverse-quality-housing",
@@ -4244,7 +3689,7 @@
           "slots": []
         },
         {
-          "id": "0415",
+          "id": "0364",
           "ref": {
             "t": "action",
             "slug": "diverse-quality-housing",
@@ -4255,7 +3700,7 @@
           "slots": []
         },
         {
-          "id": "0416",
+          "id": "0365",
           "ref": {
             "t": "action",
             "slug": "diverse-quality-housing",
@@ -4266,7 +3711,7 @@
           "slots": []
         },
         {
-          "id": "0417",
+          "id": "0366",
           "ref": {
             "t": "strategy",
             "slug": "diverse-quality-housing",
@@ -4276,7 +3721,7 @@
           "slots": []
         },
         {
-          "id": "0418",
+          "id": "0367",
           "ref": {
             "t": "action",
             "slug": "diverse-quality-housing",
@@ -4287,7 +3732,7 @@
           "slots": []
         },
         {
-          "id": "0419",
+          "id": "0368",
           "ref": {
             "t": "action",
             "slug": "diverse-quality-housing",
@@ -4298,7 +3743,7 @@
           "slots": []
         },
         {
-          "id": "0420",
+          "id": "0369",
           "ref": {
             "t": "action",
             "slug": "diverse-quality-housing",
@@ -4309,7 +3754,7 @@
           "slots": []
         },
         {
-          "id": "0421",
+          "id": "0370",
           "ref": {
             "t": "action",
             "slug": "diverse-quality-housing",
@@ -4320,7 +3765,7 @@
           "slots": []
         },
         {
-          "id": "0422",
+          "id": "0371",
           "ref": {
             "t": "strategy",
             "slug": "diverse-quality-housing",
@@ -4330,7 +3775,7 @@
           "slots": []
         },
         {
-          "id": "0423",
+          "id": "0372",
           "ref": {
             "t": "action",
             "slug": "diverse-quality-housing",
@@ -4341,7 +3786,7 @@
           "slots": []
         },
         {
-          "id": "0424",
+          "id": "0373",
           "ref": {
             "t": "action",
             "slug": "diverse-quality-housing",
@@ -4352,7 +3797,7 @@
           "slots": []
         },
         {
-          "id": "0425",
+          "id": "0374",
           "ref": {
             "t": "action",
             "slug": "diverse-quality-housing",
@@ -4363,7 +3808,7 @@
           "slots": []
         },
         {
-          "id": "0426",
+          "id": "0375",
           "ref": {
             "t": "action",
             "slug": "diverse-quality-housing",
@@ -4376,21 +3821,21 @@
       ]
     },
     {
-      "name": "14-goal-07-connect-community-and-culture.txt",
-      "title": "Goal 7: Connect community and culture",
+      "name": "13-goal-06-connect-community-and-culture.txt",
+      "title": "Goal 6: Connect community",
       "segments": [
         {
-          "id": "0427",
+          "id": "0376",
           "ref": {
             "t": "goal",
             "slug": "connect-community-and-culture",
             "field": "title"
           },
-          "en": "Connect community and culture",
+          "en": "Connect community",
           "slots": []
         },
         {
-          "id": "0428",
+          "id": "0377",
           "ref": {
             "t": "goal",
             "slug": "connect-community-and-culture",
@@ -4400,7 +3845,7 @@
           "slots": []
         },
         {
-          "id": "0429",
+          "id": "0378",
           "ref": {
             "t": "goal",
             "slug": "connect-community-and-culture",
@@ -4410,7 +3855,7 @@
           "slots": []
         },
         {
-          "id": "0430",
+          "id": "0379",
           "ref": {
             "t": "goalStat",
             "slug": "connect-community-and-culture",
@@ -4421,7 +3866,7 @@
           "slots": []
         },
         {
-          "id": "0431",
+          "id": "0380",
           "ref": {
             "t": "goalStat",
             "slug": "connect-community-and-culture",
@@ -4432,7 +3877,7 @@
           "slots": []
         },
         {
-          "id": "0432",
+          "id": "0381",
           "ref": {
             "t": "goalStat",
             "slug": "connect-community-and-culture",
@@ -4443,7 +3888,7 @@
           "slots": []
         },
         {
-          "id": "0433",
+          "id": "0382",
           "ref": {
             "t": "goalStat",
             "slug": "connect-community-and-culture",
@@ -4454,7 +3899,7 @@
           "slots": []
         },
         {
-          "id": "0434",
+          "id": "0383",
           "ref": {
             "t": "goalStat",
             "slug": "connect-community-and-culture",
@@ -4465,7 +3910,7 @@
           "slots": []
         },
         {
-          "id": "0435",
+          "id": "0384",
           "ref": {
             "t": "target",
             "slug": "connect-community-and-culture",
@@ -4475,7 +3920,7 @@
           "slots": []
         },
         {
-          "id": "0436",
+          "id": "0385",
           "ref": {
             "t": "target",
             "slug": "connect-community-and-culture",
@@ -4485,7 +3930,7 @@
           "slots": []
         },
         {
-          "id": "0437",
+          "id": "0386",
           "ref": {
             "t": "target",
             "slug": "connect-community-and-culture",
@@ -4495,7 +3940,7 @@
           "slots": []
         },
         {
-          "id": "0438",
+          "id": "0387",
           "ref": {
             "t": "target",
             "slug": "connect-community-and-culture",
@@ -4505,7 +3950,7 @@
           "slots": []
         },
         {
-          "id": "0439",
+          "id": "0388",
           "ref": {
             "t": "target",
             "slug": "connect-community-and-culture",
@@ -4515,7 +3960,7 @@
           "slots": []
         },
         {
-          "id": "0440",
+          "id": "0389",
           "ref": {
             "t": "target",
             "slug": "connect-community-and-culture",
@@ -4525,7 +3970,7 @@
           "slots": []
         },
         {
-          "id": "0441",
+          "id": "0390",
           "ref": {
             "t": "strategy",
             "slug": "connect-community-and-culture",
@@ -4535,7 +3980,7 @@
           "slots": []
         },
         {
-          "id": "0442",
+          "id": "0391",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4546,7 +3991,7 @@
           "slots": []
         },
         {
-          "id": "0443",
+          "id": "0392",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4557,7 +4002,7 @@
           "slots": []
         },
         {
-          "id": "0444",
+          "id": "0393",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4568,7 +4013,7 @@
           "slots": []
         },
         {
-          "id": "0445",
+          "id": "0394",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4579,7 +4024,7 @@
           "slots": []
         },
         {
-          "id": "0446",
+          "id": "0395",
           "ref": {
             "t": "strategy",
             "slug": "connect-community-and-culture",
@@ -4589,7 +4034,7 @@
           "slots": []
         },
         {
-          "id": "0447",
+          "id": "0396",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4600,7 +4045,7 @@
           "slots": []
         },
         {
-          "id": "0448",
+          "id": "0397",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4611,7 +4056,7 @@
           "slots": []
         },
         {
-          "id": "0449",
+          "id": "0398",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4622,7 +4067,7 @@
           "slots": []
         },
         {
-          "id": "0450",
+          "id": "0399",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4633,7 +4078,7 @@
           "slots": []
         },
         {
-          "id": "0451",
+          "id": "0400",
           "ref": {
             "t": "strategy",
             "slug": "connect-community-and-culture",
@@ -4643,7 +4088,7 @@
           "slots": []
         },
         {
-          "id": "0452",
+          "id": "0401",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4654,7 +4099,7 @@
           "slots": []
         },
         {
-          "id": "0453",
+          "id": "0402",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4665,7 +4110,7 @@
           "slots": []
         },
         {
-          "id": "0454",
+          "id": "0403",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4676,7 +4121,7 @@
           "slots": []
         },
         {
-          "id": "0455",
+          "id": "0404",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4687,7 +4132,7 @@
           "slots": []
         },
         {
-          "id": "0456",
+          "id": "0405",
           "ref": {
             "t": "strategy",
             "slug": "connect-community-and-culture",
@@ -4697,7 +4142,7 @@
           "slots": []
         },
         {
-          "id": "0457",
+          "id": "0406",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4708,7 +4153,7 @@
           "slots": []
         },
         {
-          "id": "0458",
+          "id": "0407",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4719,7 +4164,7 @@
           "slots": []
         },
         {
-          "id": "0459",
+          "id": "0408",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4730,7 +4175,7 @@
           "slots": []
         },
         {
-          "id": "0460",
+          "id": "0409",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4741,7 +4186,7 @@
           "slots": []
         },
         {
-          "id": "0461",
+          "id": "0410",
           "ref": {
             "t": "strategy",
             "slug": "connect-community-and-culture",
@@ -4751,7 +4196,7 @@
           "slots": []
         },
         {
-          "id": "0462",
+          "id": "0411",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4762,7 +4207,7 @@
           "slots": []
         },
         {
-          "id": "0463",
+          "id": "0412",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4773,7 +4218,7 @@
           "slots": []
         },
         {
-          "id": "0464",
+          "id": "0413",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4784,7 +4229,7 @@
           "slots": []
         },
         {
-          "id": "0465",
+          "id": "0414",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4795,7 +4240,7 @@
           "slots": []
         },
         {
-          "id": "0466",
+          "id": "0415",
           "ref": {
             "t": "strategy",
             "slug": "connect-community-and-culture",
@@ -4805,7 +4250,7 @@
           "slots": []
         },
         {
-          "id": "0467",
+          "id": "0416",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4816,7 +4261,7 @@
           "slots": []
         },
         {
-          "id": "0468",
+          "id": "0417",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4827,7 +4272,7 @@
           "slots": []
         },
         {
-          "id": "0469",
+          "id": "0418",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4838,7 +4283,7 @@
           "slots": []
         },
         {
-          "id": "0470",
+          "id": "0419",
           "ref": {
             "t": "action",
             "slug": "connect-community-and-culture",
@@ -4846,6 +4291,558 @@
             "id": "g7-s6-a4"
           },
           "en": "Organise Addu Cultural Festival",
+          "slots": []
+        }
+      ]
+    },
+    {
+      "name": "14-goal-07-food-security.txt",
+      "title": "Goal 7: Ensure food security",
+      "segments": [
+        {
+          "id": "0420",
+          "ref": {
+            "t": "goal",
+            "slug": "food-security",
+            "field": "title"
+          },
+          "en": "Ensure food security",
+          "slots": []
+        },
+        {
+          "id": "0421",
+          "ref": {
+            "t": "goal",
+            "slug": "food-security",
+            "field": "tagline"
+          },
+          "en": "Grow more at home, land more from the sea",
+          "slots": []
+        },
+        {
+          "id": "0422",
+          "ref": {
+            "t": "goal",
+            "slug": "food-security",
+            "field": "summary"
+          },
+          "en": "The Maldives imported approximately USD 790.5 million worth of food in 2025, underscoring the country's heavy dependence on external markets while revealing a significant economic opportunity to expand domestic production. Against a backdrop of rising global food prices, supply-chain disruptions, and climate-related shocks, strengthening food security has become a strategic priority for Addu City. With the largest land area among the Maldives' atolls, substantial agricultural potential, productive fisheries, and a growing population, Addu is uniquely positioned for sustainable food production and to contribute meaningfully to national food security.",
+          "slots": []
+        },
+        {
+          "id": "0423",
+          "ref": {
+            "t": "goalStat",
+            "slug": "food-security",
+            "label": "national food imports in 2025",
+            "field": "label"
+          },
+          "en": "national food imports in 2025",
+          "slots": []
+        },
+        {
+          "id": "0424",
+          "ref": {
+            "t": "goalStat",
+            "slug": "food-security",
+            "label": "national food imports in 2025",
+            "field": "value"
+          },
+          "en": "USD 790.5 million",
+          "slots": []
+        },
+        {
+          "id": "0425",
+          "ref": {
+            "t": "goalStat",
+            "slug": "food-security",
+            "label": "meat, seafood and fish",
+            "field": "label"
+          },
+          "en": "meat, seafood and fish",
+          "slots": []
+        },
+        {
+          "id": "0426",
+          "ref": {
+            "t": "goalStat",
+            "slug": "food-security",
+            "label": "meat, seafood and fish",
+            "field": "value"
+          },
+          "en": "USD 156.7 million",
+          "slots": []
+        },
+        {
+          "id": "0427",
+          "ref": {
+            "t": "goalStat",
+            "slug": "food-security",
+            "label": "vegetables and root crops",
+            "field": "label"
+          },
+          "en": "vegetables and root crops",
+          "slots": []
+        },
+        {
+          "id": "0428",
+          "ref": {
+            "t": "goalStat",
+            "slug": "food-security",
+            "label": "vegetables and root crops",
+            "field": "value"
+          },
+          "en": "USD 106.9 million",
+          "slots": []
+        },
+        {
+          "id": "0429",
+          "ref": {
+            "t": "goalStat",
+            "slug": "food-security",
+            "label": "fruits, nuts and seeds",
+            "field": "label"
+          },
+          "en": "fruits, nuts and seeds",
+          "slots": []
+        },
+        {
+          "id": "0430",
+          "ref": {
+            "t": "goalStat",
+            "slug": "food-security",
+            "label": "fruits, nuts and seeds",
+            "field": "value"
+          },
+          "en": "USD 106.5 million",
+          "slots": []
+        },
+        {
+          "id": "0431",
+          "ref": {
+            "t": "goalStat",
+            "slug": "food-security",
+            "label": "staples",
+            "field": "label"
+          },
+          "en": "staples",
+          "slots": []
+        },
+        {
+          "id": "0432",
+          "ref": {
+            "t": "goalStat",
+            "slug": "food-security",
+            "label": "staples",
+            "field": "value"
+          },
+          "en": "USD 33.5 million",
+          "slots": []
+        },
+        {
+          "id": "0433",
+          "ref": {
+            "t": "goalStat",
+            "slug": "food-security",
+            "label": "eggs",
+            "field": "label"
+          },
+          "en": "eggs",
+          "slots": []
+        },
+        {
+          "id": "0434",
+          "ref": {
+            "t": "goalStat",
+            "slug": "food-security",
+            "label": "eggs",
+            "field": "value"
+          },
+          "en": "USD 24.3 million",
+          "slots": []
+        },
+        {
+          "id": "0435",
+          "ref": {
+            "t": "target",
+            "slug": "food-security",
+            "id": "g3-t1"
+          },
+          "en": "Ensure 75% of homes grow 05 types of tropical fruits and 05 vegetables at home by 2028.",
+          "slots": []
+        },
+        {
+          "id": "0436",
+          "ref": {
+            "t": "target",
+            "slug": "food-security",
+            "id": "g3-t2"
+          },
+          "en": "Enable commercial production of 03 fruits and 03 vegetables to supply 30% of the need of the Maldives tourism market by 2030.",
+          "slots": []
+        },
+        {
+          "id": "0437",
+          "ref": {
+            "t": "target",
+            "slug": "food-security",
+            "id": "g3-t3"
+          },
+          "en": "Ensure ice and fuel are available to fishers in Hithadhoo and Maradhoo harbours by 2028.",
+          "slots": []
+        },
+        {
+          "id": "0438",
+          "ref": {
+            "t": "target",
+            "slug": "food-security",
+            "id": "g3-t4"
+          },
+          "en": "Supply at least 50% of Valhomas (smoked fish) and Rihaakuru (fish paste) sold in the Maldives by 2030.",
+          "slots": []
+        },
+        {
+          "id": "0439",
+          "ref": {
+            "t": "target",
+            "slug": "food-security",
+            "id": "g3-t5"
+          },
+          "en": "Produce at least 30,000 eggs per day to meet a minimum of 80% of local household, hospitality, business, and institutional demand.",
+          "slots": []
+        },
+        {
+          "id": "0440",
+          "ref": {
+            "t": "target",
+            "slug": "food-security",
+            "id": "g3-t6"
+          },
+          "en": "Ensure that 100% of food producers, processors, distributors and food-service establishments in Addu City are registered and undergo risk-based inspection.",
+          "slots": []
+        },
+        {
+          "id": "0441",
+          "ref": {
+            "t": "strategy",
+            "slug": "food-security",
+            "id": "g3-s1"
+          },
+          "en": "Every home a proud grower",
+          "slots": []
+        },
+        {
+          "id": "0442",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s1",
+            "id": "g3-s1-a1"
+          },
+          "en": "Establish a nursery and seed bank",
+          "slots": []
+        },
+        {
+          "id": "0443",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s1",
+            "id": "g3-s1-a2"
+          },
+          "en": "Distribute starter kits for households",
+          "slots": []
+        },
+        {
+          "id": "0444",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s1",
+            "id": "g3-s1-a3"
+          },
+          "en": "Launch home gardening app",
+          "slots": []
+        },
+        {
+          "id": "0445",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s1",
+            "id": "g3-s1-a4"
+          },
+          "en": "Establish home grower's market",
+          "slots": []
+        },
+        {
+          "id": "0446",
+          "ref": {
+            "t": "strategy",
+            "slug": "food-security",
+            "id": "g3-s2"
+          },
+          "en": "Organic agriculture revival",
+          "slots": []
+        },
+        {
+          "id": "0447",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s2",
+            "id": "g3-s2-a1"
+          },
+          "en": "Launch coconut & kurumba cultivation and replanting",
+          "slots": []
+        },
+        {
+          "id": "0448",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s2",
+            "id": "g3-s2-a2"
+          },
+          "en": "Allocate land for banana, breadfruit and yam plantation",
+          "slots": []
+        },
+        {
+          "id": "0449",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s2",
+            "id": "g3-s2-a3"
+          },
+          "en": "Establish orchards for papaya, mango, guava and passionfruit",
+          "slots": []
+        },
+        {
+          "id": "0450",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s2",
+            "id": "g3-s2-a4"
+          },
+          "en": "Establish crop and soil safety monitoring",
+          "slots": []
+        },
+        {
+          "id": "0451",
+          "ref": {
+            "t": "strategy",
+            "slug": "food-security",
+            "id": "g3-s3"
+          },
+          "en": "Technology driven fresh food",
+          "slots": []
+        },
+        {
+          "id": "0452",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s3",
+            "id": "g3-s3-a1"
+          },
+          "en": "Develop solar-powered climate-controlled greenhouses",
+          "slots": []
+        },
+        {
+          "id": "0453",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s3",
+            "id": "g3-s3-a2"
+          },
+          "en": "Establish vertical farms with hydroponic and aeroponic tech",
+          "slots": []
+        },
+        {
+          "id": "0454",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s3",
+            "id": "g3-s3-a3"
+          },
+          "en": "Introduce smart precision fertiliser use and irrigation",
+          "slots": []
+        },
+        {
+          "id": "0455",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s3",
+            "id": "g3-s3-a4"
+          },
+          "en": "Introduce drones + AI to track stress, pests and diseases",
+          "slots": []
+        },
+        {
+          "id": "0456",
+          "ref": {
+            "t": "strategy",
+            "slug": "food-security",
+            "id": "g3-s4"
+          },
+          "en": "High quality resilient fisheries",
+          "slots": []
+        },
+        {
+          "id": "0457",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s4",
+            "id": "g3-s4-a1"
+          },
+          "en": "Invest in renewables powered ice production",
+          "slots": []
+        },
+        {
+          "id": "0458",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s4",
+            "id": "g3-s4-a2"
+          },
+          "en": "Expand fisheries fuel storage capacity for 03 months",
+          "slots": []
+        },
+        {
+          "id": "0459",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s4",
+            "id": "g3-s4-a3"
+          },
+          "en": "Establish quality assurance for 'valhomas' and 'rihaakuru'",
+          "slots": []
+        },
+        {
+          "id": "0460",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s4",
+            "id": "g3-s4-a4"
+          },
+          "en": "Brand and promote 'valhomas', 'rihaakuru' and fish products",
+          "slots": []
+        },
+        {
+          "id": "0461",
+          "ref": {
+            "t": "strategy",
+            "slug": "food-security",
+            "id": "g3-s5"
+          },
+          "en": "Fresh eggs every day",
+          "slots": []
+        },
+        {
+          "id": "0462",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s5",
+            "id": "g3-s5-a1"
+          },
+          "en": "Build demonstration poultry farms",
+          "slots": []
+        },
+        {
+          "id": "0463",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s5",
+            "id": "g3-s5-a2"
+          },
+          "en": "Establish a PPP for quality feed development",
+          "slots": []
+        },
+        {
+          "id": "0464",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s5",
+            "id": "g3-s5-a3"
+          },
+          "en": "Conduct training on egg handling, storage and quality",
+          "slots": []
+        },
+        {
+          "id": "0465",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s5",
+            "id": "g3-s5-a4"
+          },
+          "en": "Establish a biosecurity and disease management system",
+          "slots": []
+        },
+        {
+          "id": "0466",
+          "ref": {
+            "t": "strategy",
+            "slug": "food-security",
+            "id": "g3-s6"
+          },
+          "en": "Trusted quality local food",
+          "slots": []
+        },
+        {
+          "id": "0467",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s6",
+            "id": "g3-s6-a1"
+          },
+          "en": "Establish a food quality laboratory",
+          "slots": []
+        },
+        {
+          "id": "0468",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s6",
+            "id": "g3-s6-a2"
+          },
+          "en": "Establish a food fund to support growers and producers",
+          "slots": []
+        },
+        {
+          "id": "0469",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s6",
+            "id": "g3-s6-a3"
+          },
+          "en": "Register bakers and snack producers",
+          "slots": []
+        },
+        {
+          "id": "0470",
+          "ref": {
+            "t": "action",
+            "slug": "food-security",
+            "strategy": "g3-s6",
+            "id": "g3-s6-a4"
+          },
+          "en": "Establish training and certification for food producers",
           "slots": []
         }
       ]
@@ -5346,7 +5343,7 @@
             "slug": "education-excellence",
             "field": "openNote"
           },
-          "en": "Two items on this goal are still unfinished in the 16 August draft: the count of tertiary students is printed as \"000\", and two different targets are both numbered 9.3. Both are left as the council wrote them rather than guessed at.",
+          "en": "One item on this goal is still unfinished in the draft: the count of tertiary students is printed as \"000\". It is left as the council wrote it rather than guessed at.",
           "slots": []
         },
         {

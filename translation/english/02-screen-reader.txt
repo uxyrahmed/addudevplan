@@ -1,6 +1,6 @@
 === ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
 File 2 of 19 · Screen-reader descriptions
-21 segments
+20 segments
 
 Translate every numbered segment below into Dhivehi (Thaana).
 
@@ -40,9 +40,8 @@ plain sentence that describes what is there.
 [0090] Hide your {count} {noun} on goal {number}
 [0093] Start goal {number}: {title}
 [0094] Remove your feedback on: {label}
-[0136] living elsewhere
-[0144] {subtitle}. Addu falls from 9% in 1958 to 5.1% in 2022, while Male' rises from 11% to 40%.
-[0148] Map of Addu Atoll. The four islands of the city — {islands} — lie along the western side of the atoll from north to south, joined end to end by the Link Road, which crosses open water on causeways. The road runs on past Feydhoo to the south-east, beyond the city. The rest of the atoll is reef and lagoon.
-[0157] The plan’s cover: the City of Addu emblem above the title Addu Development Plan 2026–2031, set over a pale outline of the atoll.
+[0138] {subtitle}. Addu falls from 9% in 1958 to 5.1% in 2022, while Male' rises from 11% to 40%.
+[0142] Map of Addu Atoll. The four islands of the city — {islands} — lie along the western side of the atoll from north to south, joined end to end by the Link Road, which crosses open water on causeways. The road runs on past Feydhoo to the south-east to Gan, which is outside the city and carries the international airport and its runway. The rest of the atoll is reef and lagoon.
+[0151] The plan’s cover: the City of Addu emblem above the title Addu Development Plan 2026–2031, set over a pale outline of the atoll.
 
 --- END ---

@@ -1,6 +1,6 @@
 === ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
 File 1 of 19 · Interface labels and buttons
-60 segments
+55 segments
 
 Translate every numbered segment below into Dhivehi (Thaana).
 
@@ -32,7 +32,7 @@ should not be eight.
 [0008] Have your say
 [0010] Explore the twelve goals
 [0011] Start reading
-[0012] One atoll, four islands, one city
+[0012] A connected atoll
 [0014] Islands of the city
 [0017] In {year}: {registered} on the register
 [0018] {resident} living here
@@ -61,28 +61,23 @@ should not be eight.
 [0049] Not sure
 [0050] I have a concern
 [0051] Concern
-[0121] Settlement and population
+[0121] Settlement history
 [0123] Back to the plan
-[0124] Settlement and population
-[0126] A city moved, emptied and rebuilt
-[0128] Settlement history, 1620 to 1976
-[0129] Registered here, living elsewhere
+[0124] Settlement history
+[0126] Communities relocated and new administrations formed
+[0128] Settlement history, 1620 to 2026
+[0129] 25,000 residents
 [0131] Year
-[0132] Living elsewhere
-[0133] {resident} of {registered} registered
-[0134] {registered} registered
-[0135] Not yet counted
-[0137] Living here
-[0138] On the register
-[0140] Scroll timeline back
-[0141] Scroll timeline forward
-[0142] Share of the national population
-[0143] 1958–2022
-[0146] Link Road
-[0147] Island of the city
-[0149] All goals
-[0150] Twelve goals
-[0151] Behind the plan
-[0152] Settlement and population
+[0132] Living here
+[0134] Scroll timeline back
+[0135] Scroll timeline forward
+[0136] Share of the national population
+[0137] 1958–2022
+[0140] Link Road
+[0141] Island of the city
+[0143] All goals
+[0144] Twelve goals
+[0145] Behind the plan
+[0146] Settlement history
 
 --- END ---
