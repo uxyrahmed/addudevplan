@@ -15,6 +15,11 @@
  *
  * Re-run the match if the deck redraws: this is a record of what the slide
  * draws, not a design decision to revisit independently.
+ *
+ * Keyed on `slug`, not on `number`. The council renumbered six goals in the
+ * 1 September review; a map keyed on the number would have kept pointing at
+ * whatever goal now sits in that position and quietly handed the transport
+ * goal a water droplet. The slug is the one identifier that stays with a goal.
  */
 import AirplaneTakeOff01Icon from '@hugeicons/core-free-icons/AirplaneTakeOff01Icon'
 import CarTaxiFrontIcon from '@hugeicons/core-free-icons/CarTaxiFrontIcon'
@@ -30,17 +35,18 @@ import SolarPanel05Icon from '@hugeicons/core-free-icons/SolarPanel05Icon'
 import UserGroup03Icon from '@hugeicons/core-free-icons/UserGroup03Icon'
 import type { IconData } from '@/components/ui/icon'
 
-export const GOAL_GLYPHS: Record<number, IconData> = {
-  1: SolarPanel05Icon, // Ensure energy security
-  2: DropletsIcon, // Safe diverse water sources
-  3: RiceBowl01Icon, // Ensure food security
-  4: CarTaxiFrontIcon, // Future ready transport
-  5: AirplaneTakeOff01Icon, // Connect the South
-  6: House01Icon, // Diverse quality housing
-  7: UserGroup03Icon, // Connect community and culture — nearest free match
-  8: HeartPulseIcon, // Health and well-being
-  9: Mortarboard02Icon, // Education excellence
-  10: Plant03Icon, // Inclusive prosperity
-  11: CrabIcon, // Wildlife and wellness tourism
-  12: GreenHouseIcon, // Environment protection
+export const GOAL_GLYPHS: Record<string, IconData> = {
+  'energy-security': SolarPanel05Icon,
+  'water-security': DropletsIcon,
+  'food-security': RiceBowl01Icon,
+  'future-ready-transport': CarTaxiFrontIcon,
+  'connect-the-south': AirplaneTakeOff01Icon,
+  'diverse-quality-housing': House01Icon,
+  // Nearest free match: the deck's own glyph is not in the free package.
+  'connect-community-and-culture': UserGroup03Icon,
+  'health-and-well-being': HeartPulseIcon,
+  'education-excellence': Mortarboard02Icon,
+  'inclusive-prosperity': Plant03Icon,
+  'wildlife-and-wellness-tourism': CrabIcon,
+  'environment-protection': GreenHouseIcon,
 }

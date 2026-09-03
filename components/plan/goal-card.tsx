@@ -40,10 +40,17 @@ export function GoalCard({ goal, locale }: { goal: Goal; locale: Locale }) {
           as a graphic. At 42px and 14% opacity it was a watermark competing
           with the badge for the top of the card; at label size in the goal's
           own accessible colour it is legible, which a number identifying one
-          of twelve pages ought to be. */}
+          of twelve pages ought to be.
+
+          The badge runs at 64px on the council's own note that the goals should
+          carry more of this page than the pillars above them. It is the only
+          thing on the card that says which goal this is before the title is
+          read, so growing it is what makes the grid scannable — and the number
+          beside it stays at label size, which is what keeps the two from
+          competing again. */}
       <div className="flex items-center gap-3">
         <span className="goal-card__badge">
-          <GoalBadge goal={goal} size={52} />
+          <GoalBadge goal={goal} size={64} />
         </span>
         <span
           className="font-heading text-small tabular-nums"
@@ -58,7 +65,7 @@ export function GoalCard({ goal, locale }: { goal: Goal; locale: Locale }) {
           badge, a number, a name and a count it was a fifth thing to read
           before deciding whether to open. `goal.tagline` still runs on the goal
           page's own hero, where there is room for it. */}
-      <h3 className="goal-card__title font-heading text-title text-ink">{goal.title}</h3>
+      <h3 className="goal-card__title font-heading text-title font-bold text-ink">{goal.title}</h3>
 
       <div className="relative mt-auto flex items-center justify-between gap-3 border-t border-hairline pt-4 text-small">
         {/* "Open for your input" promised the opposite of what the card opens

@@ -46,14 +46,14 @@ export const en = {
   },
 
   home: {
-    geographyTitle: 'One atoll, four islands, one city',
+    geographyTitle: 'A connected atoll',
     geographyBody:
-      'The Link Road runs the length of the western chain, joining four islands end to end. That is what makes Addu one city rather than four.',
+      'The Link Road runs the length of the western chain, joining four islands end to end. There are two inhabited islands and three resorts on the eastern chain. Gan in the southern tip serves as the international airport.',
     islandsLabel: 'Islands of the city',
 
-    gapSentence: 'people are registered in Addu but living elsewhere.',
-    gapTarget:
-      'In 1977 the gap was 705 people. The plan sets a target of 35,000 people living in Addu by 2030.',
+    registerSentence: 'people are registered in Addu.',
+    registerTarget:
+      'The population of Addu has increased from 14,094 to 25,062 by 2022. This plan sets a target of 35,000 residents in Addu by 2030.',
     sourcesLine: 'In {year}: {registered} on the register',
     sourcesResident: '{resident} living here',
     backgroundLink: 'Settlement history and the counts year by year',
@@ -214,30 +214,26 @@ export const en = {
   },
 
   background: {
-    metaTitle: 'Settlement and population',
+    metaTitle: 'Settlement history',
     metaDescription:
       'The record behind the plan: where Addu’s people have been settled since 1620, and the registered and resident population counts from 1977 to 2025.',
     backToPlan: 'Back to the plan',
-    title: 'Settlement and population',
-    lede: 'The record the plan is built on: where Addu’s people have been settled since 1620, and how the number registered here compares with the number living here from 1977 onwards.',
+    title: 'Settlement history',
+    lede: 'The following is a brief timeline of settlement history in Addu from 1620 to 2025.',
 
-    settlementTitle: 'A city moved, emptied and rebuilt',
-    settlementBody: 'Addu’s people have been relocated island to island for most of a century.',
-    settlementRailLabel: 'Settlement history, 1620 to 1976',
+    settlementTitle: 'Communities relocated and new administrations formed',
+    settlementBody:
+      'Since the establishment of Hithadhoo in 1620, several community relocations have occurred in Addu, mainly due to the establishment of Gan Airport by the British RAF during WWII, and the reestablishment of British military base in Gan.',
+    settlementRailLabel: 'Settlement history, 1620 to 2026',
 
-    ledgerTitle: 'Registered here, living elsewhere',
-    ledgerBody: 'Every year we have counted, drawn to one scale that starts at zero.',
+    ledgerTitle: '25,000 residents',
+    ledgerBody:
+      'Since the British departed Gan in 1976, decades of outward migration occurred.',
     ledgerYear: 'Year',
-    ledgerLivingElsewhere: 'Living elsewhere',
-    ledgerOf: '{resident} of {registered} registered',
-    ledgerRegistered: '{registered} registered',
-    ledgerNotCounted: 'Not yet counted',
-    ledgerLivingElsewhereSr: ' living elsewhere',
-    legendLivingHere: 'Living here',
-    legendOnRegister: 'On the register',
+    ledgerLivingHere: 'Living here',
 
     closing:
-      'The plan sets out what we intend to do about this — and every action in it takes your response.',
+      'This plan is an integrated blueprint for transforming Addu into a resilient, inclusive and sustainable city.',
   },
 
   timeline: {
@@ -257,14 +253,14 @@ export const en = {
   map: {
     linkRoad: 'Link Road',
     islandOfCity: 'Island of the city',
-    aria: 'Map of Addu Atoll. The four islands of the city — {islands} — lie along the western side of the atoll from north to south, joined end to end by the Link Road, which crosses open water on causeways. The road runs on past Feydhoo to the south-east, beyond the city. The rest of the atoll is reef and lagoon.',
+    aria: 'Map of Addu Atoll. The four islands of the city — {islands} — lie along the western side of the atoll from north to south, joined end to end by the Link Road, which crosses open water on causeways. The road runs on past Feydhoo to the south-east to Gan, which is outside the city and carries the international airport and its runway. The rest of the atoll is reef and lagoon.',
   },
 
   footer: {
     allGoalsLabel: 'All goals',
     twelveGoals: 'Twelve goals',
     behindThePlan: 'Behind the plan',
-    settlementAndPopulation: 'Settlement and population',
+    settlementAndPopulation: 'Settlement history',
     imprint: 'Published on {date} by {author}. Every action has its own place to respond.',
     openForConsultation:
       'Open for consultation — figures and targets can change with your feedback.',

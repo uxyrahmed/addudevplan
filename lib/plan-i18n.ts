@@ -1,4 +1,5 @@
 import {
+  GAN_ISLAND,
   GOALS,
   HEADLINE_FACTS,
   INITIATIVES,
@@ -36,6 +37,7 @@ export type LocalizedPlan = {
   turningPoint: { title: string; paragraphs: readonly string[] }
   headlineFacts: Stat[]
   islands: string[]
+  gan: string
   timeline: { year: string; text: string }[]
   migration: {
     title: string
@@ -146,6 +148,9 @@ function build(locale: Locale): LocalizedPlan {
     // The order is the geography and the atoll map reads its markers out of it
     // by index, so this maps in place rather than rebuilding the list.
     islands: LAND.islands.map((island) => pick(overlay.islands?.[island], island)),
+    // Same overlay as the four, keyed the same way — Gan is an island name
+    // like the others, it is just not one of the city's.
+    gan: pick(overlay.islands?.[GAN_ISLAND], GAN_ISLAND),
     timeline: TIMELINE.map((event) => ({
       // Same as `period` above: "1620–1648" is a range, and a range needs
       // isolating even though it is identical in both languages. The overlay is

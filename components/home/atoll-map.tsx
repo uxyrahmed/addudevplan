@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import AirplaneTakeOff01Icon from '@hugeicons/core-free-icons/AirplaneTakeOff01Icon'
+import { Icon } from '@/components/ui/icon'
 import { loadGsap } from '@/lib/gsap'
 import { canAnimateRichly } from '@/lib/motion-prefs'
 import { REVEAL_OBSERVER_INIT } from '@/lib/reveal-trigger'
@@ -20,6 +22,13 @@ import { fill } from '@/lib/i18n/format'
  * chain and crosses open water on causeways, which is what makes Hithadhoo,
  * Maradhoo, Maradhoo-Feydhoo and Feydhoo one city. The road draws itself in on
  * scroll, on the same threshold as everything else that arrives on this page.
+ *
+ * It argues it more quietly than it used to. The council asked for a thinner,
+ * less prominent line in review — the road was the heaviest mark on a drawing
+ * that also has to carry five islands, a runway and a coastline — so the
+ * stroke, the rings that cap it and the legend rule beside it all came down
+ * together. The phone override stays: at the ~335px this renders at there,
+ * a hairline road disappears.
  */
 
 /**
@@ -60,6 +69,41 @@ const ROAD_ENDS = [
 ] as const
 
 /**
+ * Gan, and the runway on it.
+ *
+ * Gan is not one of the four islands of the city, so it carries no numbered
+ * marker — but the road ends on it, the plan's own lede now says it holds the
+ * international airport, and the council asked in review for the runway, an
+ * airport sign and the name. An unlabelled island at the end of the road was
+ * the one place the drawing left a reader guessing.
+ *
+ * The runway line is drawn along the island's long axis rather than surveyed:
+ * every point on it was checked to fall inside Gan's traced outline, which
+ * makes it an honest indication of *where on the island* the runway runs and
+ * not a measurement of its bearing or length. Dashed, so it reads as a strip
+ * rather than as another road — the Link Road beside it is a solid line of
+ * nearly the same weight.
+ *
+ * The name sits in open water east of the island, the way the four island
+ * labels sit clear of their coasts.
+ */
+const GAN = {
+  runway: { x1: 465, y1: 696, x2: 598, y2: 704 },
+  glyph: { x: 610, y: 668, size: 30 },
+  label: { x: 648, y: 686 },
+} as const
+
+/**
+ * Which way is north.
+ *
+ * Down the left edge, in open water outside the reef — the drawing's own
+ * westernmost land starts at x 117 and the reef at x 78. Small, as asked: the
+ * letters are half the size of an island name and the arrow is a hairline, so
+ * it reads as the marginal note it is rather than as a compass rose.
+ */
+const NORTH_ARROW = { x: 74, top: 52, bottom: 146 } as const
+
+/**
  * `islands` comes down from the page rather than out of `lib/plan.ts`: the
  * names are translated, and reaching for the plan module from a client
  * component would put the whole of it — and every translation of it — in the
@@ -69,7 +113,7 @@ const ROAD_ENDS = [
  * read their names out of this array by index, so the page passes it in the
  * order the plan holds it.
  */
-export function AtollMap({ islands }: { islands: string[] }) {
+export function AtollMap({ islands, gan }: { islands: string[]; gan: string }) {
   const { t } = useLocale()
   const ref = useRef<SVGSVGElement>(null)
 
@@ -189,18 +233,18 @@ export function AtollMap({ islands }: { islands: string[] }) {
             ))}
           </g>
 
-          {/* A phone renders this ~335px wide, where a 5-unit stroke lands under
-              two device pixels. The road is the whole point, so it thickens
-              rather than thins out of legibility. */}
+          {/* A phone renders this ~335px wide, where a 3-unit stroke lands under
+              one device pixel. The road still has to be followable there, so it
+              thickens rather than thins out of legibility. */}
           <path
             data-road
             d={LINK_ROAD}
             fill="none"
             stroke="var(--color-navy)"
-            strokeWidth="5"
+            strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="max-sm:[stroke-width:9]"
+            className="max-sm:[stroke-width:6]"
           />
 
           {/* Hollow, where the island markers are solid: this is where the road
@@ -211,13 +255,84 @@ export function AtollMap({ islands }: { islands: string[] }) {
               data-end={end.id}
               cx={end.x}
               cy={end.y}
-              r="8"
+              r="6"
               fill="white"
               stroke="var(--color-navy)"
-              strokeWidth="4"
-              className="max-sm:[r:12] max-sm:[stroke-width:6]"
+              strokeWidth="2.5"
+              className="max-sm:[r:9] max-sm:[stroke-width:4]"
             />
           ))}
+
+          {/* Gan: the runway on the island, the sign, and the name in the water
+              beside it. Not animated with the road — the road's stagger is
+              about the four islands it joins, and Gan is the place it arrives
+              at. */}
+          <g>
+            <line
+              x1={GAN.runway.x1}
+              y1={GAN.runway.y1}
+              x2={GAN.runway.x2}
+              y2={GAN.runway.y2}
+              stroke="var(--color-navy)"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeDasharray="1 7"
+              className="max-sm:[stroke-width:5]"
+            />
+            <Icon
+              icon={AirplaneTakeOff01Icon}
+              x={GAN.glyph.x}
+              y={GAN.glyph.y}
+              size={GAN.glyph.size}
+              weight={1.6}
+              className="text-navy"
+            />
+            <text
+              x={GAN.label.x}
+              y={GAN.label.y}
+              dominantBaseline="central"
+              fill="var(--color-ink)"
+              fontSize="25"
+              className="hidden font-heading sm:block"
+            >
+              {gan}
+            </text>
+          </g>
+
+          {/* North and south, at the size the council asked for: "very small". */}
+          <g
+            aria-hidden
+            className="font-heading"
+            fill="var(--color-stone)"
+            stroke="var(--color-stone)"
+          >
+            <text
+              x={NORTH_ARROW.x}
+              y={NORTH_ARROW.top}
+              textAnchor="middle"
+              fontSize="13"
+              stroke="none"
+            >
+              N
+            </text>
+            <polygon points="74,62 70,72 78,72" strokeWidth="0" />
+            <line
+              x1={NORTH_ARROW.x}
+              y1="72"
+              x2={NORTH_ARROW.x}
+              y2="132"
+              strokeWidth="1.5"
+            />
+            <text
+              x={NORTH_ARROW.x}
+              y={NORTH_ARROW.bottom}
+              textAnchor="middle"
+              fontSize="13"
+              stroke="none"
+            >
+              S
+            </text>
+          </g>
 
           {MARKERS.map(([x, y], i) => (
             <g key={islands[i]} data-stop>
@@ -275,7 +390,7 @@ export function AtollMap({ islands }: { islands: string[] }) {
           the copy. */}
       <figcaption className="flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-hairline pt-4 text-small text-stone">
         <span className="inline-flex items-center gap-2">
-          <span aria-hidden className="h-[3px] w-7 rounded-full bg-navy" />
+          <span aria-hidden className="h-[2px] w-7 rounded-full bg-navy" />
           {t.map.linkRoad}
         </span>
         <span className="inline-flex items-center gap-2">

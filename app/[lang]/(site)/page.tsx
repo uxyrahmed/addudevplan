@@ -7,7 +7,7 @@ import { Hero } from '@/components/home/hero'
 import { ReefDivider } from '@/components/home/reef-divider'
 import { StatCounter } from '@/components/home/stat-counter'
 import { AtollMap } from '@/components/home/atoll-map'
-import { PopulationGap, PopulationSources } from '@/components/home/population-gap'
+import { PopulationRegister, PopulationSources } from '@/components/home/population-gap'
 import { Vision } from '@/components/home/vision'
 import { PlanComment } from '@/components/feedback/plan-comment'
 import { SplitHeading } from '@/components/motion/split-heading'
@@ -26,6 +26,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
 
   const t = getDictionary(lang)
   const {
+    gan,
     goals,
     headlineFacts,
     initiatives,
@@ -146,9 +147,6 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
               and the whitespace splits evenly above and below it. */}
           <div className="grid gap-14 lg:grid-cols-2 lg:items-center lg:gap-20">
             <div>
-              {/* "Communities" left the reader counting a different thing to
-                  the list underneath, which names islands. One noun, used
-                  everywhere: the headline facts say "islands in the city" too. */}
               <SplitHeading className="font-display text-display-3 font-bold">
                 {t.home.geographyTitle}
               </SplitHeading>
@@ -188,7 +186,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
                 for, which is most of why the section shouted. At its intended
                 size it also stops towering over the copy beside it. */}
             <div data-reveal="fade" className="mx-auto w-full max-w-[34rem]">
-              <AtollMap islands={islands} />
+              <AtollMap islands={islands} gan={gan} />
             </div>
           </div>
 
@@ -205,24 +203,25 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
             id="out-migration"
             className="mt-16 scroll-mt-24 border-t border-hairline pt-12"
           >
-            {/* No heading. The figure below opens with 9,710 set at display
-                size and finishes the sentence in words — it is already the
-                clearest statement of the section, and a small grey line above
-                it was only saying the same thing quietly first. */}
+            {/* No heading. The figure below opens with the register set at
+                display size and finishes the sentence in words — it is already
+                the clearest statement of the section, and a small grey line
+                above it was only saying the same thing quietly first. */}
 
-            {/* Claim on the left, everything that qualifies it on the right —
-                the earlier comparison, the two figures the sum comes from, and
-                the year the register runs ahead of. The qualifiers used to sit
+            {/* Figure on the left, everything that qualifies it on the right —
+                where the resident count has got to, where the plan means it to
+                get, and the year both are read off. The qualifiers used to sit
                 under the number while the right-hand column held two lines and
                 230px of nothing; split this way the columns come out level. */}
             <div className="grid gap-x-20 gap-y-8 lg:grid-cols-2 lg:items-start">
-              <PopulationGap locale={lang} />
+              <PopulationRegister locale={lang} />
               <div className="max-w-[46ch]">
-                {/* States the target, and stops there. It used to add that
-                    closing the gap "is what the whole plan is for", which is a
-                    claim about the plan that this section's figures do not
-                    make. */}
-                <p className="text-lead text-slate">{t.home.gapTarget}</p>
+                {/* States where the count has got to and where the plan means
+                    it to get, and stops there. It used to add that closing the
+                    register-to-resident gap "is what the whole plan is for",
+                    which is a claim about the plan that this section's figures
+                    do not make. */}
+                <p className="text-lead text-slate">{t.home.registerTarget}</p>
                 <PopulationSources locale={lang} />
 
                 {/* A control, not a text link. This is the only route to the
@@ -265,79 +264,40 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
             <p className="mt-8 max-w-[68ch] text-lead text-slate 2xl:mt-2.5">{pillarsIntro.body}</p>
           </div>
 
-          {/* Numbered, and carrying the deck's own phrase rather than a single
-              noun. At one column these tiles are 335px of flat colour, and
-              "People" left almost all of it empty: the numeral gives the tile a
-              top edge to hang from, and the phrase gives it something to say
-              that the heading above has not already said. */}
-          <ul className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-hairline sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          {/* Five quiet entries on a rule, not five colour plates.
+
+              They used to be full-bleed grounds in the pillar colours, white
+              type, a 124px glyph on each — the loudest block on the page, and
+              sitting directly above the twelve goals they are meant to
+              introduce. The council's note in review was that the goals should
+              carry this page and the pillars should not compete with them, so
+              the plates are gone and the goal cards grew instead.
+
+              What survives is what the plates were carrying: the numeral, the
+              deck's own phrase, and the glyph. The colour moves off the ground
+              and onto the mark and the numeral, which is enough to keep the
+              five told apart and costs nothing in prominence. Every
+              `textColor` clears 4.5:1 on white, so the contrast note the old
+              treatment needed — white over a plate, lifted where a stroke ran
+              behind a letter — no longer applies to anything here.
+
+              The border-and-rule pattern is the initiatives list further down
+              the page, which is the other supporting row on this page. */}
+          <ul
+            className="mt-12 grid gap-x-8 gap-y-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
+            data-reveal-stagger="0.05"
+          >
             {pillars.map((pillar, i) => (
-              <li
-                key={pillar.id}
-                // Numeral and heading as one block at the top, rather than
-                // pushed to opposite ends. It frees the whole bottom of the
-                // tile for the glyph, which is the only arrangement where the
-                // drawing can sit bottom-right at full strength and still be
-                // nowhere near the white type.
-                className="relative isolate flex min-h-44 flex-col gap-3 overflow-hidden p-6 text-white sm:min-h-[13rem]"
-                // The accessible variant, not the plate colour. White on three
-                // of the four printed colours measures 2.7–3.3:1, which fails
-                // for a tile that carries its own label. Same hue, legible.
-                style={{ background: pillar.textColor }}
-              >
-                {/* Faded once, as a whole drawing.
-
-                    `opacity` on this span, not `text-white/25` on the glyph.
-                    The colour form puts the alpha on `currentColor`, so every
-                    path is stroked at 25% and paints over the ones already
-                    down — so wherever two strokes crossed, the crossing came
-                    out brighter than the lines forming it and each icon read as
-                    a set of seams rather than one drawing. `opacity` flattens
-                    the subtree first and fades the result once, so a crossing
-                    is the same value as the stroke.
-
-                    Sitting on the tile's bottom edge, and allowed to run under
-                    the heading. Treated as ground rather than as a mark that
-                    has to keep out of the way.
-
-                    Worth knowing what that costs: white over a plate lifts it,
-                    and these headings are white. Infrastructure's orange
-                    measures 4.84:1 against white and drops to about 3.2 where a
-                    stroke passes behind a letter, which is under the 4.5:1 that
-                    size of type wants. It is a few pixels of thin stroke rather
-                    than a solid ground, and only on the lightest of the five
-                    plates — but if that ever needs to go, the fix is the
-                    opacity here, not the position. */}
-                <span
-                  aria-hidden
-                  // `-bottom-2.5`, not `bottom-0`. A Hugeicons glyph is drawn
-                  // inside its 24-unit box with room to spare, so aligning the
-                  // box to the card's edge leaves the drawing floating 6px
-                  // above it. The offset is that padding, measured.
-                  className="pointer-events-none absolute end-3 -bottom-2.5 -z-10 text-white opacity-25"
-                >
-                  <Icon
-                    icon={PILLAR_GLYPHS[pillar.id]}
-                    weight={1.25}
-                    className="h-[92px] w-[92px] sm:h-[124px] sm:w-[124px]"
-                  />
-                </span>
-
-                {/* Ornamental: it numbers the five for the eye, and the
-                    heading below is what actually gets read out.
-
-                    Full white, not a translucent one. At `white/60` the five
-                    numerals measured 2.7:1 on Infrastructure's orange against
-                    6.4:1 on People's purple — the plates are nowhere near a
-                    common luminance, so one alpha cannot hold one contrast,
-                    and the row read as four numerals and a smudge. No alpha
-                    fixes it either: the orange still misses 4.5:1 at 90%.
-                    Recession comes from size and tracking instead, which is
-                    how `eyebrow` already does it. */}
-                <span aria-hidden className="font-heading text-micro text-white tabular-nums">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <h3 className="max-w-[15ch] font-heading text-title !text-white">
+              <li key={pillar.id} data-reveal="up" className="border-t border-hairline pt-5">
+                <div className="flex items-center gap-2.5" style={{ color: pillar.textColor }}>
+                  <Icon icon={PILLAR_GLYPHS[pillar.id]} size={22} weight={1.5} />
+                  {/* Ornamental: it numbers the five for the eye, and the
+                      heading below is what actually gets read out. */}
+                  <span aria-hidden className="font-heading text-micro tabular-nums">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                </div>
+                <h3 className="mt-2.5 max-w-[15ch] font-heading text-small text-ink">
                   {pillar.phrase}
                 </h3>
               </li>

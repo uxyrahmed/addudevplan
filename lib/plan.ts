@@ -93,10 +93,18 @@ export type Target = {
 }
 
 export type Goal = {
+  /**
+   * The number a resident sees, and the goal's position in `GOALS`.
+   *
+   * Not the number in this goal's ids. Those read `g4-s4-a1` and were minted
+   * when the goal was numbered 4; the council renumbered six goals in the
+   * 1 September review and the ids did not move with them. See the note above
+   * `GOALS`.
+   */
   number: number
   slug: string
   title: string
-  /** Exact fill colour used for this goal's badge in the deck. */
+  /** Fill colour for this goal's badge — the four-colour palette, by row. */
   color: string
   /** Accessible variant of `color` for text and small filled controls. */
   textColor: string
@@ -159,26 +167,10 @@ export const TURNING_POINT = {
   paragraphs: [
     `Nearly fifty years after the final RAF flight departed Gan on 29 March 1976, Addu has come full circle — from a community profoundly affected by the British military withdrawal and decades of outward migration to a growing city poised to become the gateway to the Southern Maldives.`,
     `In the years that followed, many residents left Addu for employment in the rapidly expanding Maldives' tourism industry, pursue secondary and higher education, and establish careers in Malé. This sustained outward migration began to ease with the establishment of quality secondary education in Addu and continued investment in healthcare, infrastructure, and economic development, enabling more people to live, study, work, and build their futures closer to home.`,
-    `Today, with a land area of more than 1,250 hectares, a population exceeding 25,000, and expanding opportunities in tourism, trade, fisheries, agriculture, and emerging industries, Addu is increasingly becoming a destination in its own right. More than 1,700 Maldivians from other islands and over 4,700 foreign nationals now reside in the city — together representing around a quarter of its population.`,
+    `Today, with a land area of more than 1,250 hectares, more than 25,000 residents, and expanding opportunities in tourism, trade, fisheries, agriculture, and emerging industries, Addu is increasingly becoming a destination in its own right. More than 1,700 Maldivians from other islands and over 4,700 foreign nationals now reside in the city — together representing around a quarter of its population.`,
     `Its interconnected geography, diverse population, and established urban footprint offer a strong foundation for integrated planning, efficient service delivery, and sustainable growth. Building on these strengths, Addu is well positioned to become a resilient, inclusive, and sustainable city.`,
   ],
 } as const
-
-/**
- * Two of these labels used to leave the reader guessing. "Connected
- * communities" counted a different noun to the list of islands directly below
- * it, and next to "50 islands in the atoll" the reader had no way to see that
- * 4 and 50 count the same kind of thing. "Registered people" never said which
- * register.
- */
-export const HEADLINE_FACTS: Stat[] = [
-  { value: '50', label: 'islands in the atoll' },
-  { value: '4', label: 'islands in the city' },
-  { value: '1,268', label: 'hectares of land' },
-  // 35,558 in the 11 August draft; the 12 August population table revises the
-  // 2025 register down to this.
-  { value: '35,334', label: 'people on the city register' },
-]
 
 /**
  * Land area, per the 29 July draft.
@@ -212,6 +204,22 @@ export const LAND = {
 } as const
 
 /**
+ * Gan, which is not one of them.
+ *
+ * The Link Road runs on past Feydhoo and ends here, and the island carries the
+ * international airport — so the map has to name it — but it is outside the
+ * city, which is why it is not in `LAND.islands`. That array is read by index
+ * to number the map's four markers, and adding a fifth name to it would
+ * renumber the city.
+ *
+ * Here rather than in `lib/i18n/en.ts` so it translates the way the island
+ * names do: through `lib/plan-translations`, which may be partial and falls
+ * back to English. A new key in the chrome dictionary cannot — that file is
+ * typed as `Dictionary` and does not compile until every key is translated.
+ */
+export const GAN_ISLAND = 'Gan'
+
+/**
  * Reclamation is deliberately not charted on the home page.
  *
  * It is not a plan action — across all twelve goals the word appears once, and
@@ -228,6 +236,19 @@ export const LAND = {
 /**
  * Settlement history, from the timeline on slide 3 of the 29 July draft.
  * Explains why the city is shaped the way it is — and why so many people left.
+ *
+ * Four entries were added in council review, and they change what the rail is
+ * about: 1969, 1975, 2011 and 2026 record how Addu was administered rather
+ * than where its people were moved to. The section above it was retitled to
+ * match — "Communities relocated and new administrations formed".
+ *
+ * The last of them is the live one. Hulhudhoo and Meedhoo separating in 2026
+ * is why `LAND.islands` — the four islands of the city, joined by the Link
+ * Road — is not the same list as the wards of Addu.
+ *
+ * Spellings follow this file rather than the review note, which wrote
+ * "Maradhoofeydhoo" and "Seperate": the island is Maradhoo-Feydhoo everywhere
+ * else on the site, including in the 1957 entry directly above.
  */
 export const TIMELINE: { year: string; text: string }[] = [
   { year: '1620–1648', text: 'King Imaadudeen I establishes the present Hithadhoo settlement.' },
@@ -251,12 +272,30 @@ export const TIMELINE: { year: string; text: string }[] = [
     text: 'British begin construction of military base in Gan. Relocation of residents of Gan to Feydhoo, and of Feydhoo to Maradhoo-Feydhoo.',
   },
   { year: '1960', text: 'British granted 30 year lease for Gan and Maamendhoo.' },
+  {
+    year: '1969',
+    text: 'Maradhoo and Maradhoo-Feydhoo established as Maradhoo, and Meedhoo and Hulhudhoo as Hulhumeedhoo, as two administrative islands.',
+  },
+  {
+    year: '1975',
+    text: 'Separate administrative offices established for Maradhoo, Maradhoo-Feydhoo, Hulhudhoo and Meedhoo.',
+  },
   { year: '1976', text: 'British troops leave Gan.' },
+  { year: '2011', text: 'Addu City Council established.' },
+  {
+    year: '2026',
+    text: 'Hulhudhoo and Meedhoo established as separate administrative jurisdictions following a referendum.',
+  },
 ]
 
 export type PopulationYear = {
   year: number
-  registered: number
+  /**
+   * On the city register. Absent before 1977, which the council's own
+   * 1958–2022 table does not reach back for — those years carry a resident
+   * count and nothing else.
+   */
+  registered?: number
   /**
    * Everyone living in Addu, Maldivian and foreign. Absent for 2025, where the
    * draft prints a register count and no resident count.
@@ -268,13 +307,18 @@ export type PopulationYear = {
   foreigners?: number
 }
 
-/** A year the draft measured on both sides, so a gap can be taken from it. */
+/** A year with a resident count — every row the ledger draws. */
 export type MeasuredYear = PopulationYear & { resident: number }
 
+/** A year with a register count. The home page's headline figure needs one. */
+export type RegisteredYear = PopulationYear & { registered: number }
+
 /**
- * Registered against resident population. Structured rather than pre-formatted
- * strings so the gap is always derived, never hand-typed — a transcription slip
- * in the most important number on the page would be invisible otherwise.
+ * How many people have lived in Addu, and how many the register holds.
+ *
+ * Structured rather than pre-formatted strings, so every figure on the site is
+ * read off this table — a transcription slip in the most important number on
+ * the page would be invisible otherwise.
  *
  * Rebuilt from the 12 August draft, which replaced the five-row table with ten
  * rows and split the resident count into Maldivians and foreign nationals. That
@@ -285,8 +329,29 @@ export type MeasuredYear = PopulationYear & { resident: number }
  * 20,343 → 25,062, and both of those figures reappear here in the `maldivians`
  * column, which is what makes the reading safe rather than a guess. The 2022 and
  * 2025 register counts were revised down at the same time.
+ *
+ * **The four years before 1977 come from the council's own table**, supplied in
+ * `Addu population for website.docx` at the 1 September review and asked to be
+ * what the ledger draws. That table is twelve years, 1958 to 2022, one figure
+ * each — and every one of the eight years it shares with this file matches the
+ * `resident` column exactly, none of them the `registered` column. So it is
+ * read as the resident series carried back to 1958, and 1958–1974 land here
+ * with no register count beside them, which is the honest shape: the council
+ * did not supply one.
+ *
+ * The review note called it "registered population". Three things say
+ * otherwise — the eight exact matches above, the twelve years being precisely
+ * `MIGRATION_SERIES.years`, whose subtitle reads "Resident population as a
+ * share of the Maldives population", and the council's own new heading for
+ * this section, "25,000 residents", against a 2022 figure of 25,062. Worth
+ * confirming with them, but not worth labelling the axis against the numbers.
  */
 export const POPULATION: PopulationYear[] = [
+  // 1958–1974: the council's table, which publishes no register count for them.
+  { year: 1958, resident: 6500 },
+  { year: 1963, resident: 8547 },
+  { year: 1966, resident: 9501 },
+  { year: 1974, resident: 13524 },
   { year: 1977, registered: 14799, resident: 14094 },
   { year: 1985, registered: 18143, resident: 14957 },
   { year: 1990, registered: 20818, resident: 15177 },
@@ -313,23 +378,82 @@ export const POPULATION_2030 = {
 
 export const isMeasured = (row: PopulationYear): row is MeasuredYear => row.resident != null
 
-/** The years that can carry a gap — everything except the register-only 2025. */
+const hasRegister = (row: PopulationYear): row is RegisteredYear => row.registered != null
+
+/** Every year the register was counted in — 1977 onwards. */
+const REGISTERED_POPULATION = POPULATION.filter(hasRegister)
+
+/** Every year with a resident count — 1958 to 2022, which is what the ledger draws. */
 export const MEASURED_POPULATION = POPULATION.filter(isMeasured)
 
-/** The most recent year measured on both sides. */
-export const LATEST_POPULATION = MEASURED_POPULATION[MEASURED_POPULATION.length - 1]
+/**
+ * The most recent year with a resident count.
+ *
+ * The source for the home page's four headline facts and for the sources line
+ * under the register — 2022, the last census.
+ */
+export const LATEST_POPULATION = MEASURED_POPULATION[MEASURED_POPULATION.length - 1]!
 
-/** The most recent register count, whether or not a resident count matches it. */
-export const LATEST_REGISTER = POPULATION[POPULATION.length - 1]
+/**
+ * The most recent register count, whether or not a resident count matches it.
+ *
+ * Found by filtering rather than taken off the end of `POPULATION`: the four
+ * years the council added in review carry no register, so the last row of the
+ * table is no longer guaranteed to be a row that has one. It happens still to
+ * be 2025, and this keeps it true if the table grows again.
+ */
+export const LATEST_REGISTER = REGISTERED_POPULATION[REGISTERED_POPULATION.length - 1]!
 
-/** Everything in the ledger is drawn against one honest scale, starting at 0. */
-export const POPULATION_SCALE_MAX = 37000
+/**
+ * The ledger's scale, derived rather than declared.
+ *
+ * It used to be a hand-set 37,000, sized for a register count the ledger no
+ * longer draws — against a series topping out at 25,062 every bar would have
+ * come up two-thirds short. Rounded up to the next 5,000 so the axis lands on
+ * a round number and a revised census moves it on its own.
+ */
+export const POPULATION_SCALE_MAX =
+  Math.ceil(Math.max(...MEASURED_POPULATION.map((row) => row.resident)) / 5000) * 5000
 
 /** The plan's own target, from the vision slide. */
 export const TARGET_RESIDENTS = 35000
 
-export const gapOf = (row: MeasuredYear) => row.registered - row.resident
 export const fmt = (n: number) => n.toLocaleString('en-US')
+
+/**
+ * The four figures across the top of the home page.
+ *
+ * Three of them are the last census read three ways — everyone living here,
+ * the Maldivians among them, the foreign nationals among them — and the fourth
+ * is the land they live on. The council replaced the previous set (islands in
+ * the atoll, islands in the city, hectares, register count) tile by tile in
+ * review; what is left is a composition rather than four unrelated counts.
+ *
+ * Read out of `POPULATION` rather than typed here, on the same reasoning that
+ * table gives for holding numbers instead of strings: a slip in a figure set at
+ * display size on the first screen is invisible.
+ *
+ * The split is checked rather than assumed. `maldivians` and `foreigners` are
+ * optional on a row — no year before 2006 carries them — and three of these
+ * four tiles come out of them, so a revision that dropped the split would
+ * otherwise print `undefined` to a resident.
+ */
+const CENSUS = (() => {
+  const row = LATEST_POPULATION
+  if (row.maldivians == null || row.foreigners == null) {
+    throw new Error(
+      `POPULATION ${row.year} carries no Maldivian/foreign split, which the headline facts are drawn from.`,
+    )
+  }
+  return { year: row.year, resident: row.resident, maldivians: row.maldivians, foreigners: row.foreigners }
+})()
+
+export const HEADLINE_FACTS: Stat[] = [
+  { value: fmt(CENSUS.resident), label: `residents in ${CENSUS.year} Census` },
+  { value: fmt(CENSUS.maldivians), label: `resident Maldivians in ${CENSUS.year}` },
+  { value: fmt(CENSUS.foreigners), label: `foreigners in ${CENSUS.year}` },
+  { value: fmt(LAND.totalHa), label: `${LAND.unit} of land` },
+]
 
 /**
  * Where the last measured year sits on a 0 → 35,000 scale. Derived, so a
@@ -426,6 +550,28 @@ export const PILLARS: Pillar[] = [
 
 /* ------------------------------------------------------------------ goals */
 
+/**
+ * The twelve goals, in the council's order.
+ *
+ * **`number` is the position; the ids are history.** The 1 September review
+ * moved six goals — 4 and 5 up to 2 and 3, 6 and 7 to 4 and 5, and 2 and 3
+ * down to 6 and 7 — and asked the numbering to follow. The numbers and the
+ * printed target labels did. The ids did not, and must not: the consultation
+ * holds live responses keyed on `g{goal}-s{strategy}-a{action}`, and
+ * `validateSubmission` drops any id the plan no longer contains. Renumbering
+ * them would not migrate that feedback, it would delete it from the results —
+ * silently, because a dropped id looks exactly like a stale basket.
+ *
+ * So goal 2 is `future-ready-transport` and its actions are still `g4-…`. Read
+ * an id as the goal's birth certificate rather than its address. The same
+ * applies to `slug`, which is in published URLs, the home page's `#goal-`
+ * anchors and the badge's view-transition name.
+ *
+ * The colours run down the array rather than belonging to any one goal: four
+ * hues cycling by position, so each column of the four-column grid is one
+ * colour. Goals 3, 7 and 11 carry the plan's orange, which replaced a second
+ * teal that read as column 1's colour repeated.
+ */
 export const GOALS: Goal[] = [
   {
     number: 1,
@@ -483,192 +629,10 @@ export const GOALS: Goal[] = [
   },
   {
     number: 2,
-    // Slug stays `water-security`, and deliberately: it is in published URLs,
-    // the home page's `#goal-` anchors and the badge's view-transition name.
-    // The deck renaming a heading is not a reason to break a link.
-    slug: 'water-security',
-    // The 12 August draft was mid-rename here: this goal's own slide read
-    // "Safe diverse water sources" while the twelve-goals contents slide still
-    // read "Ensure water security". This site followed the goal's own slide,
-    // and the 16 August draft has settled it that way — both slides now read
-    // "Safe diverse water sources".
-    title: 'Safe diverse water sources',
-    color: '#82357E',
-    textColor: '#82357E',
-    tagline: 'Renewables-powered desalination and rainwater for all',
-    summary: `Addu will secure its long-term water supply through five diversified sources — desalination, household and community-scale rainwater harvesting, responsibly managed groundwater, reclaimed wastewater, and mineralised bottled water. Solar PV and battery storage will support reliable desalination. Expanded rainwater systems will capture and store rainfall for domestic and public use, while carefully managed groundwater will provide a dedicated supply for gardening and landscaping. Expanded sewerage networks and advanced wastewater treatment will enable reclaimed water to be used safely for agriculture, irrigation, landscaping, and other non-potable purposes. Addu will also support the local production of mineralised drinking water in reusable glass bottles and large-volume containers for homes, restaurants, hotels, offices, and other businesses.`,
-    stats: [
-      { value: '35,000', label: 'residents' },
-      { value: '85 litres', label: 'of water per person per day' },
-      { value: '3,000 cbm', label: 'of potable water per day' },
-      { value: '4 kWh', label: 'to produce a cbm of desalinated water' },
-      { value: '12,000 kWh', label: 'needed per day to produce water' },
-    ],
-    targets: [
-      { id: 'g2-t1', label: '2.1', text: 'Produce 3,000 cbm of desalinated water per day using renewable energy by 2028.' },
-      { id: 'g2-t2', label: '2.2', text: 'Equip all homes with safe rainwater collection and storage tanks.' },
-      { id: 'g2-t3', label: '2.3', text: 'Enable whole-house water filtration in homes by 2028.' },
-      { id: 'g2-t4', label: '2.4', text: "Maintain or improve groundwater quality in at least 90% of Addu City's monitoring stations, with no significant increase in salinity, nitrate, or faecal contamination from the 2026 baseline." },
-      { id: 'g2-t5', label: '2.5', text: 'Achieve universal sewerage coverage for all households by 2028.' },
-      // The 11 August draft broke off before naming a year here, so this site
-      // withheld the target and said so. The 12 August draft finishes it.
-      { id: 'g2-t6', label: '2.6', text: 'Increase proportion of households who reuse wastewater to 25% by 2030.' },
-    ],
-    strategies: [
-      {
-        id: 'g2-s1',
-        number: '01',
-        title: 'Renewables powered desalination',
-        actions: [
-          { id: 'g2-s1-a1', text: 'Increase desalination capacity to 3,000 cbm/day' },
-          { id: 'g2-s1-a2', text: 'Install 3 MWp solar PV for water production' },
-          { id: 'g2-s1-a3', text: 'Install 8 MWh battery storage for water production' },
-          { id: 'g2-s1-a4', text: 'Establish 6,000 cbm water storage capacity' },
-        ],
-      },
-      {
-        id: 'g2-s2',
-        number: '02',
-        title: 'Rainwater and groundwater harvesting',
-        actions: [
-          { id: 'g2-s2-a1', text: 'Provide safe rainwater collection tanks to all homes' },
-          { id: 'g2-s2-a2', text: 'Enable whole house water filtration for homes' },
-          { id: 'g2-s2-a3', text: 'Build community rainwater storage tanks' },
-          { id: 'g2-s2-a4', text: 'Develop guidelines for groundwater use and protection' },
-        ],
-      },
-      {
-        id: 'g2-s3',
-        number: '03',
-        title: 'Effective sewage treatment',
-        actions: [
-          { id: 'g2-s3-a1', text: 'Extend sewerage connection to all homes' },
-          { id: 'g2-s3-a2', text: 'Upgrade sewage and wastewater treatment system' },
-          { id: 'g2-s3-a3', text: 'Integrate solar PV to sewage treatment' },
-          { id: 'g2-s3-a4', text: "Invest in treated water reuse and 'sludge to compost'" },
-        ],
-      },
-    ],
-  },
-  {
-    number: 3,
-    slug: 'food-security',
-    title: 'Ensure food security',
-    color: '#51ACA3',
-    textColor: '#387770',
-    tagline: 'Grow more at home, land more from the sea',
-    // Rewritten and shortened for the 16 August draft. The earlier text opened
-    // on food security as a priority and closed on a sentence naming the
-    // enabling investments — climate-smart agriculture, testing laboratories,
-    // cold storage, a strategic food security fund. This one opens on the
-    // import bill and drops that closing sentence entirely.
-    //
-    // The source reads "positioned for sustainable food production and
-    // contribute meaningfully"; the second "to" is restored so the sentence
-    // parses.
-    summary: `The Maldives imported approximately USD 790.5 million worth of food in 2025, underscoring the country's heavy dependence on external markets while revealing a significant economic opportunity to expand domestic production. Against a backdrop of rising global food prices, supply-chain disruptions, and climate-related shocks, strengthening food security has become a strategic priority for Addu City. With the largest land area among the Maldives' atolls, substantial agricultural potential, productive fisheries, and a growing population, Addu is uniquely positioned for sustainable food production and to contribute meaningfully to national food security.`,
-    // Reworked again in the 16 August draft. The 12 August rail was six import
-    // categories; this one restores the national total to the head of the
-    // column, splits eggs back out of the dairy line, and drops both the dairy
-    // and the beverages-and-confectionary categories.
-    //
-    // Printed order is kept, and it is already sound: the total leads and the
-    // five categories descend beneath it. The first row is a total the others
-    // are parts of, which is only safe because its label says so — "national
-    // food imports" against five category names. Do not retitle it to match
-    // their shape.
-    stats: [
-      { value: 'USD 790.5 million', label: 'national food imports in 2025' },
-      { value: 'USD 156.7 million', label: 'meat, seafood and fish' },
-      { value: 'USD 106.9 million', label: 'vegetables and root crops' },
-      { value: 'USD 106.5 million', label: 'fruits, nuts and seeds' },
-      // "staple" in the deck, pluralised to sit with the other category labels.
-      { value: 'USD 33.5 million', label: 'staples' },
-      { value: 'USD 24.3 million', label: 'eggs' },
-    ],
-    targets: [
-      { id: 'g3-t1', label: '3.1', text: 'Ensure 75% of homes grow 05 types of tropical fruits and 05 vegetables at home by 2028.' },
-      { id: 'g3-t2', label: '3.2', text: 'Enable commercial production of 03 fruits and 03 vegetables to supply 30% of the need of the Maldives tourism market by 2030.' },
-      { id: 'g3-t3', label: '3.3', text: 'Ensure ice and fuel are available to fishers in Hithadhoo and Maradhoo harbours by 2028.' },
-      { id: 'g3-t4', label: '3.4', text: 'Supply at least 50% of Valhomas (smoked fish) and Rihaakuru (fish paste) sold in the Maldives by 2030.' },
-      { id: 'g3-t5', label: '3.5', text: 'Produce at least 30,000 eggs per day to meet a minimum of 80% of local household, hospitality, business, and institutional demand.' },
-      { id: 'g3-t6', label: '3.6', text: 'Ensure that 100% of food producers, processors, distributors and food-service establishments in Addu City are registered and undergo risk-based inspection.' },
-    ],
-    strategies: [
-      {
-        id: 'g3-s1',
-        number: '01',
-        title: 'Every home a proud grower',
-        actions: [
-          { id: 'g3-s1-a1', text: 'Establish a nursery and seed bank' },
-          { id: 'g3-s1-a2', text: 'Distribute starter kits for households' },
-          { id: 'g3-s1-a3', text: 'Launch home gardening app' },
-          { id: 'g3-s1-a4', text: "Establish home grower's market" },
-        ],
-      },
-      {
-        id: 'g3-s2',
-        number: '02',
-        title: 'Organic agriculture revival',
-        actions: [
-          { id: 'g3-s2-a1', text: 'Launch coconut & kurumba cultivation and replanting' },
-          { id: 'g3-s2-a2', text: 'Allocate land for banana, breadfruit and yam plantation' },
-          { id: 'g3-s2-a3', text: 'Establish orchards for papaya, mango, guava and passionfruit' },
-          { id: 'g3-s2-a4', text: 'Establish crop and soil safety monitoring' },
-        ],
-      },
-      {
-        id: 'g3-s3',
-        number: '03',
-        title: 'Technology driven fresh food',
-        actions: [
-          { id: 'g3-s3-a1', text: 'Develop solar-powered climate-controlled greenhouses' },
-          { id: 'g3-s3-a2', text: 'Establish vertical farms with hydroponic and aeroponic tech' },
-          { id: 'g3-s3-a3', text: 'Introduce smart precision fertiliser use and irrigation' },
-          { id: 'g3-s3-a4', text: 'Introduce drones + AI to track stress, pests and diseases' },
-        ],
-      },
-      {
-        id: 'g3-s4',
-        number: '04',
-        title: 'High quality resilient fisheries',
-        actions: [
-          { id: 'g3-s4-a1', text: 'Invest in renewables powered ice production' },
-          { id: 'g3-s4-a2', text: 'Expand fisheries fuel storage capacity for 03 months' },
-          { id: 'g3-s4-a3', text: "Establish quality assurance for 'valhomas' and 'rihaakuru'" },
-          { id: 'g3-s4-a4', text: "Brand and promote 'valhomas', 'rihaakuru' and fish products" },
-        ],
-      },
-      {
-        id: 'g3-s5',
-        number: '05',
-        title: 'Fresh eggs every day',
-        actions: [
-          { id: 'g3-s5-a1', text: 'Build demonstration poultry farms' },
-          { id: 'g3-s5-a2', text: 'Establish a PPP for quality feed development' },
-          { id: 'g3-s5-a3', text: 'Conduct training on egg handling, storage and quality' },
-          { id: 'g3-s5-a4', text: 'Establish a biosecurity and disease management system' },
-        ],
-      },
-      {
-        id: 'g3-s6',
-        number: '06',
-        title: 'Trusted quality local food',
-        actions: [
-          { id: 'g3-s6-a1', text: 'Establish a food quality laboratory' },
-          { id: 'g3-s6-a2', text: 'Establish a food fund to support growers and producers' },
-          { id: 'g3-s6-a3', text: 'Register bakers and snack producers' },
-          { id: 'g3-s6-a4', text: 'Establish training and certification for food producers' },
-        ],
-      },
-    ],
-  },
-  {
-    number: 4,
     slug: 'future-ready-transport',
     title: 'Future ready transport',
-    color: '#9CB854',
-    textColor: '#627430',
+    color: '#82357E',
+    textColor: '#82357E',
     tagline: 'Free electric buses every 10 minutes',
     summary: `As incomes continue to rise, vehicle ownership is expected to increase, leading to greater traffic congestion, parking shortages, road safety concerns, and dependence on imported fossil fuels. To avoid becoming a car-dependent city, Addu will adopt a free electric bus service operating every 10 minutes during peak hours, supported by walking and cycling infrastructure and a planned transition to electric vehicles. Complemented by an expanding EV charging network, this strategy will lower transport emissions, reduce fuel imports, improve air quality, and establish Addu as a city for clean, affordable, inclusive and sustainable mobility.`,
     stats: [
@@ -678,10 +642,10 @@ export const GOALS: Goal[] = [
       { value: '2,500', label: 'passengers use buses daily' },
     ],
     targets: [
-      { id: 'g4-t1', label: '4.1', text: 'Operate free electric buses every 10 minutes during peak hours by 2028.' },
-      { id: 'g4-t2', label: '4.2', text: 'Ensure 50% of motorcycles and cars used in Addu are electric vehicles by 2030.' },
-      { id: 'g4-t3', label: '4.3', text: 'Ensure that 100% of homes with vehicle access provide at least one off-street car parking space within the property boundary.' },
-      { id: 'g4-t4', label: '4.4', text: 'Develop 36 km of quality roads that meet international standard by 2028.' },
+      { id: 'g4-t1', label: '2.1', text: 'Operate free electric buses every 10 minutes during peak hours by 2028.' },
+      { id: 'g4-t2', label: '2.2', text: 'Ensure 50% of motorcycles and cars used in Addu are electric vehicles by 2030.' },
+      { id: 'g4-t3', label: '2.3', text: 'Ensure that 100% of homes with vehicle access provide at least one off-street car parking space within the property boundary.' },
+      { id: 'g4-t4', label: '2.4', text: 'Develop 36 km of quality roads that meet international standard by 2028.' },
     ],
     strategies: [
       {
@@ -731,11 +695,11 @@ export const GOALS: Goal[] = [
     ],
   },
   {
-    number: 5,
+    number: 3,
     slug: 'connect-the-south',
     title: 'Connect the South',
-    color: '#2FB2B5',
-    textColor: '#1F7879',
+    color: '#DC5818',
+    textColor: '#C04E14',
     tagline: 'One southern region, connected daily',
     summary: `Reliable connectivity between Addu, Fuvahmulah, and Huvadhoo is fundamental to creating an integrated southern economic region. Daily passenger services will improve access to healthcare, education, and employment for residents, while enabling visitors to travel between the Southern Atolls as a single tourism destination. Daily freight services will ensure the timely movement of medical supplies, laboratory samples, fresh food, fisheries products, e-commerce parcels, and essential goods, while supporting emergency response during disruptions. This target will be delivered through complementary investments to enhance Gan International Airport with new international routes and sustained regional air services, establish drone cargo corridors for time-critical deliveries, and develop a strategic gateway port.`,
     stats: [
@@ -746,9 +710,9 @@ export const GOALS: Goal[] = [
       { value: '72 guesthouses', label: 'with 978 beds' },
     ],
     targets: [
-      { id: 'g5-t1', label: '5.1', text: 'Establish direct air connectivity to four international destinations from Addu by 2028.' },
-      { id: 'g5-t2', label: '5.2', text: 'Establish daily passenger connectivity between Southern Atolls by 2028.' },
-      { id: 'g5-t3', label: '5.3', text: 'Establish daily cargo connectivity between Southern Atolls by 2028.' },
+      { id: 'g5-t1', label: '3.1', text: 'Establish direct air connectivity to four international destinations from Addu by 2028.' },
+      { id: 'g5-t2', label: '3.2', text: 'Establish daily passenger connectivity between Southern Atolls by 2028.' },
+      { id: 'g5-t3', label: '3.3', text: 'Establish daily cargo connectivity between Southern Atolls by 2028.' },
     ],
     strategies: [
       {
@@ -787,11 +751,11 @@ export const GOALS: Goal[] = [
     ],
   },
   {
-    number: 6,
+    number: 4,
     slug: 'diverse-quality-housing',
     title: 'Diverse quality housing',
-    color: '#82357E',
-    textColor: '#82357E',
+    color: '#9CB854',
+    textColor: '#627430',
     tagline: '350 new homes and 1,000 rental units',
     summary: `Addu City is planning to attract professionals, skilled workers, and returning families. Accelerating housing delivery is essential to attract residents, and we will deliver new sustainable homes for families. To support Addu's transformation into a destination for wellness, education, aviation, and business, we will deliver spacious apartments across low-rise (3-4 storey) apartment buildings, providing high-quality accommodation for professionals and their families. These apartments will feature generous living spaces, lift access, secure parking, and energy-efficient design, offering an attractive lifestyle for professionals, entrepreneurs, and skilled workers. Together with complementary initiatives for affordable rental accommodation and mixed-use neighbourhoods, this goal will create attractive liveable communities.`,
     stats: [
@@ -802,10 +766,10 @@ export const GOALS: Goal[] = [
       { value: '200', label: 'planned housing units' },
     ],
     targets: [
-      { id: 'g6-t1', label: '6.1', text: 'Develop 05 new starter home neighbourhoods by 2030.' },
-      { id: 'g6-t2', label: '6.2', text: 'Provide 350 new sustainable homes for families by 2028.' },
-      { id: 'g6-t3', label: '6.3', text: 'Develop accommodation for 150 families of professionals by 2028.' },
-      { id: 'g6-t4', label: '6.4', text: 'Develop 1,000 high quality rental units by 2030.' },
+      { id: 'g6-t1', label: '4.1', text: 'Develop 05 new starter home neighbourhoods by 2030.' },
+      { id: 'g6-t2', label: '4.2', text: 'Provide 350 new sustainable homes for families by 2028.' },
+      { id: 'g6-t3', label: '4.3', text: 'Develop accommodation for 150 families of professionals by 2028.' },
+      { id: 'g6-t4', label: '4.4', text: 'Develop 1,000 high quality rental units by 2030.' },
     ],
     strategies: [
       {
@@ -844,11 +808,11 @@ export const GOALS: Goal[] = [
     ],
   },
   {
-    number: 7,
+    number: 5,
     slug: 'connect-community-and-culture',
     title: 'Connect community and culture',
-    color: '#51ACA3',
-    textColor: '#387770',
+    color: '#2FB2B5',
+    textColor: '#1F7879',
     tagline: 'A community centre within a 10-minute walk',
     // Trimmed in the 16 August draft — four cuts, no additions. "safe, shaded
     // walkable streets" loses "safe"; the first paragraph no longer closes on
@@ -865,12 +829,12 @@ export const GOALS: Goal[] = [
       { value: '87', label: "cafés and restaurants" },
     ],
     targets: [
-      { id: 'g7-t1', label: '7.1', text: 'Ensure every resident lives within a 10-minute walk of a community centre by 2028.' },
-      { id: 'g7-t2', label: '7.2', text: 'Develop a continuous 17 km waterfront promenade from Hithadhoo to Gan by 2030.' },
-      { id: 'g7-t3', label: '7.3', text: 'Establish four themed parks by 2028.' },
-      { id: 'g7-t4', label: '7.4', text: 'Complete streetscaping of all main roads by 2030.' },
-      { id: 'g7-t5', label: '7.5', text: "Increase annual visits to Addu's museums and heritage attractions to 50,000 visitors by 2030." },
-      { id: 'g7-t6', label: '7.6', text: 'Host at least 06 major cultural events (traditional arts, crafts, music, and cuisine) annually by 2030.' },
+      { id: 'g7-t1', label: '5.1', text: 'Ensure every resident lives within a 10-minute walk of a community centre by 2028.' },
+      { id: 'g7-t2', label: '5.2', text: 'Develop a continuous 17 km waterfront promenade from Hithadhoo to Gan by 2030.' },
+      { id: 'g7-t3', label: '5.3', text: 'Establish four themed parks by 2028.' },
+      { id: 'g7-t4', label: '5.4', text: 'Complete streetscaping of all main roads by 2030.' },
+      { id: 'g7-t5', label: '5.5', text: "Increase annual visits to Addu's museums and heritage attractions to 50,000 visitors by 2030." },
+      { id: 'g7-t6', label: '5.6', text: 'Host at least 06 major cultural events (traditional arts, crafts, music, and cuisine) annually by 2030.' },
     ],
     strategies: [
       {
@@ -937,6 +901,188 @@ export const GOALS: Goal[] = [
           { id: 'g7-s6-a2', text: 'Establish Addu dialect standards' },
           { id: 'g7-s6-a3', text: 'Launch Annual Addu Awards' },
           { id: 'g7-s6-a4', text: 'Organise Addu Cultural Festival' },
+        ],
+      },
+    ],
+  },
+  {
+    number: 6,
+    // Slug stays `water-security`, and deliberately: it is in published URLs,
+    // the home page's `#goal-` anchors and the badge's view-transition name.
+    // The deck renaming a heading is not a reason to break a link.
+    slug: 'water-security',
+    // The 12 August draft was mid-rename here: this goal's own slide read
+    // "Safe diverse water sources" while the twelve-goals contents slide still
+    // read "Ensure water security". This site followed the goal's own slide,
+    // and the 16 August draft has settled it that way — both slides now read
+    // "Safe diverse water sources".
+    title: 'Safe diverse water sources',
+    color: '#82357E',
+    textColor: '#82357E',
+    tagline: 'Renewables-powered desalination and rainwater for all',
+    summary: `Addu will secure its long-term water supply through five diversified sources — desalination, household and community-scale rainwater harvesting, responsibly managed groundwater, reclaimed wastewater, and mineralised bottled water. Solar PV and battery storage will support reliable desalination. Expanded rainwater systems will capture and store rainfall for domestic and public use, while carefully managed groundwater will provide a dedicated supply for gardening and landscaping. Expanded sewerage networks and advanced wastewater treatment will enable reclaimed water to be used safely for agriculture, irrigation, landscaping, and other non-potable purposes. Addu will also support the local production of mineralised drinking water in reusable glass bottles and large-volume containers for homes, restaurants, hotels, offices, and other businesses.`,
+    stats: [
+      { value: '35,000', label: 'residents' },
+      { value: '85 litres', label: 'of water per person per day' },
+      { value: '3,000 cbm', label: 'of potable water per day' },
+      { value: '4 kWh', label: 'to produce a cbm of desalinated water' },
+      { value: '12,000 kWh', label: 'needed per day to produce water' },
+    ],
+    targets: [
+      { id: 'g2-t1', label: '6.1', text: 'Produce 3,000 cbm of desalinated water per day using renewable energy by 2028.' },
+      { id: 'g2-t2', label: '6.2', text: 'Equip all homes with safe rainwater collection and storage tanks.' },
+      { id: 'g2-t3', label: '6.3', text: 'Enable whole-house water filtration in homes by 2028.' },
+      { id: 'g2-t4', label: '6.4', text: "Maintain or improve groundwater quality in at least 90% of Addu City's monitoring stations, with no significant increase in salinity, nitrate, or faecal contamination from the 2026 baseline." },
+      { id: 'g2-t5', label: '6.5', text: 'Achieve universal sewerage coverage for all households by 2028.' },
+      // The 11 August draft broke off before naming a year here, so this site
+      // withheld the target and said so. The 12 August draft finishes it.
+      { id: 'g2-t6', label: '6.6', text: 'Increase proportion of households who reuse wastewater to 25% by 2030.' },
+    ],
+    strategies: [
+      {
+        id: 'g2-s1',
+        number: '01',
+        title: 'Renewables powered desalination',
+        actions: [
+          { id: 'g2-s1-a1', text: 'Increase desalination capacity to 3,000 cbm/day' },
+          { id: 'g2-s1-a2', text: 'Install 3 MWp solar PV for water production' },
+          { id: 'g2-s1-a3', text: 'Install 8 MWh battery storage for water production' },
+          { id: 'g2-s1-a4', text: 'Establish 6,000 cbm water storage capacity' },
+        ],
+      },
+      {
+        id: 'g2-s2',
+        number: '02',
+        title: 'Rainwater and groundwater harvesting',
+        actions: [
+          { id: 'g2-s2-a1', text: 'Provide safe rainwater collection tanks to all homes' },
+          { id: 'g2-s2-a2', text: 'Enable whole house water filtration for homes' },
+          { id: 'g2-s2-a3', text: 'Build community rainwater storage tanks' },
+          { id: 'g2-s2-a4', text: 'Develop guidelines for groundwater use and protection' },
+        ],
+      },
+      {
+        id: 'g2-s3',
+        number: '03',
+        title: 'Effective sewage treatment',
+        actions: [
+          { id: 'g2-s3-a1', text: 'Extend sewerage connection to all homes' },
+          { id: 'g2-s3-a2', text: 'Upgrade sewage and wastewater treatment system' },
+          { id: 'g2-s3-a3', text: 'Integrate solar PV to sewage treatment' },
+          { id: 'g2-s3-a4', text: "Invest in treated water reuse and 'sludge to compost'" },
+        ],
+      },
+    ],
+  },
+  {
+    number: 7,
+    slug: 'food-security',
+    title: 'Ensure food security',
+    color: '#DC5818',
+    textColor: '#C04E14',
+    tagline: 'Grow more at home, land more from the sea',
+    // Rewritten and shortened for the 16 August draft. The earlier text opened
+    // on food security as a priority and closed on a sentence naming the
+    // enabling investments — climate-smart agriculture, testing laboratories,
+    // cold storage, a strategic food security fund. This one opens on the
+    // import bill and drops that closing sentence entirely.
+    //
+    // The source reads "positioned for sustainable food production and
+    // contribute meaningfully"; the second "to" is restored so the sentence
+    // parses.
+    summary: `The Maldives imported approximately USD 790.5 million worth of food in 2025, underscoring the country's heavy dependence on external markets while revealing a significant economic opportunity to expand domestic production. Against a backdrop of rising global food prices, supply-chain disruptions, and climate-related shocks, strengthening food security has become a strategic priority for Addu City. With the largest land area among the Maldives' atolls, substantial agricultural potential, productive fisheries, and a growing population, Addu is uniquely positioned for sustainable food production and to contribute meaningfully to national food security.`,
+    // Reworked again in the 16 August draft. The 12 August rail was six import
+    // categories; this one restores the national total to the head of the
+    // column, splits eggs back out of the dairy line, and drops both the dairy
+    // and the beverages-and-confectionary categories.
+    //
+    // Printed order is kept, and it is already sound: the total leads and the
+    // five categories descend beneath it. The first row is a total the others
+    // are parts of, which is only safe because its label says so — "national
+    // food imports" against five category names. Do not retitle it to match
+    // their shape.
+    stats: [
+      { value: 'USD 790.5 million', label: 'national food imports in 2025' },
+      { value: 'USD 156.7 million', label: 'meat, seafood and fish' },
+      { value: 'USD 106.9 million', label: 'vegetables and root crops' },
+      { value: 'USD 106.5 million', label: 'fruits, nuts and seeds' },
+      // "staple" in the deck, pluralised to sit with the other category labels.
+      { value: 'USD 33.5 million', label: 'staples' },
+      { value: 'USD 24.3 million', label: 'eggs' },
+    ],
+    targets: [
+      { id: 'g3-t1', label: '7.1', text: 'Ensure 75% of homes grow 05 types of tropical fruits and 05 vegetables at home by 2028.' },
+      { id: 'g3-t2', label: '7.2', text: 'Enable commercial production of 03 fruits and 03 vegetables to supply 30% of the need of the Maldives tourism market by 2030.' },
+      { id: 'g3-t3', label: '7.3', text: 'Ensure ice and fuel are available to fishers in Hithadhoo and Maradhoo harbours by 2028.' },
+      { id: 'g3-t4', label: '7.4', text: 'Supply at least 50% of Valhomas (smoked fish) and Rihaakuru (fish paste) sold in the Maldives by 2030.' },
+      { id: 'g3-t5', label: '7.5', text: 'Produce at least 30,000 eggs per day to meet a minimum of 80% of local household, hospitality, business, and institutional demand.' },
+      { id: 'g3-t6', label: '7.6', text: 'Ensure that 100% of food producers, processors, distributors and food-service establishments in Addu City are registered and undergo risk-based inspection.' },
+    ],
+    strategies: [
+      {
+        id: 'g3-s1',
+        number: '01',
+        title: 'Every home a proud grower',
+        actions: [
+          { id: 'g3-s1-a1', text: 'Establish a nursery and seed bank' },
+          { id: 'g3-s1-a2', text: 'Distribute starter kits for households' },
+          { id: 'g3-s1-a3', text: 'Launch home gardening app' },
+          { id: 'g3-s1-a4', text: "Establish home grower's market" },
+        ],
+      },
+      {
+        id: 'g3-s2',
+        number: '02',
+        title: 'Organic agriculture revival',
+        actions: [
+          { id: 'g3-s2-a1', text: 'Launch coconut & kurumba cultivation and replanting' },
+          { id: 'g3-s2-a2', text: 'Allocate land for banana, breadfruit and yam plantation' },
+          { id: 'g3-s2-a3', text: 'Establish orchards for papaya, mango, guava and passionfruit' },
+          { id: 'g3-s2-a4', text: 'Establish crop and soil safety monitoring' },
+        ],
+      },
+      {
+        id: 'g3-s3',
+        number: '03',
+        title: 'Technology driven fresh food',
+        actions: [
+          { id: 'g3-s3-a1', text: 'Develop solar-powered climate-controlled greenhouses' },
+          { id: 'g3-s3-a2', text: 'Establish vertical farms with hydroponic and aeroponic tech' },
+          { id: 'g3-s3-a3', text: 'Introduce smart precision fertiliser use and irrigation' },
+          { id: 'g3-s3-a4', text: 'Introduce drones + AI to track stress, pests and diseases' },
+        ],
+      },
+      {
+        id: 'g3-s4',
+        number: '04',
+        title: 'High quality resilient fisheries',
+        actions: [
+          { id: 'g3-s4-a1', text: 'Invest in renewables powered ice production' },
+          { id: 'g3-s4-a2', text: 'Expand fisheries fuel storage capacity for 03 months' },
+          { id: 'g3-s4-a3', text: "Establish quality assurance for 'valhomas' and 'rihaakuru'" },
+          { id: 'g3-s4-a4', text: "Brand and promote 'valhomas', 'rihaakuru' and fish products" },
+        ],
+      },
+      {
+        id: 'g3-s5',
+        number: '05',
+        title: 'Fresh eggs every day',
+        actions: [
+          { id: 'g3-s5-a1', text: 'Build demonstration poultry farms' },
+          { id: 'g3-s5-a2', text: 'Establish a PPP for quality feed development' },
+          { id: 'g3-s5-a3', text: 'Conduct training on egg handling, storage and quality' },
+          { id: 'g3-s5-a4', text: 'Establish a biosecurity and disease management system' },
+        ],
+      },
+      {
+        id: 'g3-s6',
+        number: '06',
+        title: 'Trusted quality local food',
+        actions: [
+          { id: 'g3-s6-a1', text: 'Establish a food quality laboratory' },
+          { id: 'g3-s6-a2', text: 'Establish a food fund to support growers and producers' },
+          { id: 'g3-s6-a3', text: 'Register bakers and snack producers' },
+          { id: 'g3-s6-a4', text: 'Establish training and certification for food producers' },
         ],
       },
     ],
@@ -1218,8 +1364,8 @@ export const GOALS: Goal[] = [
     number: 11,
     slug: 'wildlife-and-wellness-tourism',
     title: 'Wildlife and wellness tourism',
-    color: '#51ACA3',
-    textColor: '#387770',
+    color: '#DC5818',
+    textColor: '#C04E14',
     tagline: 'Beyond the Beach — where nature meets wellbeing',
     summary: `Addu will become the destination "Beyond the Beach" — where nature meets wellbeing. By combining world-class wildlife experiences with health, wellness, and active lifestyles, Addu will create a distinctive year-round visitor economy. Visitors will encounter manta rays, whale sharks, dolphins, turtles, White Terns, and spectacular coral reefs through world-class diving and immersive nature experiences, while wellness retreats, healthy local cuisine, outdoor recreation, and specialist healthcare at Addu Equatorial Hospital make Addu a destination for restoration, recovery, and rejuvenation. Supported by boutique eco-lodges and sustainable accommodation, Addu will offer an authentic Maldivian experience.`,
     stats: [
