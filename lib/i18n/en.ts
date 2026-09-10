@@ -104,7 +104,10 @@ export const en = {
   /**
    * The three reactions, named for a resident. `lib/reactions.ts` keeps the
    * English alongside the colours because the council's results screens read
-   * from it; these are what the public controls actually print.
+   * from it. The thumbs on the page print no word at all — the `Label` is
+   * their accessible name — and the `Short` form is the chip in the review
+   * panel. "Not sure" stays here for the baskets that chose it before the
+   * button went.
    */
   reactions: {
     supportLabel: 'I support this',

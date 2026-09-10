@@ -2,24 +2,28 @@
 
 import { useId, useRef, useState } from 'react'
 import ThumbsUpIcon from '@hugeicons/core-free-icons/ThumbsUpIcon'
-import HelpCircleIcon from '@hugeicons/core-free-icons/HelpCircleIcon'
-import Flag02Icon from '@hugeicons/core-free-icons/Flag02Icon'
+import ThumbsDownIcon from '@hugeicons/core-free-icons/ThumbsDownIcon'
 import Comment01Icon from '@hugeicons/core-free-icons/Comment01Icon'
 import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon'
 import SentIcon from '@hugeicons/core-free-icons/SentIcon'
 import Delete02Icon from '@hugeicons/core-free-icons/Delete02Icon'
 import { Icon, type IconData } from '@/components/ui/icon'
 import { MAX_COMMENT_LENGTH } from '@/lib/feedback-limits'
-import { REACTIONS, useFeedback, type Reaction } from './feedback-store'
+import { OFFERED_REACTIONS, REACTION_META, type OfferedReaction } from '@/lib/reactions'
+import { useFeedback } from './feedback-store'
 import { useCommentDraft } from './use-comment-draft'
 import { useLocale } from '@/components/i18n/locale-provider'
 import { fill } from '@/lib/i18n/format'
 import { reactionWords } from '@/lib/i18n/reactions'
 
-const REACTION_ICON: Record<Reaction, IconData> = {
+/**
+ * The glyph is the whole button. A thumb up and a thumb down need no caption
+ * beside them, so the word each one stands for is carried by the accessible
+ * name alone and never printed.
+ */
+const REACTION_ICON: Record<OfferedReaction, IconData> = {
   support: ThumbsUpIcon,
-  unsure: HelpCircleIcon,
-  concern: Flag02Icon,
+  concern: ThumbsDownIcon,
 }
 
 /** Show the count only once the limit is close enough to matter. */
@@ -64,25 +68,27 @@ export function FeedbackControl({ id, subject, accent }: Props) {
   return (
     <div className="mt-3">
       <div className="flex flex-wrap items-center gap-1.5">
-        {REACTIONS.map((r) => {
-          const active = entry?.reaction === r.id
-          const words = reactionWords(t, r.id)
+        {OFFERED_REACTIONS.map((r) => {
+          const active = entry?.reaction === r
+          const { color } = REACTION_META[r]
           return (
             <button
-              key={r.id}
+              key={r}
               type="button"
-              onClick={() => setReaction(id, r.id)}
+              onClick={() => setReaction(id, r)}
               aria-pressed={active}
-              aria-label={fill(t.control.reactionAria, { label: words.label, subject })}
-              className="group relative inline-flex min-h-11 items-center gap-1.5 rounded-full border px-4 py-2 text-small font-semibold transition-colors duration-200"
+              aria-label={fill(t.control.reactionAria, {
+                label: reactionWords(t, r).label,
+                subject,
+              })}
+              className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border transition-colors duration-200"
               style={{
-                borderColor: active ? r.color : 'var(--color-hairline)',
-                background: active ? r.color : 'transparent',
+                borderColor: active ? color : 'var(--color-hairline)',
+                background: active ? color : 'transparent',
                 color: active ? '#fff' : 'var(--color-stone)',
               }}
             >
-              <Icon icon={REACTION_ICON[r.id]} size={15} />
-              <span>{words.short}</span>
+              <Icon icon={REACTION_ICON[r]} size={18} />
             </button>
           )
         })}

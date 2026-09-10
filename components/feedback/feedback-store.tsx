@@ -530,9 +530,11 @@ export function useFeedback() {
 }
 
 /**
- * The three reactions in the order they are offered, with their wording and
- * colour. Built from the shared metadata so the admin panel's tallies and these
- * buttons can never disagree about what green means.
+ * Every reaction a basket may hold, with its wording and colour — including
+ * `unsure`, which the page no longer offers but an older basket may still
+ * carry. Built from the shared metadata so the admin panel's tallies and the
+ * review panel's chips can never disagree about what green means. The buttons
+ * themselves run off `OFFERED_REACTIONS`.
  */
 export const REACTIONS: { id: Reaction; label: string; short: string; color: string }[] =
   REACTION_VALUES.map((id) => ({ id, ...REACTION_META[id] }))

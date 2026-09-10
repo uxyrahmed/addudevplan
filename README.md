@@ -219,8 +219,11 @@ left alone: that pair already reads correctly, and isolating it would reverse it
 
 ## Feedback
 
-Every action carries three reactions — Support, Not sure, Concern — plus an optional
-comment. A reaction is one click and needs no confirming; a comment is posted
+Every action carries two reactions — a thumb up (`support`) and a thumb down
+(`concern`), icon only — plus an optional comment. A third, `unsure`, was offered
+until 10 September 2026; it stays in the database enum, the validator and the results
+screens because it was answered before it went, but no button offers it now. A
+reaction is one click and needs no confirming; a comment is posted
 deliberately, with a button or ⌘/Ctrl + Enter, so half a sentence never reaches the
 council.
 
