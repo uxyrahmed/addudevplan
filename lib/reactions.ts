@@ -1,5 +1,5 @@
 /**
- * The three reactions, and nothing else.
+ * The three reactions the database can hold, and nothing else.
  *
  * Its own module so the feedback store — which every public page loads — can
  * import the colours without dragging in lib/plan.ts, the way it would if these
@@ -10,6 +10,22 @@
 export const REACTION_VALUES = ['support', 'unsure', 'concern'] as const
 
 export type WireReaction = (typeof REACTION_VALUES)[number]
+
+/**
+ * The reactions a resident is offered today, in the order the buttons run: a
+ * thumb up and a thumb down.
+ *
+ * `unsure` is deliberately not here and deliberately still in
+ * `REACTION_VALUES`. The council asked for the middle option to go, but it had
+ * already been answered over a hundred times before it went, and those answers
+ * are the council's to keep. So the button is gone from the page while the
+ * value stays legal on the wire, in the store, and on every results screen —
+ * which is what lets a basket saved before the change still show, and still
+ * send, exactly what the resident chose.
+ */
+export const OFFERED_REACTIONS = ['support', 'concern'] as const satisfies readonly WireReaction[]
+
+export type OfferedReaction = (typeof OFFERED_REACTIONS)[number]
 
 /**
  * How each reaction is named and coloured, shared by the controls and the admin

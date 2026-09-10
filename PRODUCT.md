@@ -59,8 +59,9 @@ stored, so responding costs a resident nothing.
   strategies and actions. The deck disagreed with itself on the pillar count until the
   16 August draft, which settles it at five in both places. It still does not say which
   goals sit under which pillar, so the site asserts no mapping.
-- Every action carries three reactions — Support, Not sure, Concern — plus an optional
-  comment.
+- Every action carries two reactions — a thumb up (support) and a thumb down
+  (concern) — plus an optional comment. A third, Not sure, was offered until
+  10 September 2026 and is still held and counted for the answers that chose it.
 - **The plan as a whole takes one comment, and no reaction.** What does not belong
   under any single action has a box of its own, keyed on a reserved id beside the
   action ids. Words only: three buttons on the whole document would collect a
