@@ -969,3 +969,22 @@ html[data-anim][dir='rtl'] [data-reveal='measure'] {
   letter-spacing: normal;
   text-transform: none;
 }
+
+/* The wordmark's lower fili, which `truncate` was cutting off.
+
+   `truncate` is `overflow: hidden`, and overflow clips at the padding edge. The
+   wordmark sets its size directly rather than through a `text-*` utility, so
+   none of the leading above reaches it: it runs at `leading-tight`, a 19px box
+   around 15.2px type, with the baseline 16.9px down. Thaana's ink descends
+   8.3px past that baseline, so roughly six pixels of every vowel hanging below
+   a consonant were cut clean off — visible on the title in the header, and only
+   in this edition, because Latin ink fits the box it was measured for.
+
+   Padding rather than leading, because the lockup already stands 66px tall in a
+   64px header and opening the line height would add seven more. Padding gives
+   the clipping box the room; the negative margin hands the layout back, so the
+   year underneath does not move. */
+:lang(dv) .wordmark-title {
+  padding-block-end: 0.45em;
+  margin-block-end: -0.45em;
+}

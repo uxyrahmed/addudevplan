@@ -77,7 +77,16 @@ export type Part = { lit: string } | { field: Field }
 /** One paragraph of the document, and the pieces it was composed from. */
 export type Composition = { block: number | null; parts: Part[] }
 
-const FONT = 'MV Boli'
+/**
+ * Which Thaana face the document asks Word for.
+ *
+ * MV Boli by default, because it ships with Windows and the file is written to
+ * be opened on someone's laptop, where a face the machine does not have is a
+ * page of boxes. CI overrides it: the workflow installs the edition's own faces
+ * out of `app/fonts/` and renders the PDF in MV Faseyha, which embeds, so the
+ * published file carries the site's own type wherever it is opened.
+ */
+const FONT = process.env.READING_DOCX_FONT ?? 'MV Boli'
 
 const blocks: Block[] = []
 

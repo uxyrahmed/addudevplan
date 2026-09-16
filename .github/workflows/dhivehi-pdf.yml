@@ -1,0 +1,97 @@
+# Keeps the Dhivehi reading PDF in step with what the site says.
+#
+# `npm run i18n:docx` composes the plan out of the transcripts, so the document
+# is only ever as current as the last time someone remembered to run it. This
+# runs it for them: whenever the Dhivehi or the plan behind it changes on main,
+# the document is rebuilt, converted, and committed to `public/plan/`, where the
+# site serves it at a stable URL.
+#
+# Two things about the conversion.
+#
+# LibreOffice rather than Word, because Word is not a thing a runner has. It
+# reads the same .docx and can paginate a page differently, so the PDF here and
+# a PDF exported by hand on a laptop are not guaranteed to break pages in the
+# same places. The text is identical either way; only the page breaks can move.
+#
+# The fonts are the edition's own, out of `app/fonts/`. A Linux runner has no
+# Thaana face at all, so without this step every letter converts to a box — and
+# MV Faseyha is what the site sets its Dhivehi body copy in, so the PDF ends up
+# carrying the same type as the page it came from, embedded for anyone opening
+# it anywhere.
+#
+# The commit lands on `public/plan/`, which this workflow does not watch, so it
+# cannot set itself off again. It is deliberately not marked `[skip ci]`: the
+# deploy that publishes the new PDF is the one that commit triggers.
+name: Dhivehi reading PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'translation/dhivehi/**'
+      - 'lib/plan.ts'
+      - 'lib/i18n/dv.ts'
+      - 'lib/plan-translations/dv.ts'
+      - 'scripts/reading-document.mts'
+      - 'scripts/i18n-docx.mts'
+      - 'scripts/docx.mts'
+      - '.github/workflows/dhivehi-pdf.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# One at a time, and only the newest: two content pushes in a row should leave
+# the PDF matching the second one, not race over which commit wins.
+concurrency:
+  group: dhivehi-pdf
+  cancel-in-progress: true
+
+jobs:
+  pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install the edition's own Thaana faces
+        run: |
+          mkdir -p ~/.local/share/fonts
+          cp app/fonts/*.ttf ~/.local/share/fonts/
+          fc-cache -f
+          fc-list | grep -i faseyha || (echo "MV Faseyha did not register" && exit 1)
+
+      - name: Install LibreOffice Writer
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libreoffice-writer
+
+      - name: Compose the document
+        run: npm run i18n:docx
+        env:
+          READING_DOCX_FONT: MV Faseyha
+
+      - name: Convert to PDF
+        run: |
+          mkdir -p public/plan
+          soffice --headless -env:UserInstallation=file:///tmp/libreoffice \
+            --convert-to pdf --outdir public/plan translation/addu-plan-dhivehi.docx
+          test -s public/plan/addu-plan-dhivehi.pdf
+
+      - name: Commit it, if it changed
+        run: |
+          if git diff --quiet -- public/plan/addu-plan-dhivehi.pdf; then
+            echo "The PDF already matches the transcripts."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/plan/addu-plan-dhivehi.pdf
+          git commit -m "Regenerate the Dhivehi reading PDF from ${GITHUB_SHA::7}"
+          git push origin HEAD:main

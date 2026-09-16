@@ -112,8 +112,16 @@ export default async function GoalPage(props: PageProps<'/[lang]/goals/[slug]'>)
       <section className="shell py-14 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20">
           <div>
-            <h2 className="font-heading text-title text-ink">{t.goal.whyThisMatters}</h2>
-            <p className="mt-5 max-w-[68ch] text-lead text-slate">{goal.summary}</p>
+            {/* No heading over the summary. It used to carry "why this
+                matters", which named what the paragraph underneath was already
+                doing; the paragraph starts at the top of the column instead, on
+                the same line as the figures' heading beside it.
+
+                `t.goal.whyThisMatters` stays in the dictionary. It still labels
+                this passage in the Word edition, where a reader has no column
+                beside it to tell them what they are looking at — and dropping a
+                key renumbers every segment after it in the transcripts. */}
+            <p className="max-w-[68ch] text-lead text-slate">{goal.summary}</p>
           </div>
 
           {goal.stats.length ? (

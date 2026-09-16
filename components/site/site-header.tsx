@@ -216,7 +216,7 @@ export function SiteHeader() {
           </span>
           <span className="min-w-0 leading-tight">
             <span
-              className={`block truncate font-heading text-[0.95rem] sm:text-[1.05rem] ${
+              className={`wordmark-title block truncate font-heading text-[0.95rem] sm:text-[1.05rem] ${
                 light ? 'text-white' : 'text-navy'
               }`}
             >
