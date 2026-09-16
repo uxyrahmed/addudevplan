@@ -297,9 +297,11 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
                     {String(i + 1).padStart(2, '0')}
                   </span>
                 </div>
-                <h3 className="mt-2.5 max-w-[15ch] font-heading text-small text-ink">
-                  {pillar.phrase}
-                </h3>
+                {/* No width cap. The grid column is the measure already, and a
+                    15ch one broke "Modern smart infrastructure" across two
+                    lines in a single-column phone layout with the rest of the
+                    screen empty beside it. */}
+                <h3 className="mt-2.5 font-heading text-small text-ink">{pillar.phrase}</h3>
               </li>
             ))}
           </ul>

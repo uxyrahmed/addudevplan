@@ -68,6 +68,51 @@ This regenerates `lib/i18n/dv.ts` and `lib/plan-translations/dv.ts`. Both are
 generated files from then on — editing them by hand loses the edit the next time
 this runs. Fix the file in `dhivehi/` and re-run instead.
 
+## Giving it to someone to read
+
+A transcript is the wrong thing to hand a councillor. 683 numbered lines in
+transcript order is a list, not a plan, and nobody reviews prose that way.
+
+```bash
+npm run i18n:docx            # translation/addu-plan-dhivehi.docx
+```
+
+That writes the same Dhivehi composed as the plan reads — cover, vision, the
+turning-point passage, the settlement timeline, the pillars, the eleven
+initiatives, then each goal with its figures, targets, strategies and actions.
+No `[nnnn]` markers, because the point is that it reads. Thaana is set in MV
+Boli, which ships with Windows; the site's own faces are not installed on most
+machines and Word has no fallback list.
+
+**Getting the marked-up copy back in:**
+
+```bash
+npm run i18n:docx-apply -- revised.docx            # report
+npm run i18n:docx-apply -- revised.docx --write    # and edit the transcripts
+```
+
+Nothing in that file says which segment a rewritten sentence belongs to — that
+was the point of taking the markers out — so the mapping is recovered rather
+than stored. The document is deterministic, so the "before" is regenerated from
+the repo and the revision is aligned against it paragraph by paragraph. A
+paragraph that matches exactly is untouched; one that differs is split along the
+pieces the document generated — a bullet, a year, `ޓާގެޓް 4.1` — and what is
+left is the segment's own text, which its `ref` resolves to one line of one
+transcript.
+
+Then `i18n:apply` as usual. This edits `dhivehi/`, never the generated files.
+
+**It reports rather than guesses** when a paragraph was added, deleted or
+reordered; when the edit lands on something no segment owns, like a figure out
+of `lib/plan.ts` or a label with a number substituted into it; and when a
+`{slot}` or a figure changed. A reviewer who types a new paragraph instead of
+editing the old one is usually replacing it — but "usually" is not enough to
+write a file on, so it says so and waits.
+
+Tracked changes come back as the final text: an insertion's text sits in a
+`<w:t>` like any other and a deletion's sits in `<w:delText>`, which the reader
+never looks at.
+
 ## Units keep their symbols
 
 A translation tool will render `kWh` as `ކިލޯވޮޓް-އަވަރ` and `MVR` as
