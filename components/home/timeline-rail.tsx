@@ -140,7 +140,9 @@ export function TimelineRail({ children, label }: { children: ReactNode; label: 
 
   return (
     <div className="mt-10">
-      <div className="mb-5 flex justify-end gap-2">
+      {/* Named so print can drop them: they page a scroller that paper has
+          already unrolled. */}
+      <div className="timeline-controls mb-5 flex justify-end gap-2">
         <button
           type="button"
           onClick={() => page(-1)}

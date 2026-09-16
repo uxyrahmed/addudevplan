@@ -217,6 +217,37 @@ number-and-Latin-unit in a Unicode left-to-right isolate, applied once as the lo
 plan and the dictionary are built. A number followed by a *Thaana* word is deliberately
 left alone: that pair already reads correctly, and isolating it would reverse it.
 
+## The PDF is the site
+
+The plan also goes out as a PDF, and the PDF is a print of this site rather than a
+document rebuilt to resemble it. [`scripts/site-pdf.mts`](scripts/site-pdf.mts) walks a
+headless browser over the same routes a resident reads — the home page, the settlement
+history, then the twelve goals — prints each one and binds the result.
+
+```bash
+npm run build && npm run start      # in one terminal
+npm run pdf:site                    # public/plan/addu-plan-dhivehi.pdf
+```
+
+What paper gets is decided by the `@media print` block at the end of
+[`app/globals.css`](app/globals.css), which is where the difference between a screen and
+a page lives:
+
+- **The reveals are uncovered.** Every `[data-reveal]` starts hidden and is shown by an
+  observer as it scrolls into view. Print has no scrolling and no fold, so without this
+  the plan prints as blank paper.
+- **The consultation device goes.** The reactions and the comment box under every action
+  are the point of the site and meaningless on paper. The prose around them stays.
+- **The timeline unrolls.** The settlement history is a horizontal scroller on screen;
+  printed as-is it gave three entries of thirteen and a pair of dead arrows.
+- **Fixed chrome goes**, sections tighten, and colour is kept — the goal plates and the
+  navy cover are content, not decoration.
+
+A workflow reprints it on every push to main that is not the PDF itself and commits the
+result, so the file a resident downloads is never older than the page it came from. That
+includes changes that are nothing to do with the words: a type scale, a component, a
+print rule. It is a photograph of the site, so anything that changes the site changes it.
+
 ## Feedback
 
 Every action carries two reactions — a thumb up (`support`) and a thumb down

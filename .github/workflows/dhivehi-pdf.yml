@@ -1,48 +1,34 @@
-# Keeps the Dhivehi reading PDF in step with what the site says.
+# Keeps the Dhivehi PDF in step with the site, because it *is* the site.
 #
-# `npm run i18n:docx` composes the plan out of the transcripts, so the document
-# is only ever as current as the last time someone remembered to run it. This
-# runs it for them: whenever the Dhivehi or the plan behind it changes on main,
-# the document is rebuilt, converted, and committed to `public/plan/`, where the
-# site serves it at a stable URL.
+# `scripts/site-pdf.mts` builds the plan, serves it, and walks a headless
+# browser over the same routes a resident reads — the home page, the settlement
+# history, then the twelve goals — printing each one and binding the result.
+# What `@media print` in `app/globals.css` decides is what paper gets.
 #
-# Two things about the conversion.
+# So the trigger is any change to main that is not the PDF itself. A word in a
+# transcript moves it; so does a change to the print rules, a component, or the
+# type scale. That is the point: there is one source for what the plan says and
+# how it looks, and the PDF is a photograph of it rather than a second document
+# that has to be kept in line by hand.
 #
-# LibreOffice rather than Word, because Word is not a thing a runner has. It
-# reads the same .docx and can paginate a page differently, so the PDF here and
-# a PDF exported by hand on a laptop are not guaranteed to break pages in the
-# same places. The text is identical either way; only the page breaks can move.
-#
-# The fonts are the edition's own, out of `app/fonts/`. A Linux runner has no
-# Thaana face at all, so without this step every letter converts to a box — and
-# MV Faseyha is what the site sets its Dhivehi body copy in, so the PDF ends up
-# carrying the same type as the page it came from, embedded for anyone opening
-# it anywhere.
-#
-# The commit lands on `public/plan/`, which this workflow does not watch, so it
+# The commit lands on `public/plan/`, which `paths-ignore` excludes, so it
 # cannot set itself off again. It is deliberately not marked `[skip ci]`: the
 # deploy that publishes the new PDF is the one that commit triggers.
-name: Dhivehi reading PDF
+name: Dhivehi plan PDF
 
 on:
   push:
     branches: [main]
-    paths:
-      - 'translation/dhivehi/**'
-      - 'lib/plan.ts'
-      - 'lib/i18n/dv.ts'
-      - 'lib/plan-translations/dv.ts'
-      - 'scripts/reading-document.mts'
-      - 'scripts/i18n-docx.mts'
-      - 'scripts/docx.mts'
-      - '.github/workflows/dhivehi-pdf.yml'
+    paths-ignore:
+      - 'public/plan/**'
+      - '**/*.md'
   workflow_dispatch:
 
 permissions:
   contents: write
 
-# One at a time, and only the newest: two content pushes in a row should leave
-# the PDF matching the second one, not race over which commit wins.
+# One at a time, newest wins: two pushes in a row should leave the PDF matching
+# the second one rather than racing over which commit gets published.
 concurrency:
   group: dhivehi-pdf
   cancel-in-progress: true
@@ -60,38 +46,28 @@ jobs:
 
       - run: npm ci
 
-      - name: Install the edition's own Thaana faces
-        run: |
-          mkdir -p ~/.local/share/fonts
-          cp app/fonts/*.ttf ~/.local/share/fonts/
-          fc-cache -f
-          fc-list | grep -i faseyha || (echo "MV Faseyha did not register" && exit 1)
+      # Chromium does the printing. `--with-deps` is what brings the shared
+      # libraries a headless browser needs on a bare runner.
+      - run: npx playwright install --with-deps chromium
 
-      - name: Install LibreOffice Writer
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends libreoffice-writer
+      - run: npm run build
 
-      - name: Compose the document
-        run: npm run i18n:docx
-        env:
-          READING_DOCX_FONT: MV Faseyha
-
-      - name: Convert to PDF
+      - name: Serve it
         run: |
-          mkdir -p public/plan
-          soffice --headless -env:UserInstallation=file:///tmp/libreoffice \
-            --convert-to pdf --outdir public/plan translation/addu-plan-dhivehi.docx
-          test -s public/plan/addu-plan-dhivehi.pdf
+          npm run start &
+          npx --yes wait-on http://localhost:3000/dv --timeout 120000
+
+      - name: Print the site
+        run: npm run pdf:site
 
       - name: Commit it, if it changed
         run: |
           if git diff --quiet -- public/plan/addu-plan-dhivehi.pdf; then
-            echo "The PDF already matches the transcripts."
+            echo "The PDF already matches the site."
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add public/plan/addu-plan-dhivehi.pdf
-          git commit -m "Regenerate the Dhivehi reading PDF from ${GITHUB_SHA::7}"
+          git commit -m "Reprint the Dhivehi plan from ${GITHUB_SHA::7}"
           git push origin HEAD:main
