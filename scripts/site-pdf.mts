@@ -90,7 +90,11 @@ await browser.close()
 
 /* ------------------------------------------------------------------- bind */
 
-const bound = await PDFDocument.create()
+// No clock in the file. pdf-lib stamps creation and modification times by
+// default, so the same site printed twice came out as two different files — and
+// the workflow commits whenever the bytes change, which would have meant a new
+// PDF and a fresh deploy on every push to main, whether or not a word had moved.
+const bound = await PDFDocument.create({ updateMetadata: false })
 bound.setTitle('Addu Development Plan')
 bound.setLanguage(locale)
 

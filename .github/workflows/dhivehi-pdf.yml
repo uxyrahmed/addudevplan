@@ -60,14 +60,18 @@ jobs:
       - name: Print the site
         run: npm run pdf:site
 
+      # Staged before it is compared. `git diff` only sees files git already
+      # tracks, so the first PDF — untracked — read as "unchanged" and was never
+      # committed; the first run printed 113 pages and published none of them.
+      # The index sees a new file and a changed one alike.
       - name: Commit it, if it changed
         run: |
-          if git diff --quiet -- public/plan/addu-plan-dhivehi.pdf; then
+          git add public/plan/addu-plan-dhivehi.pdf
+          if git diff --cached --quiet -- public/plan/addu-plan-dhivehi.pdf; then
             echo "The PDF already matches the site."
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add public/plan/addu-plan-dhivehi.pdf
           git commit -m "Reprint the Dhivehi plan from ${GITHUB_SHA::7}"
           git push origin HEAD:main
