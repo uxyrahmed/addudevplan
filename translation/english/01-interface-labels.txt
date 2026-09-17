@@ -1,6 +1,6 @@
 === ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
 File 1 of 19 · Interface labels and buttons
-55 segments
+56 segments
 
 Translate every numbered segment below into Dhivehi (Thaana).
 
@@ -75,9 +75,10 @@ should not be eight.
 [0137] 1958–2022
 [0140] Link Road
 [0141] Island of the city
-[0143] All goals
-[0144] Twelve goals
-[0145] Behind the plan
-[0146] Settlement history
+[0142] Airport
+[0144] All goals
+[0145] Twelve goals
+[0146] Behind the plan
+[0147] Settlement history
 
 --- END ---

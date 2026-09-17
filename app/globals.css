@@ -111,6 +111,8 @@
     --reef: color-mix(in oklab, var(--color-sky) 14%, white);
     --land: #ece0c4;
     --coast: #c9b58e;
+    /* The Link Road over drone imagery: the one hue lagoon, reef and land do not share. */
+    --road: #ff6a13;
   }
 
   html {

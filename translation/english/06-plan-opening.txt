@@ -22,55 +22,55 @@ the same thing in Dhivehi.
 
 --- BEGIN ---
 
-[0152] Addu Development Plan
-[0153] Addu City Council
-[0154] 30 July 2026
-[0155] For comments and feedback
-[0156] Addu City Vision
-[0157] Resilient, Inclusive, Sustainable Addu
-[0158] Our aim is a multi-cultural hub for young professionals, with
-[0159] 35,000 residents by 2030
-[0160] Addu is at a turning point
-[0161] Nearly fifty years after the final RAF flight departed Gan on 29 March 1976, Addu has come full circle — from a community profoundly affected by the British military withdrawal and decades of outward migration to a growing city poised to become the gateway to the Southern Maldives.
-[0162] In the years that followed, many residents left Addu for employment in the rapidly expanding Maldives' tourism industry, pursue secondary and higher education, and establish careers in Malé. This sustained outward migration began to ease with the establishment of quality secondary education in Addu and continued investment in healthcare, infrastructure, and economic development, enabling more people to live, study, work, and build their futures closer to home.
-[0163] Today, with a land area of more than 1,250 hectares, more than 25,000 residents, and expanding opportunities in tourism, trade, fisheries, agriculture, and emerging industries, Addu is increasingly becoming a destination in its own right. More than 1,700 Maldivians from other islands and over 4,700 foreign nationals now reside in the city — together representing around a quarter of its population.
-[0164] Its interconnected geography, diverse population, and established urban footprint offer a strong foundation for integrated planning, efficient service delivery, and sustainable growth. Building on these strengths, Addu is well positioned to become a resilient, inclusive, and sustainable city.
-[0165] residents in 2022 Census
-[0166] resident Maldivians in 2022
-[0167] foreigners in 2022
-[0168] hectares of land
-[0169] Hithadhoo
-[0170] Maradhoo
-[0171] Maradhoo-Feydhoo
-[0172] Feydhoo
-[0173] King Imaadudeen I establishes the present Hithadhoo settlement.
-[0174] Hankede abandoned and people settle in Maradhoo.
-[0175] 150 British Marines arrive in Villingili. The residents of Villingili transferred to Magu'dhoo, Huvadhoo Atoll.
-[0176] Royal Marine Engineers arrive in Gan. Residents of Gan and Feydhoo moved to Maamendhoo. Three runways constructed in Gan.
-[0177] British forces leave Addu.
-[0178] Residents of Gan and Feydhoo return back home.
-[0179] British begin construction of military base in Gan. Relocation of residents of Gan to Feydhoo, and of Feydhoo to Maradhoo-Feydhoo.
-[0180] British granted 30 year lease for Gan and Maamendhoo.
-[0181] Maradhoo and Maradhoo-Feydhoo established as Maradhoo, and Meedhoo and Hulhudhoo as Hulhumeedhoo, as two administrative islands.
-[0182] Separate administrative offices established for Maradhoo, Maradhoo-Feydhoo, Hulhudhoo and Meedhoo.
-[0183] British troops leave Gan.
-[0184] Addu City Council established.
-[0185] Hulhudhoo and Meedhoo established as separate administrative jurisdictions following a referendum.
-[0186] High out-migration since 1976
-[0187] Resident population as a share of the Maldives population
-[0188] Addu
-[0189] Male'
-[0190] Five interconnected pillars
-[0191] What distinguishes the Addu Development Plan is its integrated, systems-based approach. Rather than presenting a collection of standalone projects, it sets out a coherent model for transformation built on five interconnected pillars: modern smart infrastructure, empowered people, a diversified thriving economy, a rich natural environment, and good governance grounded in trust, respect, and strong leadership. Together, these pillars provide a clear and credible foundation for Addu's future as a resilient, inclusive and sustainable city.
-[0192] Infrastructure
-[0193] Modern smart infrastructure
-[0194] People
-[0195] Empowered people
-[0196] Economy
-[0197] A diversified economy
-[0198] Environment
-[0199] A rich natural environment
-[0200] Governance
-[0201] Good governance
+[0153] Addu Development Plan
+[0154] Addu City Council
+[0155] 30 July 2026
+[0156] For comments and feedback
+[0157] Addu City Vision
+[0158] Resilient, Inclusive, Sustainable Addu
+[0159] Our aim is a multi-cultural hub for young professionals, with
+[0160] 35,000 residents by 2030
+[0161] Addu is at a turning point
+[0162] Nearly fifty years after the final RAF flight departed Gan on 29 March 1976, Addu has come full circle — from a community profoundly affected by the British military withdrawal and decades of outward migration to a growing city poised to become the gateway to the Southern Maldives.
+[0163] In the years that followed, many residents left Addu for employment in the rapidly expanding Maldives' tourism industry, pursue secondary and higher education, and establish careers in Malé. This sustained outward migration began to ease with the establishment of quality secondary education in Addu and continued investment in healthcare, infrastructure, and economic development, enabling more people to live, study, work, and build their futures closer to home.
+[0164] Today, with a land area of more than 1,250 hectares, more than 25,000 residents, and expanding opportunities in tourism, trade, fisheries, agriculture, and emerging industries, Addu is increasingly becoming a destination in its own right. More than 1,700 Maldivians from other islands and over 4,700 foreign nationals now reside in the city — together representing around a quarter of its population.
+[0165] Its interconnected geography, diverse population, and established urban footprint offer a strong foundation for integrated planning, efficient service delivery, and sustainable growth. Building on these strengths, Addu is well positioned to become a resilient, inclusive, and sustainable city.
+[0166] residents in 2022 Census
+[0167] resident Maldivians in 2022
+[0168] foreigners in 2022
+[0169] hectares of land
+[0170] Hithadhoo
+[0171] Maradhoo
+[0172] Maradhoo-Feydhoo
+[0173] Feydhoo
+[0174] King Imaadudeen I establishes the present Hithadhoo settlement.
+[0175] Hankede abandoned and people settle in Maradhoo.
+[0176] 150 British Marines arrive in Villingili. The residents of Villingili transferred to Magu'dhoo, Huvadhoo Atoll.
+[0177] Royal Marine Engineers arrive in Gan. Residents of Gan and Feydhoo moved to Maamendhoo. Three runways constructed in Gan.
+[0178] British forces leave Addu.
+[0179] Residents of Gan and Feydhoo return back home.
+[0180] British begin construction of military base in Gan. Relocation of residents of Gan to Feydhoo, and of Feydhoo to Maradhoo-Feydhoo.
+[0181] British granted 30 year lease for Gan and Maamendhoo.
+[0182] Maradhoo and Maradhoo-Feydhoo established as Maradhoo, and Meedhoo and Hulhudhoo as Hulhumeedhoo, as two administrative islands.
+[0183] Separate administrative offices established for Maradhoo, Maradhoo-Feydhoo, Hulhudhoo and Meedhoo.
+[0184] British troops leave Gan.
+[0185] Addu City Council established.
+[0186] Hulhudhoo and Meedhoo established as separate administrative jurisdictions following a referendum.
+[0187] High out-migration since 1976
+[0188] Resident population as a share of the Maldives population
+[0189] Addu
+[0190] Male'
+[0191] Five interconnected pillars
+[0192] What distinguishes the Addu Development Plan is its integrated, systems-based approach. Rather than presenting a collection of standalone projects, it sets out a coherent model for transformation built on five interconnected pillars: modern smart infrastructure, empowered people, a diversified thriving economy, a rich natural environment, and good governance grounded in trust, respect, and strong leadership. Together, these pillars provide a clear and credible foundation for Addu's future as a resilient, inclusive and sustainable city.
+[0193] Infrastructure
+[0194] Modern smart infrastructure
+[0195] People
+[0196] Empowered people
+[0197] Economy
+[0198] A diversified economy
+[0199] Environment
+[0200] A rich natural environment
+[0201] Governance
+[0202] Good governance
 
 --- END ---
