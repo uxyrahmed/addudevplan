@@ -22,49 +22,49 @@ the same thing in Dhivehi.
 
 --- BEGIN ---
 
-[0640] Environment protection
-[0641] Protected reefs and wetlands, and a circular economy
-[0642] Addu City will protect and restore its unique natural environment while building a climate-resilient circular economy that supports sustainable growth and community wellbeing. The city will conserve coral reefs, wetlands, mangroves, beaches, and other ecologically significant ecosystems by designating and effectively managing protected areas and nature parks, restoring degraded habitats, and promoting responsible public access and eco-tourism. Through resource efficiency, waste reduction, recycling, nature-based solutions, and climate-resilient infrastructure, Addu will enhance biodiversity, strengthen resilience to climate change, and create a cleaner, healthier, and more sustainable city for present and future generations.
-[0643] protected areas
-[0644] UNESCO biosphere reserve
-[0645] hectares of protected areas
-[0646] hectares of beach area
-[0647] wetlands, covering 81.7 hectares
-[0648] Restore thriving populations of Addu's flagship species including White Terns, marine megafauna, sea turtles, beach crabs, corals, mangroves, and native flora by 2030.
-[0649] Zero net loss of critical habitats and protected areas by 2030.
-[0650] Attract at least 50,000 visitors annually to nature and wildlife attractions by 2028.
-[0651] Restore and protect 100% of priority public beaches through nature based solutions, restore beach vegetation, and beach nourishment by 2030.
-[0652] Phase out single use plastic bottles by 2028.
-[0653] Ensure waste is segregated to 4 types of recyclables (plastics, metals, compost, and paper/cardboard) by 2029.
-[0654] Protect ecologically significant areas
-[0655] Improve visitor experience at Addu Nature Park
-[0656] Develop management plan for Manta Cleaning Station
-[0657] Preserve sites for shark and whale watching
-[0658] Develop mangrove park and experience center
-[0659] Protect and restore threatened species
-[0660] Develop Dhon Dheeni protection plan
-[0661] Establish a botanical garden of rare and threatened species
-[0662] Establish zoned beach and reefs for birds, crabs and turtles
-[0663] Establish an interactive Coral Discovery Center
-[0664] Responsible wildlife interactions
-[0665] Develop management plans for rays, sharks, turtles and dolphins
-[0666] Establish viewing towers for White Terns, migratory birds and fauna
-[0667] Introduce electric wildlife boats and glass-bottom kayaks
-[0668] Organise annual wildlife festivals and "only in Addu" experiences
-[0669] Build climate resilience
-[0670] Develop roadside drainage system
-[0671] Construct flood control near wetlands
-[0672] Establish sea level and climate observation infrastructure
-[0673] Establish air and water quality monitoring systems
-[0674] Eliminate single use plastics
-[0675] Eliminate plastic water bottles
-[0676] Establish a water testing laboratory
-[0677] Enable glass bottling of water and soft drinks
-[0678] Launch an initiative for alternative bags
-[0679] A circular economy Addu
-[0680] Establish a 3 bin waste segregation at source system
-[0681] Build a modern recycling centre
-[0682] Develop infrastructure to convert organic waste to compost
-[0683] Establish Repair and Reuse Hub for furniture and appliances
+[0641] Environment protection
+[0642] Protected reefs and wetlands, and a circular economy
+[0643] Addu City will protect and restore its unique natural environment while building a climate-resilient circular economy that supports sustainable growth and community wellbeing. The city will conserve coral reefs, wetlands, mangroves, beaches, and other ecologically significant ecosystems by designating and effectively managing protected areas and nature parks, restoring degraded habitats, and promoting responsible public access and eco-tourism. Through resource efficiency, waste reduction, recycling, nature-based solutions, and climate-resilient infrastructure, Addu will enhance biodiversity, strengthen resilience to climate change, and create a cleaner, healthier, and more sustainable city for present and future generations.
+[0644] protected areas
+[0645] UNESCO biosphere reserve
+[0646] hectares of protected areas
+[0647] hectares of beach area
+[0648] wetlands, covering 81.7 hectares
+[0649] Restore thriving populations of Addu's flagship species including White Terns, marine megafauna, sea turtles, beach crabs, corals, mangroves, and native flora by 2030.
+[0650] Zero net loss of critical habitats and protected areas by 2030.
+[0651] Attract at least 50,000 visitors annually to nature and wildlife attractions by 2028.
+[0652] Restore and protect 100% of priority public beaches through nature based solutions, restore beach vegetation, and beach nourishment by 2030.
+[0653] Phase out single use plastic bottles by 2028.
+[0654] Ensure waste is segregated to 4 types of recyclables (plastics, metals, compost, and paper/cardboard) by 2029.
+[0655] Protect ecologically significant areas
+[0656] Improve visitor experience at Addu Nature Park
+[0657] Develop management plan for Manta Cleaning Station
+[0658] Preserve sites for shark and whale watching
+[0659] Develop mangrove park and experience center
+[0660] Protect and restore threatened species
+[0661] Develop Dhon Dheeni protection plan
+[0662] Establish a botanical garden of rare and threatened species
+[0663] Establish zoned beach and reefs for birds, crabs and turtles
+[0664] Establish an interactive Coral Discovery Center
+[0665] Responsible wildlife interactions
+[0666] Develop management plans for rays, sharks, turtles and dolphins
+[0667] Establish viewing towers for White Terns, migratory birds and fauna
+[0668] Introduce electric wildlife boats and glass-bottom kayaks
+[0669] Organise annual wildlife festivals and "only in Addu" experiences
+[0670] Build climate resilience
+[0671] Develop roadside drainage system
+[0672] Construct flood control near wetlands
+[0673] Establish sea level and climate observation infrastructure
+[0674] Establish air and water quality monitoring systems
+[0675] Eliminate single use plastics
+[0676] Eliminate plastic water bottles
+[0677] Establish a water testing laboratory
+[0678] Enable glass bottling of water and soft drinks
+[0679] Launch an initiative for alternative bags
+[0680] A circular economy Addu
+[0681] Establish a 3 bin waste segregation at source system
+[0682] Build a modern recycling centre
+[0683] Develop infrastructure to convert organic waste to compost
+[0684] Establish Repair and Reuse Hub for furniture and appliances
 
 --- END ---

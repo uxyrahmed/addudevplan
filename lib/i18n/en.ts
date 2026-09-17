@@ -256,6 +256,7 @@ export const en = {
   map: {
     linkRoad: 'Link Road',
     islandOfCity: 'Island of the city',
+    airport: 'Airport',
     aria: 'Map of Addu Atoll. The four islands of the city — {islands} — lie along the western side of the atoll from north to south, joined end to end by the Link Road, which crosses open water on causeways. The road runs on past Feydhoo to the south-east to Gan, which is outside the city and carries the international airport and its runway. The rest of the atoll is reef and lagoon.',
   },
 

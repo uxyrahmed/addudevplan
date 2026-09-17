@@ -22,47 +22,47 @@ the same thing in Dhivehi.
 
 --- BEGIN ---
 
-[0471] Health and well-being
-[0472] Comprehensive care within 10 minutes of home
-[0473] Addu City faces growing health challenges, including rising non-communicable diseases, mental health needs, and the high cost of care and medicines. Strengthening prevention — through cancer screening, nutrition, and active lifestyles — alongside improved mental health support is essential for long-term well-being. Upgrading island health centres into effective primary healthcare providers and positioning Addu Equatorial Hospital as the southern medical hub will improve access and quality of care. Investing in a skilled health workforce and affordable services will ensure a resilient, inclusive, and people-centred health system. There are 561 people in the health workforce in Addu. There are 19 registered pharmacies.
-[0474] operational health facilities
-[0475] specialist doctors
-[0476] medical officers
-[0477] nurses
-[0478] registered pharmacies
-[0479] Screen 90% of adults for diabetes, hypertension, and priority cancers every two years.
-[0480] Establish 50 bed hospitals in Feydhoo and Maradhoo by 2028.
-[0481] Ensure 100% of residents have access to comprehensive healthcare within 10 minutes of their home.
-[0482] Develop a virtual network of hospitals, clinics, pharmacies and wellness service providers by 2028.
-[0483] Active healthy community
-[0484] Develop gyms and fitness centres
-[0485] Organise group fitness activities and sports events
-[0486] Conduct nutrition education led by Chefs
-[0487] Prioritise mosquito and vector control
-[0488] Cancer prevention and early detection
-[0489] Conduct systemic free screening
-[0490] Establish a registry to track diagnosis and outcomes
-[0491] Implement tobacco control and insulin resistance awareness
-[0492] Conduct food, water and air quality audit and monitoring
-[0493] 24/7 mental health support
-[0494] Establish a trained team of counsellors
-[0495] Create spaces for walk-in counselling services
-[0496] Conduct training for counsellors and crisis responders
-[0497] Establish peer and youth ambassador groups
-[0498] Comprehensive modern care
-[0499] Establish hospitals in Feydhoo and Maradhoo
-[0500] Expand maternal, child health, and fertility treatment services
-[0501] Establish a hyperbaric chamber
-[0502] Establish veterinary care clinic
-[0503] Smart health services
-[0504] Establish digital appointment management system
-[0505] Establish digital surveillance for lifestyle diseases
-[0506] Launch electronic health record system
-[0507] Promote wearable health devices and digital monitoring
-[0508] Access to quality pharmaceuticals
-[0509] Develop an Addu Essential Medicine List
-[0510] Network the public and private pharmacies in region
-[0511] Enable digital stock monitoring
-[0512] Integrate tele-pharmacy, e-prescription and home delivery
+[0472] Health and well-being
+[0473] Comprehensive care within 10 minutes of home
+[0474] Addu City faces growing health challenges, including rising non-communicable diseases, mental health needs, and the high cost of care and medicines. Strengthening prevention — through cancer screening, nutrition, and active lifestyles — alongside improved mental health support is essential for long-term well-being. Upgrading island health centres into effective primary healthcare providers and positioning Addu Equatorial Hospital as the southern medical hub will improve access and quality of care. Investing in a skilled health workforce and affordable services will ensure a resilient, inclusive, and people-centred health system. There are 561 people in the health workforce in Addu. There are 19 registered pharmacies.
+[0475] operational health facilities
+[0476] specialist doctors
+[0477] medical officers
+[0478] nurses
+[0479] registered pharmacies
+[0480] Screen 90% of adults for diabetes, hypertension, and priority cancers every two years.
+[0481] Establish 50 bed hospitals in Feydhoo and Maradhoo by 2028.
+[0482] Ensure 100% of residents have access to comprehensive healthcare within 10 minutes of their home.
+[0483] Develop a virtual network of hospitals, clinics, pharmacies and wellness service providers by 2028.
+[0484] Active healthy community
+[0485] Develop gyms and fitness centres
+[0486] Organise group fitness activities and sports events
+[0487] Conduct nutrition education led by Chefs
+[0488] Prioritise mosquito and vector control
+[0489] Cancer prevention and early detection
+[0490] Conduct systemic free screening
+[0491] Establish a registry to track diagnosis and outcomes
+[0492] Implement tobacco control and insulin resistance awareness
+[0493] Conduct food, water and air quality audit and monitoring
+[0494] 24/7 mental health support
+[0495] Establish a trained team of counsellors
+[0496] Create spaces for walk-in counselling services
+[0497] Conduct training for counsellors and crisis responders
+[0498] Establish peer and youth ambassador groups
+[0499] Comprehensive modern care
+[0500] Establish hospitals in Feydhoo and Maradhoo
+[0501] Expand maternal, child health, and fertility treatment services
+[0502] Establish a hyperbaric chamber
+[0503] Establish veterinary care clinic
+[0504] Smart health services
+[0505] Establish digital appointment management system
+[0506] Establish digital surveillance for lifestyle diseases
+[0507] Launch electronic health record system
+[0508] Promote wearable health devices and digital monitoring
+[0509] Access to quality pharmaceuticals
+[0510] Develop an Addu Essential Medicine List
+[0511] Network the public and private pharmacies in region
+[0512] Enable digital stock monitoring
+[0513] Integrate tele-pharmacy, e-prescription and home delivery
 
 --- END ---

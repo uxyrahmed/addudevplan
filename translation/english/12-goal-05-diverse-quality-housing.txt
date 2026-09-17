@@ -22,32 +22,32 @@ the same thing in Dhivehi.
 
 --- BEGIN ---
 
-[0349] Diverse quality housing
-[0350] 350 new homes and 1,000 rental units
-[0351] Addu City is planning to attract professionals, skilled workers, and returning families. Accelerating housing delivery is essential to attract residents, and we will deliver new sustainable homes for families. To support Addu's transformation into a destination for wellness, education, aviation, and business, we will deliver spacious apartments across low-rise (3-4 storey) apartment buildings, providing high-quality accommodation for professionals and their families. These apartments will feature generous living spaces, lift access, secure parking, and energy-efficient design, offering an attractive lifestyle for professionals, entrepreneurs, and skilled workers. Together with complementary initiatives for affordable rental accommodation and mixed-use neighbourhoods, this goal will create attractive liveable communities.
-[0352] existing houses
-[0353] flats and row houses
-[0354] land plots released for housing
-[0355] housing units under construction
-[0356] planned housing units
-[0357] Develop 05 new starter home neighbourhoods by 2030.
-[0358] Provide 350 new sustainable homes for families by 2028.
-[0359] Develop accommodation for 150 families of professionals by 2028.
-[0360] Develop 1,000 high quality rental units by 2030.
-[0361] Starter home neighbourhoods
-[0362] Develop starter home neighbourhoods
-[0363] Build starter homes for young families
-[0364] Provide First Home Ownership Support
-[0365] Build display homes
-[0366] Residences for professionals
-[0367] Develop low rise (3-4 floor) apartment buildings
-[0368] Build spacious modern apartments
-[0369] Provide land for 2nd homes
-[0370] Provide land for private housing investment
-[0371] Diverse rental accommodation
-[0372] Develop purpose built student residences
-[0373] Develop serviced apartments for medical visitors
-[0374] Provide low-rise rental apartments for employees
-[0375] Integrate cafés, retail and childcare to mixed use precincts
+[0350] Diverse quality housing
+[0351] 350 new homes and 1,000 rental units
+[0352] Addu City is planning to attract professionals, skilled workers, and returning families. Accelerating housing delivery is essential to attract residents, and we will deliver new sustainable homes for families. To support Addu's transformation into a destination for wellness, education, aviation, and business, we will deliver spacious apartments across low-rise (3-4 storey) apartment buildings, providing high-quality accommodation for professionals and their families. These apartments will feature generous living spaces, lift access, secure parking, and energy-efficient design, offering an attractive lifestyle for professionals, entrepreneurs, and skilled workers. Together with complementary initiatives for affordable rental accommodation and mixed-use neighbourhoods, this goal will create attractive liveable communities.
+[0353] existing houses
+[0354] flats and row houses
+[0355] land plots released for housing
+[0356] housing units under construction
+[0357] planned housing units
+[0358] Develop 05 new starter home neighbourhoods by 2030.
+[0359] Provide 350 new sustainable homes for families by 2028.
+[0360] Develop accommodation for 150 families of professionals by 2028.
+[0361] Develop 1,000 high quality rental units by 2030.
+[0362] Starter home neighbourhoods
+[0363] Develop starter home neighbourhoods
+[0364] Build starter homes for young families
+[0365] Provide First Home Ownership Support
+[0366] Build display homes
+[0367] Residences for professionals
+[0368] Develop low rise (3-4 floor) apartment buildings
+[0369] Build spacious modern apartments
+[0370] Provide land for 2nd homes
+[0371] Provide land for private housing investment
+[0372] Diverse rental accommodation
+[0373] Develop purpose built student residences
+[0374] Develop serviced apartments for medical visitors
+[0375] Provide low-rise rental apartments for employees
+[0376] Integrate cafés, retail and childcare to mixed use precincts
 
 --- END ---

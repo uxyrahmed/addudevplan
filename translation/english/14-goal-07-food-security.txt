@@ -22,56 +22,56 @@ the same thing in Dhivehi.
 
 --- BEGIN ---
 
-[0420] Ensure food security
-[0421] Grow more at home, land more from the sea
-[0422] The Maldives imported approximately USD 790.5 million worth of food in 2025, underscoring the country's heavy dependence on external markets while revealing a significant economic opportunity to expand domestic production. Against a backdrop of rising global food prices, supply-chain disruptions, and climate-related shocks, strengthening food security has become a strategic priority for Addu City. With the largest land area among the Maldives' atolls, substantial agricultural potential, productive fisheries, and a growing population, Addu is uniquely positioned for sustainable food production and to contribute meaningfully to national food security.
-[0423] national food imports in 2025
-[0424] USD 790.5 million
-[0425] meat, seafood and fish
-[0426] USD 156.7 million
-[0427] vegetables and root crops
-[0428] USD 106.9 million
-[0429] fruits, nuts and seeds
-[0430] USD 106.5 million
-[0431] staples
-[0432] USD 33.5 million
-[0433] eggs
-[0434] USD 24.3 million
-[0435] Ensure 75% of homes grow 05 types of tropical fruits and 05 vegetables at home by 2028.
-[0436] Enable commercial production of 03 fruits and 03 vegetables to supply 30% of the need of the Maldives tourism market by 2030.
-[0437] Ensure ice and fuel are available to fishers in Hithadhoo and Maradhoo harbours by 2028.
-[0438] Supply at least 50% of Valhomas (smoked fish) and Rihaakuru (fish paste) sold in the Maldives by 2030.
-[0439] Produce at least 30,000 eggs per day to meet a minimum of 80% of local household, hospitality, business, and institutional demand.
-[0440] Ensure that 100% of food producers, processors, distributors and food-service establishments in Addu City are registered and undergo risk-based inspection.
-[0441] Every home a proud grower
-[0442] Establish a nursery and seed bank
-[0443] Distribute starter kits for households
-[0444] Launch home gardening app
-[0445] Establish home grower's market
-[0446] Organic agriculture revival
-[0447] Launch coconut & kurumba cultivation and replanting
-[0448] Allocate land for banana, breadfruit and yam plantation
-[0449] Establish orchards for papaya, mango, guava and passionfruit
-[0450] Establish crop and soil safety monitoring
-[0451] Technology driven fresh food
-[0452] Develop solar-powered climate-controlled greenhouses
-[0453] Establish vertical farms with hydroponic and aeroponic tech
-[0454] Introduce smart precision fertiliser use and irrigation
-[0455] Introduce drones + AI to track stress, pests and diseases
-[0456] High quality resilient fisheries
-[0457] Invest in renewables powered ice production
-[0458] Expand fisheries fuel storage capacity for 03 months
-[0459] Establish quality assurance for 'valhomas' and 'rihaakuru'
-[0460] Brand and promote 'valhomas', 'rihaakuru' and fish products
-[0461] Fresh eggs every day
-[0462] Build demonstration poultry farms
-[0463] Establish a PPP for quality feed development
-[0464] Conduct training on egg handling, storage and quality
-[0465] Establish a biosecurity and disease management system
-[0466] Trusted quality local food
-[0467] Establish a food quality laboratory
-[0468] Establish a food fund to support growers and producers
-[0469] Register bakers and snack producers
-[0470] Establish training and certification for food producers
+[0421] Ensure food security
+[0422] Grow more at home, land more from the sea
+[0423] The Maldives imported approximately USD 790.5 million worth of food in 2025, underscoring the country's heavy dependence on external markets while revealing a significant economic opportunity to expand domestic production. Against a backdrop of rising global food prices, supply-chain disruptions, and climate-related shocks, strengthening food security has become a strategic priority for Addu City. With the largest land area among the Maldives' atolls, substantial agricultural potential, productive fisheries, and a growing population, Addu is uniquely positioned for sustainable food production and to contribute meaningfully to national food security.
+[0424] national food imports in 2025
+[0425] USD 790.5 million
+[0426] meat, seafood and fish
+[0427] USD 156.7 million
+[0428] vegetables and root crops
+[0429] USD 106.9 million
+[0430] fruits, nuts and seeds
+[0431] USD 106.5 million
+[0432] staples
+[0433] USD 33.5 million
+[0434] eggs
+[0435] USD 24.3 million
+[0436] Ensure 75% of homes grow 05 types of tropical fruits and 05 vegetables at home by 2028.
+[0437] Enable commercial production of 03 fruits and 03 vegetables to supply 30% of the need of the Maldives tourism market by 2030.
+[0438] Ensure ice and fuel are available to fishers in Hithadhoo and Maradhoo harbours by 2028.
+[0439] Supply at least 50% of Valhomas (smoked fish) and Rihaakuru (fish paste) sold in the Maldives by 2030.
+[0440] Produce at least 30,000 eggs per day to meet a minimum of 80% of local household, hospitality, business, and institutional demand.
+[0441] Ensure that 100% of food producers, processors, distributors and food-service establishments in Addu City are registered and undergo risk-based inspection.
+[0442] Every home a proud grower
+[0443] Establish a nursery and seed bank
+[0444] Distribute starter kits for households
+[0445] Launch home gardening app
+[0446] Establish home grower's market
+[0447] Organic agriculture revival
+[0448] Launch coconut & kurumba cultivation and replanting
+[0449] Allocate land for banana, breadfruit and yam plantation
+[0450] Establish orchards for papaya, mango, guava and passionfruit
+[0451] Establish crop and soil safety monitoring
+[0452] Technology driven fresh food
+[0453] Develop solar-powered climate-controlled greenhouses
+[0454] Establish vertical farms with hydroponic and aeroponic tech
+[0455] Introduce smart precision fertiliser use and irrigation
+[0456] Introduce drones + AI to track stress, pests and diseases
+[0457] High quality resilient fisheries
+[0458] Invest in renewables powered ice production
+[0459] Expand fisheries fuel storage capacity for 03 months
+[0460] Establish quality assurance for 'valhomas' and 'rihaakuru'
+[0461] Brand and promote 'valhomas', 'rihaakuru' and fish products
+[0462] Fresh eggs every day
+[0463] Build demonstration poultry farms
+[0464] Establish a PPP for quality feed development
+[0465] Conduct training on egg handling, storage and quality
+[0466] Establish a biosecurity and disease management system
+[0467] Trusted quality local food
+[0468] Establish a food quality laboratory
+[0469] Establish a food fund to support growers and producers
+[0470] Register bakers and snack producers
+[0471] Establish training and certification for food producers
 
 --- END ---

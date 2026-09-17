@@ -36,7 +36,7 @@ written in Dhivehi, not translated into it.
 [0130] Since the British departed Gan in 1976, decades of outward migration occurred.
 [0133] This plan is an integrated blueprint for transforming Addu into a resilient, inclusive and sustainable city.
 [0139] Addu’s share of the Maldivian population fell from 9% in 1958 to 5.1% in 2022. Male’s rose from 11% to 40%.
-[0147] Published on {date} by {author}. Every action has its own place to respond.
-[0148] Open for consultation — figures and targets can change with your feedback.
+[0148] Published on {date} by {author}. Every action has its own place to respond.
+[0149] Open for consultation — figures and targets can change with your feedback.
 
 --- END ---
