@@ -1603,7 +1603,11 @@ export const INITIATIVES: Initiative[] = [
   {
     number: '04',
     title: 'Starter homes for young families',
-    text: 'We will provide young families 250 starter homes. These homes will be powered by renewable energy, provide safe water, and include gardens and open spaces where children can play, learn, and grow.',
+    // 250 in the 3 September draft. The council's second review of the Dhivehi
+    // edition set it at 350, and the English follows it here rather than the
+    // deck, so the two editions do not disagree about how many homes the plan
+    // promises.
+    text: 'We will provide young families 350 starter homes. These homes will be powered by renewable energy, provide safe water, and include gardens and open spaces where children can play, learn, and grow.',
   },
   {
     number: '05',
