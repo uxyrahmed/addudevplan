@@ -969,3 +969,141 @@ html[data-anim][dir='rtl'] [data-reveal='measure'] {
   letter-spacing: normal;
   text-transform: none;
 }
+
+/* The wordmark's lower fili, which `truncate` was cutting off.
+
+   `truncate` is `overflow: hidden`, and overflow clips at the padding edge. The
+   wordmark sets its size directly rather than through a `text-*` utility, so
+   none of the leading above reaches it: it runs at `leading-tight`, a 19px box
+   around 15.2px type, with the baseline 16.9px down. Thaana's ink descends
+   8.3px past that baseline, so roughly six pixels of every vowel hanging below
+   a consonant were cut clean off — visible on the title in the header, and only
+   in this edition, because Latin ink fits the box it was measured for.
+
+   Padding rather than leading, because the lockup already stands 66px tall in a
+   64px header and opening the line height would add seven more. Padding gives
+   the clipping box the room; the negative margin hands the layout back, so the
+   year underneath does not move. */
+:lang(dv) .wordmark-title {
+  padding-block-end: 0.45em;
+  margin-block-end: -0.45em;
+}
+
+/* ==========================================================================
+   Print
+   ==========================================================================
+
+   The plan is published as a PDF, and the PDF is this site printed rather than
+   a document rebuilt to look like it — one pipeline, so the page and the paper
+   cannot drift apart. `scripts/site-pdf.mts` drives a headless browser over the
+   same routes a resident reads and the workflow commits what comes out.
+
+   Everything below is what the screen does that paper cannot. */
+
+/* The reveals, which would otherwise print as blank paper.
+
+   Every `[data-reveal]` starts hidden and is uncovered by an observer as it
+   scrolls into view. Print has no scrolling and no fold: a page rendered
+   straight to paper would show the sections that happened to have been passed
+   and nothing else. This is the same override the `<noscript>` block in
+   `app/[lang]/layout.tsx` carries, for the same reason — nothing that is in the
+   document should be invisible in a copy of it. */
+@media print {
+  html[data-anim] [data-reveal],
+  html[data-anim] [data-enter] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  /* Colour is content here: the goal plates, the navy cover, the pillar marks.
+     Chromium is told to print backgrounds by the script; this stops it
+     second-guessing the values. */
+  html {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  @page {
+    size: A4;
+    margin: 14mm 12mm;
+  }
+
+  /* Anything fixed to the viewport, which paper does not have. A fixed header
+     prints once, over the top of the first page, and then haunts nothing. */
+  header,
+  .scroll-rail,
+  .basket-launcher,
+  .panel-sheet,
+  .skip-link {
+    display: none !important;
+  }
+
+  /* The consultation device itself. The reaction buttons and the comment box
+     under every action are the point of the site and meaningless on paper. The
+     prose around them stays: what the plan says does not change with the
+     medium, only what you can do about it here. */
+  .feedback-control {
+    display: none !important;
+  }
+
+  /* The settlement timeline, unrolled.
+
+     On screen it is a horizontal scroller: thirteen entries in a row, paged by
+     the arrows beside it. Printed as-is it gave three entries and a pair of
+     dead buttons — the other ten were off the side of the paper, which is a
+     hole in the record rather than a layout quirk. Paper has no sideways, so
+     the track wraps and every entry prints. */
+  .timeline-controls {
+    display: none !important;
+  }
+
+  .timeline-rail {
+    overflow: visible !important;
+    margin-inline: 0 !important;
+    padding-inline: 0 !important;
+  }
+
+  .timeline-track {
+    flex-wrap: wrap;
+    min-width: 0;
+    row-gap: 1.5rem;
+  }
+
+  .timeline-item {
+    break-inside: avoid-page;
+  }
+
+  /* Screen rhythm is not page rhythm. The sections breathe at py-20/py-32,
+     which is right scrolling and expensive on paper — it was pushing the plan
+     towards a hundred and twenty pages, most of the added ones blank. */
+  main > section {
+    padding-block: 10mm !important;
+  }
+
+  /* The cover photograph stays. It was the first suspect when the file came to
+     18MB — a full-bleed background rasterised at page resolution is exactly the
+     shape of that problem — but measured, the tern costs 973KB for the whole
+     home route. The weight was a 4134×2923 PNG being tried out in place of the
+     atoll map on a branch, and it went with the branch. */
+
+  /* Keep a figure with its label, an action with its strategy, a card whole. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid-page;
+  }
+
+  li,
+  figure,
+  blockquote,
+  .goal-card {
+    break-inside: avoid-page;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+}

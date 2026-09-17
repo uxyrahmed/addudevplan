@@ -11,7 +11,8 @@
     "i18n:apply": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n-apply.mts",
     "i18n:units": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n-units.mts",
     "i18n:docx": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n-docx.mts",
-    "i18n:docx-apply": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n-docx-apply.mts"
+    "i18n:docx-apply": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n-docx-apply.mts",
+    "pdf:site": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/site-pdf.mts"
   },
   "dependencies": {
     "@hugeicons/core-free-icons": "^4.2.3",
@@ -32,6 +33,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.12",
+    "pdf-lib": "^1.17.1",
+    "playwright": "^1.63.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

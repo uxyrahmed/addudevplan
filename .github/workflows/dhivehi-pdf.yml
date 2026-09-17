@@ -1,0 +1,73 @@
+# Keeps the Dhivehi PDF in step with the site, because it *is* the site.
+#
+# `scripts/site-pdf.mts` builds the plan, serves it, and walks a headless
+# browser over the same routes a resident reads — the home page, the settlement
+# history, then the twelve goals — printing each one and binding the result.
+# What `@media print` in `app/globals.css` decides is what paper gets.
+#
+# So the trigger is any change to main that is not the PDF itself. A word in a
+# transcript moves it; so does a change to the print rules, a component, or the
+# type scale. That is the point: there is one source for what the plan says and
+# how it looks, and the PDF is a photograph of it rather than a second document
+# that has to be kept in line by hand.
+#
+# The commit lands on `public/plan/`, which `paths-ignore` excludes, so it
+# cannot set itself off again. It is deliberately not marked `[skip ci]`: the
+# deploy that publishes the new PDF is the one that commit triggers.
+name: Dhivehi plan PDF
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'public/plan/**'
+      - '**/*.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# One at a time, newest wins: two pushes in a row should leave the PDF matching
+# the second one rather than racing over which commit gets published.
+concurrency:
+  group: dhivehi-pdf
+  cancel-in-progress: true
+
+jobs:
+  pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      # Chromium does the printing. `--with-deps` is what brings the shared
+      # libraries a headless browser needs on a bare runner.
+      - run: npx playwright install --with-deps chromium
+
+      - run: npm run build
+
+      - name: Serve it
+        run: |
+          npm run start &
+          npx --yes wait-on http://localhost:3000/dv --timeout 120000
+
+      - name: Print the site
+        run: npm run pdf:site
+
+      - name: Commit it, if it changed
+        run: |
+          if git diff --quiet -- public/plan/addu-plan-dhivehi.pdf; then
+            echo "The PDF already matches the site."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/plan/addu-plan-dhivehi.pdf
+          git commit -m "Reprint the Dhivehi plan from ${GITHUB_SHA::7}"
+          git push origin HEAD:main

@@ -66,7 +66,9 @@ export function FeedbackControl({ id, subject, accent }: Props) {
   const showComment = open ?? Boolean(posted)
 
   return (
-    <div className="mt-3">
+    // Named so the print rules can take the device out: on paper there is
+    // nothing to tap, and a row of dead buttons under every action is noise.
+    <div className="feedback-control mt-3">
       <div className="flex flex-wrap items-center gap-1.5">
         {OFFERED_REACTIONS.map((r) => {
           const active = entry?.reaction === r
