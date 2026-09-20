@@ -41,8 +41,14 @@ export function PopulationRegister({ locale }: { locale: Locale }) {
           `LATEST_REGISTER` rather than naming 2025, so the stamp follows the
           table the next time the council adds a row to it. `text-micro` carries
           its own tracking and uppercasing, both of which globals.css drops for
-          Thaana — neither does anything to a joined script but prise it apart. */}
-      <span className="mb-3 block font-body text-micro text-stone uppercase tabular-nums">
+          Thaana — neither does anything to a joined script but prise it apart.
+          Two points over the token rather than the next step up the scale, which
+          is `text-small` and carries no tracking: that would have restyled the
+          English eyebrow rather than enlarged it, and taken the Thaana out of
+          the `text-micro` rule that spares it the tracking. 12px was small for a
+          script this fine — Thaana's fili are most of what distinguishes one
+          letter from the next. */}
+      <span className="mb-3 block font-body text-micro [font-size:0.875rem] text-stone uppercase tabular-nums">
         {fill(t.home.registerYear, { year: LATEST_REGISTER.year })}
       </span>
       <span className="block font-display text-display-1 leading-[1.02] text-navy tabular-nums">
