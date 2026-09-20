@@ -26,22 +26,22 @@ plain sentence that describes what is there.
 [0003] Main
 [0004] {title} home
 [0009] A White Tern in flight over Addu — a bird found only here.
-[0044] Actions you have responded to in goal {number}
-[0052] {label}: {subject}
-[0055] Add a comment on: {subject}
-[0056] Edit your comment on: {subject}
-[0063] Remove your comment on: {subject}
-[0066] Post your comment on: {subject}
-[0067] Update your comment on: {subject}
-[0074] Your feedback: {count} of {total} actions answered across {started} of {goals} goals{overall} — {state}. Open to review it.
-[0081] Your feedback on the plan
-[0086] Remove your comment on the plan as a whole
-[0089] Show your {count} {noun} on goal {number}
-[0090] Hide your {count} {noun} on goal {number}
-[0093] Start goal {number}: {title}
-[0094] Remove your feedback on: {label}
-[0138] {subtitle}. Addu falls from 9% in 1958 to 5.1% in 2022, while Male' rises from 11% to 40%.
-[0143] Map of Addu Atoll. The four islands of the city — {islands} — lie along the western side of the atoll from north to south, joined end to end by the Link Road, which crosses open water on causeways. The road runs on past Feydhoo to the south-east to Gan, which is outside the city and carries the international airport and its runway. The rest of the atoll is reef and lagoon.
-[0152] The plan’s cover: the City of Addu emblem above the title Addu Development Plan 2026–2031, set over a pale outline of the atoll.
+[0043] Actions you have responded to in goal {number}
+[0051] {label}: {subject}
+[0054] Add a comment on: {subject}
+[0055] Edit your comment on: {subject}
+[0062] Remove your comment on: {subject}
+[0065] Post your comment on: {subject}
+[0066] Update your comment on: {subject}
+[0073] Your feedback: {count} of {total} actions answered across {started} of {goals} goals{overall} — {state}. Open to review it.
+[0080] Your feedback on the plan
+[0085] Remove your comment on the plan as a whole
+[0088] Show your {count} {noun} on goal {number}
+[0089] Hide your {count} {noun} on goal {number}
+[0092] Start goal {number}: {title}
+[0093] Remove your feedback on: {label}
+[0137] {subtitle}. Addu falls from 9% in 1958 to 5.1% in 2022, while Male' rises from 11% to 40%.
+[0142] Map of Addu Atoll. The four islands of the city — {islands} — lie along the western side of the atoll from north to south, joined end to end by the Link Road, which crosses open water on causeways. The road runs on past Feydhoo to the south-east to Gan, which is outside the city and carries the international airport and its runway. The rest of the atoll is reef and lagoon.
+[0151] The plan’s cover: the City of Addu emblem above the title Addu Development Plan 2026–2031, set over a pale outline of the atoll.
 
 --- END ---

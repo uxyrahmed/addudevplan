@@ -1,5 +1,4 @@
 import {
-  LATEST_POPULATION,
   LATEST_REGISTER,
   MEASURED_POPULATION,
   POPULATION_SCALE_MAX,
@@ -38,58 +37,19 @@ export function PopulationRegister({ locale }: { locale: Locale }) {
     // being reported. The vision section stacks a figure over its unit the same
     // way.
     <p>
+      {/* The year the count was taken, over the count. It reads off
+          `LATEST_REGISTER` rather than naming 2025, so the stamp follows the
+          table the next time the council adds a row to it. `text-micro` carries
+          its own tracking and uppercasing, both of which globals.css drops for
+          Thaana — neither does anything to a joined script but prise it apart. */}
+      <span className="mb-3 block font-body text-micro text-stone uppercase tabular-nums">
+        {fill(t.home.registerYear, { year: LATEST_REGISTER.year })}
+      </span>
       <span className="block font-display text-display-1 leading-[1.02] text-navy tabular-nums">
         {fmt(LATEST_REGISTER.registered)}
       </span>
       <span className="mt-3 block max-w-[24ch] text-lead text-ink">{t.home.registerSentence}</span>
     </p>
-  )
-}
-
-/**
- * The last year counted on both sides, under the sentences that cite it.
- *
- * It used to be provenance for a subtraction — the register and the resident
- * count the gap above was the difference of. With the gap gone from this page
- * it is provenance for the target sentence instead, which names 25,062 as
- * where Addu had got to by 2022 and 35,000 as where the plan means to be by
- * 2030. This line is where a reader checks the first of those, and sees what
- * the register said in the same year.
- *
- * Split out so the page can set it beside the figure rather than beneath it:
- * as a fourth and fifth line under the number it left the column alongside
- * holding two lines of text and a void.
- *
- * The register half is conditional. `LATEST_POPULATION` is the last year with
- * a resident count, and since the council carried the table back to 1958 that
- * is no longer guaranteed to be a year the register was counted in — the four
- * earliest rows have no register at all. It happens to be 2022, which has
- * both; this prints what the row actually holds rather than asserting it.
- */
-export function PopulationSources({ locale }: { locale: Locale }) {
-  const t = getDictionary(locale)
-  const latest = LATEST_POPULATION
-
-  return (
-    <div className="mt-6 border-t border-hairline pt-4">
-      {/* The year used to trail the two figures as a third dot-separated item,
-          where it read as another quantity rather than as the date they were
-          taken on. It leads the sentence instead. */}
-      <p className="text-small text-stone tabular-nums">
-        {latest.registered != null ? (
-          <>
-            {fill(t.home.sourcesLine, {
-              year: latest.year,
-              registered: fmt(latest.registered),
-            })}
-            <span aria-hidden className="mx-2 text-mist">
-              ·
-            </span>
-          </>
-        ) : null}
-        {fill(t.home.sourcesResident, { resident: fmt(latest.resident) })}
-      </p>
-    </div>
   )
 }
 
@@ -102,7 +62,7 @@ export function PopulationSources({ locale }: { locale: Locale }) {
  * space. The council replaced the table in review with a single series, 1958
  * to 2022, so there is no second figure to leave a void against and the row is
  * one bar. The register has not been dropped from the site: the home page
- * leads on it, and `PopulationSources` still prints both counts for 2022.
+ * leads on it, set at display size above the target sentence.
  *
  * Four of the thirteen rows are older than the register itself. 1958 to 1974
  * carry a resident count and nothing else, which is why the ledger reads

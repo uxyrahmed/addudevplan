@@ -20,6 +20,7 @@ import { fileURLToPath } from 'node:url'
 
 import { en } from '../lib/i18n/en.ts'
 import {
+  GAN_ISLAND,
   GOALS,
   HEADLINE_FACTS,
   INITIATIVES,
@@ -239,6 +240,11 @@ front.segments.push(
   ...TURNING_POINT.paragraphs.map((p, i) => seg({ t: 'turningPara', index: i }, p)),
   ...HEADLINE_FACTS.map((f) => seg({ t: 'fact', label: f.label }, f.label)),
   ...LAND.islands.map((name) => seg({ t: 'island', name }, name)),
+  // Gan is not one of the four islands of the city, so it is not in
+  // `LAND.islands` — and being in neither list it was never sent out, which is
+  // why it was the one name on the map still reading in English. It is a place
+  // name a Dhivehi reader has a spelling for, the same as the other four.
+  seg({ t: 'island', name: GAN_ISLAND }, GAN_ISLAND),
   ...TIMELINE.map((e) => seg({ t: 'timeline', year: e.year }, e.text)),
   seg({ t: 'migration', field: 'title' }, MIGRATION_SERIES.title),
   seg({ t: 'migration', field: 'subtitle' }, MIGRATION_SERIES.subtitle),

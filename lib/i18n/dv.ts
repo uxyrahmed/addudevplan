@@ -42,8 +42,7 @@ export const dv: Dictionary = {
   home: {
     geographyTitle: 'ގުޅިފައިވާ އަތޮޅެއް',
     islandsLabel: 'ސިޓީގެ ރަށްތައް',
-    sourcesLine: '{year} ގައި: ރަޖިސްޓަރީގައި {registered}',
-    sourcesResident: 'މިތާ އުޅޭ މީހުން: {resident}',
+    registerYear: '{year} ގައި:',
     backgroundLink: 'އާބާދީގެ ތާރީޚާއި އަހަރުން އަހަރަށް ބަދަލުވި ގޮތް',
     visionResidents: '2030 އަށް ލަފާކުރާ އާބާދީ',
     goalsTitle: 'ބާރަ ލަނޑުދަނޑި',

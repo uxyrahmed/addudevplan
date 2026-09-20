@@ -23,64 +23,64 @@ person. No apology and no officialese.
 
 --- BEGIN ---
 
-[0042] Strategies for this goal are not published yet. They will appear here, each action open for your response, as soon as they are.
-[0043] You have responded to {answered} of {total} actions
-[0045] Strategy {number}:
-[0053] Comment
-[0054] Comment added
-[0057] — not posted yet
-[0058] Your comment on: {subject}
-[0059] What would you change, add, or worry about?
-[0060] Cleared here only — Remove takes it out of your feedback
-[0061] Posted with your feedback
-[0062] Remove
-[0064] Post
-[0065] Update
-[0068] On the plan as a whole
-[0069] What should the council know about the plan as a whole?
-[0070] Review
-[0071] Sending
-[0072] Sent
-[0073] Not sent
-[0075] , and a comment on the plan as a whole
-[0076] sent to the council
-[0077] not sent yet
-[0078] sending
-[0079] Your comment on the plan as a whole
-[0080] Goal {number}: {title}
-[0082] Your feedback
-[0083] {count} of {total} actions · {started} of {goals} goals started
-[0084] Close
-[0085] The plan as a whole
-[0087] Change what you said
-[0088] Say something about the plan itself
-[0091] answer
-[0092] answers
-[0095] Answer the remaining {count}
-[0096] Open this goal
-[0097] Sending…
-[0098] Sending shortly
-[0099] Not sent yet. Your answers are saved on this device.
-[0100] Sent at {time}
-[0101] Updated at {time}
-[0102] Sent
-[0103] Updated
-[0104] Your answers send themselves
-[0105] Try again now
-[0106] Send now
-[0107] Sent anonymously
-[0108] Download a copy
-[0109] Delete my feedback
-[0110] Delete your feedback?
-[0111] This withdraws all {count} {noun} from the consultation and clears them from this device. The council will no longer have them, and this cannot be undone.
-[0112] response
-[0113] responses
-[0114] Keep my feedback
-[0115] Deleting…
-[0116] Delete everything
-[0117] Your feedback has not reached us yet — the connection dropped. Your answers are saved on this device and we will keep trying.
-[0118] Your feedback could not be sent. Your answers are still on this device — please try again.
-[0119] Your feedback could not be withdrawn. Nothing has been changed — please try again.
-[0120] Your feedback could not be withdrawn — the connection dropped. Nothing has been changed, so you can try again.
+[0041] Strategies for this goal are not published yet. They will appear here, each action open for your response, as soon as they are.
+[0042] You have responded to {answered} of {total} actions
+[0044] Strategy {number}:
+[0052] Comment
+[0053] Comment added
+[0056] — not posted yet
+[0057] Your comment on: {subject}
+[0058] What would you change, add, or worry about?
+[0059] Cleared here only — Remove takes it out of your feedback
+[0060] Posted with your feedback
+[0061] Remove
+[0063] Post
+[0064] Update
+[0067] On the plan as a whole
+[0068] What should the council know about the plan as a whole?
+[0069] Review
+[0070] Sending
+[0071] Sent
+[0072] Not sent
+[0074] , and a comment on the plan as a whole
+[0075] sent to the council
+[0076] not sent yet
+[0077] sending
+[0078] Your comment on the plan as a whole
+[0079] Goal {number}: {title}
+[0081] Your feedback
+[0082] {count} of {total} actions · {started} of {goals} goals started
+[0083] Close
+[0084] The plan as a whole
+[0086] Change what you said
+[0087] Say something about the plan itself
+[0090] answer
+[0091] answers
+[0094] Answer the remaining {count}
+[0095] Open this goal
+[0096] Sending…
+[0097] Sending shortly
+[0098] Not sent yet. Your answers are saved on this device.
+[0099] Sent at {time}
+[0100] Updated at {time}
+[0101] Sent
+[0102] Updated
+[0103] Your answers send themselves
+[0104] Try again now
+[0105] Send now
+[0106] Sent anonymously
+[0107] Download a copy
+[0108] Delete my feedback
+[0109] Delete your feedback?
+[0110] This withdraws all {count} {noun} from the consultation and clears them from this device. The council will no longer have them, and this cannot be undone.
+[0111] response
+[0112] responses
+[0113] Keep my feedback
+[0114] Deleting…
+[0115] Delete everything
+[0116] Your feedback has not reached us yet — the connection dropped. Your answers are saved on this device and we will keep trying.
+[0117] Your feedback could not be sent. Your answers are still on this device — please try again.
+[0118] Your feedback could not be withdrawn. Nothing has been changed — please try again.
+[0119] Your feedback could not be withdrawn — the connection dropped. Nothing has been changed, so you can try again.
 
 --- END ---

@@ -1,6 +1,6 @@
 === ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
 File 1 of 19 · Interface labels and buttons
-56 segments
+55 segments
 
 Translate every numbered segment below into Dhivehi (Thaana).
 
@@ -8,7 +8,7 @@ RULES
 1. Keep every [nnnn] marker exactly as written, at the start of its own line.
 2. Return the same segments, in the same order. Never merge two or split one.
 3. Translate the text only. Add no notes, no explanations, no English.
-4. Keep every {slot} exactly as written, in Latin letters: {year} {registered} {resident} {number} {title} {total} {label} {strategies} {actions}
+4. Keep every {slot} exactly as written, in Latin letters: {year} {number} {title} {total} {label} {strategies} {actions}
    Each is a hole a number or a name is dropped into when the page is
    built. Put it where Dhivehi wants it in the sentence — but do not
    translate, rename, remove or duplicate one.
@@ -34,51 +34,50 @@ should not be eight.
 [0011] Start reading
 [0012] A connected atoll
 [0014] Islands of the city
-[0017] In {year}: {registered} on the register
-[0018] {resident} living here
-[0019] Settlement history and the counts year by year
-[0020] residents by 2030
-[0021] Twelve goals
-[0025] Start with goal 1
-[0026] Goal {number}: {title}
-[0027] Back to the goals
-[0028] Goal {number} of {total}
-[0029] Why this matters
-[0030] Where we are today
-[0031] Targets
-[0032] Target {label}
-[0033] Strategies and actions
-[0035] Still open:
-[0036] Other goals
-[0037] Next goal
-[0038] Previous goal
-[0039] Goal {number}
-[0040] {strategies} strategies · {actions} actions
-[0041] No strategies published yet
-[0046] I support this
-[0047] Support
-[0048] I'm not sure
-[0049] Not sure
-[0050] I have a concern
-[0051] Concern
-[0121] Settlement history
-[0123] Back to the plan
-[0124] Settlement history
-[0126] Communities relocated and new administrations formed
-[0128] Settlement history, 1620 to 2026
-[0129] 25,000 residents
-[0131] Year
-[0132] Living here
-[0134] Scroll timeline back
-[0135] Scroll timeline forward
-[0136] Share of the national population
-[0137] 1958–2022
-[0140] Link Road
-[0141] Island of the city
-[0142] Airport
-[0144] All goals
-[0145] Twelve goals
-[0146] Behind the plan
-[0147] Settlement history
+[0015] In {year}:
+[0018] Settlement history and the counts year by year
+[0019] residents by 2030
+[0020] Twelve goals
+[0024] Start with goal 1
+[0025] Goal {number}: {title}
+[0026] Back to the goals
+[0027] Goal {number} of {total}
+[0028] Why this matters
+[0029] Where we are today
+[0030] Targets
+[0031] Target {label}
+[0032] Strategies and actions
+[0034] Still open:
+[0035] Other goals
+[0036] Next goal
+[0037] Previous goal
+[0038] Goal {number}
+[0039] {strategies} strategies · {actions} actions
+[0040] No strategies published yet
+[0045] I support this
+[0046] Support
+[0047] I'm not sure
+[0048] Not sure
+[0049] I have a concern
+[0050] Concern
+[0120] Settlement history
+[0122] Back to the plan
+[0123] Settlement history
+[0125] Communities relocated and new administrations formed
+[0127] Settlement history, 1620 to 2026
+[0128] 25,000 residents
+[0130] Year
+[0131] Living here
+[0133] Scroll timeline back
+[0134] Scroll timeline forward
+[0135] Share of the national population
+[0136] 1958–2022
+[0139] Link Road
+[0140] Island of the city
+[0141] Airport
+[0143] All goals
+[0144] Twelve goals
+[0145] Behind the plan
+[0146] Settlement history
 
 --- END ---

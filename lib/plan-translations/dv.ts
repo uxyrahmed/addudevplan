@@ -56,6 +56,7 @@ export const dvPlan: PlanTranslation = {
     Maradhoo: 'މަރަދޫ',
     'Maradhoo-Feydhoo': 'މަރަދޫފޭދޫ',
     Feydhoo: 'ފޭދޫ',
+    Gan: 'ގަން',
   },
   timeline: {
     '1799': 'ހަންކެޑެ ދޫކޮށް މީހުން މަރަދޫގައި އާބާދުވުން.',

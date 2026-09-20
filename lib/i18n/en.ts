@@ -51,11 +51,10 @@ export const en = {
       'The Link Road runs the length of the western chain, joining four islands end to end. There are two inhabited islands and three resorts on the eastern chain. Gan in the southern tip serves as the international airport.',
     islandsLabel: 'Islands of the city',
 
+    registerYear: 'In {year}:',
     registerSentence: 'people are registered in Addu.',
     registerTarget:
       'The population of Addu has increased from 14,094 to 25,062 by 2022. This plan sets a target of 35,000 residents in Addu by 2030.',
-    sourcesLine: 'In {year}: {registered} on the register',
-    sourcesResident: '{resident} living here',
     backgroundLink: 'Settlement history and the counts year by year',
 
     visionResidents: 'residents by 2030',

@@ -7,7 +7,7 @@ import { Hero } from '@/components/home/hero'
 import { ReefDivider } from '@/components/home/reef-divider'
 import { StatCounter } from '@/components/home/stat-counter'
 import { AtollMap } from '@/components/home/atoll-map'
-import { PopulationRegister, PopulationSources } from '@/components/home/population-gap'
+import { PopulationRegister } from '@/components/home/population-gap'
 import { Vision } from '@/components/home/vision'
 import { PlanComment } from '@/components/feedback/plan-comment'
 import { SplitHeading } from '@/components/motion/split-heading'
@@ -209,10 +209,10 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
                 above it was only saying the same thing quietly first. */}
 
             {/* Figure on the left, everything that qualifies it on the right —
-                where the resident count has got to, where the plan means it to
-                get, and the year both are read off. The qualifiers used to sit
-                under the number while the right-hand column held two lines and
-                230px of nothing; split this way the columns come out level. */}
+                where the resident count has got to and where the plan means it
+                to get. The qualifier used to sit under the number while the
+                right-hand column held two lines and 230px of nothing; split
+                this way the columns come out level. */}
             <div className="grid gap-x-20 gap-y-8 lg:grid-cols-2 lg:items-start">
               <PopulationRegister locale={lang} />
               <div className="max-w-[46ch]">
@@ -222,14 +222,14 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
                     which is a claim about the plan that this section's figures
                     do not make. */}
                 <p className="text-lead text-slate">{t.home.registerTarget}</p>
-                <PopulationSources locale={lang} />
 
                 {/* A control, not a text link. This is the only route to the
-                    evidence from the home page and it was competing with two
-                    lines of grey source notes directly above it; given a border
-                    and a target it reads as somewhere to go. It names what is
-                    on the other end rather than saying "read more", so the
-                    reader knows whether the trip is worth making. */}
+                    evidence from the home page, so it is given a border and a
+                    target and reads as somewhere to go. It names what is on the
+                    other end rather than saying "read more", so the reader
+                    knows whether the trip is worth making. The counts it used
+                    to sit under — the register and the residents for 2022 — are
+                    on the other end of it now, and nowhere else on this page. */}
                 <Link
                   href={localePath(lang, '/background')}
                   transitionTypes={['page-forward']}

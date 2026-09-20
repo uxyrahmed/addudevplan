@@ -100,30 +100,18 @@
           "slots": []
         },
         {
-          "id": "0017",
+          "id": "0015",
           "ref": {
             "t": "chrome",
-            "path": "home.sourcesLine"
+            "path": "home.registerYear"
           },
-          "en": "In {year}: {registered} on the register",
+          "en": "In {year}:",
           "slots": [
-            "{year}",
-            "{registered}"
+            "{year}"
           ]
         },
         {
           "id": "0018",
-          "ref": {
-            "t": "chrome",
-            "path": "home.sourcesResident"
-          },
-          "en": "{resident} living here",
-          "slots": [
-            "{resident}"
-          ]
-        },
-        {
-          "id": "0019",
           "ref": {
             "t": "chrome",
             "path": "home.backgroundLink"
@@ -132,7 +120,7 @@
           "slots": []
         },
         {
-          "id": "0020",
+          "id": "0019",
           "ref": {
             "t": "chrome",
             "path": "home.visionResidents"
@@ -141,7 +129,7 @@
           "slots": []
         },
         {
-          "id": "0021",
+          "id": "0020",
           "ref": {
             "t": "chrome",
             "path": "home.goalsTitle"
@@ -150,7 +138,7 @@
           "slots": []
         },
         {
-          "id": "0025",
+          "id": "0024",
           "ref": {
             "t": "chrome",
             "path": "home.startWithGoalOne"
@@ -159,7 +147,7 @@
           "slots": []
         },
         {
-          "id": "0026",
+          "id": "0025",
           "ref": {
             "t": "chrome",
             "path": "goal.metaTitle"
@@ -171,7 +159,7 @@
           ]
         },
         {
-          "id": "0027",
+          "id": "0026",
           "ref": {
             "t": "chrome",
             "path": "goal.backToGoals"
@@ -180,7 +168,7 @@
           "slots": []
         },
         {
-          "id": "0028",
+          "id": "0027",
           "ref": {
             "t": "chrome",
             "path": "goal.counter"
@@ -192,7 +180,7 @@
           ]
         },
         {
-          "id": "0029",
+          "id": "0028",
           "ref": {
             "t": "chrome",
             "path": "goal.whyThisMatters"
@@ -201,7 +189,7 @@
           "slots": []
         },
         {
-          "id": "0030",
+          "id": "0029",
           "ref": {
             "t": "chrome",
             "path": "goal.whereWeAreToday"
@@ -210,7 +198,7 @@
           "slots": []
         },
         {
-          "id": "0031",
+          "id": "0030",
           "ref": {
             "t": "chrome",
             "path": "goal.targets"
@@ -219,7 +207,7 @@
           "slots": []
         },
         {
-          "id": "0032",
+          "id": "0031",
           "ref": {
             "t": "chrome",
             "path": "goal.targetLabel"
@@ -230,7 +218,7 @@
           ]
         },
         {
-          "id": "0033",
+          "id": "0032",
           "ref": {
             "t": "chrome",
             "path": "goal.strategiesAndActions"
@@ -239,7 +227,7 @@
           "slots": []
         },
         {
-          "id": "0035",
+          "id": "0034",
           "ref": {
             "t": "chrome",
             "path": "goal.stillOpen"
@@ -248,7 +236,7 @@
           "slots": []
         },
         {
-          "id": "0036",
+          "id": "0035",
           "ref": {
             "t": "chrome",
             "path": "goal.otherGoalsLabel"
@@ -257,7 +245,7 @@
           "slots": []
         },
         {
-          "id": "0037",
+          "id": "0036",
           "ref": {
             "t": "chrome",
             "path": "goal.nextGoal"
@@ -266,7 +254,7 @@
           "slots": []
         },
         {
-          "id": "0038",
+          "id": "0037",
           "ref": {
             "t": "chrome",
             "path": "goal.previousGoal"
@@ -275,7 +263,7 @@
           "slots": []
         },
         {
-          "id": "0039",
+          "id": "0038",
           "ref": {
             "t": "chrome",
             "path": "goalCard.goalNumber"
@@ -286,7 +274,7 @@
           ]
         },
         {
-          "id": "0040",
+          "id": "0039",
           "ref": {
             "t": "chrome",
             "path": "goalCard.counts"
@@ -298,7 +286,7 @@
           ]
         },
         {
-          "id": "0041",
+          "id": "0040",
           "ref": {
             "t": "chrome",
             "path": "goalCard.noStrategies"
@@ -307,7 +295,7 @@
           "slots": []
         },
         {
-          "id": "0046",
+          "id": "0045",
           "ref": {
             "t": "chrome",
             "path": "reactions.supportLabel"
@@ -316,7 +304,7 @@
           "slots": []
         },
         {
-          "id": "0047",
+          "id": "0046",
           "ref": {
             "t": "chrome",
             "path": "reactions.supportShort"
@@ -325,7 +313,7 @@
           "slots": []
         },
         {
-          "id": "0048",
+          "id": "0047",
           "ref": {
             "t": "chrome",
             "path": "reactions.unsureLabel"
@@ -334,7 +322,7 @@
           "slots": []
         },
         {
-          "id": "0049",
+          "id": "0048",
           "ref": {
             "t": "chrome",
             "path": "reactions.unsureShort"
@@ -343,7 +331,7 @@
           "slots": []
         },
         {
-          "id": "0050",
+          "id": "0049",
           "ref": {
             "t": "chrome",
             "path": "reactions.concernLabel"
@@ -352,7 +340,7 @@
           "slots": []
         },
         {
-          "id": "0051",
+          "id": "0050",
           "ref": {
             "t": "chrome",
             "path": "reactions.concernShort"
@@ -361,7 +349,7 @@
           "slots": []
         },
         {
-          "id": "0121",
+          "id": "0120",
           "ref": {
             "t": "chrome",
             "path": "background.metaTitle"
@@ -370,7 +358,7 @@
           "slots": []
         },
         {
-          "id": "0123",
+          "id": "0122",
           "ref": {
             "t": "chrome",
             "path": "background.backToPlan"
@@ -379,7 +367,7 @@
           "slots": []
         },
         {
-          "id": "0124",
+          "id": "0123",
           "ref": {
             "t": "chrome",
             "path": "background.title"
@@ -388,7 +376,7 @@
           "slots": []
         },
         {
-          "id": "0126",
+          "id": "0125",
           "ref": {
             "t": "chrome",
             "path": "background.settlementTitle"
@@ -397,7 +385,7 @@
           "slots": []
         },
         {
-          "id": "0128",
+          "id": "0127",
           "ref": {
             "t": "chrome",
             "path": "background.settlementRailLabel"
@@ -406,7 +394,7 @@
           "slots": []
         },
         {
-          "id": "0129",
+          "id": "0128",
           "ref": {
             "t": "chrome",
             "path": "background.ledgerTitle"
@@ -415,7 +403,7 @@
           "slots": []
         },
         {
-          "id": "0131",
+          "id": "0130",
           "ref": {
             "t": "chrome",
             "path": "background.ledgerYear"
@@ -424,7 +412,7 @@
           "slots": []
         },
         {
-          "id": "0132",
+          "id": "0131",
           "ref": {
             "t": "chrome",
             "path": "background.ledgerLivingHere"
@@ -433,7 +421,7 @@
           "slots": []
         },
         {
-          "id": "0134",
+          "id": "0133",
           "ref": {
             "t": "chrome",
             "path": "timeline.scrollBack"
@@ -442,7 +430,7 @@
           "slots": []
         },
         {
-          "id": "0135",
+          "id": "0134",
           "ref": {
             "t": "chrome",
             "path": "timeline.scrollForward"
@@ -451,7 +439,7 @@
           "slots": []
         },
         {
-          "id": "0136",
+          "id": "0135",
           "ref": {
             "t": "chrome",
             "path": "chart.nationalShare"
@@ -460,7 +448,7 @@
           "slots": []
         },
         {
-          "id": "0137",
+          "id": "0136",
           "ref": {
             "t": "chrome",
             "path": "chart.nationalShareYears"
@@ -469,7 +457,7 @@
           "slots": []
         },
         {
-          "id": "0140",
+          "id": "0139",
           "ref": {
             "t": "chrome",
             "path": "map.linkRoad"
@@ -478,7 +466,7 @@
           "slots": []
         },
         {
-          "id": "0141",
+          "id": "0140",
           "ref": {
             "t": "chrome",
             "path": "map.islandOfCity"
@@ -487,7 +475,7 @@
           "slots": []
         },
         {
-          "id": "0142",
+          "id": "0141",
           "ref": {
             "t": "chrome",
             "path": "map.airport"
@@ -496,7 +484,7 @@
           "slots": []
         },
         {
-          "id": "0144",
+          "id": "0143",
           "ref": {
             "t": "chrome",
             "path": "footer.allGoalsLabel"
@@ -505,7 +493,7 @@
           "slots": []
         },
         {
-          "id": "0145",
+          "id": "0144",
           "ref": {
             "t": "chrome",
             "path": "footer.twelveGoals"
@@ -514,7 +502,7 @@
           "slots": []
         },
         {
-          "id": "0146",
+          "id": "0145",
           "ref": {
             "t": "chrome",
             "path": "footer.behindThePlan"
@@ -523,7 +511,7 @@
           "slots": []
         },
         {
-          "id": "0147",
+          "id": "0146",
           "ref": {
             "t": "chrome",
             "path": "footer.settlementAndPopulation"
@@ -567,7 +555,7 @@
           "slots": []
         },
         {
-          "id": "0044",
+          "id": "0043",
           "ref": {
             "t": "chrome",
             "path": "strategies.progressAria"
@@ -578,7 +566,7 @@
           ]
         },
         {
-          "id": "0052",
+          "id": "0051",
           "ref": {
             "t": "chrome",
             "path": "control.reactionAria"
@@ -590,7 +578,7 @@
           ]
         },
         {
-          "id": "0055",
+          "id": "0054",
           "ref": {
             "t": "chrome",
             "path": "control.addCommentAria"
@@ -601,7 +589,7 @@
           ]
         },
         {
-          "id": "0056",
+          "id": "0055",
           "ref": {
             "t": "chrome",
             "path": "control.editCommentAria"
@@ -612,7 +600,7 @@
           ]
         },
         {
-          "id": "0063",
+          "id": "0062",
           "ref": {
             "t": "chrome",
             "path": "control.removeCommentAria"
@@ -623,7 +611,7 @@
           ]
         },
         {
-          "id": "0066",
+          "id": "0065",
           "ref": {
             "t": "chrome",
             "path": "control.postCommentAria"
@@ -634,7 +622,7 @@
           ]
         },
         {
-          "id": "0067",
+          "id": "0066",
           "ref": {
             "t": "chrome",
             "path": "control.updateCommentAria"
@@ -645,7 +633,7 @@
           ]
         },
         {
-          "id": "0074",
+          "id": "0073",
           "ref": {
             "t": "chrome",
             "path": "basket.launcherAria"
@@ -661,7 +649,7 @@
           ]
         },
         {
-          "id": "0081",
+          "id": "0080",
           "ref": {
             "t": "chrome",
             "path": "panel.dialogLabel"
@@ -670,7 +658,7 @@
           "slots": []
         },
         {
-          "id": "0086",
+          "id": "0085",
           "ref": {
             "t": "chrome",
             "path": "panel.removeOverallAria"
@@ -679,7 +667,7 @@
           "slots": []
         },
         {
-          "id": "0089",
+          "id": "0088",
           "ref": {
             "t": "chrome",
             "path": "panel.showAnswersAria"
@@ -692,7 +680,7 @@
           ]
         },
         {
-          "id": "0090",
+          "id": "0089",
           "ref": {
             "t": "chrome",
             "path": "panel.hideAnswersAria"
@@ -705,7 +693,7 @@
           ]
         },
         {
-          "id": "0093",
+          "id": "0092",
           "ref": {
             "t": "chrome",
             "path": "panel.startGoalAria"
@@ -717,7 +705,7 @@
           ]
         },
         {
-          "id": "0094",
+          "id": "0093",
           "ref": {
             "t": "chrome",
             "path": "panel.removeFeedbackAria"
@@ -728,7 +716,7 @@
           ]
         },
         {
-          "id": "0138",
+          "id": "0137",
           "ref": {
             "t": "chrome",
             "path": "chart.chartAria"
@@ -739,7 +727,7 @@
           ]
         },
         {
-          "id": "0143",
+          "id": "0142",
           "ref": {
             "t": "chrome",
             "path": "map.aria"
@@ -750,7 +738,7 @@
           ]
         },
         {
-          "id": "0152",
+          "id": "0151",
           "ref": {
             "t": "chrome",
             "path": "metadata.ogImageAlt"
@@ -774,7 +762,7 @@
           "slots": []
         },
         {
-          "id": "0015",
+          "id": "0016",
           "ref": {
             "t": "chrome",
             "path": "home.registerSentence"
@@ -783,7 +771,7 @@
           "slots": []
         },
         {
-          "id": "0016",
+          "id": "0017",
           "ref": {
             "t": "chrome",
             "path": "home.registerTarget"
@@ -792,7 +780,7 @@
           "slots": []
         },
         {
-          "id": "0022",
+          "id": "0021",
           "ref": {
             "t": "chrome",
             "path": "home.goalsBody"
@@ -801,7 +789,7 @@
           "slots": []
         },
         {
-          "id": "0023",
+          "id": "0022",
           "ref": {
             "t": "chrome",
             "path": "home.feedbackTitle"
@@ -810,7 +798,7 @@
           "slots": []
         },
         {
-          "id": "0024",
+          "id": "0023",
           "ref": {
             "t": "chrome",
             "path": "home.feedbackBody"
@@ -821,7 +809,7 @@
           ]
         },
         {
-          "id": "0034",
+          "id": "0033",
           "ref": {
             "t": "chrome",
             "path": "goal.strategiesBody"
@@ -830,7 +818,7 @@
           "slots": []
         },
         {
-          "id": "0122",
+          "id": "0121",
           "ref": {
             "t": "chrome",
             "path": "background.metaDescription"
@@ -839,7 +827,7 @@
           "slots": []
         },
         {
-          "id": "0125",
+          "id": "0124",
           "ref": {
             "t": "chrome",
             "path": "background.lede"
@@ -848,7 +836,7 @@
           "slots": []
         },
         {
-          "id": "0127",
+          "id": "0126",
           "ref": {
             "t": "chrome",
             "path": "background.settlementBody"
@@ -857,7 +845,7 @@
           "slots": []
         },
         {
-          "id": "0130",
+          "id": "0129",
           "ref": {
             "t": "chrome",
             "path": "background.ledgerBody"
@@ -866,7 +854,7 @@
           "slots": []
         },
         {
-          "id": "0133",
+          "id": "0132",
           "ref": {
             "t": "chrome",
             "path": "background.closing"
@@ -875,7 +863,7 @@
           "slots": []
         },
         {
-          "id": "0139",
+          "id": "0138",
           "ref": {
             "t": "chrome",
             "path": "chart.reading"
@@ -884,7 +872,7 @@
           "slots": []
         },
         {
-          "id": "0148",
+          "id": "0147",
           "ref": {
             "t": "chrome",
             "path": "footer.imprint"
@@ -896,7 +884,7 @@
           ]
         },
         {
-          "id": "0149",
+          "id": "0148",
           "ref": {
             "t": "chrome",
             "path": "footer.openForConsultation"
@@ -911,7 +899,7 @@
       "title": "Feedback controls and status messages",
       "segments": [
         {
-          "id": "0042",
+          "id": "0041",
           "ref": {
             "t": "chrome",
             "path": "strategies.notPublished"
@@ -920,7 +908,7 @@
           "slots": []
         },
         {
-          "id": "0043",
+          "id": "0042",
           "ref": {
             "t": "chrome",
             "path": "strategies.responded"
@@ -932,7 +920,7 @@
           ]
         },
         {
-          "id": "0045",
+          "id": "0044",
           "ref": {
             "t": "chrome",
             "path": "strategies.strategyPrefix"
@@ -943,7 +931,7 @@
           ]
         },
         {
-          "id": "0053",
+          "id": "0052",
           "ref": {
             "t": "chrome",
             "path": "control.comment"
@@ -952,7 +940,7 @@
           "slots": []
         },
         {
-          "id": "0054",
+          "id": "0053",
           "ref": {
             "t": "chrome",
             "path": "control.commentAdded"
@@ -961,7 +949,7 @@
           "slots": []
         },
         {
-          "id": "0057",
+          "id": "0056",
           "ref": {
             "t": "chrome",
             "path": "control.notPostedSuffix"
@@ -970,7 +958,7 @@
           "slots": []
         },
         {
-          "id": "0058",
+          "id": "0057",
           "ref": {
             "t": "chrome",
             "path": "control.yourCommentOn"
@@ -981,7 +969,7 @@
           ]
         },
         {
-          "id": "0059",
+          "id": "0058",
           "ref": {
             "t": "chrome",
             "path": "control.placeholder"
@@ -990,7 +978,7 @@
           "slots": []
         },
         {
-          "id": "0060",
+          "id": "0059",
           "ref": {
             "t": "chrome",
             "path": "control.clearedHereOnly"
@@ -999,7 +987,7 @@
           "slots": []
         },
         {
-          "id": "0061",
+          "id": "0060",
           "ref": {
             "t": "chrome",
             "path": "control.postedWithFeedback"
@@ -1008,7 +996,7 @@
           "slots": []
         },
         {
-          "id": "0062",
+          "id": "0061",
           "ref": {
             "t": "chrome",
             "path": "control.remove"
@@ -1017,7 +1005,7 @@
           "slots": []
         },
         {
-          "id": "0064",
+          "id": "0063",
           "ref": {
             "t": "chrome",
             "path": "control.post"
@@ -1026,7 +1014,7 @@
           "slots": []
         },
         {
-          "id": "0065",
+          "id": "0064",
           "ref": {
             "t": "chrome",
             "path": "control.update"
@@ -1035,7 +1023,7 @@
           "slots": []
         },
         {
-          "id": "0068",
+          "id": "0067",
           "ref": {
             "t": "chrome",
             "path": "planComment.title"
@@ -1044,7 +1032,7 @@
           "slots": []
         },
         {
-          "id": "0069",
+          "id": "0068",
           "ref": {
             "t": "chrome",
             "path": "planComment.placeholder"
@@ -1053,7 +1041,7 @@
           "slots": []
         },
         {
-          "id": "0070",
+          "id": "0069",
           "ref": {
             "t": "chrome",
             "path": "basket.review"
@@ -1062,7 +1050,7 @@
           "slots": []
         },
         {
-          "id": "0071",
+          "id": "0070",
           "ref": {
             "t": "chrome",
             "path": "basket.sending"
@@ -1071,7 +1059,7 @@
           "slots": []
         },
         {
-          "id": "0072",
+          "id": "0071",
           "ref": {
             "t": "chrome",
             "path": "basket.sent"
@@ -1080,7 +1068,7 @@
           "slots": []
         },
         {
-          "id": "0073",
+          "id": "0072",
           "ref": {
             "t": "chrome",
             "path": "basket.notSent"
@@ -1089,7 +1077,7 @@
           "slots": []
         },
         {
-          "id": "0075",
+          "id": "0074",
           "ref": {
             "t": "chrome",
             "path": "basket.overallClause"
@@ -1098,7 +1086,7 @@
           "slots": []
         },
         {
-          "id": "0076",
+          "id": "0075",
           "ref": {
             "t": "chrome",
             "path": "basket.stateSent"
@@ -1107,7 +1095,7 @@
           "slots": []
         },
         {
-          "id": "0077",
+          "id": "0076",
           "ref": {
             "t": "chrome",
             "path": "basket.stateNotSent"
@@ -1116,7 +1104,7 @@
           "slots": []
         },
         {
-          "id": "0078",
+          "id": "0077",
           "ref": {
             "t": "chrome",
             "path": "basket.stateSending"
@@ -1125,7 +1113,7 @@
           "slots": []
         },
         {
-          "id": "0079",
+          "id": "0078",
           "ref": {
             "t": "chrome",
             "path": "basket.overallTitle"
@@ -1134,7 +1122,7 @@
           "slots": []
         },
         {
-          "id": "0080",
+          "id": "0079",
           "ref": {
             "t": "chrome",
             "path": "basket.goalTitle"
@@ -1146,7 +1134,7 @@
           ]
         },
         {
-          "id": "0082",
+          "id": "0081",
           "ref": {
             "t": "chrome",
             "path": "panel.title"
@@ -1155,7 +1143,7 @@
           "slots": []
         },
         {
-          "id": "0083",
+          "id": "0082",
           "ref": {
             "t": "chrome",
             "path": "panel.summary"
@@ -1169,7 +1157,7 @@
           ]
         },
         {
-          "id": "0084",
+          "id": "0083",
           "ref": {
             "t": "chrome",
             "path": "panel.close"
@@ -1178,7 +1166,7 @@
           "slots": []
         },
         {
-          "id": "0085",
+          "id": "0084",
           "ref": {
             "t": "chrome",
             "path": "panel.planAsWhole"
@@ -1187,7 +1175,7 @@
           "slots": []
         },
         {
-          "id": "0087",
+          "id": "0086",
           "ref": {
             "t": "chrome",
             "path": "panel.changeWhatYouSaid"
@@ -1196,7 +1184,7 @@
           "slots": []
         },
         {
-          "id": "0088",
+          "id": "0087",
           "ref": {
             "t": "chrome",
             "path": "panel.sayAboutPlan"
@@ -1205,7 +1193,7 @@
           "slots": []
         },
         {
-          "id": "0091",
+          "id": "0090",
           "ref": {
             "t": "chrome",
             "path": "panel.answerOne"
@@ -1214,7 +1202,7 @@
           "slots": []
         },
         {
-          "id": "0092",
+          "id": "0091",
           "ref": {
             "t": "chrome",
             "path": "panel.answerOther"
@@ -1223,7 +1211,7 @@
           "slots": []
         },
         {
-          "id": "0095",
+          "id": "0094",
           "ref": {
             "t": "chrome",
             "path": "panel.answerRemaining"
@@ -1234,7 +1222,7 @@
           ]
         },
         {
-          "id": "0096",
+          "id": "0095",
           "ref": {
             "t": "chrome",
             "path": "panel.openThisGoal"
@@ -1243,7 +1231,7 @@
           "slots": []
         },
         {
-          "id": "0097",
+          "id": "0096",
           "ref": {
             "t": "chrome",
             "path": "panel.statusSending"
@@ -1252,7 +1240,7 @@
           "slots": []
         },
         {
-          "id": "0098",
+          "id": "0097",
           "ref": {
             "t": "chrome",
             "path": "panel.statusSendingShortly"
@@ -1261,7 +1249,7 @@
           "slots": []
         },
         {
-          "id": "0099",
+          "id": "0098",
           "ref": {
             "t": "chrome",
             "path": "panel.statusNotSent"
@@ -1270,7 +1258,7 @@
           "slots": []
         },
         {
-          "id": "0100",
+          "id": "0099",
           "ref": {
             "t": "chrome",
             "path": "panel.statusSentAt"
@@ -1281,7 +1269,7 @@
           ]
         },
         {
-          "id": "0101",
+          "id": "0100",
           "ref": {
             "t": "chrome",
             "path": "panel.statusUpdatedAt"
@@ -1292,7 +1280,7 @@
           ]
         },
         {
-          "id": "0102",
+          "id": "0101",
           "ref": {
             "t": "chrome",
             "path": "panel.statusSent"
@@ -1301,7 +1289,7 @@
           "slots": []
         },
         {
-          "id": "0103",
+          "id": "0102",
           "ref": {
             "t": "chrome",
             "path": "panel.statusUpdated"
@@ -1310,7 +1298,7 @@
           "slots": []
         },
         {
-          "id": "0104",
+          "id": "0103",
           "ref": {
             "t": "chrome",
             "path": "panel.statusIdle"
@@ -1319,7 +1307,7 @@
           "slots": []
         },
         {
-          "id": "0105",
+          "id": "0104",
           "ref": {
             "t": "chrome",
             "path": "panel.tryAgainNow"
@@ -1328,7 +1316,7 @@
           "slots": []
         },
         {
-          "id": "0106",
+          "id": "0105",
           "ref": {
             "t": "chrome",
             "path": "panel.sendNow"
@@ -1337,7 +1325,7 @@
           "slots": []
         },
         {
-          "id": "0107",
+          "id": "0106",
           "ref": {
             "t": "chrome",
             "path": "panel.sentAnonymously"
@@ -1346,7 +1334,7 @@
           "slots": []
         },
         {
-          "id": "0108",
+          "id": "0107",
           "ref": {
             "t": "chrome",
             "path": "panel.downloadCopy"
@@ -1355,7 +1343,7 @@
           "slots": []
         },
         {
-          "id": "0109",
+          "id": "0108",
           "ref": {
             "t": "chrome",
             "path": "panel.deleteMyFeedback"
@@ -1364,7 +1352,7 @@
           "slots": []
         },
         {
-          "id": "0110",
+          "id": "0109",
           "ref": {
             "t": "chrome",
             "path": "panel.confirmTitle"
@@ -1373,7 +1361,7 @@
           "slots": []
         },
         {
-          "id": "0111",
+          "id": "0110",
           "ref": {
             "t": "chrome",
             "path": "panel.confirmBody"
@@ -1385,7 +1373,7 @@
           ]
         },
         {
-          "id": "0112",
+          "id": "0111",
           "ref": {
             "t": "chrome",
             "path": "panel.responseOne"
@@ -1394,7 +1382,7 @@
           "slots": []
         },
         {
-          "id": "0113",
+          "id": "0112",
           "ref": {
             "t": "chrome",
             "path": "panel.responseOther"
@@ -1403,7 +1391,7 @@
           "slots": []
         },
         {
-          "id": "0114",
+          "id": "0113",
           "ref": {
             "t": "chrome",
             "path": "panel.keepMyFeedback"
@@ -1412,7 +1400,7 @@
           "slots": []
         },
         {
-          "id": "0115",
+          "id": "0114",
           "ref": {
             "t": "chrome",
             "path": "panel.deleting"
@@ -1421,7 +1409,7 @@
           "slots": []
         },
         {
-          "id": "0116",
+          "id": "0115",
           "ref": {
             "t": "chrome",
             "path": "panel.deleteEverything"
@@ -1430,7 +1418,7 @@
           "slots": []
         },
         {
-          "id": "0117",
+          "id": "0116",
           "ref": {
             "t": "chrome",
             "path": "errors.sendOffline"
@@ -1439,7 +1427,7 @@
           "slots": []
         },
         {
-          "id": "0118",
+          "id": "0117",
           "ref": {
             "t": "chrome",
             "path": "errors.sendFailed"
@@ -1448,7 +1436,7 @@
           "slots": []
         },
         {
-          "id": "0119",
+          "id": "0118",
           "ref": {
             "t": "chrome",
             "path": "errors.withdrawFailed"
@@ -1457,7 +1445,7 @@
           "slots": []
         },
         {
-          "id": "0120",
+          "id": "0119",
           "ref": {
             "t": "chrome",
             "path": "errors.withdrawOffline"
@@ -1472,7 +1460,7 @@
       "title": "Search and share descriptions",
       "segments": [
         {
-          "id": "0150",
+          "id": "0149",
           "ref": {
             "t": "chrome",
             "path": "metadata.description"
@@ -1481,7 +1469,7 @@
           "slots": []
         },
         {
-          "id": "0151",
+          "id": "0150",
           "ref": {
             "t": "chrome",
             "path": "metadata.ogDescription"
@@ -1496,7 +1484,7 @@
       "title": "The plan: cover, vision and background",
       "segments": [
         {
-          "id": "0153",
+          "id": "0152",
           "ref": {
             "t": "planMeta",
             "field": "title"
@@ -1505,7 +1493,7 @@
           "slots": []
         },
         {
-          "id": "0154",
+          "id": "0153",
           "ref": {
             "t": "planMeta",
             "field": "author"
@@ -1514,7 +1502,7 @@
           "slots": []
         },
         {
-          "id": "0155",
+          "id": "0154",
           "ref": {
             "t": "planMeta",
             "field": "date"
@@ -1523,7 +1511,7 @@
           "slots": []
         },
         {
-          "id": "0156",
+          "id": "0155",
           "ref": {
             "t": "planMeta",
             "field": "callout"
@@ -1532,7 +1520,7 @@
           "slots": []
         },
         {
-          "id": "0157",
+          "id": "0156",
           "ref": {
             "t": "vision",
             "field": "kicker"
@@ -1541,7 +1529,7 @@
           "slots": []
         },
         {
-          "id": "0158",
+          "id": "0157",
           "ref": {
             "t": "vision",
             "field": "name"
@@ -1550,7 +1538,7 @@
           "slots": []
         },
         {
-          "id": "0159",
+          "id": "0158",
           "ref": {
             "t": "vision",
             "field": "headline"
@@ -1559,7 +1547,7 @@
           "slots": []
         },
         {
-          "id": "0160",
+          "id": "0159",
           "ref": {
             "t": "vision",
             "field": "figure"
@@ -1568,7 +1556,7 @@
           "slots": []
         },
         {
-          "id": "0161",
+          "id": "0160",
           "ref": {
             "t": "turningTitle"
           },
@@ -1576,7 +1564,7 @@
           "slots": []
         },
         {
-          "id": "0162",
+          "id": "0161",
           "ref": {
             "t": "turningPara",
             "index": 0
@@ -1585,7 +1573,7 @@
           "slots": []
         },
         {
-          "id": "0163",
+          "id": "0162",
           "ref": {
             "t": "turningPara",
             "index": 1
@@ -1594,7 +1582,7 @@
           "slots": []
         },
         {
-          "id": "0164",
+          "id": "0163",
           "ref": {
             "t": "turningPara",
             "index": 2
@@ -1603,7 +1591,7 @@
           "slots": []
         },
         {
-          "id": "0165",
+          "id": "0164",
           "ref": {
             "t": "turningPara",
             "index": 3
@@ -1612,7 +1600,7 @@
           "slots": []
         },
         {
-          "id": "0166",
+          "id": "0165",
           "ref": {
             "t": "fact",
             "label": "residents in 2022 Census"
@@ -1621,7 +1609,7 @@
           "slots": []
         },
         {
-          "id": "0167",
+          "id": "0166",
           "ref": {
             "t": "fact",
             "label": "resident Maldivians in 2022"
@@ -1630,7 +1618,7 @@
           "slots": []
         },
         {
-          "id": "0168",
+          "id": "0167",
           "ref": {
             "t": "fact",
             "label": "foreigners in 2022"
@@ -1639,7 +1627,7 @@
           "slots": []
         },
         {
-          "id": "0169",
+          "id": "0168",
           "ref": {
             "t": "fact",
             "label": "hectares of land"
@@ -1648,7 +1636,7 @@
           "slots": []
         },
         {
-          "id": "0170",
+          "id": "0169",
           "ref": {
             "t": "island",
             "name": "Hithadhoo"
@@ -1657,7 +1645,7 @@
           "slots": []
         },
         {
-          "id": "0171",
+          "id": "0170",
           "ref": {
             "t": "island",
             "name": "Maradhoo"
@@ -1666,7 +1654,7 @@
           "slots": []
         },
         {
-          "id": "0172",
+          "id": "0171",
           "ref": {
             "t": "island",
             "name": "Maradhoo-Feydhoo"
@@ -1675,12 +1663,21 @@
           "slots": []
         },
         {
-          "id": "0173",
+          "id": "0172",
           "ref": {
             "t": "island",
             "name": "Feydhoo"
           },
           "en": "Feydhoo",
+          "slots": []
+        },
+        {
+          "id": "0173",
+          "ref": {
+            "t": "island",
+            "name": "Gan"
+          },
+          "en": "Gan",
           "slots": []
         },
         {

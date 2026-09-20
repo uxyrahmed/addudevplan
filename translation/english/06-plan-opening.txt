@@ -1,6 +1,6 @@
 === ADDU DEVELOPMENT PLAN — ENGLISH TO DHIVEHI ===
 File 6 of 19 · The plan: cover, vision and background
-50 segments
+51 segments
 
 Translate every numbered segment below into Dhivehi (Thaana).
 
@@ -22,27 +22,28 @@ the same thing in Dhivehi.
 
 --- BEGIN ---
 
-[0153] Addu Development Plan
-[0154] Addu City Council
-[0155] 30 July 2026
-[0156] For comments and feedback
-[0157] Addu City Vision
-[0158] Resilient, Inclusive, Sustainable Addu
-[0159] Our aim is a multi-cultural hub for young professionals, with
-[0160] 35,000 residents by 2030
-[0161] Addu is at a turning point
-[0162] Nearly fifty years after the final RAF flight departed Gan on 29 March 1976, Addu has come full circle — from a community profoundly affected by the British military withdrawal and decades of outward migration to a growing city poised to become the gateway to the Southern Maldives.
-[0163] In the years that followed, many residents left Addu for employment in the rapidly expanding Maldives' tourism industry, pursue secondary and higher education, and establish careers in Malé. This sustained outward migration began to ease with the establishment of quality secondary education in Addu and continued investment in healthcare, infrastructure, and economic development, enabling more people to live, study, work, and build their futures closer to home.
-[0164] Today, with a land area of more than 1,250 hectares, more than 25,000 residents, and expanding opportunities in tourism, trade, fisheries, agriculture, and emerging industries, Addu is increasingly becoming a destination in its own right. More than 1,700 Maldivians from other islands and over 4,700 foreign nationals now reside in the city — together representing around a quarter of its population.
-[0165] Its interconnected geography, diverse population, and established urban footprint offer a strong foundation for integrated planning, efficient service delivery, and sustainable growth. Building on these strengths, Addu is well positioned to become a resilient, inclusive, and sustainable city.
-[0166] residents in 2022 Census
-[0167] resident Maldivians in 2022
-[0168] foreigners in 2022
-[0169] hectares of land
-[0170] Hithadhoo
-[0171] Maradhoo
-[0172] Maradhoo-Feydhoo
-[0173] Feydhoo
+[0152] Addu Development Plan
+[0153] Addu City Council
+[0154] 30 July 2026
+[0155] For comments and feedback
+[0156] Addu City Vision
+[0157] Resilient, Inclusive, Sustainable Addu
+[0158] Our aim is a multi-cultural hub for young professionals, with
+[0159] 35,000 residents by 2030
+[0160] Addu is at a turning point
+[0161] Nearly fifty years after the final RAF flight departed Gan on 29 March 1976, Addu has come full circle — from a community profoundly affected by the British military withdrawal and decades of outward migration to a growing city poised to become the gateway to the Southern Maldives.
+[0162] In the years that followed, many residents left Addu for employment in the rapidly expanding Maldives' tourism industry, pursue secondary and higher education, and establish careers in Malé. This sustained outward migration began to ease with the establishment of quality secondary education in Addu and continued investment in healthcare, infrastructure, and economic development, enabling more people to live, study, work, and build their futures closer to home.
+[0163] Today, with a land area of more than 1,250 hectares, more than 25,000 residents, and expanding opportunities in tourism, trade, fisheries, agriculture, and emerging industries, Addu is increasingly becoming a destination in its own right. More than 1,700 Maldivians from other islands and over 4,700 foreign nationals now reside in the city — together representing around a quarter of its population.
+[0164] Its interconnected geography, diverse population, and established urban footprint offer a strong foundation for integrated planning, efficient service delivery, and sustainable growth. Building on these strengths, Addu is well positioned to become a resilient, inclusive, and sustainable city.
+[0165] residents in 2022 Census
+[0166] resident Maldivians in 2022
+[0167] foreigners in 2022
+[0168] hectares of land
+[0169] Hithadhoo
+[0170] Maradhoo
+[0171] Maradhoo-Feydhoo
+[0172] Feydhoo
+[0173] Gan
 [0174] King Imaadudeen I establishes the present Hithadhoo settlement.
 [0175] Hankede abandoned and people settle in Maradhoo.
 [0176] 150 British Marines arrive in Villingili. The residents of Villingili transferred to Magu'dhoo, Huvadhoo Atoll.

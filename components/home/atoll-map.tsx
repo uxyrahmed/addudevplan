@@ -171,6 +171,16 @@ export function AtollMap({ islands, gan }: { islands: string[]; gan: string }) {
           ref={ref}
           viewBox="58 24 1000 790"
           className="block h-auto w-full"
+          // A map's coordinates are compass points rather than reading order, so
+          // the drawing keeps a left-to-right base direction in both editions.
+          // `text-anchor` is logical: under the Dhivehi page's `dir="rtl"`,
+          // `start` resolves to the right edge and `end` to the left, which put
+          // every name on the wrong side of its marker — Hithadhoo's over the
+          // island instead of the reef west of it, the southern three and Gan's
+          // back over the land instead of the lagoon east of them. Only the base
+          // direction changes: each Thaana name is still a right-to-left run and
+          // still sets right to left.
+          style={{ direction: 'ltr' }}
           role="img"
           aria-label={fill(t.map.aria, { islands: islands.join('، ') })}
         >
