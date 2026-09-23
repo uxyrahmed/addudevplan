@@ -25,7 +25,19 @@ export type Entry = {
 
 export type Feedback = Record<string, Entry>
 
-const STORAGE_KEY = 'addu-plan-feedback:v1'
+/**
+ * Where the basket lives on this device, and the council copy it belongs to.
+ *
+ * The suffix moves on whenever the council's copy is wiped, as it was when the
+ * consultation opened and the answers given while the site was being tested
+ * were cleared out. A basket saved before a wipe records as sent answers the
+ * database no longer holds: the panel would call them filed, and the next edit
+ * would send every one of them again, into a consultation they were never part
+ * of. So an older basket is never read, and is removed rather than left on the
+ * device unseen.
+ */
+const STORAGE_KEY = 'addu-plan-feedback:v2'
+const RETIRED_KEYS = ['addu-plan-feedback:v1']
 
 /**
  * How long the basket waits for the answering to stop before it sends.
@@ -201,6 +213,7 @@ export function FeedbackProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     /* eslint-disable react-hooks/set-state-in-effect */
     try {
+      for (const key of RETIRED_KEYS) window.localStorage.removeItem(key)
       const raw = window.localStorage.getItem(STORAGE_KEY)
       if (raw) {
         const parsed = JSON.parse(raw) as {

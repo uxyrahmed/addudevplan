@@ -294,6 +294,14 @@ a failure leaves both sides as they were rather than stranding a basket nobody c
 Emptying the basket one response at a time withdraws it the same way — an endpoint with
 nothing to file would otherwise have quietly left the last set standing.
 
+**Clearing the responses means moving the basket's key.** A device remembers which
+basket the council last acknowledged, and nothing asks the server again. Empty
+`submissions` and `responses` on their own and every browser that answered goes on
+showing its answers as sent, then files every one of them again with its next edit. So
+a wipe goes with a new suffix on `STORAGE_KEY` in
+[`feedback-store.tsx`](components/feedback/feedback-store.tsx), the old key added to
+`RETIRED_KEYS`, and that change is deployed before the tables are cleared, not after.
+
 ### Anonymity, and what stops a repeat submission
 
 Nothing identifying is asked for or stored — no name, no email, no raw IP address. Two
