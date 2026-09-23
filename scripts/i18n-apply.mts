@@ -450,8 +450,7 @@ const PROVENANCE = [
   ' * Every string here passed the checks in `i18n-apply.mts`: its `{slots}` match',
   ' * the English exactly, and it is written in Thaana. Nothing else is asserted',
   ' * about it — in particular, whether a native speaker has read it is not',
-  ' * recorded here, and `proxy.ts` keeps the Dhivehi edition unlisted until one',
-  ' * has.',
+  ' * recorded here.',
 ].join('\n')
 
 if (chromeComplete) {

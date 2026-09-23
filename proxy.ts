@@ -82,13 +82,13 @@ export async function proxy(request: NextRequest) {
  * the language they meant. A rewrite would leave every reader on `/` and the
  * Dhivehi edition would have no address to share.
  *
- * It does **not** negotiate on `Accept-Language`, and that is deliberate while
- * the Dhivehi edition is unlisted. The translation is complete but has not been
- * read by a native speaker, so it is reachable by typing or sharing a `/dv`
- * URL and by nothing else — no switcher in the chrome, and no browser
- * preference that would walk a Dhivehi-speaking resident into an unreviewed
- * edition they never asked for. `matchLocale` in `lib/i18n/config.ts` is the
- * negotiation, kept and tested; restoring it is one call.
+ * It does **not** negotiate on `Accept-Language`, and that is deliberate. The
+ * translation is complete but has not been read by a native speaker, so a
+ * resident reaches it by choosing it — the EN | DV switch in the header, or a
+ * `/dv` link — and never by a browser preference that would walk them into an
+ * unreviewed edition they did not ask for. `matchLocale` in
+ * `lib/i18n/config.ts` is the negotiation, kept and tested; restoring it is
+ * one call.
  *
  * There is no cookie here either. A visitor who follows a `/dv/…` link gets
  * Dhivehi because the URL says so, not because of something this site

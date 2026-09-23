@@ -965,9 +965,12 @@ html[data-anim][dir='rtl'] [data-reveal='measure'] {
    0.14em–0.18em tracking that gives the Latin eyebrow its quiet authority
    prises Thaana's joined forms apart instead. Both are dropped, and the label
    keeps its job through size and colour, which is most of what it was doing
-   anyway. */
-:lang(dv) .eyebrow,
-:lang(dv) [class*='text-micro'] {
+   anyway.
+
+   Except where the label is marked English: that is a declaration that it is
+   Latin — EN | DV in the header — and Latin keeps the tracking it is set in. */
+:lang(dv) .eyebrow:not(:lang(en)),
+:lang(dv) [class*='text-micro']:not(:lang(en)) {
   letter-spacing: normal;
   text-transform: none;
 }

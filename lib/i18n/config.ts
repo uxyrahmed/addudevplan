@@ -81,9 +81,10 @@ export function splitLocale(pathname: string): { locale: Locale | null; rest: st
  * Best supported locale for an `Accept-Language` header.
  *
  * Not currently called. `proxy.ts` sends every unprefixed path to the default
- * edition while the Dhivehi one is unlisted — see the note there. This is kept
- * rather than deleted because unlisting is a temporary state, and turning
- * negotiation back on is meant to be one call rather than a rewrite.
+ * edition while the Dhivehi one waits for a native speaker's read — see the
+ * note there. This is kept rather than deleted because that is a temporary
+ * state, and turning negotiation back on is meant to be one call rather than a
+ * rewrite.
  *
  *
  * Hand-rolled rather than pulled from `@formatjs/intl-localematcher`: with two

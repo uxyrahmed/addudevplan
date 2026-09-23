@@ -85,9 +85,9 @@ Two conventions matter when editing it:
 The consultation is published in English and Dhivehi. The language is a path segment —
 `/en/goals/energy-security`, `/dv/goals/energy-security` — so a Dhivehi link opens in
 Dhivehi for whoever it is sent to. A request arriving without one is redirected to the
-default edition rather than negotiated on `Accept-Language` — see the note on the Dhivehi
-edition being unlisted below; `/admin` is outside all of this and stays English at one
-address.
+default edition rather than negotiated on `Accept-Language` — see the note on review
+below. Every page carries an EN | DV switch in the header, which opens the same page in
+the other language. `/admin` is outside all of this and stays English at one address.
 
 There are two things to translate, and they are separate on purpose:
 
@@ -157,12 +157,11 @@ so. The plan overlay has no such gate — it is partial by design.
 [`translation/README.md`](translation/README.md) is the working guide.
 
 **It has not been read by a native speaker.** The checks above are mechanical: they prove
-a `{slot}` survived and the text is Thaana, never that it reads well. That is the one
-thing still owed before this goes in front of residents, and it is why `proxy.ts` does not
-negotiate on `Accept-Language` and the chrome carries no language switcher — `/dv` is
-reachable by typing or sharing the URL and by nothing else. Turning it on is one call:
-`matchLocale` in [`lib/i18n/config.ts`](lib/i18n/config.ts), kept and tested for exactly
-that.
+a `{slot}` survived and the text is Thaana, never that it reads well. The edition is
+offered in the header's EN | DV switch, so a resident reaches it by choosing it; `proxy.ts`
+still does not negotiate on `Accept-Language`, so no browser preference walks anyone into
+it unasked. Turning that on is one call: `matchLocale` in
+[`lib/i18n/config.ts`](lib/i18n/config.ts), kept and tested for exactly that.
 
 Dhivehi is written in Thaana and reads right to left. `dir="rtl"` on `<html>` does most of
 the work, because the layout is built on flexbox, grid and logical properties; what CSS

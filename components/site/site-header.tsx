@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useLocale } from '@/components/i18n/locale-provider'
+import { LanguageSwitcher } from '@/components/site/language-switcher'
 import { splitLocale } from '@/lib/i18n/config'
 import { fill } from '@/lib/i18n/format'
 import type { Dictionary } from '@/lib/i18n/en'
@@ -51,7 +52,7 @@ const CTA = { id: 'goals', label: (t: Dictionary) => t.header.haveYourSay } as c
  */
 export function SiteHeader() {
   const pathname = usePathname()
-  const { t, plan, href } = useLocale()
+  const { locale, t, plan, href } = useLocale()
   const [lifted, setLifted] = useState(false)
   /** True while the bar overlaps a full-bleed dark hero. */
   const [overDark, setOverDark] = useState(false)
@@ -214,7 +215,10 @@ export function SiteHeader() {
               priority
             />
           </span>
-          <span className="min-w-0 leading-tight">
+          {/* Below `sm` the bar holds the bird, the call to action and EN | DV,
+              and what room is left would cut the title to its first word and
+              break the period over two lines. The link keeps its label. */}
+          <span className="min-w-0 leading-tight max-sm:hidden">
             <span
               className={`wordmark-title block truncate font-heading text-[0.95rem] sm:text-[1.05rem] ${
                 light ? 'text-white' : 'text-navy'
@@ -234,12 +238,14 @@ export function SiteHeader() {
 
         {/* Pushed to the right edge as one group, so the links and the call to
             action read as a single cluster rather than drifting apart. The
-            section links drop below `md`; the call to action does not. */}
+            section links drop below `lg`; the call to action does not. Narrower
+            than that, the three of them beside the call to action and EN | DV
+            cut the English title short. */}
         <nav
           className="ms-auto flex shrink-0 items-center gap-0.5 lg:gap-1"
           aria-label={t.header.navLabel}
         >
-          <span className="hidden items-center gap-0.5 md:flex lg:gap-1">
+          <span className="hidden items-center gap-0.5 lg:flex lg:gap-1">
           {NAV.map((item) => {
             const active = activeId === item.id
             return (
@@ -278,7 +284,7 @@ export function SiteHeader() {
 
           <Link
             href={to(CTA.id)}
-            className={`inline-flex shrink-0 items-center rounded-full px-3.5 py-2.5 text-small font-semibold whitespace-nowrap transition-colors md:ms-1.5 lg:ms-2 lg:px-4 ${
+            className={`inline-flex shrink-0 items-center rounded-full px-3.5 py-2.5 text-small font-semibold whitespace-nowrap transition-colors lg:ms-2 lg:px-4 ${
               light
                 ? 'bg-white text-navy hover:bg-white/90'
                 : 'bg-navy text-white hover:bg-navy-deep'
@@ -287,17 +293,12 @@ export function SiteHeader() {
             {CTA.label(t)}
           </Link>
 
-          {/* No language switcher, for now.
-
-              The Dhivehi edition is complete but has not been read by a native
-              speaker, so it is unlisted rather than published: reachable by
-              typing or sharing a `/dv` URL, and not offered in the chrome. The
-              proxy stops negotiating on `Accept-Language` for the same reason —
-              a Dhivehi-preferring browser should not be walked into an
-              unreviewed edition it did not ask for.
-
-              `components/site/language-switcher.tsx` is left in place and
-              working. Restoring the control is this import and this one line. */}
+          <LanguageSwitcher
+            current={locale}
+            route={route}
+            light={light}
+            label={t.common.languageLabel}
+          />
         </nav>
       </div>
     </header>

@@ -166,13 +166,13 @@ inside a Dhivehi sentence, which is worse than either language alone. So the
 chrome is all 158 keys or nothing: until every one is back, `--write` leaves
 that file exactly as it was and says so.
 
-## Before it goes in front of anyone
+## How a reader reaches it
 
-The Dhivehi edition is unlisted. `proxy.ts` does not negotiate on
-`Accept-Language` and there is no switcher in the chrome, so `/dv` is reachable
-by typing or sharing the URL and by nothing else. Turning it on is one call —
-`matchLocale` in `lib/i18n/config.ts`, which is kept for exactly that.
+The header's EN | DV switch offers the Dhivehi edition on every page. `proxy.ts`
+does not negotiate on `Accept-Language`, so a browser that prefers Dhivehi still
+lands on English until its reader chooses otherwise. Turning that on is one call
+— `matchLocale` in `lib/i18n/config.ts`, which is kept for exactly that.
 
-Leave it unlisted until a Dhivehi speaker has read the site as a site, not as a
-list of segments. The checks here are mechanical: they can tell you a `{slot}`
+Leave negotiation off until a Dhivehi speaker has read the site as a site, not
+as a list of segments. The checks here are mechanical: they can tell you a `{slot}`
 survived and that the text is in Thaana. They cannot tell you it reads well.

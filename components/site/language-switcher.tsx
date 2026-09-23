@@ -1,5 +1,6 @@
 'use client'
 
+import { Fragment } from 'react'
 import Link from 'next/link'
 import { localePath, LOCALES, LOCALE_META, type Locale } from '@/lib/i18n/config'
 
@@ -13,22 +14,23 @@ type Props = {
 }
 
 /**
- * Two links, both always visible.
+ * EN | DV — the two editions by the two letters their addresses open with, the
+ * one being read in full ink and bold.
  *
- * Not a dropdown, and not a globe icon. With two languages a menu hides one
- * behind a click and puts a symbol where a word could go — and the reader who
- * most needs this control is the one who cannot read the page it is on, so the
- * thing that has to be on screen is the *other* script, written in itself.
- * ދިވެހި is recognisable to a Dhivehi reader at a glance in a way that a globe,
- * or the word "Dhivehi", is not.
+ * Codes rather than names so the pair takes the room of one short word beside
+ * the call to action, at every width. Each carries its language's name, written
+ * in itself, as a `title`: hovering DV shows ދިވެހި.
  *
  * Real links to real addresses, not a preference. Each one points at the page
- * currently being read, in the other language, so switching mid-plan lands on
- * the same goal rather than back at the top of the site — and the URL that
- * results is the one to share.
+ * currently being read, in that language, so switching mid-plan lands on the
+ * same goal rather than back at the top of the site — and the URL that results
+ * is the one to share. `hrefLang` says so, which is the one case the attribute
+ * is for.
  *
- * `hrefLang` is on them because that is exactly what these are: the same
- * document in another language, which is the one case the attribute is for.
+ * The codes themselves are marked English in both editions. They are Latin
+ * letters, so that is the voice a screen reader should spell them in — and it
+ * keeps them out of the Dhivehi edition's rule for small type, which drops case
+ * and tracking for Thaana's sake (see `app/globals.css`).
  */
 export function LanguageSwitcher({ current, route, light, label }: Props) {
   return (
@@ -39,37 +41,51 @@ export function LanguageSwitcher({ current, route, light, label }: Props) {
       // as one on every page.
       role="group"
       aria-label={label}
-      className={`ms-1.5 flex shrink-0 items-center rounded-full p-0.5 lg:ms-2 ${
-        light ? 'bg-white/15' : 'bg-shell'
-      }`}
+      className="ms-1 flex shrink-0 items-center lg:ms-2"
     >
-      {LOCALES.map((locale) => {
+      {LOCALES.map((locale, index) => {
         const meta = LOCALE_META[locale]
         const active = locale === current
         return (
-          <Link
-            key={locale}
-            href={localePath(locale, route)}
-            lang={meta.tag}
-            hrefLang={meta.tag}
-            // The active one is a link to the page you are on, which is
-            // exactly what `aria-current` is for — and it stays a link so the
-            // pair reads as one switch rather than a button and a label.
-            aria-current={active ? 'true' : undefined}
-            className={`rounded-full px-2.5 py-1.5 text-small font-semibold whitespace-nowrap transition-colors ${
-              active
-                ? light
-                  ? 'bg-white text-navy'
-                  : 'bg-navy text-white'
-                : light
-                  ? 'text-white/75 hover:text-white'
-                  : 'text-slate hover:text-navy'
-            }`}
-          >
-            {/* The endonym, and nothing else. "EN"/"DV" would be shorter and
-                would name neither language to the person looking for it. */}
-            {meta.endonym}
-          </Link>
+          <Fragment key={locale}>
+            {index > 0 ? (
+              <span
+                aria-hidden
+                className={`mx-1 h-3.5 w-px shrink-0 ${light ? 'bg-white/45' : 'bg-mist-plate'}`}
+              />
+            ) : null}
+            <Link
+              href={localePath(locale, route)}
+              hrefLang={meta.tag}
+              title={meta.endonym}
+              // The active one is a link to the page you are on, which is
+              // exactly what `aria-current` is for — and it stays a link so the
+              // pair reads as one switch rather than a button and a label.
+              aria-current={active ? 'true' : undefined}
+              // On hover rather than on sight. The bar is on screen on every
+              // page and most readers never change edition, so prefetching on
+              // arrival would fetch the other language's copy of every page
+              // for nobody.
+              prefetch={false}
+              // Weight as well as colour marks the edition being read, so the
+              // difference survives for a reader who cannot tell navy from grey.
+              //
+              // The pill is drawn at 32px so a focus ring sits close around two
+              // letters, and clear of the rule; the `after` block takes the
+              // touch target to 44px and across the gap to the rule.
+              className={`relative inline-flex h-8 items-center rounded-full px-1.5 transition-colors after:absolute after:-inset-x-1 after:-inset-y-1.5 focus-visible:outline-offset-1 ${
+                active
+                  ? `font-bold ${light ? 'text-white' : 'text-navy'}`
+                  : `font-normal ${light ? 'text-white/75 hover:text-white' : 'text-mist hover:text-navy'}`
+              }`}
+            >
+              {/* Tracking is added after the last letter too; pulling it back
+                  keeps the two codes optically even about the rule. */}
+              <span lang="en" className="-mr-[0.14em] text-micro">
+                {locale.toUpperCase()}
+              </span>
+            </Link>
+          </Fragment>
         )
       })}
     </div>
