@@ -28,7 +28,7 @@ written in Dhivehi, not translated into it.
 [0017] The population of Addu has increased from 14,094 to 25,062 by 2022. This plan sets a target of 35,000 residents in Addu by 2030.
 [0021] Twelve goals carry the vision of a resilient, inclusive, sustainable Addu. Open any goal to read its targets and comment on each action.
 [0022] Tell us what to change.
-[0023] Every one of the {count} actions in this plan takes a response — support it, say you are unsure, or raise a concern, and add a comment if you want to explain. Your answers send themselves as you make them.
+[0023] Every one of the {count} actions in this plan takes a response — support it or raise a concern, and add a comment if you want to explain. Your answers send themselves as you make them.
 [0033] Tell us what you think of each action below. One tap to react, and a comment box if you want to explain why.
 [0121] The record behind the plan: where Addu’s people have been settled since 1620, and the registered and resident population counts from 1977 to 2025.
 [0124] The following is a brief timeline of settlement history in Addu from 1620 to 2025.

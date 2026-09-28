@@ -106,18 +106,18 @@ There are two things to translate, and they are separate on purpose:
 ### Where the Dhivehi stands
 
 **The chrome is complete** — every string, so no English word appears inside a Dhivehi
-sentence anywhere in the interface. Sixteen of those strings are now translations of
-English the council has since revised, and `lib/i18n/dv.ts` cannot be regenerated until
-they come back: it is typed `Dictionary`, so it is all the keys or none. `npm run
-i18n:apply` names the sixteen.
+sentence anywhere in the interface — and so `lib/i18n/dv.ts` can be regenerated: it is
+typed `Dictionary`, so it is all the keys or none, and `npm run i18n:apply` reports all
+of them back.
 
 **The plan is all twelve goals**, with their targets, strategies and actions, along with
 the cover, the vision, the turning-point passage, the settlement timeline, the five
-pillars and the flagship initiatives. Four pieces are open, all from the 3 September
-review: the initiatives heading and its sentence, which counted ten and now count eleven;
-the new Modern Smart Link Road's paragraph; and the two goal titles that lost a word,
-`water-security` and `connect-community-and-culture`. Each falls through to the English
-underneath — which is the overlay working as intended, not a gap to be papered over.
+pillars and the flagship initiatives: every segment the extract sends out has come back.
+One is deliberately not a translation of its English. The initiatives heading reads
+`11 މައިގަނޑު މަޝްރޫއު`, "11 main projects", where the English says "Eleven flagship
+initiatives" — the wording the Dhivehi edition was asked to carry. A segment the overlay
+does not hold still falls through to the English underneath, which is the overlay
+working as intended, not a gap to be papered over.
 
 An earlier machine translation covered all twelve goals and was withdrawn: it read as a
 government gazette throughout, because every string — button, error, screen-reader

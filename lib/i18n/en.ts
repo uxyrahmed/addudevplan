@@ -65,7 +65,7 @@ export const en = {
 
     feedbackTitle: 'Tell us what to change.',
     feedbackBody:
-      'Every one of the {count} actions in this plan takes a response — support it, say you are unsure, or raise a concern, and add a comment if you want to explain. Your answers send themselves as you make them.',
+      'Every one of the {count} actions in this plan takes a response — support it or raise a concern, and add a comment if you want to explain. Your answers send themselves as you make them.',
     startWithGoalOne: 'Start with goal 1',
   },
 

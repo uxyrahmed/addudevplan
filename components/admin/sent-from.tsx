@@ -20,11 +20,6 @@ export function SentFrom({ places, total }: { places: Place[]; total: number }) 
           {fmt(total)} {total === 1 ? 'submission' : 'submissions'}
         </p>
       </div>
-      <p className="mt-2 max-w-prose text-small leading-snug text-stone">
-        The place each connection reports, not where the resident lives. Maldivian networks
-        often show as Malé whichever island a phone is on, so this tells the Maldives from
-        abroad more reliably than one island from another.
-      </p>
 
       <ul className="mt-4 space-y-3">
         {places.map((place) => {
