@@ -101,12 +101,15 @@ export const en = {
   },
 
   /**
-   * The three reactions, named for a resident. `lib/reactions.ts` keeps the
-   * English alongside the colours because the council's results screens read
-   * from it. The thumbs on the page print no word at all — the `Label` is
-   * their accessible name — and the `Short` form is the chip in the review
-   * panel. "Not sure" stays here for the baskets that chose it before the
-   * button went.
+   * The reactions, named for a resident. `lib/reactions.ts` keeps the English
+   * alongside the colours because the council's results screens read from it.
+   * The thumbs on the page print no word at all — the `Label` is their
+   * accessible name — and the `Short` form is the chip in the review panel.
+   *
+   * The two "not sure" strings are no longer read by anything. They stay
+   * because the translation transcript numbers every string in the order it
+   * walks this file: deleting them would renumber every segment after them and
+   * put the Dhivehi that has come back against the wrong English.
    */
   reactions: {
     supportLabel: 'I support this',

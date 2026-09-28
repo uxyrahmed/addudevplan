@@ -13,7 +13,6 @@ import { fmt, type Goal } from '@/lib/plan'
  */
 const NONE: Omit<Tally, 'actionId'> = {
   support: 0,
-  unsure: 0,
   concern: 0,
   comments: 0,
   responses: 0,
@@ -74,12 +73,7 @@ export function GoalActions({ goal, byAction }: { goal: Goal; byAction: Map<stri
                     </p>
 
                     <div className={COL_WIDE}>
-                      <ReactionBar
-                        support={tally.support}
-                        unsure={tally.unsure}
-                        concern={tally.concern}
-                        thin
-                      />
+                      <ReactionBar support={tally.support} concern={tally.concern} thin />
                     </div>
 
                     <ReactionFigures tally={tally} />

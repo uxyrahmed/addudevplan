@@ -37,6 +37,39 @@ function clientAddress(h: Headers) {
   return h.get('x-real-ip')?.trim() || null
 }
 
+/**
+ * Where the connection says it is, as Vercel's edge reports it: a country code,
+ * a first-level region code and a city name. Nothing finer — the coordinates
+ * Vercel also offers are not read — and all three are null off Vercel, where
+ * the headers are never set.
+ *
+ * This is the network's location, not the resident's. IP location is coarse in
+ * the Maldives — carriers route through a few gateways — so a basket sent from
+ * Addu can be expected to read as Malé, or as the country alone; what this
+ * separates reliably is the Maldives from abroad. The database checks the shape
+ * again and keeps a place without a country out altogether.
+ */
+function connectionPlace(h: Headers) {
+  const country = h.get('x-vercel-ip-country')?.trim().toUpperCase()
+  if (!country || !/^[A-Z]{2}$/.test(country)) return { country: null, region: null, city: null }
+
+  const region = h.get('x-vercel-ip-country-region')?.trim().toUpperCase()
+
+  // Sent percent-encoded, so Malé arrives as `Mal%C3%A9`.
+  let city: string | null = null
+  try {
+    city = decodeURIComponent(h.get('x-vercel-ip-city') ?? '').trim().slice(0, 80) || null
+  } catch {
+    // Not valid percent-encoding: dropped rather than stored half-read.
+  }
+
+  return {
+    country,
+    region: region && /^[A-Z0-9]{1,3}$/.test(region) ? region : null,
+    city,
+  }
+}
+
 export async function POST(request: Request) {
   const writeSecret = process.env.FEEDBACK_WRITE_SECRET
   const pepper = process.env.FEEDBACK_HASH_SECRET
@@ -66,7 +99,9 @@ export async function POST(request: Request) {
   const existing = cookieStore.get(SUBMITTER_COOKIE)?.value
   const token = existing ?? randomUUID()
 
-  const address = clientAddress(await headers())
+  const requestHeaders = await headers()
+  const address = clientAddress(requestHeaders)
+  const place = connectionPlace(requestHeaders)
 
   const supabase = createAnonClient()
   const { data, error } = await supabase.rpc('submit_feedback', {
@@ -74,6 +109,9 @@ export async function POST(request: Request) {
     p_submitter_hash: peppered(token, pepper),
     p_ip_hash: address ? peppered(address, pepper) : null,
     p_responses: validated.responses,
+    p_country: place.country,
+    p_region: place.region,
+    p_city: place.city,
   })
 
   if (error) {

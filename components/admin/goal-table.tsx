@@ -113,12 +113,7 @@ export function GoalTable({
                 </div>
 
                 <div className={COL_WIDE}>
-                  <ReactionBar
-                    support={row.support}
-                    unsure={row.unsure}
-                    concern={row.concern}
-                    thin
-                  />
+                  <ReactionBar support={row.support} concern={row.concern} thin />
                 </div>
 
                 <ReactionFigures tally={row} />

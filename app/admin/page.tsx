@@ -5,8 +5,10 @@ import { AdminShell } from '@/components/admin/admin-shell'
 import { ReactionBar } from '@/components/admin/reaction-bar'
 import { ReactionSwatch } from '@/components/admin/reaction-figures'
 import { GoalTable } from '@/components/admin/goal-table'
+import { SentFrom } from '@/components/admin/sent-from'
 import { requireCouncilViewer } from '@/lib/admin/session'
-import { OVERALL_SCOPE, getOverview, isGoalSort, sortGoals } from '@/lib/admin/results'
+import { OVERALL_SCOPE, getOverview, getPlaces, isGoalSort, sortGoals } from '@/lib/admin/results'
+import { COUNCIL_TIME_ZONE } from '@/lib/admin/time'
 import { OVERALL_LABEL } from '@/lib/feedback-scope'
 import { REACTION_META, REACTION_VALUES } from '@/lib/reactions'
 import { fmt } from '@/lib/plan'
@@ -19,7 +21,10 @@ export const metadata = { title: 'Overview' }
  */
 export const dynamic = 'force-dynamic'
 
-/** Absent only before the first submission, where the figure says so instead. */
+/**
+ * Absent only before the first submission, where the figure says so instead.
+ * In Maldives time: this renders on a server that keeps UTC.
+ */
 function when(iso: string) {
   return new Date(iso).toLocaleString('en-GB', {
     day: 'numeric',
@@ -27,6 +32,7 @@ function when(iso: string) {
     year: 'numeric',
     hour: '2-digit',
     minute: '2-digit',
+    timeZone: COUNCIL_TIME_ZONE,
   })
 }
 
@@ -57,14 +63,14 @@ export default async function AdminOverviewPage({
   searchParams: Promise<{ sort?: string | string[] }>
 }) {
   const viewer = await requireCouncilViewer()
-  const [overview, params] = await Promise.all([getOverview(), searchParams])
+  const [overview, sentFrom, params] = await Promise.all([getOverview(), getPlaces(), searchParams])
 
   // Anything unrecognised falls back to plan order rather than erroring: a
   // mistyped link a colleague was sent should still open the page.
   const requested = one(params.sort)
   const sort = isGoalSort(requested) ? requested : 'plan'
 
-  const reacted = overview.support + overview.unsure + overview.concern
+  const reacted = overview.support + overview.concern
 
   return (
     <AdminShell viewer={viewer} current="/admin">
@@ -109,11 +115,7 @@ export default async function AdminOverviewPage({
             </div>
 
             <div className="mt-4">
-              <ReactionBar
-                support={overview.support}
-                unsure={overview.unsure}
-                concern={overview.concern}
-              />
+              <ReactionBar support={overview.support} concern={overview.concern} />
             </div>
 
             <dl className="mt-4 flex flex-wrap gap-x-8 gap-y-2">
@@ -155,6 +157,8 @@ export default async function AdminOverviewPage({
           </Link>
         </section>
       ) : null}
+
+      <SentFrom places={sentFrom.places} total={sentFrom.total} />
 
       <GoalTable rows={sortGoals(overview.byGoal, sort)} byAction={overview.byAction} sort={sort} />
     </AdminShell>

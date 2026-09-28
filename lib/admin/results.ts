@@ -3,12 +3,11 @@ import 'server-only'
 import { createClient } from '@/lib/supabase/server'
 import { OVERALL_ID } from '@/lib/feedback-scope'
 import { GOALS, type Goal, type Strategy } from '@/lib/plan'
-import type { WireReaction } from '@/lib/reactions'
+import { REACTION_VALUES, type WireReaction } from '@/lib/reactions'
 
 export type Tally = {
   actionId: string
   support: number
-  unsure: number
   concern: number
   comments: number
   responses: number
@@ -16,7 +15,6 @@ export type Tally = {
 
 const EMPTY: Omit<Tally, 'actionId'> = {
   support: 0,
-  unsure: 0,
   concern: 0,
   comments: 0,
   responses: 0,
@@ -52,7 +50,6 @@ export const OVERALL_SCOPE = 'plan'
 export type GoalRollup = {
   goal: Goal
   support: number
-  unsure: number
   concern: number
   comments: number
   responses: number
@@ -66,7 +63,6 @@ export type Overview = {
   responses: number
   comments: number
   support: number
-  unsure: number
   concern: number
   answeredActions: number
   totalActions: number
@@ -93,7 +89,7 @@ export async function getOverview(): Promise<Overview> {
   const supabase = await createClient()
 
   const [tallyResult, submissionResult] = await Promise.all([
-    supabase.from('response_tallies').select('action_id, support, unsure, concern, comments, responses'),
+    supabase.from('response_tallies').select('action_id, support, concern, comments, responses'),
     supabase
       .from('submissions')
       .select('created_at', { count: 'exact' })
@@ -111,7 +107,6 @@ export async function getOverview(): Promise<Overview> {
     byAction.set(row.action_id, {
       actionId: row.action_id,
       support: row.support ?? 0,
-      unsure: row.unsure ?? 0,
       concern: row.concern ?? 0,
       comments: row.comments ?? 0,
       responses: row.responses ?? 0,
@@ -130,7 +125,6 @@ export async function getOverview(): Promise<Overview> {
       const tally = byAction.get(action.id)
       if (!tally) continue
       rollup.support += tally.support
-      rollup.unsure += tally.unsure
       rollup.concern += tally.concern
       rollup.comments += tally.comments
       rollup.responses += tally.responses
@@ -144,12 +138,11 @@ export async function getOverview(): Promise<Overview> {
       responses: acc.responses + g.responses,
       comments: acc.comments + g.comments,
       support: acc.support + g.support,
-      unsure: acc.unsure + g.unsure,
       concern: acc.concern + g.concern,
       answeredActions: acc.answeredActions + g.answeredActions,
       totalActions: acc.totalActions + g.totalActions,
     }),
-    { responses: 0, comments: 0, support: 0, unsure: 0, concern: 0, answeredActions: 0, totalActions: 0 },
+    { responses: 0, comments: 0, support: 0, concern: 0, answeredActions: 0, totalActions: 0 },
   )
 
   // Added after the goal rollup rather than inside it. These are responses and
@@ -169,6 +162,67 @@ export async function getOverview(): Promise<Overview> {
     responses: totals.responses + (overallTally?.responses ?? 0),
     comments: totals.comments + overallComments,
   }
+}
+
+export type Place = {
+  /** "Malé, Maldives"; the country alone when no city was named; or "Not recorded". */
+  label: string
+  /** False for the row of baskets that carry no place at all. */
+  recorded: boolean
+  submissions: number
+}
+
+const COUNTRY_NAMES = new Intl.DisplayNames(['en'], { type: 'region' })
+
+function countryName(code: string) {
+  try {
+    return COUNTRY_NAMES.of(code) ?? code
+  } catch {
+    return code
+  }
+}
+
+/**
+ * How many baskets came from each place, as the connections reported it.
+ *
+ * From the grouped `submission_places` view rather than the submissions
+ * themselves, for the same reason the tallies come from `response_tallies`: one
+ * row per place however many residents answer. Rows that differ only in region
+ * code are joined here, because the card names places by city and country and
+ * two rows reading "Malé, Maldives" would look like a fault.
+ *
+ * Most first, with the baskets that carry no place last whatever their count:
+ * they are the absence of an answer, not a place that out-drew the others.
+ */
+export async function getPlaces(): Promise<{ places: Place[]; total: number }> {
+  const supabase = await createClient()
+  const { data, error } = await supabase
+    .from('submission_places')
+    .select('country, city, submissions')
+
+  if (error) throw new Error(`Could not read where submissions came from: ${error.message}`)
+
+  const byLabel = new Map<string, Place>()
+  for (const row of data ?? []) {
+    const recorded = Boolean(row.country)
+    const label = !recorded
+      ? 'Not recorded'
+      : row.city
+        ? `${row.city}, ${countryName(row.country)}`
+        : countryName(row.country)
+    const place = byLabel.get(label) ?? { label, recorded, submissions: 0 }
+    place.submissions += row.submissions ?? 0
+    byLabel.set(label, place)
+  }
+
+  const places = [...byLabel.values()].sort(
+    (a, b) =>
+      Number(b.recorded) - Number(a.recorded) ||
+      b.submissions - a.submissions ||
+      a.label.localeCompare(b.label),
+  )
+
+  return { places, total: places.reduce((n, p) => n + p.submissions, 0) }
 }
 
 export type CommentRow = {
@@ -319,7 +373,10 @@ export async function getComments({
     const comment: CommentRow = {
       id: row.id,
       actionId: row.action_id,
-      reaction: row.reaction,
+      // The enum still allows `unsure`, which nothing can send any more. Should
+      // one ever be read, it shows as no reaction rather than as a label with
+      // no name or colour to draw it with.
+      reaction: REACTION_VALUES.includes(row.reaction) ? row.reaction : null,
       comment: row.comment as string,
       createdAt: row.created_at,
     }

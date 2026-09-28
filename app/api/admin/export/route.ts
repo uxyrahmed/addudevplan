@@ -2,6 +2,7 @@ import { checkCouncilViewer } from '@/lib/admin/session'
 import { createClient } from '@/lib/supabase/server'
 import { describeAction } from '@/lib/admin/results'
 import { OVERALL_ID, OVERALL_LABEL } from '@/lib/feedback-scope'
+import { maldivesIso } from '@/lib/admin/time'
 import { PLAN } from '@/lib/plan'
 
 /** Supabase caps a single select at 1000 rows, so an export walks the table. */
@@ -13,6 +14,8 @@ type Row = {
   reaction: string | null
   comment: string | null
   created_at: string
+  /** The basket's place, as its connection last reported it. */
+  submissions: { country: string | null; region: string | null; city: string | null } | null
 }
 
 /**
@@ -50,7 +53,7 @@ export async function GET(request: Request) {
   for (let page = 0; ; page += 1) {
     const { data, error } = await supabase
       .from('responses')
-      .select('submission_id, action_id, reaction, comment, created_at')
+      .select('submission_id, action_id, reaction, comment, created_at, submissions(country, region, city)')
       .order('created_at', { ascending: true })
       .range(page * PAGE, page * PAGE + PAGE - 1)
 
@@ -58,7 +61,10 @@ export async function GET(request: Request) {
       return Response.json({ error: `Could not read responses: ${error.message}` }, { status: 502 })
     }
     if (!data?.length) break
-    rows.push(...(data as Row[]))
+    // Through `unknown` because the client, with no generated schema types,
+    // cannot know `submissions` is the one row a response belongs to and types
+    // the embed as a list. PostgREST follows the foreign key and sends an object.
+    rows.push(...(data as unknown as Row[]))
     if (data.length < PAGE) break
   }
 
@@ -67,7 +73,13 @@ export async function GET(request: Request) {
     const overall = row.action_id === OVERALL_ID
     return {
       submission: row.submission_id,
-      submittedAt: row.created_at,
+      // Maldives time with its offset written out, as the panel shows it.
+      submittedAt: maldivesIso(row.created_at),
+      // Raw, as the connection reported them — the codes a reader can look up,
+      // where the overview's card turns them into names.
+      country: row.submissions?.country ?? null,
+      region: row.submissions?.region ?? null,
+      city: row.submissions?.city ?? null,
       goalNumber: place?.goal.number ?? null,
       // The `goal` column is what a reader sorts and groups by, so the response
       // that belongs to no goal says so there rather than leaving three empty
@@ -82,13 +94,14 @@ export async function GET(request: Request) {
     }
   })
 
-  const stamp = new Date().toISOString().slice(0, 10)
+  const now = maldivesIso(Date.now())
+  const stamp = now.slice(0, 10)
 
   if (format === 'json') {
     return Response.json(
       {
         plan: `${PLAN.title} ${PLAN.period}`,
-        exportedAt: new Date().toISOString(),
+        exportedAt: now,
         responses: enriched,
       },
       {
@@ -103,6 +116,9 @@ export async function GET(request: Request) {
   const header = [
     'submission',
     'submitted_at',
+    'country',
+    'region',
+    'city',
     'goal_number',
     'goal',
     'strategy',
@@ -116,6 +132,9 @@ export async function GET(request: Request) {
     [
       r.submission,
       r.submittedAt,
+      r.country,
+      r.region,
+      r.city,
       r.goalNumber,
       r.goal,
       r.strategy,

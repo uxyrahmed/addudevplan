@@ -7,6 +7,7 @@ import { ACTIONS_PER_PAGE, OVERALL_SCOPE, describeAction, getComments } from '@/
 import { OVERALL_ID, OVERALL_LABEL } from '@/lib/feedback-scope'
 import { REACTION_META, REACTION_VALUES, type WireReaction } from '@/lib/reactions'
 import { GOALS, fmt } from '@/lib/plan'
+import { COUNCIL_TIME_ZONE } from '@/lib/admin/time'
 
 export const metadata = { title: 'Comments' }
 
@@ -186,6 +187,7 @@ export default async function AdminCommentsPage({
                             day: 'numeric',
                             month: 'short',
                             year: 'numeric',
+                            timeZone: COUNCIL_TIME_ZONE,
                           })}
                         </span>
                       </p>

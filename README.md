@@ -251,8 +251,10 @@ print rule. It is a photograph of the site, so anything that changes the site ch
 
 Every action carries two reactions — a thumb up (`support`) and a thumb down
 (`concern`), icon only — plus an optional comment. A third, `unsure`, was offered
-until 10 September 2026; it stays in the database enum, the validator and the results
-screens because it was answered before it went, but no button offers it now. A
+until 10 September 2026. Its answers went with the rest of the pre-release responses in
+the wipe of 23 September, so the site no longer accepts or shows it; the value survives
+only in the database enum, and as two unused strings in the dictionary, where deleting
+them would renumber the translation transcripts. A
 reaction is one click and needs no confirming; a comment is posted
 deliberately, with a button or ⌘/Ctrl + Enter, so half a sentence never reaches the
 council.
@@ -321,10 +323,30 @@ clears their cookies and changes network can submit again. No anonymous scheme c
 prevent that — preventing it is exactly what asking for identity buys, and this
 consultation chose not to ask.
 
+### Where a basket was sent from
+
+One coarse thing is kept about where each basket came from: the country, first-level
+region and city its connection reports, read from Vercel's `x-vercel-ip-country`,
+`x-vercel-ip-country-region` and `x-vercel-ip-city` headers on every send and stored on
+the submission. Never the coordinates Vercel also offers, and never the address — the
+peppered hash above stays the only trace of that. A later send that reports no place
+keeps the last one known; off Vercel, locally, nothing is recorded.
+
+It is the network's location, not the resident's. IP location is coarse in the
+Maldives — carriers route traffic out through a few gateways — so expect a phone in
+Hithadhoo to read as Malé, or as the country alone, more often than as Addu: this tells
+the Maldives from abroad far better than it tells one island from another. How coarse it
+really is will show on the overview once baskets arrive with it. Baskets last sent
+before it was recorded carry no place at all.
+
 ## The results panel
 
-`/admin` shows the council what came in: totals, the reaction split per goal, every
-comment in context, and a CSV or JSON export. It is invite-only and `noindex`.
+`/admin` shows the council what came in: totals, the reaction split per goal, where the
+baskets were sent from, every comment in context, and a CSV or JSON export. It is
+invite-only and `noindex`. Times are Maldives time throughout — the panel renders on
+servers that keep UTC, so each formatter names `Indian/Maldives` itself — and the
+export writes them with the offset, `2026-09-28T08:27:52+05:00`, beside the country,
+region and city of the basket each row belongs to.
 
 Comments on the plan as a whole belong to no goal, so they get their own card on the
 overview and their own filter — `/admin/comments?goal=plan` — rather than being mixed

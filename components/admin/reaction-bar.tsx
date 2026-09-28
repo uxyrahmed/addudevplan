@@ -2,14 +2,13 @@ import { REACTION_META, REACTION_VALUES } from '@/lib/reactions'
 
 type Props = {
   support: number
-  unsure: number
   concern: number
   /** The goal and action rows want a thinner bar than the page-level one. */
   thin?: boolean
 }
 
 /**
- * The support / not sure / concern split as one bar.
+ * The support / concern split as one bar.
  *
  * Proportional to the reactions given, not to the number of actions: a goal
  * where two people answered should not read as overwhelming support, so the
@@ -20,9 +19,14 @@ type Props = {
  * is exactly the thing a council reader is scanning for, so it is given a
  * sliver it can actually see. The remaining segments give up the difference in
  * proportion to their own size, so the bar still totals its width.
+ *
+ * The two are parted by a 2px gap in whatever the bar sits on, so where support
+ * ends and concern begins never rests on telling their colours apart. The
+ * widths are flex-grow weights rather than percentages for the same reason: the
+ * gap comes out of the bar's width instead of pushing the last segment past it.
  */
-export function ReactionBar({ support, unsure, concern, thin }: Props) {
-  const total = support + unsure + concern
+export function ReactionBar({ support, concern, thin }: Props) {
+  const total = support + concern
   const height = thin ? 'h-1.5' : 'h-2.5'
 
   if (total === 0) {
@@ -31,7 +35,7 @@ export function ReactionBar({ support, unsure, concern, thin }: Props) {
 
   const parts = REACTION_VALUES.map((key) => ({
     key,
-    value: { support, unsure, concern }[key],
+    value: { support, concern }[key],
   })).filter((p) => p.value > 0)
 
   const FLOOR = 3 // percent
@@ -42,16 +46,19 @@ export function ReactionBar({ support, unsure, concern, thin }: Props) {
     share < FLOOR ? FLOOR : spare > 0 ? share - (share - FLOOR) * (owed / spare) : share,
   )
 
+  const label = parts.map((p) => `${REACTION_META[p.key].short}: ${p.value}`).join(', ')
+
   return (
     <div
-      className={`flex ${height} w-full overflow-hidden rounded-full bg-hairline`}
+      className={`flex ${height} w-full gap-[2px] overflow-hidden rounded-full`}
       role="img"
-      aria-label={parts.map((p) => `${REACTION_META[p.key].short}: ${p.value}`).join(', ')}
+      aria-label={label}
+      title={label}
     >
       {parts.map((p, i) => (
         <span
           key={p.key}
-          style={{ width: `${widths[i]}%`, background: REACTION_META[p.key].color }}
+          style={{ flexGrow: widths[i], flexBasis: 0, background: REACTION_META[p.key].color }}
         />
       ))}
     </div>

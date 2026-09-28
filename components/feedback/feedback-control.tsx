@@ -9,7 +9,7 @@ import SentIcon from '@hugeicons/core-free-icons/SentIcon'
 import Delete02Icon from '@hugeicons/core-free-icons/Delete02Icon'
 import { Icon, type IconData } from '@/components/ui/icon'
 import { MAX_COMMENT_LENGTH } from '@/lib/feedback-limits'
-import { OFFERED_REACTIONS, REACTION_META, type OfferedReaction } from '@/lib/reactions'
+import { REACTION_META, REACTION_VALUES, type WireReaction } from '@/lib/reactions'
 import { useFeedback } from './feedback-store'
 import { useCommentDraft } from './use-comment-draft'
 import { useLocale } from '@/components/i18n/locale-provider'
@@ -21,7 +21,7 @@ import { reactionWords } from '@/lib/i18n/reactions'
  * beside them, so the word each one stands for is carried by the accessible
  * name alone and never printed.
  */
-const REACTION_ICON: Record<OfferedReaction, IconData> = {
+const REACTION_ICON: Record<WireReaction, IconData> = {
   support: ThumbsUpIcon,
   concern: ThumbsDownIcon,
 }
@@ -70,7 +70,7 @@ export function FeedbackControl({ id, subject, accent }: Props) {
     // nothing to tap, and a row of dead buttons under every action is noise.
     <div className="feedback-control mt-3">
       <div className="flex flex-wrap items-center gap-1.5">
-        {OFFERED_REACTIONS.map((r) => {
+        {REACTION_VALUES.map((r) => {
           const active = entry?.reaction === r
           const { color } = REACTION_META[r]
           return (

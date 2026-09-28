@@ -73,12 +73,13 @@ const REACTION_BY_ID = new Map(REACTIONS.map((r) => [r.id, r]))
 const TIME = new Intl.DateTimeFormat(undefined, { hour: 'numeric', minute: '2-digit' })
 
 /**
- * Three plates for the send status: settled, in hand, and not landed. Tinted
- * from the same three colours the reactions use, so the panel's palette says
- * the same things the controls do.
+ * Three plates for the send status: settled, in hand, and not landed. Settled
+ * is tinted from the support green, so the panel's palette says the same thing
+ * the controls do; not landed from the site's plum, the colour its other
+ * failures wear.
  */
 const TONE = {
-  done: { tint: 'color-mix(in oklab, #178E6B 10%, white)', ink: '#0f6b51' },
+  done: { tint: 'color-mix(in oklab, #04A177 10%, white)', ink: '#0f6b51' },
   working: { tint: 'var(--color-shell)', ink: 'var(--color-stone)' },
   trouble: { tint: 'color-mix(in oklab, #970E53 9%, white)', ink: '#7c0b45' },
 } as const
@@ -453,9 +454,12 @@ export function FeedbackPanel({ onClose }: { onClose: () => void }) {
                                 {r ? (
                                   <span
                                     className="rounded-full px-2 py-0.5 text-micro font-bold tracking-wide"
+                                    // The fill tints the chip; the word is set in
+                                    // the ink, since support's fill is too light
+                                    // to read as text.
                                     style={{
                                       background: `color-mix(in oklab, ${r.color} 14%, white)`,
-                                      color: r.color,
+                                      color: r.ink,
                                     }}
                                   >
                                     {reactionWords(t, r.id).short}

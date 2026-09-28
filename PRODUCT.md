@@ -17,7 +17,9 @@ sittings rather than one.
 **Council and ministry stakeholders** are a second, named audience. This site is the
 public face of the plan, not only a comment box: council members, ministries and
 other institutional readers use it to see the plan as published and to read what came
-back. The `/admin` results panel serves the council side of that directly.
+back. The `/admin` results panel serves the council side of that directly, in
+Maldives time, including where the baskets were sent from as the network reports it
+— the country reliably, the city coarsely: often Malé whichever island a phone is on.
 
 ## Product Purpose
 
@@ -38,7 +40,9 @@ action. The plan is not summarised into a feedback form — the full draft is th
 site, and every individual action carries its own response control, with one box for
 the plan itself so an answer that belongs to no action is not filed under one.
 Anonymity is structural, not a policy line: nothing identifying is ever asked for or
-stored, so responding costs a resident nothing.
+stored, so responding costs a resident nothing. The one thing kept about where an answer
+came from is as coarse as a city — the place the connection reports, never coordinates
+or an address.
 
 ## Operating Context
 
@@ -61,7 +65,11 @@ stored, so responding costs a resident nothing.
   goals sit under which pillar, so the site asserts no mapping.
 - Every action carries two reactions — a thumb up (support) and a thumb down
   (concern) — plus an optional comment. A third, Not sure, was offered until
-  10 September 2026 and is still held and counted for the answers that chose it.
+  10 September 2026; its answers went in the pre-release wipe of 23 September, and it
+  is no longer accepted or shown.
+- **Support and concern are told apart without colour.** They are a light green and a
+  dark red, validated for the commonest colour blindness, and every chart that sets
+  them side by side parts them with a gap; the buttons are a thumb up and a thumb down.
 - **The plan as a whole takes one comment, and no reaction.** What does not belong
   under any single action has a box of its own, keyed on a reserved id beside the
   action ids. Words only: three buttons on the whole document would collect a

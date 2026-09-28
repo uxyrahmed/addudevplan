@@ -20,10 +20,11 @@ export function ReactionSwatch({ color }: { color: string }) {
 }
 
 /**
- * The three column headings, which are also the only legend the table needs.
+ * The reaction column headings, which are also the only legend the table
+ * needs.
  *
- * A fragment of three cells rather than a row of its own, so the heading and
- * the twelve rows below it are placed by the same grid and cannot drift apart.
+ * A fragment of cells rather than a row of its own, so the heading and the
+ * twelve rows below it are placed by the same grid and cannot drift apart.
  * Purely visual — the figures carry their own names for a screen reader, which
  * reads them one row at a time and never sees this strip.
  */
@@ -44,12 +45,12 @@ export function ReactionColumnHeads() {
 }
 
 /**
- * The three counts as three sibling grid cells.
+ * The reaction counts as sibling grid cells, one per reaction.
  *
  * A fragment rather than a wrapper, so the cells land in the caller's own grid
  * and every row's Support column starts at the same x. That is the whole point
  * of the table: twelve figures under one heading compare down the column
- * without reading a word, which twelve wrapping "Support 12 · Not sure 3"
+ * without reading a word, which twelve wrapping "Support 12 · Concern 3"
  * sentences cannot.
  *
  * Below the width where the column heading fits, each figure carries its own
@@ -62,7 +63,7 @@ export function ReactionColumnHeads() {
 export function ReactionFigures({
   tally,
 }: {
-  tally: { support: number; unsure: number; concern: number }
+  tally: { support: number; concern: number }
 }) {
   return (
     <>
