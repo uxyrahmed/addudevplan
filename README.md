@@ -113,9 +113,10 @@ of them back.
 **The plan is all twelve goals**, with their targets, strategies and actions, along with
 the cover, the vision, the turning-point passage, the settlement timeline, the five
 pillars and the flagship initiatives: every segment the extract sends out has come back.
-One is deliberately not a translation of its English. The initiatives heading reads
+Two are deliberately not translations of their English. The initiatives heading reads
 `11 މައިގަނޑު މަޝްރޫއު`, "11 main projects", where the English says "Eleven flagship
-initiatives" — the wording the Dhivehi edition was asked to carry. A segment the overlay
+initiatives" — the wording the Dhivehi edition was asked to carry — and the sentence
+beneath it calls them the same. A segment the overlay
 does not hold still falls through to the English underneath, which is the overlay
 working as intended, not a gap to be papered over.
 

@@ -17,7 +17,7 @@ export function LoginForm({ next }: { next?: string }) {
 
       <div>
         <label htmlFor="email" className="text-small font-semibold text-ink">
-          Council email
+          Email
         </label>
         <input
           id="email"
