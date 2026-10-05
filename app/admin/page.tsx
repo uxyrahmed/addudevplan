@@ -5,9 +5,8 @@ import { AdminShell } from '@/components/admin/admin-shell'
 import { ReactionBar } from '@/components/admin/reaction-bar'
 import { ReactionSwatch } from '@/components/admin/reaction-figures'
 import { GoalTable } from '@/components/admin/goal-table'
-import { SentFrom } from '@/components/admin/sent-from'
 import { requireCouncilViewer } from '@/lib/admin/session'
-import { OVERALL_SCOPE, getOverview, getPlaces, isGoalSort, sortGoals } from '@/lib/admin/results'
+import { OVERALL_SCOPE, getOverview, isGoalSort, sortGoals } from '@/lib/admin/results'
 import { COUNCIL_TIME_ZONE } from '@/lib/admin/time'
 import { OVERALL_LABEL } from '@/lib/feedback-scope'
 import { REACTION_META, REACTION_VALUES } from '@/lib/reactions'
@@ -63,7 +62,7 @@ export default async function AdminOverviewPage({
   searchParams: Promise<{ sort?: string | string[] }>
 }) {
   const viewer = await requireCouncilViewer()
-  const [overview, sentFrom, params] = await Promise.all([getOverview(), getPlaces(), searchParams])
+  const [overview, params] = await Promise.all([getOverview(), searchParams])
 
   // Anything unrecognised falls back to plan order rather than erroring: a
   // mistyped link a colleague was sent should still open the page.
@@ -158,7 +157,8 @@ export default async function AdminOverviewPage({
         </section>
       ) : null}
 
-      <SentFrom places={sentFrom.places} total={sentFrom.total} />
+      {/* "Where it was sent from" (`SentFrom`, fed by `getPlaces`) is hidden
+          until the places it reports can be trusted. */}
 
       <GoalTable rows={sortGoals(overview.byGoal, sort)} byAction={overview.byAction} sort={sort} />
     </AdminShell>
